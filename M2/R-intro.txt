@@ -1,0 +1,258 @@
+AN INTRODUCTION TO R FOR DATA MANIPULATION AND PROCESSING, AND PLOTTING
+=======================================================================
+
+IN THE FOLLOWING, WE WILL LOOK AT 
+
+- TYPING IN VALUES, DOING SOME SIMPLE OPERATIONS, AND PLOTTING
+- SAVING PLOT OUTPUT AS PDF (FOR YOUR PAPERS) OR AS JPEG (FOR PRESENTATIONS)
+
+- READING A DATA MATRIX IN TO R
+- SAVING DATA IN R TO A TEXT FILE
+- LOADING A PACKAGE
+- MATRIX OPERATIONS
+- PLOTTING OPERATIONS, INCLUDING AXIS LABELING 
+- PRINCIPAL COMPONENTS ANALYSIS
+- HIERARCHICAL CLUSTERING
+- IN THE LATTER CASE, USE OF A C PROGRAM IN THE R ENVIRONMENT
+- LINEAR AND QUADRATIC DISCRIMINANT ANALYSIS
+- READING IN TIME SERIES, AND PLOTTING
+
+COMMENTED LINES IN THIS SCRIPT ARE INDICATED BY "#" AT THE START 
+
+R IS A PUBLICLY AVAILABLE SYSTEM (WITH A LOT OF ONGOING SUPPORT),
+AVAILABLE AT: www.r-project.org
+(ORIGIN OF THE NAME: THE S SYSTEM CAME OUT OF BELL LABS.  S-PLUS IS 
+A SUPPORTED, COMMERCIAL, EXPANDED VERSION OF S.  R IS A PUBLIC VERSION
+OF S-PLUS)
+
+CODE IN R, AND IN C (AND FORTRAN) FOR USE IN THE R ENVIRONMENT, IN 
+PARTICULAR FOR MULTIVARIATE DATA ANALYSIS, IS AVAILABLE AT:
+astro.u-strasbg.fr/~fmurtagh/mda-sw
+
+
+On Sun Sparc system, I use command Splus5 to run S-Plus.
+To create a window for plots, I use command: motif()
+On Windows or Mac, I use command R in a command window.
+For plot functionality on a Mac, I click on the R icon.
+
+---------------------------------------------------------------------------
+
+# Get R running 
+x <- c(2.3, 3.1, 5, 7, 8)
+x
+sqrt(x)
+y <- c(3.1, 1.4, 6.1, 3.4)
+y
+length(x); length(y)
+y <- c(y, 1.1)
+y
+plot(x,y)
+plot(x,y,type="l")
+plot(x,y,type="l",xlab="Daily highs",ylab="gm/cm^2")
+x <- runif(40)
+x
+plot(x, type="l")       # Same as: plot(1:40, x, type="l")
+plot(x, type="b")
+title("First plot")
+# File / Save as... for PDF
+# Copy / Then in Preview: New from Clipboard / Export ... for JPEG
+
+
+
+# Reading in data.  Look at sodata.dat.  We'll read in in two ways.
+# Firstly, explicitly saying that each column is numeric, and 
+# then putting columns together into array.
+# Secondly, reading directly into array.
+# Then we will proceed to look at establishing labels (for rows, cols.)
+# which are needed later in plots.
+
+so.data <- scan("/Users/fionnmurtagh/Saothar-G4/r-work-sxb/sodata.dat",
+  list(a=0,b=0,c=0,d=0,e=0,f=0,g=0,h=0))
+# List of elements of type numeric read.
+sodata <- cbind(log(so.data$a),so.data$b,so.data$c,so.data$d,
+                so.data$e,so.data$f,so.data$g,so.data$h)
+# cbind = "column bind" 
+# Look at contents of sodata in R by typing variable name: sodata
+
+# Alternative input:
+sodata2 <- read.table("/Users/fionnmurtagh/Saothar-G4/r-work-sxb/sodata.dat")
+
+# Note: the file name can be a URL.
+# Look at contents: sodata2
+
+# Note difference in handling (row, column) labels.  
+
+# Let's be explicit about the labels.  With command read.table we
+# could have had them in the input file.  The attribute of the
+# variable containing the labels is called dimnames, and this is 
+# of type list.
+
+dimnames(sodata) <- list(NULL,c("log(t_rel)","R_gc","Z_g",
+                "log(mass)","c","[Fe/H]","x","x_0"))
+dimnames(sodata)[[1]] <- list("M15","M68","M13","M3","M5","M4",
+                "47 Tuc","M30","NGC 6397","M92","M12","NGC 6752","M10","M71")
+
+# Now look at sodata again
+
+---------------------------------------------------------------------------
+
+# Principal components analysis using R command princomp.
+
+help(princomp)
+sopr <- princomp(sodata, cor=TRUE)
+names(sopr)
+# sopr is an object with various components.
+sopr$loadings
+sopr$scores
+
+clbls <- c("log(t_rel)","R_gc","Z_g",
+                "log(mass)","c","[Fe/H]","x","x_0")
+rlbls <- c("M15","M68","M13","M3","M5","M4",
+                "47 Tuc","M30","NGC 6397","M92","M12","NGC 6752",
+                "M10","M71")
+plot(sopr$scores[,1],sopr$scores[,2],type="n")
+# Empty plot to begin with.
+plot(sopr$scores[,1],sopr$scores[,2],type="n",xlab="PC1",ylab="PC2")
+text(sopr$scores[,1],sopr$scores[,2],rlbls)
+title("Principal plane")
+
+# Draw axes using an external script
+source("/Users/fionnmurtagh/Saothar-G4/r-work-sxb/plaxes.q")
+plaxes(sopr$scores[,1], sopr$scores[,2])
+# Save plot as PDF file.  Later can convert to other formats.
+
+---------------------------------------------------------------------------
+
+# Next hierarchical clustering
+# Compile to produce object file:
+# gcc3 -no-cpp-precomp -c hierclustx.c 
+# R CMD SHLIB hierclustx.o
+# produces shared object file: hierclustx.so
+ 
+dyn.load("/Users/fionnmurtagh/Saothar-G4/r-work-sxb/hierclustx.so")
+source("/Users/fionnmurtagh/Saothar-G4/r-work-sxb/hcluswtd_c.r")
+data(iris)
+x <- iris[,1:4]
+xh <- HierClust(as.matrix(x), rep(1/150, 150))
+plclust(xh)
+cutree(xh, k=3)
+
+# PCA of iris data
+ipc <- princomp(x,cor=TRUE)
+# Plot with "+" for each point (iris) in principal plane
+plot(ipc$scores[,1], ipc$scores[,2], pch="+")
+# How about a different symbol of 1-50, 51-100, 101-150?
+plot(ipc$scores[1:50,1], ipc$scores[1:50,2], pch="+")
+# Nope, better establish axes in their entirety to start with
+plot(ipc$scores[,1], ipc$scores[,2], type="n")
+points(ipc$scores[1:50,1], ipc$scores[1:50,2], pch="+")
+points(ipc$scores[51:100,1], ipc$scores[51:100,2], pch="-")
+points(ipc$scores[101:150,1], ipc$scores[101:150,2], pch="|")
+
+
+
+soh <- HierClust(as.matrix(sodata), rep(1/14, 14))
+plclust(soh)
+sohc <- HierClust(as.matrix(t(sodata)), rep(1/8, 8))
+plclust(sohc,labels=clbls)
+
+---------------------------------------------------------------------------
+
+# Discriminant analysis
+
+# We will look at LDA and QDA here.  First, we look at the 
+# creation of random samples.  Then we apply them to the 
+# Fisher iris data.  
+
+
+# LDA and QDA (resp., linear/quadratic discriminant analysis) 
+# are in package MASS, loaded as follows 
+library(MASS)
+
+# Create a sample: 25 values uniformly chosen in 1:50
+tr <- sample(1:50, 25)
+
+tr
+# Example:
+# [1] 50  7 41  3 15 25 33 19 36 43 34 28 30 46 40 35 48 45 47 17 
+# 44 11 13 21  9
+
+slct <- c(tr, tr+50, tr+100)
+slct
+# [1]  50   7  41   3  15  25  33  19  36  43  34  28  30  46  40  
+# 35  48  45  47
+# [20]  17  44  11  13  21   9 100  57  91  53  65  75  83  69  86  
+# 93  84  78  80
+# [39]  96  90  85  98  95  97  67  94  61  63  71  59 150 107 141 
+# 103 115 125 133
+# [58] 119 136 143 134 128 130 146 140 135 148 145 147 117 144 111 
+# 113 121 109
+
+ts <- sample(1:50,25)
+ts
+# [1]  2 26 11 24 23 14 25 45 44 16 47 19 17  7 21 39 32 22  9 13 33 
+# 38 37 35  3
+selectts <- c(ts, ts+50, ts+100)
+
+iris[1,]
+#  Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+# 1          5.1         3.5          1.4         0.2  setosa
+
+train <- rbind(iris[tr, -5], iris[tr + 50, -5], iris[tr + 100, -5])
+xxx <- rbind(iris[slct, -5])       # Identical
+yyy <- rbind(iris[slct, 1:4])      # Identical
+
+
+test <- rbind(iris[selectts, -5])
+
+nrow(train); ncol(train); nrow(test); ncol(test)
+# [1] 75
+# [1] 4
+# [1] 75
+# [1] 4
+
+cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
+cl
+# [1] s s s s s s s s s s s s s s s s s s s s s s s s s c c c c c c 
+# c c c c c c c c
+# [40] c c c c c c c c c c c v v v v v v v v v v v v v v v v v v v v 
+# v v v v v
+# Levels: c s v
+
+# Carry out LDA on the training set... 
+
+z <- lda(train, cl)
+names(z)
+# [1] "prior"   "counts"  "means"   "scaling" "ldet"    "lev"     
+# "N"       "call"   
+
+# ... and test using the test set.
+# Class memberships are given by one of c, s, v.
+
+predict(z, test)$class
+# [1] s s s s s s s s s s s s s s s s s s s s s s s s s c c c c c c c 
+# c c c c c c c
+# [40] v c c c c c c c c c c v v v v v v v v v v v v v v v v v v v v v 
+# v v v v
+# Levels: c s v
+
+# Carry out QDA on the training set...
+# ... and then test on the test set.
+
+z <- qda(train, cl)
+predict(z, test)$class
+# [1] s s s s s s s s s s s s s s s s s s s s s s s s s c c c c c c c 
+# c c c c c c c
+# [40] v c c c c c c c c c c v v v v v v v v v v v v v v v v v v v v 
+# v v v v v
+# Levels: c s v
+
+---------------------------------------------------------------------------
+
+Read in a 1-dimensional time series.
+
+fin <- scan("~/Saothar-G4/r-work-sxb/ftse1326.dat")
+plot(1:length(fin), fin, type="l", xlab="Time (days)", ylab="FTSE")
+
+---------------------------------------------------------------------------
+

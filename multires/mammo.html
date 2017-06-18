@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - Mammogram</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+<font color=red>
+<h1>Compression, for image transfer</h1>
+<font color=black>
+<p>
+Image transfer is very common.  But images are defined by a considerable 
+quantity of data, so that transfer can put strains on the communications 
+lines supporting transfer.  We are working on various products for progressive
+transmission.  Here, we see the tremedous gains which can be made through
+image compression.  Shown is a mammogram image.  This was compressed to 
+less than 3% of the original image's size.  Then the image was 
+uncompressed, and is the second image shown below.  
+<p> 
+<img src="../pic/mammo0.gif">
+<p>
+<img src="../pic/mammoc.gif">
+<p>
+
+The original image was 1024x1024 and just over 4 MB in size.  The compressed
+image was just 126 kB.  The images shown have been downsized to 512x512 for
+convenience.  Visual fidelity was excellent, and the difference map between
+input and output contained small noise values.
+
+<p>
+<hr>
+</center>
+
+<b>Commands used</b><p>
+
+<i>mr_comp -R 20 im1s.fits im1scomp.fits</i> <br>
+<i>mr_decomp -i im1scomp.fits.MRC  -o im1scomp.fits</i> <br>
+Then in IDL, <i> write_gif,'im1s512comp.gif',bytscl(rebin(b,512,512))</i>
+following false-colouring.
+
+<hr>
+
+
+<b>To probe further</b><p>
+
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, 1998.
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

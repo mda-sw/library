@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>Image and Data Analysis - The Multiscale Approach</title>
+</head>
+
+<body bgcolor=white >
+<img align=left src="../pic/galicon.jpg">
+<ul>
+<font color=red>
+<h1>Options for program: mr_transform </h1>
+</font>
+
+<p>
+
+<hr><p>
+
+<pre>
+$ mr_transform
+Usage: mr_transform options in_image out_mr_file
+
+   where options =  
+
+        [-t type_of_multiresolution_transform]
+              1: linear wavelet transform: a trous algorithm 
+              2: bspline wavelet transform: a trous algorithm 
+              3: wavelet transform in Fourier space 
+              4: morphological median transform 
+              5: morphological minmax transform 
+              6: pyramidal linear wavelet transform 
+              7: pyramidal bspline wavelet transform 
+              8: pyramidal wavelet transform in Fourier space: algo 1 
+                 (diff. between two resolutions) 
+              9: pyramidal wavelet transform in Fourier space: algo 2 
+                 (diff. between the square of two resolutions) 
+              10: pyramidal median transform 
+              11: pyramidal laplacian 
+              12: morphological pyramidal minmax transform 
+              13: decomposition on scaling function 
+              14: Mallat's wavelet transform (7/9 filters) 
+              15: Feauveau's wavelet transform 
+              16: Feauveau's wavelet transform without undersampling 
+              17: G transform (morphological min-max algorithm) 
+              18: Haar's wavelet transform 
+             default is bspline wavelet transform: a trous algorithm
+
+         [-n number_of_scales]
+             Number of scales used in the multiresolution transform
+             default is 4.
+
+         [-x]
+             Write all scales separately as images with prefix 'scale_j' 
+             (j being the scale number)
+
+         [-b]
+             Same as x option, but interpolate by block the scales.
+             This option is valid only if the chosen multiresolution 
+             transform is pyramidal (6,7,8,9,10,11,12). 
+
+         [-i]
+             Same as b option, but interpolate by a B3 spline the scales.
+             This option is valid only if the chosen multiresolution 
+             transform is pyramidal (6,7,8,9,10,11,12). 
+
+         [-c iter]
+             Iterative transformation. Iter = number of iterations. 
+             This option is valid only if the chosen multiresolution  
+             transform is pyramidal (6,7,8,9,10,11). The reconstruction 
+             is not exact and we need few iterations. Generally, we take 3. 
+</pre>
+<p>
+
+<hr>
+</BODY>
+</HTML>
+
+
+
+

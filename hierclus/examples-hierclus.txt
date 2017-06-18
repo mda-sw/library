@@ -1,0 +1,106 @@
+Last update to this file: 2004/1/31.
+
+==========================================================================
+
+Examples of use of hierarchical clustering in native R (S-Plus) 
+code, and in C callable from R.
+
+Programs and scripts here:
+hcluswtd.r
+hierclustx.c
+hierclustx.dll
+hcluswtd_c.r
+
+Report problems and issues to: Fionn Murtagh, f.murtagh at qub.ac.uk
+January 2004.
+
+Notes: 
+1) Minimum variance (Ward's) agglomerative criterion used.  
+2) Reciprocal nearest neighbours algorithm.
+3) Weights or masses are used for the observations (cases, rows).
+4) Versions are available in R (or S-Plus), that is slow for 
+   anything other than very small data sets; and in C callable
+   from an R program, for larger data sets.
+
+==========================================================================
+
+Running the full R (S-Plus) version, where all functions are 
+contained in hcluswtd.r
+
+source("c:/hcluswtd.r")
+# Use 150 x 4 Fisher iris data as an example.
+data(iris)
+x <- iris[,1:4]
+# Use equal weights, 1/n for each observation.
+xh <- hierclust(x, rep(1/150, 150) )
+names(xh)
+# That takes a few minutes on my pretty reasonable desktop PC.
+
+Same thing in S-Plus.
+source("hcluswtd.r")
+x <- rbind( iris[,,1], iris[,,2], iris[,,3] )
+xh2 <- hierclust(x, rep(1/150, 150))
+# That actually gave memory problems because of the 150x150 
+# dissimilarity array used.
+
+==========================================================================
+
+# Use the C program instead.  The C source code is in 
+# hierclustx.c, and the R driver program is in hcluswtd_c.r
+
+# For Intel/Windows the object library is in: hierclustx.dll   
+# For Unix systems, do: gcc -c hierclustx.c 
+# or otherwise produce the object code, hierclustx.o
+
+# Load this, in Intel/Windows:
+dyn.load("c:/hierclustx.dll")
+# Ignore the warning message ("DLL attempted to change...").
+# Source the R driver:
+source("c:/hcluswtd_c.r")
+# Again use iris data, with identical weights.
+data(iris)
+x <- iris[,1:4]
+# Here we have to coerce to matrix data type.  Compared to above, 
+# following is more or less blindingly fast. 
+xh3 <- HierClust(as.matrix(x), rep(1/150, 150) )
+names(xh2) 
+
+
+In the S-Plus dialect, on a Unix/Solaris machine, do the same.
+gcc -c hierclustx.c
+
+# Then in S-Plus:
+source("hcluswtd_c.r")
+dyn.open("hierclustx.o")
+x <- rbind( iris[,,1], iris[,,2], iris[,,3] )
+xh4 <- HierClust(x, rep(1/150, 150))
+
+==========================================================================
+
+NOTES
+=====
+
+Note on plotting the dendrograms.
+=================================
+
+On both R/Intel/Windows and S-Plus/Sparc/Solaris, we found the 
+output of the callable C code to be plottable with plclust.  
+
+For R/Intel/Windows, we found the output of the stand-alone R 
+program not to be plottable with plclust.  Instead, we used:
+plot(as.dendrogram(xh)) 
+For S-Plus/Sparc/Solaris, we also found the stand-alone S-Plus
+program to have problems with plclust.  This was due to the 
+presence in the returned list of list members like "call".  
+
+
+Note on compiling on Unix systems.
+==================================
+
+Although we used simple gcc -c on a Sparc/Solaris system, 
+another user had to do the following:
+gcc -c hierclustx.c
+gcc -shared -o hierclustx.so hierclustx.o
+
+==========================================================================
+

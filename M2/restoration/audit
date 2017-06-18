@@ -1,0 +1,111 @@
+main% mr4/sol_ns/mr_deconv -i 50 -v sn.fits snpsf.fits out
+
+
+PARAMETERS: 
+
+File Name in = sn.fits
+File Name Out = out
+Transform = bspline wavelet transform: a trous algorithm
+Number of scales = 4
+Type of Noise = GAUSSIAN
+Deconv = Deconvolution by multiresolution Lucy algorithm
+N_Sigma = 3
+Epsilon = 0.001
+Max_Iter = 50
+Convergence paramter = 1
+Fwhm = 0
+ Start the deconvolution ... 
+Sigma Noise = 1.12733
+0: Sigma = 224.548431, Func = 285.370483
+1: Sigma = 195.781769, Func = 248.811981
+2: Sigma = 166.961700, Func = 212.185593
+3: Sigma = 144.606674, Func = 183.775406
+4: Sigma = 127.853271, Func = 162.484116
+5: Sigma = 115.017563, Func = 146.171661
+6: Sigma = 104.877953, Func = 133.285599
+7: Sigma = 96.641724, Func = 122.818481
+8: Sigma = 89.794930, Func = 114.117134
+9: Sigma = 83.995560, Func = 106.746918
+10: Sigma = 79.008530, Func = 100.409088
+11: Sigma = 74.666962, Func = 94.891548
+12: Sigma = 70.848770, Func = 90.039146
+13: Sigma = 67.462189, Func = 85.735260
+14: Sigma = 64.436600, Func = 81.890144
+15: Sigma = 61.716560, Func = 78.433350
+16: Sigma = 59.257748, Func = 75.308533
+17: Sigma = 57.024242, Func = 72.470055
+18: Sigma = 54.986549, Func = 69.880424
+19: Sigma = 53.120167, Func = 67.508499
+20: Sigma = 51.404583, Func = 65.328232
+21: Sigma = 49.822430, Func = 63.317528
+22: Sigma = 48.358959, Func = 61.457653
+23: Sigma = 47.001488, Func = 59.732494
+24: Sigma = 45.739105, Func = 58.128178
+25: Sigma = 44.562336, Func = 56.632664
+26: Sigma = 43.462914, Func = 55.235447
+27: Sigma = 42.433624, Func = 53.927364
+28: Sigma = 41.468098, Func = 52.700310
+29: Sigma = 40.560711, Func = 51.547142
+30: Sigma = 39.706482, Func = 50.461536
+31: Sigma = 38.900978, Func = 49.437851
+32: Sigma = 38.140266, Func = 48.471088
+33: Sigma = 37.420776, Func = 47.556713
+34: Sigma = 36.739353, Func = 46.690716
+35: Sigma = 36.093113, Func = 45.869434
+36: Sigma = 35.479481, Func = 45.089588
+37: Sigma = 34.896114, Func = 44.348213
+38: Sigma = 34.340897, Func = 43.642605
+39: Sigma = 33.811886, Func = 42.970306
+40: Sigma = 33.307343, Func = 42.329102
+41: Sigma = 32.825645, Func = 41.716927
+42: Sigma = 32.365330, Func = 41.131931
+43: Sigma = 31.925053, Func = 40.572395
+44: Sigma = 31.503563, Func = 40.036743
+45: Sigma = 31.099741, Func = 39.523537
+46: Sigma = 30.712532, Func = 39.031448
+47: Sigma = 30.340963, Func = 38.559235
+48: Sigma = 29.984148, Func = 38.105770
+49: Sigma = 29.641258, Func = 37.670002
+50: Sigma = 29.311522, Func = 37.250954
+Solution: : Min = 3.37761e-05    Max = 29739.3    Flux = 427389    Mean = 6.52144     Sigma = 183.807
+Resi: : Min = -53.8098    Max = 704.931    Flux = -304.869    Mean = -0.00465193     Sigma = 6.10324
+
+
+
+
+
+
+
+main% mr4/sol_ns/mr_deconv -v sn.fits snpsf.fits out2
+
+
+PARAMETERS: 
+
+File Name in = sn.fits
+File Name Out = out2
+Transform = bspline wavelet transform: a trous algorithm
+Number of scales = 4
+Type of Noise = GAUSSIAN
+Deconv = Deconvolution by multiresolution Lucy algorithm
+N_Sigma = 3
+Epsilon = 0.001
+Max_Iter = 500
+Convergence paramter = 1
+Fwhm = 0
+ Start the deconvolution ... 
+Sigma Noise = 1.12733
+0: Sigma = 224.548431, Func = 285.370483
+1: Sigma = 195.781769, Func = 248.811981
+...
+499: Sigma = 15.597308, Func = 19.822056
+500: Sigma = 15.595510, Func = 19.819771
+Solution: : Min = 2.8026e-45    Max = 66164.9    Flux = 426437    Mean = 6.50691     Sigma = 333.311
+Resi: : Min = -32.8018    Max = 491.357    Flux = 639.567    Mean = 0.00975902     Sigma = 4.45186
+
+To generate a PSF image:
+
+im_simu -f 20.0 -w outnew snpsf out3
+
+This saves the PSF used to convolve snpsf into out3: the new 
+PSF image is outnew.fits
+

@@ -1,0 +1,1131 @@
+\documentclass[a4,dvips]{seminar}
+\usepackage{semlayer}
+\usepackage{gradient}
+\usepackage{times}
+\usepackage{pifont}
+\usepackage{epsfig}
+\usepackage{graphics}
+\usepackage{array}
+%\usepackage{french}
+\usepackage{slidesec}
+\usepackage{fancybox}
+\usepackage{sem-page}
+\usepackage{semrot}
+\usepackage{psfig}
+\usepackage{rotating}
+\usepackage{color}
+\definecolor{reddish}{rgb}{.8,.1,.1}
+\def\real{{\rm I \kern-0.2em R}}       % Defn. of math. "real" symbol.
+
+\renewcommand{\printlandscape}{\special{landscape}}    % Works with dvips.
+\articlemag{1}
+\input{psfig}
+% \twoup   % Try me.
+ 
+\newpagestyle{327}%
+ {Discriminant Analysis -- F Murtagh
+\hspace{\fill}\rightmark \hspace{\fill}\thepage}{}%
+\pagestyle{327}
+ 
+\slideframe{Oval}
+ 
+\newcommand{\heading}[1]{%
+  \begin{center}
+    \large\bf
+    \shadowbox{#1}%
+  \end{center}
+  \vspace{1ex minus 1ex}}
+ 
+ 
+\newcommand{\subheading}[1]{%
+    {\bf \underline{%
+    \mbox{#1}}}%
+  \vspace{0.5ex minus 0.5ex}}
+ 
+\newcommand{\BF}[1]{{\bf #1:}\hspace{1em}\ignorespaces}
+\rotateheaderstrue
+\date{\color{Yellow} 2003-07-22}
+\begin{document}
+\ptsize{9}
+ 
+\begin{slide}
+\textcolor {reddish} {\heading{Discriminant Analysis}}
+Topics:
+\begin{itemize}
+\item Linear discriminants 
+\item Fisher's discriminant
+\item Mean square error discriminant
+\item Multiple discriminant analysis
+\item Bayesian discrimination 
+\item Maximum likelihood discrimination
+\item k-Nearest neighbours 
+\item Perceptron
+\item Multilayer perceptron 
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Basic Concepts}}
+\begin{itemize}
+\item Training set, test set.  
+\item Test set is also known as: unseen, or out of sample.
+\item OC or ROC diagram for 2-class problems.  (OC = operating
+characteristic; ROC = receiver operating characteristic.) 
+\item Detection, false alarm.
+\item Multiple class problems.
+\end{itemize}
+\end{slide}
+
+
+
+\begin{slide}
+\textcolor {reddish} {\heading{Discriminant Analysis: 
+Objectives and Properties}}
+\begin{itemize}
+\item Assess the adequacy of a classification, given the group 
+memberships.
+\item Assign objects to one of a number of (known) groups of objects.
+\item Note: supervised classification (= discriminant analysis) vs.
+unsupervised classification (= cluster analysis).  Sometimes, along these 
+lines, classification is distinguised from clustering.  
+\item Remark: discriminant analysis is ``discrete prediction'', whereas
+regression analysis is ``continuous prediction''.
+\item So a multilayer perceptron neural network used for classification 
+purposes is discriminant analysis; but used for the purposes of 
+continuous mapping it is nonlinear regression.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Practical Remarks}}
+\begin{itemize}
+\item We can evaluate {\sl error rates} by means of a training sample (to
+construct the discrimination surface) and a test sample.  
+\item An optimistic
+error rate is obtained by reclassifying the design set: this is
+known as the {\sl apparent error rate}.  
+\item If an independent test sample
+is used for classifying, we arrive at the {\sl true error rate}.  
+\item The
+{\sl leaving one out} method attempts to use as much of the data as
+possible: for every subset of $n-1$ objects from the given $n$ objects,
+a classifier is designed, and the object omitted is assigned.  This
+leads to the overhead of $n$ discriminant analyses, and to $n$ tests
+from which an error rate can be derived. 
+\item Another approach to 
+appraising the results of a discriminant analysis is to determine a
+{\sl confusion matrix} which is a contingency table (a table of
+frequencies of co--occurrence) crossing the known groups with the
+obtained groups.  
+\item We may improve our discrimination by implementing a 
+{\sl reject option}: if for instance we find $ P({\bf x} \mid c) >
+P({\bf x} \mid y)$ for all groups $y \neq c$, we may additionally
+require that $P({\bf x} \mid c)$ be greater than some threshold for
+assignment of ${\bf x}$ to $c$.  Such an approach will of course help
+to improve the error rate.
+\item Neyman-Pearson criterion: let $p_d$ be the probability of detection
+(i.e.\ finding correct class), and let $p_f$ be the probability of a 
+false alarm.  Then the Neyman-Pearson criterion is to choose the maximum 
+$p_d$ subject to $p_f = \alpha$ where $0 \leq \alpha \leq 1$.  
+\item For alternative decision strategies, see J.L. Melsa and D.L. Cohn, 
+Decision and Estimation Theory,  McGraw-Hill, New York, 1978.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Statistical Pattern Recognition}}
+\begin{footnotesize}
+\begin{verbatim}
+ 
+            +-----------------+          +---------------+
+            |                 |          |               |
+Observation | Feature         | Feature  |  Classifier   |Decision
+----------->| Extraction      |--------->|               |-------->
+x (Vector)  |                 | Vector y |               |Vector w 
+            |                 |          |               |
+            +-----------------+          +---------------+
+ 
+\end{verbatim}
+\end{footnotesize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Linear Discriminant -- 1}}
+
+Simplest possible transformation: linear discriminant.
+ 
+$$    y    = a^\prime x $$
+i.e.\ $x$ is transformed to a single scalar. Classification is then a
+matter of thresholding. Restricting attention to the two-class case:  
+\begin{center}
+\begin{tabular}{lllll}
+ y &   $>$ & $T$ & $\Longrightarrow $ & class 1  \\
+   &   $<$ & $T$ & $\Longrightarrow $ & class 2  \\
+   &   $=$ & $T$ & $\Longrightarrow $ & class chosen arbitrarily
+\end{tabular}
+\end{center}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Linear Discriminant -- 2}}
+\begin{footnotesize}
+\begin{verbatim}
+(Simple) perceptron with a step transfer function
+
+                                             T
+              x0                             |
+               \                             |
+                \a1                          v
+                 \                      +----+----+
+                  \                     | 1|   +--|
+                   +--+--+              |  |   |  |  output 1 => class 1
+      x1    a2     |     |    y         | 0|   |  |         0 => class 2
+      ------------+    +--------------->+--+---+--+-------->
+            .      |     |              |  |   T  |
+            .     /+--+--+              +---------+
+                 /           
+                /ap-1       y = sum of         y>T?  output = 1 if y>T
+               /            ai.xi for i=1                   = 0 otherwise
+             xp-1           to i=p
+                            (Weighted sum
+                             of inputs) 
+\end{verbatim}
+\end{footnotesize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Discriminant Function}}
+
+A general discriminant function, $g$, is a function of the form:
+ 
+$$    y    = g(x) $$
+ 
+\begin{center} 
+\begin{tabular}{lllll}
+ y &   $>$ & $T$ & $\Longrightarrow $ & class 1  \\
+   &   $<$ & $T$ & $\Longrightarrow $ & class 2  \\
+   &   $=$ & $T$ & $\Longrightarrow $ & class chosen arbitrarily
+\end{tabular}
+\end{center}
+Examples of $g$: linear function given by scalar product; 
+or non-linear function giving a multilayer preceptron.   
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Linear Discriminant as Projection -- 1}}
+\begin{footnotesize}
+\begin{verbatim}
+ 
+ 
+            |       1        2 2 2 2
+      y1    |      1 1 1       2 2 2 2 2
+            |    1 1 1 1 1 1   2 2 2 2 2      
+            |    1 1 1 1 1 1 1  2 2 2 2 2
+            |    1 1 1 1 1 1          2 2
+            |      1 1 1 1         class w2
+            |          1   
+            |  class w1
+            +--------------+---+--------------------------->
+                             t1    t2                           y0
+
+ Feature space, two-class, two dimensions
+\end{verbatim}
+\end{footnotesize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Linear Discriminant as Projection -- 2}}
+\begin{itemize}
+\item  Simple linear discriminant, i.e.\  $     y    = a^\prime x $
+\item Projecting the data onto the $y_0$ axis corresponds to a discriminant
+vector $a = (a_1, a_2)^\prime 
+= (1.0,0.0)^\prime$, i.e.\ $y_0$ is given a weight of 1.0,
+$y_1$ is given zero weight. 
+\item This projection would result in a little
+overlap of the classes.
+\item Projecting data onto axis $y_1$, discriminant vector = (0.0,1.0), would
+result in much overlap. 
+\item However, projecting the vectors onto the
+line shown below  would be close to optimal -- no class
+overlap.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Linear Discriminant as Projection -- 3}}
+\begin{footnotesize}
+\begin{verbatim}
+                                   *
+            |       1        2 2 * 2
+      y1    |      1 1 1       * 2 2 2 2
+            |    1 1 1 1 1 1*  2 2 2 2 2      
+            |    1 1 1 1 1* 1 1  2 2 2 2 2
+            |    1 1 1 * 1 1          2 2
+            |      1*1 1 1                  class w2
+            |    *     1   
+            | *           class w1
+            +----------------------------------------------->
+                                                                y0
+ 
+            * * * projection line
+ 
+\end{verbatim}
+\end{footnotesize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Fisher's Linear Discriminant}}
+\begin{itemize}
+\item Project the data onto a single axis, 
+defined by the Fisher discriminant vector $a$
+\item $    y    = a^\prime x $
+\item Simultaneously optimize two criteria:
+\item maximum between-class separation, expressed as separation of
+the class means $m_1, m_2$, and
+\item minimum within-class scatter, expressed as the within class
+variances, $v_1, v_2$
+\item Fisher criterion combines these two optimands as:
+$$          J = (m_1 - m_2)/(v_1 + v_2) $$
+                 where  the transformed means and
+                 variances are:
+                 $m_j =  a^\prime m_j, 
+                 v_j = a S_j a^\prime,  
+                       S_j =$ covariance for class $j$, 
+                       $m_j = $ mean vector for class $j$. 
+\item The discriminant is computed using:
+$$     a    = W^{-1}(m_1 - m_2)$$
+            where $W$ is the pooled (overall, class-independent)
+            covariance matrix,
+           $ W    = p_1 S_1 + p_2 S_2 $.
+           $ p_1, p_2$ are the prior probabilities.
+
+The discriminant is the line joining $m_1$ and $m_2$, with the 
+``correction factor'', $W^{-1}$, which ``corrects'' for overall spread 
+of points.  (``Pooled'': total, all points contributing.)
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Fisher's Linear Discriminant: Algorithm}}
+\begin{enumerate}
+ \item Estimate class means $m_j$ and covariance matrices $S_j$, and prior
+probabilities, $p_j$.
+\item Compute pooled covariance matrix, $W$ (see equation above).
+\item Invert matrix  $W$  (using some standard matrix inversion
+procedure).
+\item  Compute the discriminant vector, $a$ (see equation above).
+\item  Apply the discriminant using equation $y = a^\prime x$.
+\end{enumerate}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Summary}}
+\begin{enumerate}
+\item weighted sum of inputs
+\item scalar (inner) product of vectors
+\item projection
+\item thresholding
+\item perceptron
+\item Fisher's linear discrimant analysis
+\end{enumerate}
+\end{slide}
+
+
+\begin{slide}
+\textcolor {reddish} {\heading{Mean Square Error Discriminant}}
+\begin{itemize}
+\item Fisher discriminant works only for two classes although 
+it is possible to tackle multi-class problems using
+pairwise discriminants for each of the $ \left( 
+\begin{array}{l}
+c \\
+2
+\end{array}
+\right) $
+ dichotomies. 
+%\item Can generalize to a multiclass recognition problem.
+\item The class vector is a binary vector, with only one bit set at any
+time, in which a bit $j$ set ( = 1) denotes class $j$; i.e. 
+$      y     = (1,0,0,...0)^\prime \mbox{   denotes class 0} $
+
+$      y     = (0,1,0,...0)^\prime \mbox{   denotes class 1} $
+etc.
+\item 
+\begin{footnotesize}
+\begin{verbatim}
+ 
+                       +-----------------+      y class vector
+                       |                 +--->     class 0
+            Observ-    | Feature         +--->     class 1
+            ---------> | Extraction /    +--->     class j
+            -ation x   | Classification  +--->
+            Vector     |                 +--->     class c-1
+                       +-----------------+  
+ 
+\end{verbatim}
+\end{footnotesize}
+\item For, initially, just one component of $y$, $y_j$, the regression problem
+can be expressed compactly as:
+
+$     y_{ji}  = x_i^\prime b + e_i $       
+      where $b = (b_0, b_1, \dots , b_{p-1})^\prime$ 
+is a $p \times 1$ vector of coefficients for class $j$,
+            $x_i = (1, x_{i1}, \dots x_{ip-1})^\prime$ 
+is the pattern vector, and             $e_i$ = error,
+            $y_{ji} = 1$ if the pattern $x$ belongs to class $j$,
+                $= 0$ otherwise.
+\item  Formulation in terms of the augmented vector $x$, which contains the
+bias element 1 is important; without it we would effectively be
+fitting a straight line through the origin -- the bias ($b_0$)
+corresponds to a non-zero intercept of the $y$-axis; compared to using
+a separate bias element, the analysis is greatly simplified.
+\item The complete set of $n$ observation equations can be expressed as:
+ 
+$$     y = X b + e $$
+      where $e = (e_1, e_2, \dots e_i, \dots e_n)^\prime$, and
+            $y = (y_1, y_2, \dots y_i, \dots y_n)^\prime$, 
+the $n \times 1$ 
+vector of                    
+                                        observations of the class
+                                        variable (bit).
+            $X$ is the $n \times p$ matrix formed by $n$ rows of $p$ pattern
+            components.
+\item 
+The least square error fitting is given by: 
+$$b' = (X^\prime X)^{-1} X^\prime y $$
+\item Note: the $jk$th element of the $p \times p$ matrix $X^\prime X$ is 
+$\sum_i x_{ji} x_{ik}$, and the
+$j$th row of the $p \times 1$ vector $X^\prime y$ is 
+$\sum_i x_{ij} y_i$. 
+\item Thus, $X^\prime X$ differs from
+the autocorrelation matrix of $x$ only by a multiplicative factor, $n$, 
+so that the major requirement for the least square error fitting equation 
+above to provide a
+valid result is that the autocorrelation matrix of $x$ is non-singular.
+\item We can express the complete problem, where the vector $y$ has $c$
+components by replacing the vector $y$ in the least square error fitting
+equation with the
+matrix $Y$, the $n \times c$ matrix formed by $n$ rows of $c$ observations. 
+\item Thus,  the least square error fitting equation extends to the complete 
+least square error
+linear discriminant:
+$$     B' = (X^\prime X)^{-1} X^\prime Y     $$
+$X^\prime Y$ is now a $p \times c$ matrix, and $B'$ is a $p \times c$ 
+matrix of parameters,
+i.e.\ one column of $p$ parameters for each dependent variable.
+\item Applying the discriminant/transformation is simply a matter of
+premultiplying the (augmented) vector $x$ by $B'$:
+$$    y' = B' x  $$
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Multiple Discriminant Analysis}}
+\begin{itemize}
+\item Also a generalization of Fisher's linear discriminant analysis.
+\item Also termed Discriminant Factor Analysis and Canonical 
+Discriminant Analysis. 
+\item It adopts
+a similar perspective to PCA: the rows of the data matrix to be
+examined constitute points in a multidimensional space, as also
+do the group mean vectors.  Discriminating axes are determined in
+this space, in such a way that optimal separation of the predefined
+groups is attained.  As with PCA, the problem becomes mathematically
+the eigenreduction of a real, symmetric matrix. 
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Multiple Discriminant Analysis}}
+\begin{itemize}
+\item Consider the set of objects, $ i \in I $; they are characterised by
+a finite set of parameters, $ j \in J$.  
+\item The vectors associated with
+the objects are given as the row vectors of the matrix $X = \{x_{ij}\}$.
+\item The grand mean of all vectors is given by $$ g_{j} = {1 \over n} 
+\sum_{i \in I} x_{ij} $$ (where $n$ is the cardinality of $I$).
+\item Let $ y_{j} $ be the $j^{th}$ coordinate of the 
+mean of group $y$; i.e. $$y_{j} = {1 \over n_y}
+\sum_{i \in y} x_{ij} $$ (where $n_y $ is the cardinality of group $y$).
+\item We consider the case of mutually disjoint groups, $y$, whose
+union gives $I$.  
+\item Let $Y$ be the set of these groups, and let $n_Y$ be 
+the number of groups considered.  Evidently, $n_Y \leq n$.
+\item We now define the following three variance--covariance matrices.
+$T$ (of $jk^{th}$ term, $t_{jk}$) is the total covariance matrix;
+$W$ is the within classes covariance matrix; and $B$ is the between
+classes covariance matrix:
+\begin{description}
+  \item[T]:
+       $ t_{jk} = {1 \over n} \sum_{i \in I} (x_{ij} - g_{j})(x_{ik} -
+                                                       g_{k}) $
+
+ \item[W]:
+       $ w_{jk} = {1 \over n} \sum_{y \in Y} \sum_{i \in y}
+                  (x_{ij} - y_{j})(x_{ik} - y_{k}) $
+
+ \item[B]:
+       $ b_{jk} = \sum_{y \in Y} {n_y \over n} (y_{j} - g_{j})
+                  (y_{k} - g_{k}) . $
+
+\end{description}
+\item The three matrices, $T$, $W$ and $B$, are of dimensions $m \times m$
+where $m$ is the number of attributes (i.e. the vectors considered, their
+grand mean, and the group means are located in $\real^m$).
+\item 
+Generalizing Huyghen's Theorem in classical mechanics, we have that 
+$T = W + B$. 
+This is proved as follows.  We have, for the $(j,k)^{th}$
+terms of these matrices:
+$$ {1 \over n} \sum_{i \in I} (x_{ij} - g_{j})(x_{ik} - g_{k}) $$
+$$ = {1 \over n} \sum_{y \in Y} \sum_{i \in y} (x_{ij} - y_{j})(x_{ik} -
+                                                       y_{k})
+  + \sum_{y \in Y} {n_y \over n} (y_{j} - g_{j})(y_{k} - g_{k}). $$
+
+Rewriting the first term on the right hand side of the equation as
+
+$$ {1 \over n} \sum_{y \in Y} \sum_{i \in y} ((x_{ij} - g_{j}) -
+    (y_{j} - g_{j}))((x_{ik} - g_{k}) - (y_{k} - g_{k})) $$ and 
+expanding gives the required result.
+\item 
+The sum of squared projections of the points in $ \real^m $ along any given 
+axis ${\bf u}$ is
+given by $ {\bf u}^\prime T {\bf u} $ (cf.\ the analogous situation in 
+principal components analysis). 
+\item For the class means along this 
+axis we have $ {\bf u}^\prime B {\bf u} $.  
+\item Finally, for the 
+within class deviations along this axis, we have $ {\bf u}^\prime W {\bf u} $. 
+\item Since
+$ T = W + B $, we have that
+
+$$  {\bf u}^\prime T {\bf u}  =  {\bf u}^\prime B {\bf u} 
+                                +  {\bf u}^\prime W {\bf u}. $$
+
+\item The optimal discrimination of the given groups is carried out as follows.
+We choose axis ${\bf u}$ to maximize the spread of class means, while
+restraining the compactness of the classes, i.e.
+
+$$ {\sl max} {{{\bf u}^\prime B {\bf u}} \over {{\bf u}^\prime W {\bf u}}}. $$
+\item This maximization problem is the same as
+
+$$ {\sl min} {{{\bf u}^\prime W {\bf u}} \over {{\bf u}^\prime B {\bf u}}} 
+ = {\sl min} {{{\bf u}^\prime W {\bf u}} \over {{\bf u}^\prime B {\bf u}}} 
+                                                                   + 1
+ = {\sl min} {{{\bf u}^\prime W {\bf u} + {\bf u}^\prime B {\bf u}} 
+                        \over {{\bf u}^\prime B {\bf u}}} $$
+
+$$ = {\sl min} {{{\bf u}^\prime T {\bf u}} \over {{\bf u}^\prime B {\bf u}}} 
+ = {\sl max} {{{\bf u}^\prime B {\bf u}} \over {{\bf u}^\prime T {\bf u}}}. $$
+\item As in PCA, we use $\lambda$ as a Lagrangian 
+multiplier, and differentiate the
+expression ${\bf u}^\prime B {\bf u} - \lambda({\bf u}^\prime T {\bf u})$ with
+respect to {\bf u}. 
+\item This yields {\bf u} as the eigenvector of $T^{-1}B$ 
+associated with the largest eigenvalue, $\lambda$.  
+\item Eigenvectors associated 
+with successively large eigenvalues define discriminating factors or axes 
+which are orthogonal to those previously obtained.  
+\item  We may therefore say 
+that MDA is the PCA of a set of centred vectors (the group means) in the
+$T^{-1}$-metric.
+\item A difficulty has not been mentioned in the foregoing: the matrix product,
+$T^{-1}B$ is not necessarily symmetric, and so presents a problem for
+diagonalization.  This difficulty is circumvented as follows. We have that
+$B{\bf u} = \lambda T {\bf u}$.  Writing $B$ as the product of its square
+roots $CC^\prime$
+(which we can always do because of the fact that $B$ is necessarily
+positive definite and symmetric) gives:  $CC^\prime {\bf u} = \lambda T 
+{\bf u}$.
+Next, define a new vector ${\bf a}$ as follows: ${\bf u} = T^{-1}C{\bf a}$.
+This gives:
+
+$$ CC^\prime T^{-1} C {\bf a} = \lambda T T^{-1} C {\bf a} 
+\Rightarrow C(C^\prime T^{-1} C){\bf a} = \lambda C {\bf a}
+\Rightarrow (C^\prime T^{-1} C){\bf a} = \lambda {\bf a} $$
+
+We now have an eigenvalue equation, which has a matrix which is necessarily
+real and symmetric. This is solved for ${\bf a}$, and substituted back to
+yield ${\bf u}$.
+\item Since the largest eigenvalue is 
+$${{{\bf u}^\prime B {\bf u}} \over {{\bf u}^\prime T {\bf u}}}
+ = {{{\bf u}^\prime T {\bf u} - {\bf u}^\prime W {\bf u}} 
+                        \over {{\bf u}^\prime T {\bf u}}}, $$ it
+is seen that the right side here, and hence all eigenvalues, are
+necessarily positive and less than 1.
+\item The eigenvalues represent the discriminating power of the associated
+eigenvectors.  Unlike in PCA, the percentage variance explained by a
+factor has no sense in MDA, since the sum of eigenvalues has no
+meaning.
+\item The $n_Y$ classes lie in a space of dimension at most $n_Y - 1$.
+This will be the number of discriminant axes or factors obtainable
+in the most common practical case when $ n > m > n_Y $.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Linear or Fisher Discriminant Analysis}}
+\begin{itemize}
+\item 2-group case of MDA.
+\item We will look at assigning a 
+new object (rather than  confirming the separation
+between given groups).
+\item The distance, in this new $T^{-1}$-metric,
+between some new vector ${\bf a}$ and the barycentre (or centre of
+gravity) ${\bf y}$ of class $y$ is defined by the {\sl Mahalanobis}
+or {\sl generalized distance}:
+$$ d(a,y) = ({\bf a} - {\bf y})^\prime T^{-1} ({\bf a} - {\bf y}) $$
+
+\item Vector ${\bf a}$ is assigned to the class $y$ such that $d(a,y)$ is
+minimal over all groups. 
+\item In the two-group case, we have that ${\bf a}$
+is assigned to group $y_1$ if $ d(a,y_1) < d(a,y_2).$
+\item Writing out explicitly the Euclidean distances associated with the
+matrix $T^{-1}$, and following some simplifications, we find that
+vector ${\bf a}$ is assigned to group $y_1$ if
+$ ({\bf y}_1 - {\bf y}_2)^\prime T^{-1} {\bf a} 
+   >  {1 \over 2} ({\bf y}_1 - {\bf y}_2)^\prime T^{-1}
+                  ({\bf y}_1 + {\bf y}_2)  $ 
+
+and to group $y_2$ if
+$ ({\bf y}_1 - {\bf y}_2)^\prime T^{-1} {\bf a} 
+   <  {1 \over 2} ({\bf y}_1 - {\bf y}_2)^\prime T^{-1}
+                  ({\bf y}_1 + {\bf y}_2)  $
+\item The left hand side is the $T^{-1}$--projection of ${\bf a}$ onto
+${\bf y}_1 - {\bf y}_2$ (i.e. the vector connecting ${\bf y}_2$
+to ${\bf y}_1$; and the right hand side is the $T^{-1}$--projection
+of $({\bf y}_1 + {\bf y}_2)/2$ onto ${\bf y}_1 - {\bf y}_2$.
+\item This allocation rule may be rewritten as 
+
+$$ ({\bf y}_1 - {\bf y}_2)^\prime T^{-1} ({\bf a} -
+    { { {\bf y}_1 + {\bf y}_2 } \over 2 } )
+    > 0 \Longrightarrow {\bf a} \rightarrow y_1 $$
+
+$$ ({\bf y}_1 - {\bf y}_2)^\prime T^{-1} ({\bf a} -
+    { { {\bf y}_1 + {\bf y}_2 } \over 2 } )
+    < 0 \Longrightarrow {\bf a} \rightarrow y_2. $$
+
+The left hand side here is known as {\sl Fisher's linear discriminant
+function}.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Fisher's Linear Discriminant}}
+\psfig{figure=fma06.ps}
+The assignment of a new sample ${\bf a}$ to one of two
+           groups of centres ${\bf y}_1$ and ${\bf y}_2$.
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Bayesian Discrimination: Quadratic Case}}
+\begin{itemize}
+\item Consider a vector of measured parameters, ${\bf x}$, relating to
+attributes of galaxies.  
+\item Next consider that a sample of galaxies
+which is being studied consists of 75\% spirals and 25\% ellipticals.
+\item That is, $ P(spiral) = 0.75, P(elliptical) = 0.25 $
+\item In the absence of any other
+information, we would therefore assign any unknown galaxy to the 
+class of spirals.  In the long run, we would be correct in 75\% of
+cases, but we have obviously derived a very crude assignment rule. 
+\item Consider now that we are given also the conditional probabilities:
+for a particular set of parameter values, ${\bf x}_0$, we have 
+$ P(spiral \mid {\bf x}_0) = 0.3, \ \ \ \ \ \
+P(elliptical \mid {\bf x}_0) = 0.7  $
+\item In this case, we are led to choose the class of ellipticals for our
+unknown galaxy, for which we have measured the parameter values
+${\bf x}_0$. 
+\item This leads to Bayes' rule for the assignment of an unknown object 
+to group $c$ rather than to any other group, $y$:
+$ P(c \mid {\bf x}_0) > P(y \mid {\bf x}_0)\ \ \   for \  all \  y \neq c$
+\item A difficulty arises with Bayes' rule as defined above: although
+we could attempt to determine $P(c \mid {\bf x})$ for all
+possible values of ${\bf x}$ (or, perhaps, for a discrete set of
+such values), this is cumbersome. 
+\item In fact, it is 
+usually simpler to derive values for $P({\bf x}_0 \mid c)$, i.e. the
+probability of having a given set of measurements, ${\bf x}_0$,
+given that we are dealing with a given class, $c$.
+\item Bayes' theorem relates priors and posteriors.
+$$  P(c \mid {\bf x}_0) = 
+ {  { P({\bf x}_0 \mid c) P(c) } \over 
+    { \sum_{all  \ y} P({\bf x}_0 \mid y) P(y) }  }$$
+\item All terms on the right hand side can be sampled: $P(c)$ is determined
+straightforwardly; $P({\bf x}_0 \mid c)$ may be sampled by looking
+at each parameter in turn among the vector ${\bf x}_0$, and deriving
+estimates for the members of class $c$.
+\item Assignment rule:  Choose class c over all classes y, if
+$ P({\bf x}_0 \mid c) \ P(c) > P({\bf x}_0 \mid y) \ P(y) \ \ \
+                                       for \  all \  y \neq c $
+\item But again a
+difficulty arises: a great deal of sampling is required to estimate the
+terms of the above expression.
+\item Hence it is convenient to make distributional
+assumptions about the data.
+\item The multivariate normal density function (defining a multidimensional
+bell-shaped curve) is taken to better represent the distribution of
+${\bf x}$ than the single point as heretofore.  This is defined as
+$ (2 \pi)^{-{n \over 2}} \mid V \mid ^{-{1 \over 2}} \ exp \ 
+   (-{1 \over 2} ({\bf x} - {\bf g})^\prime V^{-1} ({\bf x} - {\bf g}))
+$ 
+\item Where
+$V$ is the variance-covariance matrix.  It is of dimensions 
+$m \times m$, if $m$ is the dimensionality of the space.  If equal to the
+identity matrix, it would indicate that ${\bf x}$ is distributed in a
+perfectly symmetric fashion with no privileged direction of elongation.
+$\mid V \mid$ is the determinant of the matrix $V$.
+\item Assuming that each group, $c$, is a Gaussian, we have
+$ P({\bf x} \mid c) = (2 \pi)^{-{n \over 2}} \mid V_c \mid ^{-{1 \over 2}} 
+   \ exp \ 
+   (-{1 \over 2} ({\bf x} - {\bf g}_c)^\prime V^{-1}_c ({\bf x} - {\bf g}_c))
+$ where
+${\bf g}_c$ is the centre of class $c$, and $V_c$ is its 
+variance-covariance matrix.
+\item Substituting, taking natural logs of both sides of
+the inequality, and cancelling common terms on both sides, gives the
+following assignment rule: Assign ${\bf x}$ to class $c$ if
+$$ ln \mid V_c \mid + ({\bf x} - {\bf g}_c)^\prime V^{-1}_c ({\bf x} 
+- {\bf g}_c)  - ln \ P(c)   $$
+$$  <  ln \mid V_y \mid + ({\bf x} - {\bf g}_y)^\prime V^{-1}_y 
+({\bf x} - {\bf g}_y)
+ - ln \ P(y) \ \ \ for \ all \ y \neq c .
+$$
+\item This expression is simplified by defining a ``discriminant score'' as
+$$ \delta_c({\bf x}) = ln \mid V_c \mid + 
+({\bf x} - {\bf g_c})^\prime V^{-1}_c ({\bf x} - {\bf g_c})  $$
+\item The assignment rule then becomes: Assign ${\bf x}$ to class $c$
+if
+$$ \delta_c({\bf x}) - ln \ P(c) < \delta_y({\bf x}) - ln \ P(y) 
+ \   \ \ \ for \ all \ y \neq c . $$
+\item The dividing curve between any two classes immediately follows from
+this.  It is defined by:
+$ \delta_c({\bf x}) - ln \ P(c) = \delta_y({\bf x}) - ln \ P(y) 
+ \   \ \ \ for \ all \ y \neq c $
+
+\item The shape of a curve defined by this equation is quadratic.  Hence
+this general form of Bayesian discrimination is also referred to
+as {\sl quadratic discrimination}.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Maximum Likelihood Discrimination}}
+\begin{itemize}
+\item In a practical context we must estimate the mean vectors (${\bf g}_y$)
+and the variance-covariance matrices ($V_y$) from the data which
+may be taken to constitute a sample from an underlying population. 
+\item We have used a multivariate normal density function for $P({\bf x} \mid
+y)$.  
+\item If all $n$ objects ${\bf x}_i$ have been independently sampled,
+then their joint distribution is 
+ 
+$$ {\cal L} = \Pi_{i=1}^n P({\bf x}_i \mid y). $$
+
+\item Considering ${\cal L}$ as a function of the unknown parameters ${\bf g}$ 
+and $V$, it is termed a {\sl likelihood function}.  
+\item The {\sl principle of
+maximum likelihood} then states that we should choose the unknown
+parameters such that ${\cal L}$ is maximized.  
+\item The classical approach
+for optimizing ${\cal L}$ is to differentiate it with respect to
+${\bf g}$ and then with respect to $V$, and to set the results equal to
+zero.  
+\item Doing this for the multivariate normal expression used
+previously allows us to derive estimates for the mean and covariances
+as follows.
+ 
+$$ \hat{\bf g} = {1 \over n} \sum_{i=1}^n {\bf x}_i $$
+$$ \hat{V} = {1 \over n} \sum_{i=1}^n ( {\bf x}_i - {\bf g} )
+                                   ( {\bf x}_i - {\bf g} )^\prime . $$
+\item These are used to provide {\sl maximum likelihood estimates} for the
+Bayesian classifier.
+\item In a more general setting, we could wish to consider a multivariate
+normal mixture of the following form:
+ 
+$$ P({\bf x} \mid y) = \sum_k w_k f_k({\bf x} \mid {\bf g}_k, V_k) 
+$$ where
+$k$ ranges over the set of mixture members, $w$ is a weighting 
+factor, and the function $f$ depends on the mean and the covariance
+structure of the mixture members.  
+\item For such density functions, an
+iterative rather than an analytic approach is used
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Bayesian Equal Covariances Case}}
+\begin{itemize}
+\item The groups we study will not ordinarily have the same covariance
+structure.  
+\item However it may be possible to assume that this is the
+case, and here we study what this implies in Bayesian discrimination.
+
+The discriminant score, when 
+expanded, is
+
+$$ \delta_c({\bf x}) = ln \mid V_c \mid 
+             + {\bf x}^\prime V^{-1}_c {\bf x}
+             - {\bf g}^\prime_c V^{-1}_c {\bf x}
+             - {\bf x}^\prime V^{-1}_c {\bf g}_c
+             + {\bf g}^\prime_c V^{-1}_c {\bf g}_c  . $$
+
+\item The first two terms on the right hand side can be ignored since they will
+feature on both sides of the assignment rule (by virtue of our assumption
+of equal covariances); and the third and
+fourth terms are equal.  
+\item If we write
+$ \phi_c({\bf x}) = 2 {\bf g}^\prime_c V^{-1}_c {\bf x} - 
+             {\bf g}^\prime_c V^{-1}_c {\bf g}_c $ then
+the assignment rule is: Assign ${\bf x}$ to class $c$ if
+
+$$ \phi_c({\bf x}) + ln \ P(c) > \phi_y({\bf x}) + ln \ P(y)              
+ \ \ \ \ for  \ all  \ y \neq c .  $$
+
+\item However, $\phi$ can be further simplified.  Its second term is a constant
+for a given group, $a_0$; and its first term can be regarded as a vector
+of constant coefficients (for a given group), ${\bf a}$.  
+\item Hence $\phi$
+may be written as:
+$ \phi_c({\bf x}) = a_{c0} + \sum^m_{j=1} a_{cj} x_j   $
+
+\item Assuming $P(c) = P(y)$, for all $y$, the assignment rule in the case of
+equal covariances thus involves a linear decision surface.  
+\item We have a
+result which is particularly pleasing from the mathematical point of
+view: Bayesian discrimination in the equal covariances case, when the
+group cardinalities are equal, gives {\sl exactly} the same decision
+rule (i.e.\ a linear decision surface) as linear discriminant 
+analysis discussed from a geometric standpoint. 
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Non-Parametric Discrimination}}
+\begin{itemize}
+\item Non-parametric (distribution-free) methods dispense with the need for
+assumptions regarding the probability density function.  
+\item Given a vector of parameter values, ${\bf x}_0$, the probability that any
+unknown point will fall in a local neighbourhood of ${\bf x}_0$ may
+be defined in terms of the relative volume of this neighbourhood.  
+\item If
+$n^\prime$ points fall in this region, out of a set of $n$ points in
+total, and if $v$ is the volume taken up by the region, then the
+probability that any unknown point falls in the local neighbourhood of
+${\bf x}_0$ is ${ n^\prime / {nv} }$.  
+\item 
+In the {\sl k-NN} ($k$ nearest neighbours) approach, we specify that the
+volume is to be defined by the $k$ NNs of the unclassified point.  
+\item Consider
+$n_c$ of these $k$ NNs to be members of class $c$, and $n_y$ to be 
+members of class $y$ (with $n_c + n_y = k$).  
+\item The conditional probabilities
+of membership in classes $c$ and $y$ are then
+
+$$ P({\bf x}_0 \mid c) = {n_c \over {nv} } $$
+$$ P({\bf x}_0 \mid y) = {n_y \over {nv} } . $$
+
+\item Hence the decision rule is: Assign to group $c$ if
+
+$$ {n_c \over {nv} } > {n_y \over {nv} } $$
+$$ i.e.  \ \ \  n_c > n_y   $$
+
+\item The determining of NNs of course requires the definition of distance: the
+Euclidean distance is usually used.
+\item An interesting theoretical property of the NN--rule relates it to the
+Bayesian misclassification rate.  
+\item The latter is defined as
+$ 1 - \max_y P(y \mid {\bf x}_0)  $ or,
+using notation introduced previously, $1 - P(c \mid {\bf x}_0)$
+\item This is the probability that ${\bf x}_0$ will be misclassified, given
+that it should be classified into group $c$.
+\item In the 1-NN approach, the misclassification rate is the product of:
+the conditional probability of class $y$ given the measurement 
+vector ${\bf x}$, and one minus the conditional probability of 
+class $y$ given the NN of ${\bf x}$ as the measurement vector:
+$$ \sum_{all \ y} P(y \mid {\bf x}) (1 - P(y \mid NN({\bf x})) $$
+\item This is the probability that we assign to class $y$ given that
+the NN is not in this class. 
+\item  It may be shown that the misclassification
+rate in the 1--NN approach  is not larger than
+twice the Bayesian misclassification rate.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Multilayer Perceptron}}
+\begin{itemize}
+\item 
+The multilayer perceptron (MLP) is an example of a {\sl supervised} method, 
+in that it a training set of samples or items of known properties is
+used.  
+\item In dealing with the MLP, the single perceptron is first described, and 
+subsequently the networking of perceptrons in a set of interconnected, 
+multiple layers to form the MLP.  
+\item The influential generalized delta rule, used
+in training the network, is introduced via the simpler case of the delta
+rule. 
+\item The perceptron algorithm is due to Rosenblatt in the late 1950s.  
+The perceptron, a simple computing engine which has been dubbed a 
+``linear machine'' for reasons which will become clear.
+\item Let {\bf x}  be an input vector of binary values; $o$ an output scalar; 
+and
+{bf w} a vector of weights (or learning coefficients; initially containing
+arbitrary values).  The perceptron calculates $ o = \sum_j w_j x_j$.  Let
+$ \theta  $ be some threshold.  
+\item If $o \geq \theta $, when we would have wished $o < \theta$ for the given
+input, then $i$ is incorrectly categorized.  We therefore seek to modify
+the weights and the threshold.  
+\item 
+Set $\theta \longleftarrow \theta + 1 $ to make it less likely that wrong
+categorization will take place again. 
+\item If $x_j = 0$ then no change is made to $w_j$.  If $x_j = 1$ then 
+$w_j \longleftarrow w_j - 1$ to lessen the influence of this weight.  
+\item If the output was found to be less than the threshold, when it should 
+have been greater for the given input, then the reciprocal updating 
+schedule is implemented.  
+\item The updates to weights and thresholds may be 
+denoted as follows::
+$ o = \sum_j w_j x_j $
+
+$ \Delta \theta = - (t_p - o_p) = -\delta_p $
+(change in threshold for pattern $p$)
+
+$ \Delta w_i = (t_p - o_p) x_{pi} = \delta_p x_{pi} $
+(change in weights for pattern $p$).
+\item If a set of weights exist, then the perceptron algorithm will find them.
+A counter-example is the exclusive-or, XOR, problem.
+\item The line (hyperplane) separating T from F is defined by $\sum_j w_j x_j
+= \theta $. In the XOR case, linear separability does not hold.  Perceptron
+learning fails for non-separable problems.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Multilayer Perceptron}}
+\begin{verbatim}
+
+   AND            OR           XOR
+ 0  0  F       0  0  F       0  0  F 
+ 0  1  F       0  1  T       0  1  T
+ 1  0  F       1  0  T       1  0  T
+ 1  1  T       1  1  T       1  1  F
+
+\end{verbatim}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Multilayer Perceptron Solution for XOR Problem}}
+\centerline{
+\vbox{
+\psfig{figure=fig7_1.ps,width=8cm,angle=90}
+}}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{The Generalized Delta Rule}}
+Training a feedforward multilayer perceptron.
+\centerline{
+\vbox{
+\psfig{figure=fig7_2.ps,angle=-270,width=8cm}
+}}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{The Generalized Delta Rule}}
+\begin{itemize}
+\item Initially we consider linear units only, i.e.
+$o_{pj} = \sum_i w_{ij} x_{pi} $
+\item The input at the $i$th neuron, $x_{pi}$, is occasioned by the $p$th 
+pattern.
+\item The weight connecting the $i$th neuron in a given layer, 
+to the $j$th neuron in the subsequent layer, is denoted $w_{ij}$. 
+\item  Consider
+an error term which we seek to minimize at each output neuron $j$; and let
+$p$ by be the pattern which is currently being presented to the net.
+\item  Then
+$ E_p = \frac{1}{2} \sum_j (t_{pj} - o_{pj})^2 $
+where $o$ is the output obtained when using the current set of weights.
+\item The multiplicative constant of a half is purely conventional, 
+to make this
+error term look like an energy expression. 
+\item The target output, $t$, is what
+we wish the network to replicate on being presented with the $p$th 
+pattern. 
+\item Consider
+$ E = \sum_p E_p$
+\item We may write the expression for $E_p$ as 
+$ \frac{1}{2} \sum_j \delta_{pj}^2 $
+\item The rate of change of $E_p$ with respect to $w_{ij}$ is given by the 
+chain rule:
+
+$$ \frac{\partial E_p}{\partial w_{ij}} = 
+\frac{\partial E_p}{\partial o_{pj}} \frac{\partial o_{pj}}{\partial 
+w_{ij}}$$
+
+\item Now, since $E_p = \frac{1}{2} \sum_j (t_{pj} - o_{pj})^2$, the first
+term here is $-(t_{pj} - o_{pj})$.  
+\item Given that linear units are 
+being considered, i.e.\ $o_{pj} = \sum_i w_{ij} x_{pi}$, the second
+term equals $x_{pi}$.  
+\item The gradient of $E_p$ is thus
+$$ \frac{\partial E_p}{\partial w_{ij}} = - \delta_{pj} x_{pi}$$
+\item 
+If $\partial E/\partial w_{ij} = \sum_p \partial E_p / \partial w_{ij}$ and 
+if updates do not take place after every training pattern, $p$, then we may
+consider the updating of weights as a classical gradient descent minimization
+of $E$.  
+\item Each weight is updated according to
+$$ \Delta_p w_{ij} = \eta (t_{pj} - o_{pj}) x_{pi} $$
+where $\eta$ is a small constant.  
+\item This corresponds to steepest descent
+optimization: we vary the weights in accordance with the downwards slope.
+\item So far, with linear units, we have done the following.
+\item  Given a vector of inputs, $x_p$, the values
+at the hidden layer are given by $x_p W_1$.  The values at the output 
+layer are then $x_p W_1 W_2$.  Note that we can ``collapse'' our network
+to one layer by seeking the weights matrix $W = W_1 W_2$.  If $t_p$ is the 
+target vector, then  we are seeking a solution of the equation 
+$x_p W = t_p$.  This is linear regression.
+\item Backpropagation assumes greater relevance when 
+nonlinear transfer functions
+are used at neurons.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{The Generalized Delta Rule for Nonlinear Units}}
+\begin{itemize}
+\item Nonlinear transformations are less tractable mathematically but may
+offer more sensitive modeling of real data.  
+\item They provide a more faithful
+modeling of electronic gates or biological neurons.
+\item Consider the accumulation of weighted values of a neuron
+$$ \mbox{net}_{pj} = \sum_i w_{ij} o_{pi} $$
+where $o_i = x_i$ if unit $i$ is an input one.  
+\item This is passed through a 
+differentiable and nondecreasing transformation, $f$, 
+$$ o_{pj} = f_j(\mbox{net}_{pj}) $$
+\item Normally this transfer function is a sigmoidal one.  
+\item If it were a step
+function, this would violate our requirement for a differentiable function.
+\item  One possibility is the function 
+$y = (1 + e^{-x})^{-1}$.  Another choice is the hyperbolic tangent or 
+tanh function: for $x > 20.0, y = + 1.0$; for $ y < -20.0, y = -1.0$; 
+otherwise $y = (e^x - e^{-x})/(e^x + e^{-x})$
+\item Both of these functions are
+invertible and continuously differentiable.   
+\item Both have semilinear zones
+which allow good (linear) fidelity to input data.  
+\item Both can make ``soft'' or
+fuzzy decisions.  
+\item Finally, they are similar to the response curve of a 
+biological neuron.  
+\item 
+As before, the change in weights will be defined to be  proportional to the 
+energy (or error function) slope, and the chain rule yeilds:
+$$ \Delta_pw_{ij}  \propto - \frac{\partial E_p}{\partial w_{ij}} =
+- \frac{\partial E_p}{\partial\mbox{net}_{pj}}  \frac{\partial \mbox{net}_{pj}}
+{\partial w_{ij}} $$
+\item 
+From the definition of $\mbox{net}_{pj}$, the last term is $o_{pi}$.  Let
+$\delta_{pj} = - \partial E_p/ \partial \mbox{net}_{pj}$.  
+\item Hence
+$$ - \frac{\partial E_p}{\partial w_{ij}} = \delta_{pj} o_{pj} $$
+or 
+$$ \Delta_p w_{ij} = \eta \delta_{pj} o_{pi}$$
+where $\eta$ is the learning constant, usually a small fraction which 
+prevents rebounding from side to side in ravines of the energy surface.  
+\item 
+Note that for a linear output unit, by definition $o_{pj} = \mbox{net}_{pj}$
+and so we have $- \partial E_p/ \partial o_{pj} = \delta_{pj}$ as was 
+seen above when considering such units. 
+\item It must now be determined how to define $\delta_{pj}$.  
+\item We have
+
+$$ \delta_{pj} = - \frac{\partial E_p}{\partial \mbox{net}_{pj}} = 
+- \frac{\partial E_p}{\partial \mbox{o}_{pj}} \frac{\partial o_{pj}}
+{\partial \mbox{net}_{pj}} $$
+and the last term is equal to $f^\prime_j(\mbox{net}_pj) $, i.e.\ the
+derivative of the transfer function.  
+\item Two cases will be distinguished 
+depending on whether the unit is an output one or a hidden layer one.
+
+\begin{description}
+\item[Case 1:] Unit $j$ is an output one, and it is found that 
+$$\delta_{pj}= (t_{pj}- o_{pj}) f^\prime_j(\mbox{net}_{pj}) $$
+
+\item[Case 2:] Unit $j$ is a hidden layer one and it is found that
+$$ \delta_{pj} = f^\prime_j(\mbox{net}_{pj}) \sum_k \delta_{pk} w_{kj} $$
+\end{description}
+
+\item Hence the deltas at an internal node can be derived from the deltas at a
+subsequent (closer to output) node.  
+
+\item The overall algorithm is as follows: present pattern; feed forward, 
+through successive layers; backpropagate -- updating weight; repeat.
+
+\item An alternative is to determine the changes in weights as a result of 
+presenting all patterns: $\Delta w_{ij} = \sum_p \Delta_p w_{ij}$.  This
+so-called ``off-line'' updating of weights is computationally more 
+efficient but loses on the adaptivity of the overall approach. 
+
+\item Some further notes on the multilayer perceptron using the generalized 
+delta rule follow. 
+
+\item A local optimum set of weights may be arrived at.  There is no guarantee
+of arriving at a global optimum in weight space.   
+
+\item For the logistic activation function defined by
+$$ f_j(\mbox{net}_{pj}) = 1/(1 + \exp^{-\mbox{net}_{pj}}) $$
+where
+$$\mbox{net}_{pj} = \sum_i w_{ij} o_{pi} + \theta_j $$
+and the last term is a bias (or threshold, we have the following result:
+$$f^\prime_j(\mbox{net}_{pj}) = o_{pj}(1 - o_{pj}) $$
+
+\item For this function: 
+
+$$\delta_{pj} = (t_{pj} -o_{pj}) o_{pj} (1 - o_{pj}) $$
+for an output unit, 
+$$ \delta_{pj} = o_{pj}  (1 - o_{pj}) \sum_k \delta_{pk} 
+w_{kj}$$
+for a hidden layer unit.
+
+
+\item In practice one must use approximations to hard-limiting values of 0, 1; 
+e.g. 0.1, 0.9 can be used.  Otherwise, infinite weight values would be 
+needed in the above expression for $f_j(\mbox{net}_{pj})$.  
+
+\item It is found that symmetry breaking is necessary in order to get the 
+backpropagation algorithm started.  This involves randomizing the initial
+arbitrary weight values. 
+
+\item The presence of an additional momentum term, $\Delta w_{ij}^{(n+1)} = 
+\eta \delta_{pj} o_{pi} + \alpha \Delta w_{ij}^{(n)} $ often helps the 
+convergence properties of the steepest descent iterative optimization.  
+\item This term takes the effect of previous steps into account.  If the change
+in the previous step was large, the momentum tends to continue to keep
+the delta large.  
+
+\item The learning rate, $\eta$, should be small (0.7 or smaller). 
+
+\item The MLP architecture using the generalized delta rule can be very slow.
+\item The number of hidden layers in an MLP and the number of nodes in each 
+layer can vary for a given problem.  In general, more nodes offer greater
+sensitivity to the problem being solved, but also the risk of overfitting.
+\end{itemize}
+\end{slide}
+
+\begin{slide}
+\textcolor {reddish} {\heading{Examples}}
+\begin{itemize}
+\item Faint star/galaxy discrimination
+\item Cosmic ray hit/point source discrimination
+\end{itemize}
+\end{slide}
+
+
+\end{document}
+
+
+

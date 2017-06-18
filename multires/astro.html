@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - Astronomical Examples</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+<font color=red>
+<h1>X-ray image filtering, and deconvolution</h1>
+<font color=black>
+<hr><p>
+<img src="../pic/fig3.gif">
+<img src="../pic/fig4.gif">
+<img src="../pic/fig5.gif">
+<p>
+</center>
+
+The galaxy cluster A2390 is at a redshift of 0.231.  The first image above 
+was obtained with the ROSAT X-ray spacecraft.  The resolution is one arc 
+second per pixel, with a total number of photons equal to 13506, based on an 
+integration time of 8.5 hours.  The background level is about 0.04 photons
+per pixel.  <p>
+It is obvious that the image cannot be used directly and that some processing
+is required before any analysis.  The standard method consists of 
+convolving the image with a Gaussian.  The second image above shows the 
+result of doing this.  With much residual noise, it is difficult to see any
+structure. <p>
+The final image above shows the image after wavelet filtering.  Faint 
+X-ray emission structures are seen, related to gravitational amplification
+phenomena obervable in the visible wavelength range.  
+
+<p>
+<p>
+
+<center>
+<hr><p>
+<img src="../pic/fig9.gif">
+<img src="../pic/fig10.gif">
+<p>
+</center>
+
+The Beta Pictoris image (first image) was obtained by integrating on-source
+for 5 hours using a mid-infrared camera (TIMMI, on the ESO 3.6m telescope 
+at La Silla, Chile).  The raw image has a peak signal-to-noise ratio of 80. 
+It is strongly blurred by a combination of seeing, diffraction 
+(0.7 arcsec on a 3m-class telescope) and additive Gaussian noise.  The initial
+disk shape has been lost following convolution with the point spread 
+function.  Thus we need to deconvolve  the image to get the best information
+about the object - the exact profile and thickness of the disk - and 
+subsequently to compare results to models of thermal dust emission.
+<p>
+Noise filtering alone will show up the disk quite well.  For detection of 
+faint structures in the disk, one can calculate that the use of such 
+filtering on this image provides a gain of observing time of a factor of
+around 60.  The deconvolved image (second image above) shows that 
+the disk is extended at 10 microns and on close examination can be seen 
+to be asymmetrical.  The multiscale 
+entropy method is more effective for regularizing than other standard
+methods, and leads to good reconstruction of the faintest structures of 
+the dust disk.
+<p>
+<hr>
+<b>To probe further</b><p>
+
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, 1998.
+
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

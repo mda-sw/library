@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<TITLE> Thesis Abstract - Damien Guillaume </TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<CENTER><h2>Distributed Information Retrieval, Search and Processing in Astronomy</h2></CENTER>
+<BR>
+PhD Thesis Defended Universit&eacute; Louis Pasteur, 2000 January 21
+<br>
+<a href="report.ps">Thesis in Postscript</a>, and in 
+<a href="report.ps.gz">gzipped Postscript</a>.
+
+<P align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;The thesis aims at improving information retrieval and knowledge discovery in astronomy. Massive amounts of heterogeneous data are used in astronomy, and they require precise metadata. The publication, done more and more on the internet, involves the use of multimedia objects, like images or other scientific data requiring an interaction to be properly viewed.
+</P><P align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;Today, various file formats are used to exchange and process this information. These files are transformed into HTML for publication on the internet, and a limited interaction is possible with the use of HTML forms and CGI programs, for instance to enable searching. The HTML documents used are mixing data content information and user interface information, thus providing only a way to access the information without providing a way of reusing it. Sometimes, the original data files are available by FTP, but then the selection of the data done with the HTML forms is lost, and a user has to download more data than needed. Obviously, these solutions are not adapted to the needs of information retrieval in astronomy.
+</P><P align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;While good solutions exist to store and process purely unstructured data, strictly structured data, or graphic multimedia objects, a better support was needed for documents mixing structured, unstructured data, and multimedia objects. Also, a standard metadata syntax was required. Current metadata languages are either too specific for a discipline, or too general with only very few elements.
+</P><P align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;Based on the concept of object-oriented information, and on flexible data and software structures, the solutions tested in the course of the thesis provide a new way of exchanging data and searching it. With these improvements in information retrieval, knowledge discovery using distributed collections of documents becomes possible, thus opening a new powerful tool for research.
+</P><P align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;The new XML language is the most important basis of the framework: XML, a new markup meta-language based on SGML and optimised for the internet, provides a uniform, flexible yet rigorous way of storing complex multimedia data and metadata. A number of other standards are based on XML, and have been studied and used in the course of the thesis: XLink is a standard syntax to link XML documents, XSL is a stylesheet language to define a user interface for an XML language, and the Namespaces provide a way to use different XML languages in a single XML document.
+</P><P align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;Based on XML, a new language for astronomical data and metadata has been created: AML, Astronomical Markup Language. AML is composed of a number of objects (currently: astronomical object, article, image, table, set of tables, person and project) that can be expressed in a unified way. AML is designed for information retrieval and knowledge discovery, with a standard linking system based on XLink. It is also designed to handle scientific data, and it provides customisation possibilities.
+</P><P align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;A Java browser to display these objects, with a different Java class for each object, has been created. Each object can be browsed with a specific software module, sometimes performing very specific operations, such as displaying astronomical images. The many links between the objects can be followed, thus allowing a navigation similar to the one used on the World-Wide-Web.
+</P><P align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;A knowledge discovery application is the AML map: a set of AML documents is clustered automatically with the information residing in the links between the documents, and the keywords available for some objects. This clustering is done with an improved graph-partitioning algorithm, and the resulting classification can be browsed with a semantic map interface linked to the AML browser. With the data unification provided by AML, this lets users cluster various heterogeneous objects in a unique synthetic classification. This method of classification has been evaluated and compared with the Kohonen map method and another method used within the T&eacute;tralogie system.
+</P><P align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;As a number of search systems already exist to perform complex distributed searches, it wasn't needed to design a completely new framework. Instead, existing frameworks (Harvest, Ingrid and Emerge) have been extended to make use of AML. Harvest is divided into 3 software modules: the client, with the user interface, the gatherer, gathering the indexed information on each provider site, and the broker, searching through the indexed data to execute client queries. Ingrid uses a similar framework, but in a more distributed way: links are created between the resources, so that a search can focus on a sub-graph of the grid, without needing to use the metadata for all the resources. Emerge is based on the Z39.50 protocol, to allow complex and interactive queries to be executed on the different servers. Each extended framework was successfully applied to collections of AML documents, thus providing a way to search through various heterogeneous datasets.
+</P><P align="justify">
+&nbsp;&nbsp;&nbsp;&nbsp;Finally, efforts were made to promote XML to the astronomical community, and apply the new developments in existing data centres. In particular, AML is becoming the new internal format for metadata in the ADIL (Astronomy Digital Image Library). The adoption of new standards is one of the most important tasks to improve information retrieval, but it is a slow process, and is still ongoing when technical solutions are already existing. However, a path is now set out for the improvements, and there is great hope for the future of knowledge discovery in astronomy.
+</P>
+</BODY>
+</HTML>

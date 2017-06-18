@@ -1,0 +1,453 @@
+This is TeX, Version 3.14159 (Web2c 7.0) (format=latex 0.6.13)  13 DEC 2006 10:26
+**expose-discr-new
+(expose-discr-new.tex
+LaTeX2e <1996/12/01> patch level 1
+Babel <v3.6h> and hyphenation patterns for american, english, french, dutch, ge
+rman, loaded.
+(/usr/local/texmf/tex/latex/seminar/seminar.cls
+Document Class: seminar 1997/04/15, 1.1
+Document Style: `seminar' v1.1 <1997/04/15> (tvz)
+\slidewidth=\dimen102
+\slideheight=\dimen103
+\footheight=\dimen104
+(/usr/local/texmf/tex/latex/base/article.cls
+Document Class: article 1996/10/31 v1.3u Standard LaTeX document class
+(/usr/local/texmf/tex/latex/base/size10.clo
+File: size10.clo 1996/10/31 v1.3u Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen105
+)
+(/usr/local/texmf/tex/latex/seminar/sem-page.sty)
+\before@document=\toks14
+\after@document=\toks15
+\before@enddocument=\toks16
+\c@slide=\count87
+\slide@count=\count88
+\@slidebox=\box26
+\not@slidebox=\box27
+\slide@hook=\toks17
+\after@slide=\toks18
+\slide@footins=\insert233
+\slide@listdepth=\count89
+\saved@specials=\box28
+\before@newslide=\toks19
+\after@slidepage=\toks20
+\slidesep=\skip43
+\c@note=\count90
+\slideframewidth=\dimen106
+\slideframesep=\dimen107
+\semin=\dimen108
+\semcm=\dimen109
+)
+(/usr/local/texmf/tex/latex/seminar/semlayer.sty
+\@@slidebox=\box29
+\c@overlay=\count91
+)
+
+! LaTeX Error: File `gradient.sty' not found.
+
+Type X to quit or <RETURN> to proceed,
+or enter new name. (Default extension: sty)
+
+Enter file name: 
+(/usr/local/texmf/tex/latex/psnfss/times.sty
+Package: times 1997/01/23 6.0 Times PSNFSS2e package
+)
+(/usr/local/texmf/tex/latex/psnfss/pifont.sty
+Package: pifont 1997/01/23 6.0 Pi font PSNFSS2e package
+LaTeX Font Info:    Try loading font information for U+pzd on input line 60.
+
+(/usr/local/texmf/tex/latex/psnfss/upzd.fd
+File: upzd.fd 1997/02/11 font definitions for U/pzd.
+)
+LaTeX Font Info:    Try loading font information for U+psy on input line 61.
+
+(/usr/local/texmf/tex/latex/psnfss/upsy.fd
+File: upsy.fd 1997/02/11 font definitions for U/psy.
+))
+(/usr/local/texmf/tex/latex/graphics/epsfig.sty
+Package: epsfig 1996/10/04 v1.7 (e)psfig emulation (SPQR)
+
+(/usr/local/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1996/10/31 v1.0c Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1995/09/21 v1.09 key=value parser (DPC)
+)
+(/usr/local/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 1996/10/31 v1.0c Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texmf/tex/latex/graphics/trig.sty
+Package: trig 1994/10/16 v1.08 sin cos tan (DPC)
+)
+(/usr/local/texmf/tex/latex/config/graphics.cfg)
+Package graphics Info: Driver file: dvips.def on input line 83.
+
+(/usr/local/texmf/tex/latex/graphics/dvips.def
+File: dvips.def 1996/12/12 v3.0d Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen110
+\Gin@req@width=\dimen111
+)
+\epsfxsize=\dimen112
+\epsfysize=\dimen113
+)
+(/usr/local/texmf/tex/latex/tools/array.sty
+Package: array 1998/05/13 v2.3m Tabular extension package (FMi)
+\col@sep=\dimen114
+\extrarowheight=\dimen115
+\NC@list=\toks21
+\extratabsurround=\skip44
+\backup@length=\skip45
+)
+(/usr/local/texmf/tex/latex/seminar/slidesec.sty
+File `slidesec.sty' v0.9  92/05/07  <tvz>
+\@temptokenb=\toks22
+\c@slidesection=\count92
+\c@slidesubsection=\count93
+) (/usr/local/texmf/tex/latex/pstricks/fancybox.sty
+Style option: `fancybox' v1.0 <93/02/10> (tvz)
+\@fancybox=\box30
+\shadowsize=\dimen116
+\@Sbox=\box31
+\do@VerbBox=\toks23
+\the@fancyput=\toks24
+\this@fancyput=\toks25
+\EndVerbatimTokens=\toks26
+\Verbatim@Outfile=\write3
+\Verbatim@Infile=\read1
+) (/usr/local/texmf/tex/latex/seminar/semrot.sty
+\@rotdimen=\dimen117
+\@rotbox=\box32
+)
+(/usr/local/texmf/tex/latex/obs/psfig.sty)
+(/usr/local/texmf/tex/latex/rotating/rotating.sty
+Package: rotating 1995/08/22 2.10 Rotation package
+
+(/usr/local/texmf/tex/latex/base/ifthen.sty
+Package: ifthen 1996/08/02 v1.0m Standard LaTeX ifthen package (DPC)
+)
+\r@tfl@t=\count94
+\rot@float@box=\box33
+)
+(/usr/local/texmf/tex/latex/graphics/color.sty
+Package: color 1997/01/07 v1.0d Standard LaTeX Color (DPC)
+
+(/usr/local/texmf/tex/latex/config/color.cfg)
+Package color Info: Driver file: dvips.def on input line 128.
+
+(/usr/local/texmf/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 1996/12/12 v3.0d Driver-dependant file (DPC,SPQR)
+))
+(/usr/local/texmf/tex/latex/obs/psfig.tex) (expose-discr-new.aux)
+\openout1 = `expose-discr-new.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 48.
+
+(/usr/local/texmf/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 1997/02/11 Fontinst v1.6 font definitions for OT1/ptm.
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 52.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 55.
+
+(/usr/local/texmf/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <9> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 55.
+
+
+LaTeX Warning: Slide 1 overfull by 7.75229pt on input line 65.
+
+[1
+
+
+] [2
+
+] [3
+
+]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 111.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 111.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 111.
+
+
+LaTeX Warning: Slide 4 overfull by 18.48718pt on input line 120.
+
+[4
+
+] [5]
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 138.
+
+ (/usr/local/texmf/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 1997/02/11 Fontinst v1.6 font definitions for OT1/pcr.
+) [6
+
+] [7
+
+]
+Overfull \hbox (2.05093pt too wide) in paragraph at lines 192--192
+[]               \OT1/pcr/m/n/7 /            ai.xi for i=1                   = 
+0 otherwise[] 
+ []
+
+
+LaTeX Warning: Slide 8 overfull by 8.3917pt on input line 194.
+
+[8
+
+] [9
+
+] [10
+
+] [11
+
+] [12
+
+]
+
+LaTeX Warning: Slide 13 overfull by 11.76886pt on input line 296.
+
+[13
+
+] [14] [15
+
+] [16
+
+]
+
+LaTeX Warning: Slide 17 overfull by 10.82182pt on input line 369.
+
+[17
+
+]
+
+LaTeX Warning: Slide 18 overfull by 12.63377pt on input line 394.
+
+[18] [19] [20] [21
+
+]
+
+LaTeX Warning: Slide 22 overfull by 8.71257pt on input line 452.
+
+[22
+
+]
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 459.
+
+
+LaTeX Warning: Slide 23 overfull by 16.13647pt on input line 480.
+
+
+Overfull \vbox (3.04199pt too high) has occurred while \output is active []
+
+
+[23]
+
+LaTeX Warning: Slide 24 overfull by 12.238pt on input line 503.
+
+[24]
+
+LaTeX Font Warning: Command \sl invalid in math mode on input line 509.
+
+
+LaTeX Font Warning: Command \sl invalid in math mode on input line 512.
+
+
+LaTeX Font Warning: Command \sl invalid in math mode on input line 513.
+
+
+LaTeX Font Warning: Command \sl invalid in math mode on input line 515.
+
+
+LaTeX Font Warning: Command \sl invalid in math mode on input line 518.
+
+
+LaTeX Font Warning: Command \sl invalid in math mode on input line 519.
+
+
+LaTeX Warning: Slide 25 overfull by 18.05504pt on input line 526.
+
+
+Overfull \vbox (2.73308pt too high) has occurred while \output is active []
+
+
+[25]
+
+LaTeX Warning: Slide 26 overfull by 15.41727pt on input line 550.
+
+
+Overfull \vbox (2.93015pt too high) has occurred while \output is active []
+
+
+[26] [27]
+
+LaTeX Warning: Slide 28 overfull by 10.60724pt on input line 590.
+
+[28
+
+] [29]
+File: fma06.ps Graphic file (type eps)
+ <fma06.ps>
+Overfull \hbox (57.80492pt too wide) in paragraph at lines 615--618
+[][] 
+ []
+
+[30
+
+]
+
+LaTeX Warning: Slide 31 overfull by 12.65219pt on input line 642.
+
+[31
+
+]
+
+LaTeX Warning: Slide 32 overfull by 14.74034pt on input line 661.
+
+[32]
+
+LaTeX Warning: Slide 33 overfull by 7.54279pt on input line 688.
+
+[33]
+
+LaTeX Warning: Slide 34 overfull by 5.95024pt on input line 710.
+
+[34]
+
+LaTeX Warning: Slide 35 overfull by 9.15224pt on input line 734.
+
+[35
+
+] [36] [37]
+
+LaTeX Warning: Slide 38 overfull by 23.90866pt on input line 788.
+
+
+Overfull \vbox (5.31291pt too high) has occurred while \output is active []
+
+
+[38
+
+] [39]
+
+LaTeX Warning: Slide 40 overfull by 23.75217pt on input line 825.
+
+
+Overfull \vbox (5.5614pt too high) has occurred while \output is active []
+
+
+[40
+
+]
+
+LaTeX Warning: Slide 41 overfull by 22.05627pt on input line 846.
+
+
+Overfull \vbox (5.51933pt too high) has occurred while \output is active []
+
+
+[41] [42]
+
+LaTeX Warning: Slide 43 overfull by 22.83542pt on input line 880.
+
+
+Overfull \vbox (5.85962pt too high) has occurred while \output is active []
+
+
+[43
+
+]
+
+LaTeX Warning: Slide 44 overfull by 11.77228pt on input line 898.
+
+[44] [45] [46
+
+]
+File: fig7_1.ps Graphic file (type eps)
+ <fig7_1.ps> [47
+
+]
+
+LaTeX Warning: Slide 48 overfull by 19.10211pt on input line 923.
+
+
+Overfull \vbox (19.10211pt too high) has occurred while \output is active []
+
+
+[48]
+File: fig7_2.ps Graphic file (type eps)
+ <fig7_2.ps> [49
+
+]
+
+LaTeX Warning: Slide 50 overfull by 16.03723pt on input line 957.
+
+[50
+
+]
+
+LaTeX Warning: Slide 51 overfull by 15.20027pt on input line 979.
+
+[51] [52]
+
+LaTeX Warning: Slide 53 overfull by 18.01881pt on input line 1012.
+
+[53
+
+] [54]
+
+LaTeX Warning: Slide 55 overfull by 11.90654pt on input line 1055.
+
+[55]
+
+LaTeX Warning: Slide 56 overfull by 6.95927pt on input line 1075.
+
+[56]
+
+LaTeX Warning: Slide 57 overfull by 11.6198pt on input line 1091.
+
+[57]
+
+LaTeX Warning: Slide 58 overfull by 2.32173pt on input line 1112.
+
+[58] [59] [60
+
+] (expose-discr-new.aux) ) 
+Here is how much of TeX's memory you used:
+ 1620 strings out of 10919
+ 19459 string characters out of 72859
+ 69800 words of memory out of 263001
+ 4494 multiletter control sequences out of 10000+0
+ 10602 words of font info for 33 fonts, out of 100000 for 500
+ 14 hyphenation exceptions out of 1000
+ 32i,8n,23p,225b,523s stack positions out of 300i,100n,500p,3000b,4000s
+
+Output written on expose-discr-new.dvi (60 pages, 87632 bytes).

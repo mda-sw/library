@@ -1,0 +1,80 @@
+Lecture - DESS - Janvier 1999
+-----------------------------
+
+(1)
+
+ Titre : Analyse des donnees (l') 
+
+ Auteur : Jean-Marie BOUROCHE, Gilbert SAPORTA
+ Numiro : 1854
+ Edition : 6eme - 9412
+ ISBN : 2130450830 
+ Format : 11.5 x 17.6 cm
+ Pages : 128
+ Prix : 42 FF 
+
+    Table des matieres :
+Chap. 1 - La nature des
+donnees : quelques concepts
+fondamentaux
+Chap. 2 - L'analyse en
+composantes principales
+Chap. 3 - La classification
+Chap. 4 - L'analyse canonique
+Chap. 5 - L'analyse factorielle
+des correspondances
+Chap. 6 - L'analyse
+discriminante
+Bibliographie
+
+(2)
+
+Titre : Information scientifique et technique
+ (l') 
+
+ Auteur : Francois TAKOBIAK
+ Numiro : 3015
+ Edition : 2eme - 9609
+ ISBN : 2130472729 
+ Format : 11.5 x 17.6 cm
+ Pages : 128
+ Prix : 42 FF 
+
+    Table des matieres :
+Chap. 1 - Typologie de l'information
+Chap. 2 - Les sources d'information scientifique et technique 
+Chap. 3 - La recherche d'information
+Chap. 4 - La diffusion de l'information
+Chap. 5 - Le traitement de l'information
+Chap. 6 - La memorisation de l'information
+Chap. 7 - L'exploitation rationnelle de l'information
+Bibliographie
+
+(3)
+
+Titre : Banques de donnees (les) 
+
+ Auteur : Jacques CHAUMIER
+ Numiro : 1629
+ Edition : 4eme - 9404
+ ISBN : 2130461727 
+ Format : 11.5 x 17.6 cm
+ Pages : 128
+ Prix : 42 FF 
+
+    Table des matieres :
+Chap. 1 - Definition et
+caracteristiques des banques
+de donnees
+Chap. 2 - Banques de donnees et
+informatique
+Chap. 3 - Applications des
+banques de donnees
+Chap. 4 - Le developpement des
+banques de donnees
+Bibliographie
+
+(4)
+
+Jean-Pierre Fenelon, Qu'est-ce que l'analyse des donnees ?, Lefonen.
+

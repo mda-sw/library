@@ -1,0 +1,49 @@
+haarum<- function(memberships, x, threshold = 0)
+{
+
+# DZ, 25/03/005
+
+# Example of use.
+# dyn.load("C:/TEMP/haarum.dll") 
+
+
+# Elementary input checking
+n <- nrow(memberships)
+if (n != nrow(x))
+	cat("Problem: expecting nrow(memberships) = nrow(x).\n")
+if (n != ncol(memberships))
+	cat("Problem: expecting nrow = ncol for memberships.\n")
+m <- ncol(x)
+
+
+xout <- x
+
+smooth <- matrix(0, nrow=m, ncol=n-1)
+detail <- matrix(0, nrow=m, ncol=n-1)
+
+
+output <-  .C("haarum", as.double(xout),
+			as.double(smooth),
+			as.double(detail),
+			as.double(x),
+			as.integer(n),
+			as.integer(m), 
+			as.integer(memberships),
+			as.double(threshold)
+                         )
+
+xout   <- matrix(output[[1]], nrow=n, ncol=m)
+smooth <- matrix(output[[2]], nrow=m, ncol=n-1)
+detail <- matrix(output[[3]], nrow=m, ncol=n-1)
+
+
+retlist <- list(wt=cbind(smooth[,1], detail),
+		# Return ultrametric wavelet transform, dims n x n
+                xout=xout)
+		# and approximate (if filtering threshold > 0) reconstruction of
+		# input data.
+
+retlist 
+
+} # End of function haarum (ultrametric Haar wavelet transform + inverse)
+

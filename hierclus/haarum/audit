@@ -1,0 +1,21 @@
+# Note: C++ programs must have extern wrapping the main class.
+# Note: C programs must have malloc.h removed.
+
+# For haarum.cpp and hierclustx.c, compile, and create shared object file:
+R CMD SHLIB haarum.cpp hierclustx.c
+
+dyn.load("haarum.so")
+
+source("haarum.txt")
+source("HierClustx.txt")
+
+data(iris)
+x <- iris[,1:4]
+xh3 <- HierClust(as.matrix(x), rep(1/150, 150) )
+x <- iris[,1:4]
+xh3 <- HierClust(as.matrix(x), rep(1/150, 150) )
+xres <- haarum(cutree(hclust(dist(x)),1:150), as.matrix(x), 0.1)
+
+
+
+SEE NOW Saothar-G5/Scriibhne

@@ -1,0 +1,25 @@
+Enclosed please find an ERS SAR image of the Gulf of Oman containing
+several spiral features. We have a SeaWiFs image coincident with this
+SAR image which I am also sending. 
+
+As you can see there is some nice correspondence between the two images.
+The spirals are visible in the SAR as a result of biological matter on
+the surface which forms into slicks when there are circulatory patterns
+set up due to eddies. The slicks show up against the normal sea surface
+background due to reduction in backscatter from the surface. The
+biological content of the slicks causes the sea surface to become less
+rough, hence providing less surface area to reflect back emitted radar
+from the SAR sensor. The beauty of SAR is its all weather capability,
+i.e. even when SeaWiFS is cloud covered, SAR will still give signals
+back from the sea surface. Returns from the sea surface however are
+affected by wind speed over the surface and this explains the large
+black patches. The patches result from a drop in the wind at these
+locations, leading to reduced roughness of the surface.
+
+What we would be interested in is, how successful your SeaWiFS feature
+(spiral) detection routines would be in highlighting the spirals in
+this type of image, bearing in mind the other features and artefacts.
+Maybe the wavelet transform could be employed in this context, as a form
+of reducing the background signal to highlight the spirals.
+
+Image courtesy of Will Aicken, DERA

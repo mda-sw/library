@@ -1,0 +1,78 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<img align=left src="../pic/galicon.gif">
+<ul>
+<font color=red>
+<h1>A Palette of Multiresolution Applications</h1>
+<font color=green>
+A privileged insight into data and information.
+Applications in medicine, astronomy, surveillance and security, Earth 
+observation, telecommunications, financial engineering, multimedia, 
+plasma physics, and many other areas.
+
+<p>
+
+<font color=blue>
+<hr><p>
+<li> <b><a href="comet.html">Comet nucleus</a></b> - looking into the nucleus 
+and surroundings of a comet.
+<li> <b><a href="heart.html">Echocardiography</a></b> - using ulstrasound to 
+non-invasively see the structure of the heart. 
+<li> <b><a href="mines.html">Surveillance</a></b> - where is the minefield?
+<li> <b><a href="ngc2997.html">Galaxy and stars</a></b> - 
+separating into layers what we observe.
+<li> <b><a href="noise.html">Noise</a></b> - an ever-present foe.
+<li> <b><a href="mammo.html">Mammogram</a></b> - for image transfer to
+breast cancer specialists.
+<li> <b><a href="sar.html">Radar view of Earth</a></b> - as seen from the 
+European Space Agency's ERS synthetic aperture radar satellites.
+<li> <b><a href="edge.html">Architectural backbone</a></b> - the linear 
+components of a street scene.
+<li> <b><a href="envir.html">Jetstream</a></b> - 
+showing the superimposed fluctuations 
+that make up most environmental phenomena.
+<li> <b><a href="fin.html">Predicting the S&P 500 index</a></b> - financial 
+engineering, using the elasticity of time.
+<li> <b><a href="telec.html">Web middleware engineering</a></b> - observation,
+interpretation and forecasting of telecommunications traffic.
+<li> <b><a href="hyper.html">Text and hypertext</a></b> - information 
+discovery and retrieval.
+</ul>
+<hr>
+<b>Temporary warning:</b>
+So far implemented are:
+Comet, Echocardiography, Mines, Galaxy, Noise, and Jetstream.
+
+<hr>
+<font color=black>
+<b>To probe further</b><p>
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, available from 
+March 1998.
+<p>
+Last update of this page in January 1998.
+Contacts: Fionn Murtagh, 
+<a href="mailto:fd.murtagh@ulst.ac.uk">fd.murtagh@ulst.ac.uk</a>, 
+Jean-Luc Starck,
+<a href="mailto:starck@cea.fr">starck@cea.fr</a>,
+Zheng Gonghui 
+<a href="mailto:zheng@infm.ulst.ac.uk">zheng@infm.ulst.ac.uk</a>.
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

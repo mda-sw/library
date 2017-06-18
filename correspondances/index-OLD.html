@@ -1,0 +1,378 @@
+<html>
+<head>
+<title>Correspondence Analysis and Data Coding with R and Java</title>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-18128645-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body bgcolor="white">
+
+<hr>
+<ul>
+<li> Recent writings of J.-P. Benz&eacute;cri: Revue MODULAD,
+<a href="http://www-rocq.inria.fr/axis/modulad/archivesdetail.htm#38">
+"Si j'avais un laboratoire ..., No. 38; and 
+"L'Analyse des donn&eacute;es : histoire, bilan, projets, ..., 
+perspective", No. 35</a>.   
+(<a href="cahier-2008/cahier-start-translation.txt">English translation of 
+part of page 1</a> of "Si j'avais un laboratoire ..." in text - Latex format.)
+<p>
+<li> A recent issue of 
+<a href="http://www.emis.de/journals/JEHPS/decembre2008.html">
+Electronic Journal for History of Probability and Statistics</a>,
+Vol.4/2 December 2008: "About the History of Multivariate Exploratory Data 
+Analysis", with many articles dealing with the history and development of 
+Benz&eacute;cri's approach to analysis of data and science.  
+<p>
+This includes a 
+version in English of the article <i>L'&Acirc;me au bout d'un rasoir, The
+Soul at the Razor's Edge</i>, originally publised in the journal <i>
+Les Cahiers de l'Analyse des Donn&eacute;es</i>, vol. V, no. 2, 1980,
+pp. 229-242. 
+<p>
+Updated version (10 May 2009) of <a href="LargFionn-10mai2009.pdf">
+<i>L'&Acirc;me au bout d'un rasoir, The 
+Soul at the Razor's Edge</i></a>.
+</ul>
+<hr>
+<center>
+<img align="middle" height="100" src="BCRI_Logo.jpg">
+</center>
+<center><font color=blue>
+<a href="http://www.bcri.ucc.ie/lectureSeries.html">
+6th Annual Public Boole Lecture in Informatics</a><br>
+Boole Centre for Research in Informatics, 
+Annual Boole Lecture Series, University College Cork, 
+Ireland, 29 April 2008 <br>
+Fionn Murtagh, "The Correspondence Analysis Platform for Uncovering Deep 
+Structure in Data and Information"<br>
+<a href="http://arxiv.org/abs/0807.0908">Preprint</a>, 
+Computer Journal, in press, 
+<a href="http://comjnl.oxfordjournals.org/cgi/content/abstract/bxn045v1">
+Advance Access 9 Sept. 2008</a>
+</font></center>
+<hr>
+
+<center><font color=red>
+<h1>Software Accompanying:<br>
+Correspondence Analysis and Data Coding<br>
+with R and Java</font></h1>
+</font></center>
+
+<hr>
+
+The software and data presented here accompanies the book <i> 
+Correspondence Analysis and Data Coding with R and Java</i>, by Fionn 
+Murtagh, Chapman & Hall/CRC, 2005, pp 250+xviii.  
+
+<p>
+
+<center>
+<img src="cabookcover.jpg">
+</center>
+
+<font size=2>
+Benz&eacute;cri, from Foreword:  <br>
+"Physics progresses, mainly, by constituting corpora of rare 
+phenomena among immense sets of ordinary cases.  The simple 
+observation of one of these ordinary cases requires detection 
+apparatus based on millions of small elementary detectors.  <br>
+Yet physics is, in part, a computational science, as evidenced 
+by the conclusion of a paper on the theory of generalized zeta 
+functions: "Our results are secure, numerically, yet appear very 
+hard to prove by analysis".  <br>
+<font color="red">
+I repeat: the statistician has to be modest.  The work of my generation 
+has been exalting. A new statistical and data analysis is there to be 
+invented, now that one has inexpensive means of computation that could 
+not be dreamed of just thirty years ago."
+</font>
+</font>
+
+<ul>
+
+<li> <a href="cabookToC.pdf">Table of Contents</a> (in PDF).
+
+<li> Chapters:
+<ol>
+<li> Avant-Propos, Foreword (in French and English) by J.P. Benz&eacute;cri
+<li> Introduction 
+<li> Theory of Correspondence Analysis
+<li> Input Data Coding
+<li> Examples and Case Studies
+<li> Content Analysis of Text
+<li> Concluding Remarks, References, Index
+</ol>
+
+<li> Link to <a href="http://www.crcpress.com/shopping_cart/products/product_detail.asp?sku=C5289&parent_id=&pc=">online description - Chapman & Hall/CRC
+Computer Science & Data Analysis series</a>
+
+<li> Link to <a href="http://www.amazon.com/gp/product/1584885289/qid=1145031684/sr=1-1/ref=sr_1_1/002-2496811-7182426?s=books&v=glance&n=283155">Amazon</a>
+
+<li> Link to <a href="http://www.amazon.co.uk/exec/obidos/ASIN/1584885289/qid%3D1145031787/202-7899072-1199828">Amazon.co.uk</a>
+
+</ol>
+</ul>
+
+<hr>
+<p>
+
+Some of the programs, especially
+the R and C ones, are in ascii text.  Some others
+are binary (e.g. the clustering DLL program, and the Java class files).  
+The Java code and the data sets are collected together in tar files, to 
+be extracted using WinZIP or tar or some similar utility.  
+
+<font color=green><h2>1. Software in R</h2></font>
+
+The R package can be obtained for most computer platforms at the 
+address <a href="http://www.r-project.org">The R Project for 
+Statistical Computing</a>.
+
+<ul>
+
+<li> Correspondence analysis
+<ul>
+<li> <a href="ca.r">Correspondence analysis</a>, determining rates of 
+inertia, projections on factors, contributions, and correlations.
+<li> <a href="caSuppRow.r">Supplementary rows.</a>
+<li> <a href="caSuppCol.r">Supplementary columns.</a>
+</ul>
+
+<li> Hierarchical clustering 
+<ul>
+<li> <a href="examples-hierclus.txt">Background details, and
+examples of use on Intel Windows and Unix systems.</a>  
+<li> <a href="hcluswtd.r">All functions in one (standalone) R/S-Plus file</a>
+(call in R as function <i>hierclust</i>).
+<li> <a href="hierclustx.c">C source code for the clustering.</a> 
+<br> Next a <a href="hierclustx.dll">DLL library for use on 
+Intel/Windows systems</a>.
+<br> Alternatively compile on a Unix system to 
+get the object code (cf. "Background details..." above); and <br>
+<a href="hcluswtd_c.r">R/S-Plus script
+that calls the C code</a> (call in R as function <i>HierClust</i>).
+</ul>
+
+<li> Interpretation aids
+<ul>
+<li> <a href="facor.r">FACOR - factors and clusters.</a>
+<li> <a href="print.facor.r">Print and format FACOR results.</a>
+<li> <a href="vacor.r">VACOR - variables and clusters.</a>
+<li> <a href="vacor_c.r">VACOR - variables and clusters, supporting 
+C code for clustering.</a>
+<li> <a href="print.vacor.r">Print and format VACOR results.</a>
+</ul>
+
+<li> Utilities and data
+<ul>
+<li> <a href="fuzzy.r">Fuzzy or piecewise linear data coding.</a>
+<li> <a href="plaxes.r">Plot axes.</a>
+<li> <a href="r-data.tar">Data sets to be used with R programs.</a> 
+Currently 3 data sets (but see also the data sets available below that are
+ready for use with the Java program: these can also be easily prepared for 
+use with the R programs).  
+</ul>
+
+</ul>
+
+<font color=orange><h2>2. Text Processing</h2></font>
+
+The text processing support programs are all in C.
+
+<ul>
+<li> Analysis of multiple text files.
+     <ul>
+     <li> <a href="aviation-reports-data.tar">aviation-reports-data.tar</a>,
+     47 aviation accident reports, the list of these files, programs
+     txtanalysis.c and xtabulate.c, and output files words.txt, words0.txt,
+     and xtabulate.txt, used as examples in the following.  
+     <li> <a href="txtanalysis.c">txtanalysis.c program</a>, that is run 
+     as follows: txtanalysis filelist.txt [words.txt] 
+     <li> <a href="xtabulate.c">xtabulate.c program</a>, that is run as 
+     follows: xtabulate words.txt filelist.txt [xtabulate.txt]
+     <li> <a href="word_analysis.c">word_analysis.c</a>, program to check 
+     for sufficient number of occurrences of words in all texts.  Hence, 
+     this program yields a common word-list.  This common word-list can be 
+     used by xtabulate.  
+     </ul>
+<li> Analysis of a single (large) text file.
+     <ul>
+     <li> <a href="arist10.txt">arist10.txt</a>, Aristotle's Categories.
+     Note: we removed the legal information (so as not to influence the
+     analysis) to yield the file arist10x.txt.
+     <li> <a href="docanalysis.c">docanalysis.c program</a>, to produce a word
+     list from a single text file.   Example of use: docanalysis
+     arist10x.txt words.txt.  for the Categories 1260 words are found. 
+     It is best to filter or cull these (or else the cross-tabulations, to
+     follow will be very large).  
+     <li> <a href="doctabulate.c">doctabulate.c program</a>, to produce a 
+     cross-tabulation for each of the chapter and section levels in the 
+     Categories.  Use:  doctabulate arist10x.txt words.txt out.  This 
+     produces the cross-tabulations, or contingency tables, out1.txt,
+     out2.txt, out3.txt, out4.txt, corresponding to the different section 
+     levels in this book.
+     </ul>
+<li> Notes: programs txtanalysis and xtabulate should handle acceptably
+(i) accented characters, and (ii) use in a Mac OS X environment.  (The 
+latter issue is that memory allocation is already  catered for; so  
+the line "#include &lt;malloc.h&gt;" at the 
+start of the file should not be present.)
+</ul>
+
+
+
+<font color=blue><h2>3. Software in Java</h2></font>
+
+To install JDK or JRE (see below), check <a href="http://www.sunsoft.com">
+Sunsoft Sun Developer Network Site</a>.
+
+<ul>
+<li> <a href="java-source.tar">Tar file containing all *.java source 
+files.</a>  Compile these using the JDK (Java Development Kit) command: 
+<br>javac *.java -d java-classes</br>
+where java-classes is the target directory.
+<li> <a href="java-classes.tar">Tar file containing all *.class class
+files.</a>  Run these using the JRE (Java Runtime Environment) command:
+<br> java DataAnalysis</br> 
+It is best to do this as a command-line instruction, in the classes 
+directory.  A pop-up window will prompt for the input file name.
+<li> <a href="java-data.tar">Tar file containing a set of *.dat data 
+files</a> for use with the Java software.  Currently containing 28 
+data files.  By removing certain lines and labels these data sets can be 
+easily read into R.  
+</ul>
+
+</ul>
+
+<font color=purple><h2>4. Updates to the Book</h2></font>
+
+<h3>Errata</h3>
+<ul>
+<li> <a href="cabook_p35.pdf">P. 35</a>, 2 lines above expressions (2.4), 
+change <i>j \in J</i> to: <i>i \in I</i>.
+<li> <a href="cabook_p37.pdf">P. 37</a>, line -14, change <i>f_K</i> to 
+<i>f_I</i>.  And in paragraphs on lines -11, -10, delete opening words and 
+terms to begin sentence with: <i>We can right-multiply the 
+eigen-equation above ...</i>.
+<li> P. 113, line 6 of text, 40% should be 48%.  
+<li> See above for changes to the C program for hierarchical clustering
+(minimum variance/Wards with weighting of rows/cases), and associated R 
+calling script. 
+</ul>
+
+<h3>Updates</h3>
+<ul>
+<li> A new version of <a href="facor-new.r">facor</a>, with an example of 
+use at the start of the program.  Input data set, <a href="casa2.prn">
+casa2.prn</a> (text file), a characterization with 13 person and place 
+attributes of the 77 scenes of the film, Casablanca.   
+</ul>
+
+<hr>
+
+<h2>5. Other R Software for Correspondence Analysis</h2>
+
+<ul> 
+<li> <a 
+href="http://cran.r-project.org/src/contrib/Descriptions/FactoMineR.html">
+FactoMineR</a>
+<li> <a href="http://www.carme-n.org">CARME-N.ORG</a>
+</ul>
+
+<h2>6. Book Reviews and Survey Papers</h2
+
+<ul>
+<li> F. Murtagh,
+<a href="http://arxiv.org/abs/0811.2519">Origins of modern data analysis
+linked to the beginnings and early development of computer science and
+information engineering</a>,
+http://arxiv.org/abs/0811.2519, submitted, 2008.
+
+<li> <a href="http://www.jstatsoft.org/v14/b05/v14b05.pdf">Jan de Leeuw's 
+review of this book</a> in Journal of Statistical Software, Vol. 14, Sept. 
+2005.  My <a 
+href="http://astro.u-strasbg.fr/~fmurtagh/mda-sw/correspondances/reply-to-Jan-de-Leeuw.pdf">reply to Jan's review</a>
+focusing on the continuing ground-breaking innovation underlying data 
+coding in the correspondence analysis and associated data analysis 
+framework.
+<li> <a href="review-of-greenacre-blasius.pdf">Review of M. Greenacre and 
+J. Blasius</a>, Multiple Correspondence Analysis and Related Methods,
+Chapman-Hall, 2006.  To appear in Psychometrika.
+<li> <a href="review-GDA.pdf">Review</a>, Journal of 
+Classification, 25, 137-141, 2008, of 
+Brigitte Le Roux and Henry Rouanet, 
+Geometric Data Analysis, From Correspondence Analysis to Structured 
+Data Analysis, Kluwer, Dordrecht, 2004.  
+</ul>
+
+<h2>7. Other Data Analysis and Signal Processing Software </h2>
+<ul>
+<li> <a href="http://astro.u-strasbg.fr/~fmurtagh/mda-sw">Multivariate
+data analysis resources</a>, code by F Murtagh, in C, Fortran, R/S-Plus,
+and Java, for cluster analysis, and other purposes.  
+<li> <a href="http://www.multiresolution.com">MR, a large suite of 
+programs for wavelet transform analysis of images and signals</a>,
+together with other multiresolution transform analysis approaches 
+(curvelet and ridgelet transform), and general image and signal 
+processing (edge detection, fractal analysis, etc.).  For filtering
+and noise modeling, compression, deconvolution, visualization, and other
+related applications.
+</ul>
+<h2>8. Online Writings of J.P. Benz&eacute;cri </h2>
+<ul> 
+<li> Earlier versions of work that has since appeared in Revue MODULAD 
+(see elsewhere on this page).
+<ul>
+<li> <a href="cahier-2008/cahier-p1p11r.pdf">"Si j'avais un laboratoire..."</a>
+un cahier de 11 pages de la part de J-P Benz&eacute;cri, 2007.  "If I had a 
+lab ...", an 11-page paper by J-P Benz&eacute;cri, 2007.
+<li> <a href="cahier-2008/Sijavais_v2.pdf">"Si j'avais un laboratoire..." -
+2e version</a>, october 2008, 14 pp.  (4.8 MB) 
+</ul>
+<li> <a href="http://www.journalarchive.jst.go.jp/english/jnlabstract_en.php?cdjournal=bhmk1974&cdvol=10&noissue=14&startpage=1">L'avenir de l'analyse des 
+donn&eacute;es</a>, Behaviormetrika, 10, 1-11 (1983). 
+<li> <a href="http://www.numdam.org">
+A number of papers between  1954 and 1972</a> are available from
+www.numdam.org.  Use "benz&eacute;cri" as a search term. These include: 
+"Description math&eacute;matique des classifications" (1972); 
+"Sur les algorithmes de classification" (1971); 
+"Combattre pour la linguistique" (1971);
+"Probl&egrave;mes et m&eacute;thodes de la taxinomie" (1970); 
+and two other papers from 1967.  Elsewhere www.numdam.org has e.g. 
+"Sur l'analyse des matrices de confusion" (1970).  
+<li> Back issues of <a href="http://thames.cs.rhul.ac.uk/~fionn/CAD/">
+Les Cahiers de l'Analyse des Donn&eacute;es</a>, 1997, 1996, 1994, 1993.  
+</ul>
+
+<h2>9. Linnaeus, Huyghens, Laplace</h2>
+
+From J.-P. Benz&eacute;cri et coll., <i>L'Analyse des Donn&eacute;es.
+Tome I, Taxinomie.  Tome II, Correspondances.</i>  
+Dunod, 1973 (2nd edn., 1976).
+
+<ol> 
+<li> <a href="images/picture03a.jpg">Linnaeus</a>
+<li> <a href="images/picture1a.jpg">Huyghens</a>
+
+<li> <a href="images/picture02a.jpg">Laplace</a>
+</ol>
+
+
+
+<hr>
+<a href="http://www.cs.rhul.ac.uk/home/fionn">Author's homepage.</a>
+<a href="http://astro.u-strasbg.fr/~fmurtagh">Page d'acceuil.</a>
+Contact: f murtagh at acm dot org (user name: one word)
+<hr>
+

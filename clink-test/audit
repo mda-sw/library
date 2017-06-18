@@ -1,0 +1,100 @@
+We looked at clink.r and did some timing tests:  But given that
+this is an R script, its performance is terrible:
+
+> x <- matrix(runif(4000),nrow=500,ncol=8); 
+   system.time(xh1 <- hierclust(x, rep(1/nrow(x), 1))) ; 
+   system.time(xh2 <- hclust(dist(x),method="complete"))
+[1] 592.40  16.97 774.40   0.00   0.00
+[1] 0.69 0.14 1.61 0.00 0.00
+
+So instead we came back to our Fortran code, in this dir., taken from
+dir. above, and did some timing tests.  (Below, we check against the
+builtin R hclust code.)  
+
+    53  cp clink-test-100.f clink-test-1000.f
+    54  xemacs -nw clink-test-1000.f
+    55  f77 clink-test-1000.f hc.f -o clink-test-1000
+    56  time sh -c 'clink-test-1000'
+    57  cp clink-test-1000.f clink-test-2000.f
+    58  xemacs -nw clink-test-2000.f
+    59  f77 clink-test-2000.f hc.f -o clink-test-2000
+    60  time sh -c 'clink-test-2000'
+    61  cp clink-test-2000.f clink-test-3000.f
+    62  xemacs -nw clink-test-3000.f
+    63  f77 clink-test-3000.f hc.f -o clink-test-3000
+    64  time sh -c 'clink-test-3000'
+    65  cp clink-test-3000.f clink-test-4000.f
+    66  xemacs -nw clink-test-4000.f
+    67  f77 clink-test-4000.f hc.f -o clink-test-4000
+    68  time sh -c 'clink-test-4000'
+    69  cp clink-test-4000.f clink-test-5000.f
+    70  xemacs -nw clink-test-5000.f
+    71  f77 clink-test-5000.f hc.f -o clink-test-5000
+    72  time sh -c 'clink-test-5000'
+    73  cp clink-test-5000.f clink-test-6000.f
+    74  xemacs -nw clink-test-6000.f
+    75  f77 clink-test-6000.f hc.f -o clink-test-6000
+    76  time sh -c 'clink-test-6000'
+
+1000    6.0
+2000   24.0
+3000   56.0
+4000  102.0
+5000  160.0
+6000  229.0
+
+ m <- c(1000,2000,3000,4000,5000,6000)
+> n <- c(6,24,56,102,160,229)
+> plot(m, n,type="l")
+> plot(m, n * log(n),type="l")
+> plot(m, n^0.33,type="l")
+> plot(m, n^0.5,type="l")
+
+Definitely latter!  
+clink-NNchain-storeddist.jpg, .pdf
+
+x <- matrix(runif(1600),nrow=200,ncol=8); system.time(xh2 <- hclust(dist(x),method="complete"))
+[1] 0.10 0.02 0.30 0.00 0.00
+> x <- matrix(runif(3200),nrow=400,ncol=8); system.time(xh2 <- hclust(dist(x),method="complete"))
+[1] 0.33 0.03 0.42 0.00 0.00
+> x <- matrix(runif(4800),nrow=600,ncol=8); system.time(xh2 <- hclust(dist(x),method="complete"))
+[1] 1.08 0.06 1.37 0.00 0.00
+> x <- matrix(runif(6400),nrow=800,ncol=8); system.time(xh2 <- hclust(dist(x),method="complete"))
+[1] 2.44 0.11 3.55 0.00 0.00
+> x <- matrix(runif(8000),nrow=1000,ncol=8); system.time(xh2 <- hclust(dist(x),method="complete"))
+[1] 4.63 0.21 5.72 0.00 0.00
+> x <- matrix(runif(9600),nrow=1200,ncol=8); system.time(xh2 <- hclust(dist(x),method="complete"))
+[1]  7.95  0.38 11.53  0.00  0.00
+> plot(c(200,400,600,800,1000,1200), c(.1, .33, 1.08, 2.44, 4.63, 7.95))
+> x <- matrix(runif(11200),nrow=1400,ncol=8); system.time(xh2 <- hclust(dist(x),method="complete"))
+[1] 12.67  0.56 17.79  0.00  0.00
+> x <- matrix(runif(12800),nrow=1600,ncol=8); system.time(xh2 <- hclust(dist(x),method="complete"))
+[1] 19.18  1.62 31.15  0.00  0.00
+
+> u <- c(200,400,600,800,1000,1200,1400,1600)
+> v <- c(.1, .33, 1.08, 2.44, 4.63, 7.95, 12.67, 19.18)
+> plot(u, v * log(v), type="l")
+> 
+> 
+> 
+> plot(u, v^0.33, type="l")
+> plot(u, v^0.5, type="l")
+> plot(u, v^0.33, type="l")
+
+Definitely last best!  
+clink-hclust-in-R.pdf, .jpg
+
+But assignments are found in the R implementation - this explains
+O(n^3) behavior:
+
+    hcl <- .Fortran("hclust", n = n, len = len, method = as.integer(method), 
+        ia = integer(n), ib = integer(n), crit = double(n), members = 
+               as.double(members), 
+        nn = integer(n), disnn = double(n), flag = logical(n), 
+        diss = as.double(d), PACKAGE = "stats")
+    hcass <- .Fortran("hcass2", n = as.integer(n), ia = as.integer(hcl$ia), 
+        ib = as.integer(hcl$ib), order = integer(n), iia = integer(n), 
+        iib = integer(n), PACKAGE = "stats")
+    tree <- list(merge = cbind(hcass$iia[1:(n - 1)], hcass$iib[1:(n -  
+ETC.
+

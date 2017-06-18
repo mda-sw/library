@@ -1,0 +1,359 @@
+\documentstyle[palatino,11pt]{article}
+\textheight=21truecm 
+\textwidth=15truecm  
+\begin{document}
+
+\section*{Content-Based Information Retrieval: New Tools for Textual 
+Data, New Problems for Image Data}
+
+\bigskip
+ 
+\
+
+{\bf Fionn Murtagh}
+ 
+Space Telescope -- European Coordinating Facility
+ 
+European Southern Observatory, Karl-Schwarzschild-Str. 2
+ 
+D-85748 Garching, Germany
+ 
+{\tt fmurtagh@eso.org}
+ 
+\bigskip
+ 
+\bigskip
+ 
+
+
+{\bf Abstract:}
+Retrieval of data and 
+information is something which every scientist and technologist
+does many times over in each working day.  However there are still problems 
+to be overcome before heterogeneous data can be integrated for the 
+user in a seamless way.  We discuss three case-studies.  The first deals with
+textual information retrieval
+in a modern science environment, using a particular set of text segments
+-- astronomical observing proposal abstracts.
+Secondly, we discuss viable approaches to content-based image retrieval, using
+accompanying textual information.
+Finally we examine the role that multiresolution vision models can play in 
+facilitating content-based image retrieval.  The immediate focus of this
+third case-study is the
+retrieval of information about objects, characterized by their morphological
+shapes, from large image databases.
+
+
+
+\section{Introduction}
+
+The automation of text and image retrieval is not sufficiently 
+standardized at present.  Yet many if not most of those involved in 
+science and technology face the need to interrogate large data collections,
+using content and context.  A number of facets of this problem will be 
+discussed.  The application areas will be noted.  Some current solution 
+techniques will be described.  
+
+\section{Free-Text Information Retrieval}
+
+Astronomical observation proposals are submitted for peer review at regular
+time-intervals.  In the case of Hubble Space Telescope observations, the
+abstracts are available for successful proposals.  These abstracts provide
+convenient raw-material for description of the images which are taken later.
+Associating  the abstracts and images will be described in section 3, below.  
+Firstly we address the following issue: just as in the case of text 
+segments in other fields (company reports, for financial appraisal purposes;
+legal reports; etc.), can the text segments be used for other purposes also?
+If so, what types of useful operations can be performed on them?
+
+Three objectives of free text querying of 
+observation proposal abstracts are envisaged:
+ 
+\begin{enumerate}
+ 
+\item As an aid to observation proposal assessors, and scheduling planners,
+it is helpful to look for closely related proposals.
+ 
+\item As an aid to the user who is preparing a proposal, it is useful to
+check on what has been already achieved, and by whom, using general phrases
+which express his or her envisaged research.
+ 
+\item As a general approach to image retrieval from the HST image archive,
+we may search through the proposal abstracts, which we hope express in a 
+few natural language sentences what the associated images (observed later)
+are meant to contain.
+ 
+\end{enumerate}
+
+An  HST observing proposal abstract is shown in the following.
+ 
+\begin{footnotesize}
+\begin{footnotesize}
+\begin{verbatim}
+Prop. Type:  GO                                                                
+ 
+              GALAXIES & CLUSTERS   -- (  GAS & DUST  ) -- 
+3840- CT - "THE ABUNDANCES AND TIME EVOLUTION OF CARBON, NITROGEN AND OXYGEN IN
+               STAR-FORMING GALAXIES"          
+    Continuation of Program Number  3840       
+    Keywords :  
+ 
+    Proposers: Evan D. Skillman (PI; University Of Minnesota), R.Dufour (Rice 
+               University), D.Garnett (Space Telescope Science Institute), 
+               M.Peimbert (Unam; Mexico), G.Shields (University Of Texas), 
+               E.Terlevich (Royal Greenwich Observatory; United Kingdom), 
+               R.Terlevich (Royal Greenwich Observatory; United Kingdom), 
+               S.Torres-Peimbert (Unam; Mexico)   
+ 
+    We propose to observe UV emission lines of carbon, nitrogen, and oxygen 
+    from high-surface brightness extragalactic H II regions drawn from a sample
+    of irregular and spiral galaxies having a large spread of known oxygen  
+    abundance (2% solar to nearly solar). From the emission-line data we will 
+    derive C/O and N/O abundance ratios for which systematic uncertainties -
+    due to reddening corrections, temperature and density effects, and     
+    mismatched aperture sizes (typical in IUE+optical studies) - are greatly 
+    reduced. We will use the derived abundances to study the time evolution of
+    C/O and N/O in nearby galaxies, and compare the results with those obtained
+    from observations of stars in our own Galaxy. We will be able to test the 
+    suggestion (from far-infrared observations of H II regions) that nitrogen 
+    abundances derived from optical spectra are systematically in error by
+    factors of two or more. We will also be able to measure the gas phase 
+    abundance of silicon, allowing us to study Si depletion as a function of 
+    metallicity. Our target sample size of 28 is sufficiently large to study 
+    both trends in relative abundances and search for anomalous regions (for
+    example, those affected by the presence of WR stellar winds). The order of
+    magnitude increase in s/n over IUE will allow the measurement of C/O and
+    C/N with the requisite accuracy for the first time.      
+                                                                      
+\end{verbatim}
+\end{footnotesize}
+\end{footnotesize}
+
+As an experiment in constructing an astronomically knowledgeable search engine,
+we took the IAU Thesaurus (Shobbrook and Shobbrook, 1993) to generate a list
+of astronomical phrases.  No particular attention was paid to 
+object names (e.g.\ globular cluster 47 Tuc); or to additional semantics 
+related especially to data in numeric form (``wavelengths less than 7000 \AA'';
+``distant''; etc.).  
+
+We took the accepted observing proposals, for Hubble Space Telescope, for 
+the first four observing 
+cycles (1989--1993), and experimented with publicly available 
+information retrieval software tools which support free text querying.  
+About 1500 proposal abstracts were used.  Due to the control allowed the
+user in supporting querying by phrase (``IRAS galax*'', ``spectral energy
+distribution'', ``elliptical galax*'', ``spectral type'', ``absorption line''),
+its ignoring dashes, and its case insensitivity, a 
+publicly available Unix tool, {\it lq-text}, was 
+used.  This software is available by anonymous ftp from
+{\tt ftp.cs.toronto.edu}.  Problems which  remained included the limited
+capabilities to handle such astronomical 
+terms as ``A star'', ``B star'', etc. 
+
+A set of 286 phrases was ultimately retained, each of which is present 
+in one or more
+proposal abstracts.  To assess the potential for such phrases to describe
+the interrelationships between the proposal abstracts, a clustering was 
+carried out on the 1434 proposals, crossed (presence/absence) by the 
+286 phrases.  The Kohonen ``self-organizing feature map'' 
+(Murtagh and Hern\'andez-Pajares, 1994) offers a 
+simultaneous clustering and dimensionality reduction.  Characterizing the 
+clusters found on a $8 \times 8$ regular grid was quite successful.  Major
+categories of observations were obtained: ``stars'', ``planetary nebulae'',
+``solar system'', etc.  
+See Murtagh (1994) for further details of this particular study.
+
+\section{Content-Based Image Retrieval}
+
+It is not an easy matter  to characterize meaningfully, and for general 
+purposes, the subject matter of images. One possible solution is to use 
+textual 
+information accompanying an image.
+
+We constructed such a prototype for the HST archive, which around the time
+of the CODATA'94 meeting contained about 50,000 2-dimensional and 
+1-dimensional (spectral) images.  The set of available observing proposals
+had grown to 2006, and these provided a convenient body of text to 
+characterize the images.  A proposal was an advance statement of what the 
+image was to contain, so a working hypothesis was that the image actually
+was related to the description in the observing proposal.  
+
+More than one image could be related to a proposal.  For instance, a 
+snapshot survey of 
+protoplanetary nebulae requested, and subsequently obtained, 100 different
+images.  
+
+In an initial prototyping phase we concentrated on Wide Field/Planetary Camera
+(WF/PC) images, taken before HST's refurbishment in December 1993.  Each 
+such image is of dimensions $1600 \times 1600$, and is 10.5 MB in size.  
+However many images have a preview version.  This is a binned, and compressed
+version (using a wavelet H-transform), and leads to images of dimensions 
+approximately $800 \times 800$, of size 40 kB, which can be stored on-line.
+When using such images, we further reduced their size and converted them to 
+GIF format (in order to allow them to be viewed inline, when using a World-Wide
+Web browser such as Mosaic).
+
+About 4340 unique images 
+(different coordinates of the sky were observed; but we 
+allowed for exclusion of images of the same location on the sky with different
+exposure times, or using different filters, simply to cut down on the 
+processing involved in this prototype) were finally sought, and 
+2362 preview images 
+were found to be available.  Generally, non-existence of a preview
+image means that the proprietary period of one year is still running.  
+
+We used WAIS (Wide-Area Information Server) to index the observing proposal
+text, having first created an HTML file from the proposal with a link to any
+accompanying images.  Then, accessing WAIS via Mosaic provided a list of 
+``hits'' resulting from a free-text query.  Each item in this ranked list
+corresponded to a proposal.  Clicking on any such item provided the text of 
+the proposal, and associated images which were displayed in an inline manner.
+
+This approach is quite a feasible one for the quick and easy delivery of 
+information.  It is flexible, in that the user's request is
+expressed in free-text.  Figure 1 shows the result in the case of a particular
+proposal.  The query term used was ``extragalactic distance scale''.  The
+prototype version set up is at this time accessible at URL
+{\tt http://ecf.hq.eso.org/$\sim$fmurtagh/hst-navigate.html}.  
+
+\begin{figure}
+\vskip 6cm
+\caption{Text (proposal abstract) and inlined image(s) found when using a 
+free-text search.  This illustrates 
+one approach to content-based image retrieval.}
+\end{figure}
+
+
+\section{Image Retrieval through Image Inventory}
+
+A more difficult way to carry out content-based image retrieval is 
+through first analyzing the image, using appropriate pattern recognition
+methods, and building up an inventory of the image's contents.  
+Traditional approaches to object inventory have used thresholding.  An
+enhanced approach to adaptive thresholding is used here which incorporates 
+a vision model relating to the type of object which is sought as a priority.
+This vision model is based on multiresolution analysis, and mathematical 
+morphological operations.
+
+Multiresolution analysis (Starck et al., 1994)
+is motivated by the fact that the human visual system deals with visual
+scenes at differing resolution scales.  It handles these resolution scales 
+simultaneously.  Using wavelet transforms, or other approaches (Starck et al.,
+1994), the first phase is to arrive at a set of 4 or 5 resolution scales
+related to the original image.  Next we use the fact that astronomical images
+are always noisy.  Hence we seek to find what is real and what is noise-related
+in the set of multiresolution images.  We represent the images at each scale
+by boolean versions, -- a one represents a pixel associated with a real 
+object, and a zero represents a noise pixel.  Contiguous sets of 1-valued 
+pixels demarcate astronomical images of interest.  This allows a range of 
+quantitative properties of the objects, i.e.\ the pixels in a given contiguous
+``island'', to be determined.  
+
+A report is built up on the objects found.
+Figures 2 and 3 show the first stages of this.  These results relate to the 
+searching in a large number of images, for faint edge-on galaxies.  
+Figure 2 shows the original image, where some objects are very faint indeed.
+It is a WF/PC image from HST. 
+This image was filtered to remove the spoiling effect of cosmic-ray hits --
+a common problem for such CCD detectors when the Earth's atmosphere provides
+little protection.  Figure 3 depicts the 
+multiresolution-related boolean images.
+Further processing involves performing mathematical morphology {\tt opening}
+operations on Figure 3, to remove detector artifacts (long linear features)
+and the many left-over effects of cosmic ray hits.  Then the remaining objects
+are labeled, and quantitative characterizations made (peak-to-background
+intensity, roundness, moments, ellipticity, etc.).  
+
+
+\begin{figure}
+\vskip 6cm
+\caption{An image (WF/PC, from Hubble Space Telescope).  We seek to 
+demarcate and then characterize the astronomical objects which are present.}
+\end{figure}
+
+\begin{figure}
+\vskip 6cm
+\caption{From the image shown in Figure 2, boolean images are created which
+serve to specify  -- on varying resolution levels -- the object present.}
+\end{figure}
+
+The problem
+of finding effective approaches which span varying image exposure levels is
+not an easy one, and is being tackled empirically.  The multiresolution 
+approach, in producing boolean images, allows Minkowski (mathematical
+morphology) operators  such as {\tt openings} and {\tt closings} 
+to be used on these
+boolean images, such that the user's a priori knowledge of objects of interest
+is availed of.  For example, objects which are too small to be of practical
+use can be suppressed by a sequence of {\tt openings} ({\tt erosion} followed 
+by {\tt dilation}),
+and this often includes the left-over effects of cosmic ray hits.  The 
+kernel or structuring element used in the multiresolution transform, and 
+later in the use of Minkowski operators, are related to the types of objects
+wanted, -- e.g.\ point-symmetric shapes of limited extent.  Convolving with 
+appropriate kernels yields clearer peaks, better definition of regions and
+greater ease of implementation of subsequent image analysis operations.
+
+
+\section{Conclusion}
+
+Section 1 reviewed objectives, and one implementation approach, for the 
+handling of relatively homogeneous ``chunks'' of text.  Software tools such 
+as WAIS have progressed significantly in recent years.  Such tools are
+distributed, i.e.\ the user and the server can be geographically distant.
+Recent versions support fields (e.g.\ author name, or date), and the 
+association of files of different types (e.g.\ text and image).  We believe 
+that there is some way to go, still, before such tools are as often used
+as, say, a news reader or an image display utility on the user's machine.  
+Such tools provide access to text or image information; but text analysis
+provides not only secondary analyses, but also a different type of access --
+not based on novelty, but rather on directed subject-driven search.
+
+Section 2 described a prototype image retrieval system, based on natural
+language query specification.  The aim was to express the image's contents
+using associated text fragments which are conveniently available.  A 
+challenging task which lies ahead is to bring about more linkages with 
+online abstract servers, which comprehensively represent the published
+astronomical literature.
+
+Section 3 described on-going research in using idealized astronomical 
+objects in order to catalog, or perform an inventory of, all objects in an
+image.  The image databases of the future will be interrogated in natural
+language, and will reveal their secrets in a way which is more natural than 
+today's cumbersome access mechanisms.
+ 
+\section*{Acknowledgements}
+
+The work described in section 3 is in collaboration with E.J.A.M. Meurs,
+Dublin Institute of Advanced Studies.  A similar study, involving globular
+cluster systems in the neighborhood of elliptical galaxies, is ongoing with
+W. Zeilinger, University of Vienna.  Section 3 is based on work with J.-L. 
+Starck, CEA Paris,  and A. Bijaoui, Observatoire de la C\^ote d'Azur, Nice.
+
+\section*{References}
+
+\begin{enumerate}
+
+\item F. Murtagh, ``Free text information retrieval: an assessment of 
+publicly available Unix-based systems'', report (unpublished), Feb. 1994, 
+12 pp.
+
+\item F. Murtagh and M. Hern{\'a}ndez-Pajares, M., ``The Kohonen 
+     self-organizing map method: an assessment'', {\it Journal of 
+     Classification},  1994, in press.
+
+\item R.M. Shobbrook and R.R. Shobbrook, {\it The Astronomy Thesaurus}, Version
+1.1, IAU, 1993.
+
+\item J.-L. Starck, A. Bijaoui and F. Murtagh, ``Multiresolution and 
+astronomical image processing'', in H. Payne, D. Shaw and J. Hayes,
+Eds., {\it ADASS'94 Astronomical Data Analysis Software and Systems},
+ASP, San Francisco, 1994, forthcoming.
+
+\end{enumerate}
+
+
+\end{document}
+
+\bye
+

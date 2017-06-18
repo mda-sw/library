@@ -1,0 +1,41 @@
+# orbit-home/splus-from-hawk
+
+cat("Sourcing all S-Plus scripts...\n")
+source("bea.q")
+source("distance.q")
+source("pca.q")
+source("plaxes.q")
+source("members.q")
+source("partition.q")
+source("modclust.q")
+source("plot.clustering.q")
+source("print.clustering.q")
+source("summary.clustering.q")
+source("plot.hierarchy.q")
+source("print.hierarchy.q")
+source("summary.hierarchy.q")
+source("sammon.q")
+source("ca.q")
+source("ca.supplr.q")
+source("ca.supplc.q")
+source("flou.q")
+source("logique.q")
+source("hc.q")
+source("hierclust.q")
+
+cat("Dyn.load'ing all object files...\n")
+dyn.open("bea.o")
+dyn.open("hc.o")
+dyn.open("hcmovie.o")
+dyn.open("pca.o")
+dyn.open("members.o")
+dyn.open("partition.o")
+dyn.open("sammon.o")
+dyn.open("ca.o")
+
+ir <- matrix(iris,nrow=150,ncol=4,byrow=T)
+ir[1,]
+
+#motif()
+
+#x <- hierclust(ir, movie=T)

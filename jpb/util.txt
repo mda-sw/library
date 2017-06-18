@@ -1,0 +1,215 @@
+UNIT uver5;
+INTERFACE uses memtypes,quickdraw,osintf,toolintf,sane;
+const jmax =300;imax=1000;iamax=2700;ibmax=5400;ipmax=8000;xtn=12;
+aamax=93;abmax=95;ddir=193;titab=256;
+type
+  zigle=packed array[0..5]of byte;pzgl=^zigle;plng=^longint;
+  zgi=array[1..ipmax]of zigle;pzgi=^zgi;
+  pww=^single;pint=^integer;
+  tk=array[0..jmax]of ptr;ptk=^tk;
+  rtj=array[1..jmax]of extended;prtj=^rtj;
+  sjj=array[1..jmax]of prtj;psjj=^sjj;
+  itj=array[1..jmax]of integer;pitj=^itj;
+  tini=array[1..ipmax]of integer;ptni=^tini;
+  tdri=array[1..ipmax]of extended;ptdri=^tdri;
+  ti=array[1..ipmax]of single;pti=^ti;kji=array[0..jmax]of pti;
+  ricla=record sis:zigle;Fac:array[1..abmax] of single end;
+  tric=array[1..ddir]of integer;ptrc=^tric;
+
+procedure benzecri;
+procedure benzec;
+function verif(sptr0:stringptr):integer;
+function dialof(sptr0:stringptr):char;
+procedure verichaine(sptr0,sptr1:stringptr;var rep:char);
+procedure detruire(nnn:str255);
+procedure drwnum(ntg:integer);
+procedure drw4(ntg:integer);
+procedure drwfl(rfl:extended);
+function sigler(zig0:zigle):str255;
+function zigler(sig0:str255):zigle;
+procedure lir(var rep:char);
+procedure lirv(var rep:char);
+implementation
+procedure benzecri;
+var cadre:rect;
+wp1:windowptr;
+begin
+textbook(thePort);
+with cadre do begin left:=0;top:=38;right:=520;bottom:=342 end;
+initgraf(@theport);initfonts;initwindows;
+wp1:=newwindow(nil,cadre,'MacSAIF',true,0,pointer(-1),true,111);
+setport(wp1);setorigin(0,0);pensize(1,1);penmode(patXor);
+textfont(4);textsize(9);
+moveto(5,25);
+end;
+procedure benzec;
+var r1,r2,r3,cadre:rect;i:integer; res:single;tic:longint;
+fond:pattern;chaine:string;wp1:windowptr;
+procedure tracer;var c:integer;
+begin
+   for c:=1 to length(chaine) do if (32<ord(chaine[c])) then
+       chaine[c]:=chr(ord(chaine[c])+32);
+   drawstring(chaine) end;
+begin
+textbook(thePort);
+with cadre do begin left:=0;top:=38;right:=520;bottom:=342 end;
+initgraf(@theport);initfonts;initwindows;
+wp1:=newwindow(nil,cadre,'MacSAIF',true,0,pointer(-1),true,111);
+setport(wp1);setorigin(0,0);pensize(1,1);penmode(patXor);
+textfont(4);textsize(9);
+
+setrect(r1,50,50,280,150);setrect(r2,70,70,260,130);
+for i:=0 to 3 do begin fond[2*i]:=0;fond[1+(2*i)]:=85 end;
+fillrect(r1,fond);eraserect(r2);framerect(r2);
+moveto(110,90);
+chaine:='*0 %4 & "%.:%#2)';tracer;
+moveto(80,110);
+chaine:='02 $% , !.!,93% $%3 $/..%%3';tracer;
+setrect(r3,60,180,270,235);framerect(r3);
+moveto(73,220);
+chaine:='XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX';tracer;
+moveto(80,200);
+chaine:='#%4 %8%-0,!)2% !00!24)%.4 !';tracer;
+tic:=TickCount;
+while (TickCount<tic+160) do res:= sqrt(TickCount);
+eraserect(r1);eraserect(r3);moveto(5,25);
+end;
+function verif;
+var nomf:str255;fin:file of integer;
+vrn1,i1,i2,i3,rfn1:integer;finf1:finfo;
+begin i2:=0;
+if (setvol(sptr0,99)=noerr) then i2:=1;
+if (i2=1) then begin
+     i1:=getvol(@nomf,vrn1);
+     nomf:=copy(sptr0^,length(nomf)+1,length(sptr0^)-length(nomf));
+     i1:=fsopen(nomf,vrn1,rfn1);
+     if (i1=noerr) then begin i3:=fsclose(rfn1);i2:=2 end end;
+if (i2=2) then begin
+     reset(fin,sptr0^);if eof(fin) then i2:=1;close(fin);
+     if (i2=1) then i3:=fsdelete(nomf,vrn1) end;
+verif:=i2;
+end;
+function dialof;
+begin dialof:='O';
+if (verif(sptr0)=0) then begin dialof:='N';
+     writeln('ERREUR le disque manque') end
+  else if (verif(sptr0)=1) then begin dialof:='N';
+     writeln('ERREUR le fichier manque') end;
+end;
+procedure verichaine;
+var str2:string;
+begin
+if (rep='O') then writeln(' BIEN');
+if not(rep='N') then begin
+      str2:=concat(sptr0^,sptr1^);
+      write('verification pour ',sptr1^,'':8-length(sptr1^));
+      rep:=dialof(stringptr(@str2)) end;
+end;
+procedure detruire;
+var vrn1,ii:integer;nnf,nnc:string;sptr0:stringptr;
+begin
+sptr0:=stringptr(@nnc);nnc:=nnn;
+ii:=setvol(sptr0,99);ii:=getvol(@nnf,vrn1);
+nnf:=copy(sptr0^,length(nnf)+1,length(sptr0^)-length(nnf));
+ii:=fsdelete(nnf,vrn1);
+end;
+procedure drwnum;var catnum:string;ctg:integer;begin
+ catnum:='';ctg:=ntg;
+ while not(ctg=0) do begin
+  catnum:=concat(chr(48+(ctg mod 10)),catnum);
+  ctg:=ctg div 10 end;
+ if (ntg=0) then catnum:='0';
+ drawstring(catnum);
+end;
+procedure drw4;var catnum:string;ctg:integer;begin
+ catnum:='';ctg:=ntg;
+ while not(ctg=0) do begin
+  catnum:=concat(chr(48+(ctg mod 10)),catnum);
+  ctg:=ctg div 10 end;
+ while (length(catnum)<4) do catnum:=concat(' ',catnum);
+ drawstring(catnum);
+end;
+procedure drwfl;var catfl:string;sgn:char;xp,ml:integer;
+begin
+ sgn:=' ';if (rfl<0) then sgn:='-';catfl:='';
+ if (rfl=0) then catfl:=' 0     ';
+ if ((9.9e+9<rfl) or (rfl<-9.9e+9)) then catfl:='inf';
+ if (catfl='') then begin
+   xp:=0;
+   if (rfl<0) then rfl:=-rfl;
+   if (rfl<1) then catfl:='-' else catfl:='+';
+   while (rfl<1) do begin xp:=xp+1;rfl:=rfl*10 end;
+   while not (rfl<10) do begin xp:=xp+1;rfl:=rfl/10 end;
+   catfl:=concat('e',catfl,chr(48+xp));
+   ml:=trunc(rfl*100);
+   catfl:=concat(chr(48+(ml mod 10)),catfl);ml:=ml div 10;
+   catfl:=concat(chr(48+(ml mod 10)),catfl);ml:=ml div 10;
+   catfl:=concat(chr(48+(ml mod 10)),'.',catfl);
+ end;
+ catfl:=concat(sgn,catfl);
+ drawstring(catfl);
+end;
+function sigler;var str0:str255;i1:integer;
+begin
+  for i1:=0 to 5 do str0[i1]:=chr(zig0[i1]);
+  sigler:=str0;
+end;
+function zigler;var zig0:zigle;i1:integer;
+begin
+  for i1:=0 to 5 do zig0[i1]:=ord(sig0[i1]);
+  zigler:=zig0;
+end;
+procedure lir;
+var P:point;
+zz,cc,ww:integer;
+vnt:eventrecord;boule:boolean;
+begin
+zz:=1;ww:=0;
+while not(zz=0) do begin
+    boule:=getnextevent(keydownmask,vnt);
+    cc:=bitand(vnt.message,charcodemask);
+    if (32<cc) and (ww=0) then begin rep:=chr(cc);
+         ww:=1;drawchar(rep);getpen(P);moveto(2,P.v+11) end;
+    if (cc=13) and (1=ww) then zz:=0; end;
+end;
+procedure lirv;
+var P:point;
+zz,cc,ww:integer;
+vnt:eventrecord;boule:boolean;
+begin
+zz:=1;ww:=0;
+while not(zz=0) do begin
+    boule:=getnextevent(keydownmask,vnt);
+    cc:=bitand(vnt.message,charcodemask);
+    if (32<cc) and (ww=0) then begin rep:=chr(cc);
+         ww:=1;drawchar(rep);end;
+    if (cc=13) and (1=ww) then zz:=0; end;
+end;
+end.
+end.
+
+UNIT utrir5;
+INTERFACE uses memtypes,quickdraw,osintf,toolintf,sane,uver5;
+procedure trire(parp,ppra,pVr,ptVr:ptr;cr:integer);
+implementation procedure trire;
+var arp1,pra1:ptni;Vr1,tVr1:ptdri;ina,la,lb,n,na,nb,nz,x:integer;
+begin
+arp1:=ptni(parp);pra1:=ptni(ppra);Vr1:=ptdri(pVr);tVr1:=ptdri(ptVr);
+for n:=1 to cr do arp1^[n]:=n; la:= 1 ; ina := 1 ;
+while (ina+la<=cr) do begin
+    x:=cr-(ina+la-1);if(x<la)then lb:=x else lb:=la;
+    na:=ina;nb:=ina+la;
+   for n:=ina to (ina+la+lb)-1 do begin
+       if(na<ina+la) and (nb<ina+la+lb) then
+          if(Vr1^[na]<=Vr1^[nb]) then begin nz:=na;na:=na+1 end
+            else begin nz:=nb;nb:=nb+1 end
+       else if (ina+la=na) then begin nz:=nb;nb:=nb+1 end
+            else begin nz:=na;na:=na+1 end ;
+       tVr1^[n]:=Vr1^[nz] ; pra1^[n] :=arp1^[nz] end;
+    for n:=ina to ina+la+lb-1 do begin Vr1^[n]:=tVr1^[n];arp1^[n]:=pra1^[n]
+end;
+    ina:=ina+la+lb;
+    if (cr<ina+la) then begin la:=2*la;ina:=1 end;   end;
+for n:= 1 to cr do pra1^[arp1^[n]]:=n;
+end;end.
+

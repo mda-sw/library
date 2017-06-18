@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+  <title>Notes on Deconvolution</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+
+<font color=red>
+<h1>Notes on Deconvolution</h1>
+<font color=black>
+</center>
+
+<hr><p>
+
+
+<b>The MR/1 Approach to Deconvolution</b><p>
+
+<ul>
+<li> Detection of signal, and hence of noise, provides a very effective
+way to <i>regularize</i> the solution.
+<li> There is no need to guess or estimate any regularizing parameter.
+<li> In fact, convergence is usually very rapid (a few iterations only).
+<li> In such regularization through noise removal (and the use of 
+variance stabilization if called for), the image so treated is the 
+discrepancy image between given input image and the approximation to this
+at any iteration (the "residual image").  
+<i>So variance stabilization does not alter the 
+basic nature of the inverse problem.</i>
+<li> <i>The future:</i> software for maximum entropy deconvolution is nearing 
+completion and will be part of the MR/2 package, due for release around 
+mid-1999.  Multiscale entropy and noise modeling is used in this method.
+<li> For various examples, evaluation, and to read further:
+<ul>
+<li> Chapter 3 of JL Starck, F Murtagh and A Bijaoui, Image and Data 
+Analysis: the Multiscale Approach", Cambridge University Press, 1998.
+<li> A Bijaoui, JL Starck and F Murtagh, "Restauration des images
+multi-&eacute;chelles par l'algorithme &agrave; trous", Traitement du 
+Signal, 11, 229-243, 1994.
+<li> JL Starck and A Bijaoui, "Filtering and deconvolution by the 
+wavelet transform", Signal Processing, 35, 195-211, 1994.
+<li> JL Starck and F Murtagh, "Image restoration with noise suppression
+using the wavelet transform", Astronomy and Astrophysics, 288, 343-348,
+1994.
+<li> F Murtagh, JL Starck and A Bijaoui, "Image restoration with noise
+suppression using a multiresolution support", Astronomy and Astrophysics
+Supplement Series, 112, 179-189, 1995.
+<li> JL Starck and E Pantin, "Multiscale maximum entropy image restoration",
+Vistas in Astronomy, 40, 1-6, 1996.
+</ul>
+
+</ul>
+
+<hr>
+</BODY>
+</HTML>

@@ -1,0 +1,65 @@
+x <- matrix(scan("~/Saothar-G4/r-work-sxb/3b-extracted.dat"),nrow=797,ncol=9,byrow=T)
+
+x[1,]
+
+ylab <- c("log T_50","log T_90","log F_tot","log H_321","log H_32","log P_256")
+
+ylab
+
+xdat <- x[ , 4:9]
+
+dimnames(xdat) <- list(NULL, ylab)
+
+pairs(xdat)        # Resize window!
+
+pxdat <- princomp(xdat, cor=T)      # Note: command prcomp gives (for us) less useful output.
+
+names(pxdat)
+
+pxdat$sdev
+
+#  pxdat$scores    797 x 6 matrix of GRBs crossed by PCs
+#  pxdat$loadings   6  x 6 matrix of features crossed by PCs
+
+plot(pxdat$scores[,1], pxdat$scores[,2], type="n", xlab="PC1", ylab="PC2")
+text(pxdat$scores[,1], pxdat$scores[,2])
+
+plot(pxdat$scores[,1], pxdat$scores[,2], type="n", xlab="PC1", ylab="PC2")
+text(pxdat$scores[,1], pxdat$scores[,2], rep(".", 797))
+
+source("~/Saothar-G4/r-work-sxb/plaxes.q")
+plaxes(pxdat$scores[,1], pxdat$scores[,2])
+
+plot(pxdat$loadings[,1], pxdat$loadings[,2], type="n", xlab="PC1", ylab="PC2")
+text(pxdat$loadings[,1], pxdat$loadings[,2], ylab)
+ 
+pxdatk2 <- kmeans(pxdat$scores[,1:3], 2)
+pxdatk3 <- kmeans(pxdat$scores[,1:3], 3)
+
+length(pxdatk2$cluster[pxdatk2$cluster==1])
+length(pxdatk2$cluster[pxdatk2$cluster==2])
+
+length(pxdatk3$cluster[pxdatk3$cluster==1])
+length(pxdatk3$cluster[pxdatk3$cluster==2])
+length(pxdatk3$cluster[pxdatk3$cluster==3])
+
+coord1 <- pxdat$scores[,1]
+coord2 <- pxdat$scores[,2]
+keq2cl1 <- coord1[pxdatk2$cluster==1]
+keq2cl2 <- coord1[pxdatk2$cluster==2]
+keq3cl1 <- coord1[pxdatk3$cluster==1]
+keq3cl2 <- coord1[pxdatk3$cluster==2]
+keq3cl3 <- coord1[pxdatk3$cluster==3]
+
+plot(coord1, coord2, type="n", xlab="PC1", ylab="PC2")
+text(coord1[pxdatk2$cluster==1], coord2[pxdatk2$cluster==1], rep("+",length(keq2cl1)))
+text(coord1[pxdatk2$cluster==2], coord2[pxdatk2$cluster==2], rep("o",length(keq2cl2)))
+plaxes(coord1, coord2)
+title("2-cluster k-means solution; cluster 1 = +; cluster 2 = o")
+
+plot(coord1, coord2, type="n", xlab="PC1", ylab="PC2")
+text(coord1[pxdatk3$cluster==1], coord2[pxdatk3$cluster==1], rep("+",length(keq3cl1)))
+text(coord1[pxdatk3$cluster==2], coord2[pxdatk3$cluster==2], rep("o",length(keq3cl2)))
+text(coord1[pxdatk3$cluster==3], coord2[pxdatk3$cluster==3], rep("-",length(keq3cl3)))
+plaxes(coord1, coord2)
+title("2-cluster k-means solution; cluster 1 = +; cluster 2 = o; cluster 3 = -")

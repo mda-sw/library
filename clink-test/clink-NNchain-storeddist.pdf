@@ -1,0 +1,235 @@
+%PDF-1.4
+%Å‚Å„ÅœÅ”
+1 0 obj
+<<
+/CreationDate (D:20060417160621)
+/ModDate (D:20060417160621)
+/Title (R Graphics Output)
+/Producer (R 2.2.1)
+/Creator (R)
+>>
+endobj
+2 0 obj
+<<
+/Type /Catalog
+/Pages 3 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F1
+/BaseFont /ZapfDingbats
+>>
+endobj
+6 0 obj
+<<
+/Type /Page
+/Parent 3 0 R
+/Contents 7 0 R
+/Resources 4 0 R
+>>
+endobj
+7 0 obj
+<<
+/Length 8 0 R
+>>
+stream
+q
+/GS257 gs
+1.000 1.000 1.000 rg
+0 0 360.00 360.00 re f
+Q q 59.04 73.44 270.72 227.52 re W n
+Q q 59.04 73.44 270.72 227.52 re W n
+/GS1 gs
+0.000 0.000 0.000 RG
+0.75 w
+[] 0 d
+1 J
+1 j
+10.00 M
+74.66 86.40 m 113.61 118.02 l S
+124.67 127.24 m 163.86 160.79 l S
+174.77 170.19 m 214.03 204.22 l S
+224.97 213.58 m 264.10 246.63 l S
+275.16 255.86 m 314.17 287.96 l S
+BT
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 66.10 79.27 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 116.24 119.96 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 166.37 162.88 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 216.50 206.34 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 266.64 248.69 Tm (l) Tj 0 Tr
+/F1 1 Tf 1 Tr 7.48 0 0 7.48 316.77 289.94 Tm (l) Tj 0 Tr
+ET
+Q q
+/GS1 gs
+0.000 0.000 0.000 RG
+0.75 w
+[] 0 d
+1 J
+1 j
+10.00 M
+69.07 73.44 m 319.73 73.44 l S
+69.07 73.44 m 69.07 66.24 l S
+119.20 73.44 m 119.20 66.24 l S
+169.33 73.44 m 169.33 66.24 l S
+219.47 73.44 m 219.47 66.24 l S
+269.60 73.44 m 269.60 66.24 l S
+319.73 73.44 m 319.73 66.24 l S
+BT
+/GS257 gs
+0.000 0.000 0.000 rg
+/F2 1 Tf 12.00 0.00 -0.00 12.00 55.72 47.52 Tm (1000) Tj
+/F2 1 Tf 12.00 0.00 -0.00 12.00 105.86 47.52 Tm (2000) Tj
+/F2 1 Tf 12.00 0.00 -0.00 12.00 155.99 47.52 Tm (3000) Tj
+/F2 1 Tf 12.00 0.00 -0.00 12.00 206.12 47.52 Tm (4000) Tj
+/F2 1 Tf 12.00 0.00 -0.00 12.00 256.26 47.52 Tm (5000) Tj
+/F2 1 Tf 12.00 0.00 -0.00 12.00 306.39 47.52 Tm (6000) Tj
+ET
+59.04 74.40 m 59.04 273.72 l S
+59.04 74.40 m 51.84 74.40 l S
+59.04 107.62 m 51.84 107.62 l S
+59.04 140.84 m 51.84 140.84 l S
+59.04 174.06 m 51.84 174.06 l S
+59.04 207.28 m 51.84 207.28 l S
+59.04 240.50 m 51.84 240.50 l S
+59.04 273.72 m 51.84 273.72 l S
+BT
+/F2 1 Tf 0.00 12.00 -12.00 0.00 41.76 71.06 Tm (2) Tj
+/F2 1 Tf 0.00 12.00 -12.00 0.00 41.76 104.28 Tm (4) Tj
+/F2 1 Tf 0.00 12.00 -12.00 0.00 41.76 137.50 Tm (6) Tj
+/F2 1 Tf 0.00 12.00 -12.00 0.00 41.76 170.72 Tm (8) Tj
+/F2 1 Tf 0.00 12.00 -12.00 0.00 41.76 200.61 Tm (10) Tj
+/F2 1 Tf 0.00 12.00 -12.00 0.00 41.76 233.83 Tm (12) Tj
+/F2 1 Tf 0.00 12.00 -12.00 0.00 41.76 267.05 Tm (14) Tj
+ET
+59.04 73.44 m
+329.76 73.44 l
+329.76 300.96 l
+59.04 300.96 l
+59.04 73.44 l
+S
+Q q
+BT
+/GS257 gs
+0.000 0.000 0.000 rg
+/F2 1 Tf 12.00 0.00 -0.00 12.00 161.60 18.72 Tm (Nos. of rows) Tj
+/F2 1 Tf 0.00 12.00 -12.00 0.00 12.96 141.95 Tm (Sqrt of CPU time) Tj
+/F3 1 Tf 14.00 0.00 -0.00 14.00 53.17 325.45 Tm (Complete link, NN-chain, stored distances) Tj
+ET
+Q
+endstream
+endobj
+8 0 obj
+2367
+endobj
+3 0 obj
+<<
+/Type /Pages
+/Kids [
+6 0 R
+]
+/Count 1
+/MediaBox [0 0 360 360]
+>>
+endobj
+4 0 obj
+<<
+/ProcSet [/PDF /Text]
+/Font << /F1 5 0 R /F2 10 0 R /F3 11 0 R /F4 12 0 R /F5 13 0 R /F6 14 0 R >>
+/ExtGState << /GS1 15 0 R /GS257 16 0 R >>
+>>
+endobj
+9 0 obj
+<<
+/Type /Encoding
+/BaseEncoding /WinAnsiEncoding
+/Differences [ 45/minus 96/quoteleft
+144/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent
+/dieresis /.notdef /ring /cedilla /.notdef /hungarumlaut /ogonek /caron /space]
+>>
+endobj
+10 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F2
+/BaseFont /Helvetica
+/Encoding 9 0 R
+>>
+endobj
+11 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F3
+/BaseFont /Helvetica-Bold
+/Encoding 9 0 R
+>>
+endobj
+12 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F4
+/BaseFont /Helvetica-Oblique
+/Encoding 9 0 R
+>>
+endobj
+13 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F5
+/BaseFont /Helvetica-BoldOblique
+/Encoding 9 0 R
+>>
+endobj
+14 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/Name /F6
+/BaseFont /Symbol
+>>
+endobj
+15 0 obj
+<<
+/Type /ExtGState
+/CA 1.000 >>
+endobj
+16 0 obj
+<<
+/Type /ExtGState
+/ca 1.000
+>>
+endobj
+xref
+0 17
+0000000000 65535 f 
+0000000020 00000 n 
+0000000162 00000 n 
+0000002814 00000 n 
+0000002897 00000 n 
+0000000211 00000 n 
+0000000294 00000 n 
+0000000374 00000 n 
+0000002794 00000 n 
+0000003060 00000 n 
+0000003317 00000 n 
+0000003414 00000 n 
+0000003516 00000 n 
+0000003621 00000 n 
+0000003730 00000 n 
+0000003808 00000 n 
+0000003857 00000 n 
+trailer
+<<
+/Size 17
+/Info 1 0 R
+/Root 2 0 R
+>>
+startxref
+3906
+%%EOF

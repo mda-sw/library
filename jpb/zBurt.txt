@@ -1,0 +1,177 @@
+program zBurt;
+uses memtypes,quickdraw,osintf,toolintf,sane,uver5;
+const mmax=300;
+type
+colber=array[0..mmax]of longint;pcol=^colber;
+cowber=array[0..mmax]of single ;pcow=^cowber;
+var fin:file of integer;ft:text;
+carac,repc,rpf,bon,rpz,rpw,suB:char;nomba,nomf,titre,vacua:str255;
+er1,iz1,i,j,jj,jp,m,mp,c,carj,carm,lu,nu,sgn:integer;ret:real;nw:single;
+sig:zigle;psg1:pzgl;ttri:stringptr;ffli:plng;ffw:pww;ptrr:ptr;
+tampi:array[1..titab]of integer;
+sigj:array[1..jmax]of zigle;sigm:array[1..mmax]of zigle;
+mdj,nmj,dj:array[1..jmax]of integer;
+colm:array[0..mmax]of pcol;cowm:array[0..mmax]of pcow;
+wdj:array[1..jmax]of single;
+ffl:longint;
+procedure lecsig;   begin    sig[0]:=0;
+   while (ord(carac) in [0..32]) and not eof(ft) do  read(ft, carac);
+   while not ((ord(carac) in [0..32]) or (sig[0]=4)) do begin
+     sig[0]:=sig[0]+1;sig[sig[0]]:=ord(carac);
+  if eof(ft) then carac:=' ' else read(ft, carac) end;
+   while not ((ord(carac) in [0..32]) or eof(ft)) do read(ft, carac);
+   if eof(ft) then carac:=' ';end;
+procedure lecnombre;begin ffl:=0;sgn:=1;
+      while not((ord(carac) in [48..57]) or eof(ft)) do begin
+          read(ft,carac);
+          if not(ord(carac) in [48..57]) then sgn:=1;
+          if (carac='-') then sgn:=-1;end;
+      while (ord(carac) in [48..57]) do begin
+          ffl:=(10*ffl)+(ord(carac)-48);
+          if eof(ft) then carac:=' ' else read(ft,carac) end;
+      ffl:=sgn*ffl; end;
+
+procedure nommer;begin
+ repc:='N';er1:=0;
+ while not ((repc='O') or (er1=6)) do begin repc:='O';
+  write('le fichier des donn^Îes est ');readln(nomba);
+  write('a-t-on un codage en [O,1](Z), ou un codage barycentrique(B)
+');readln(rpw);
+  if (rpw='B') then rpw:='S' else rpw:='M';
+  if (rpw='S') then writeln('  codage barycentrique') else writeln('  codage
+en [0,1]');
+  if (rpw='S') then nomf:=concat(nomba,'S.w') else nomf:=concat(nomba,'M');
+  if (rpw='S') then suB:='w' else suB:='z';
+  writeln('V^Îrification pour le fichier des num^Îros de modalit^Îs
+',nomf);iz1:=1;
+  if (rpw='M') then begin
+    iz1:=verif(stringptr(@nomf));
+    if (iz1=1) then nomf:=concat(nomf,'.z');end;
+  repc:=dialof(stringptr(@nomf));
+  if (repc='O') then begin writeln(nomf);nomf:=concat(nomba,'Dcodx');
+    writeln('V^Îrification pour le fichier de codage des modalit^Îs ',nomf);
+    repc:=dialof(stringptr(@nomf)) end;
+  if (repc='N') then er1:=er1+1 else begin writeln(nomf);
+   write('le nom du fichier des donn^Îes est il confirm^Î oui(O) ou non(N) ');
+   readln(repc) end end;end;
+
+procedure vercoder;begin
+  reset(ft,concat(nomba,'Dcodx'));
+  readln(ft,titre);readln(ft,vacua);
+  carac:=' ';lecnombre;carj:=ffl;carm:=0;
+  for j:=1 to carj do begin dj[j]:=carm;carac:=' ';
+     lecsig;sigj[j]:=sig;
+  lecnombre;nmj[j]:=ffl;readln(ft,vacua);carac:=' ';
+     for m:=1 to nmj[j] do begin carac:=' ';
+         carm:=carm+1;lecsig;
+      if (carm<=mmax) then sigm[carm]:=sig end;
+     for m:=1 to nmj[j] do read(ft,ret);end;
+  close(ft);
+  if (mmax<carm) then begin repc:='N';
+     writeln('ERREUR le nombre de modalit^Îs d^Îpasse',mmax:4) end end;
+
+procedure teter;begin
+ reset(ft,concat(nomba,'M'));
+ readln(ft,vacua);carac:=' ';
+ lecnombre;if not(carj=ffl mod 1000) then repc:='N';
+ if (repc='O') then for j:=1 to carj do begin lecsig;
+     if not(sigler(sig)=sigler(sigj[j])) then repc:='N' end;
+ if (repc='N') then close(ft);end;
+procedure tetez;begin
+ reset(fin,concat(nomba,rpw,'.',suB));
+ for c:=1 to titab do read(fin,tampi[c]);
+ read(fin,lu);if not(carj=lu) then repc:='N';
+ if (repc='O') then for j:=1 to carj do begin
+     for c:=1 to 3 do read(fin,tampi[c]);
+     if not(sigler(psg1^)=sigler(sigj[j])) then repc:='N' end;
+ if (repc='N') then close(fin);end;
+
+procedure verteter;begin
+
+ffli:=plng(@tampi);ffw:=pww(@tampi);psg1:=pzgl(@tampi);ttri:=stringptr(@tamp
+i);
+  if (iz1=1) then tetez;if (iz1=2) then teter;
+  if (repc='N') then writeln('ERREUR sur les sigles des variables') end;
+
+
+procedure verinum;begin
+ if ((not (nmj[jj]=0)) and ((nu<1) or (nmj[jj]<nu))) then begin
+    bon:='N';vacua:=sigler(sigj[jj]);
+    write('ERREUR',vacua:5,' a',nmj[jj]:3,' modalit^Îs et pour');
+    write(sigler(sig):5,' le num^Îro est',nu:3);readln(rpf);nu:=0 end;end;
+
+procedure liger;begin lecsig;
+ if not(sig[0]=0) then for j:=1 to carj do begin lecnombre;
+   nu:=ffl;jj:=j;verinum;
+   mdj[j]:=nu+dj[j] end;end;
+procedure ligez;begin
+ for c:=1 to 3 do read(fin,tampi[c]);sig:=psg1^;
+ for j:=1 to carj do begin read(fin,tampi[1]);read(fin,tampi[2]);
+   nu:=ffli^;nw:=ffw^;
+   if (rpw='S') then begin wdj[j]:=nw+dj[j];
+      nu:=trunc(0+nw);if (nu<nw) then nu:=nu+1;if (nw<1) then nu:=0;end;
+   jj:=j;verinum;
+   mdj[j]:=nu+dj[j] end;end;
+
+procedure burt;
+  var wjj,wjp:integer;aoo,aou,auo,auu,rjj,rjp:single;
+  begin writeln(sigler(sig));
+  for j:=1 to carj do if (nmj[j]=0) then mdj[j]:=0;
+  if (rpw='M') then for j:=1 to carj do for jp:=j to carj do
+    colm[mdj[j]]^[mdj[jp]]:=colm[mdj[j]]^[mdj[jp]]+1;
+  if (rpw='S') then for j:=1 to carj do if not(nmj[j]=0) then
+    for jp:=j to carj do if not(nmj[jp]=0) then begin
+      wjj:=trunc(0+wdj[j]);wjp:=trunc(0+wdj[jp]);
+      rjj:=wdj[j]-wjj;rjp:=wdj[jp]-wjp;
+      auu:=rjj*rjp;aou:=rjp-auu;auo:=rjj-auu;aoo:=1+auu-(rjj+rjp);
+      if (0<aoo) then cowm[wjj]^[wjp]:=cowm[wjj]^[wjp]+aoo;
+      if (0<auo) then cowm[wjj+1]^[wjp]:=cowm[wjj+1]^[wjp]+auo;
+      if (0<aou) then cowm[wjj]^[wjp+1]:=cowm[wjj]^[wjp+1]+aou;
+      if (0<auu) then cowm[wjj+1]^[wjp+1]:=cowm[wjj+1]^[wjp+1]+auu;end;
+end;
+
+procedure burter;begin
+ while not(eof(ft) or (bon='N')) do begin
+     liger;if not(sig[0]=0) then burt end;close(ft);end;
+procedure burtez;begin
+ while not(eof(fin) or (bon='N')) do begin ligez;if (bon='O') then burt
+end;close(fin);end;
+procedure compler;begin
+ for j:=1 to carj-1 do for m:=dj[j]+1 to dj[j]+nmj[j] do for
+mp:=dj[j]+nmj[j]+1 to carm do
+    colm[mp]^[m]:=colm[m]^[mp];end;
+
+procedure creburter;begin
+  if (rpw='M') then ffli^:=0 else ffw^:=0;
+  for m:=0 to carm do begin ptrr:=newptr(4*(1+mmax));
+     colm[m]:=pcol(ptrr);cowm[m]:=pcow(ptrr);
+     for mp:=0 to carm do colm[m]^[mp]:=ffli^ end;
+  if (iz1=1) then burtez;if (iz1=2) then burter;
+  if (bon='O') then compler;end;
+
+procedure sorburter;begin
+    rewrite(fin,concat(nomba,'B.',suB));
+    ttri^:=titre;tampi[titab]:=carm;
+    for c:=1 to titab do write(fin,tampi[c]);write(fin,carm);
+    for m:=1 to carm do begin psg1^:=sigm[m];
+       for c:=1 to 3 do write(fin,tampi[c]) end;
+    for m:=1 to carm do begin psg1^:=sigm[m];
+       for c:=1 to 3 do write(fin,tampi[c]);
+       for mp:=1 to carm do begin ffli^:=colm[m]^[mp];
+         write(fin,tampi[1]);write(fin,tampi[2]) end end;
+    close(fin) end;
+
+procedure vider;begin for m:=0 to carm do dispose(colm[m]); end;
+
+begin  benzecri;rpz:='O';
+while not(rpz='N') do begin nommer;
+ if (repc='O') then vercoder;
+ if (repc='O') then verteter;
+
+ if (repc='O') then begin bon:='O';
+  creburter;if (bon='O') then sorburter;
+  vider;end;
+
+ if (repc='N') then rpz :='N' else begin
+  write('faut il traiter un autre tableau O ou N ');readln(rpz) end end;
+readln(rpf);end.

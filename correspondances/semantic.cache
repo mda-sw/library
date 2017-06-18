@@ -1,0 +1,50 @@
+;; Object correspondances/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "correspondances/"
+  :tables (list 
+   (semanticdb-table "index.html"
+    :major-mode 'html-mode
+    :tags '(("Correspondence Analysis and Data Coding with R and Java" section nil nil [15 86]) ("var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-18128645-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();" section nil nil [86 569]) ("Recent writings of J.-P. Benz&eacute;cri: Revue MODULAD,
+<a href=\"http://www-rocq.inria.fr/axis/modulad/archivesdetail.htm#38\">
+\"Si j'avais un laboratoire ..., No. 38; and 
+\"L'Analyse des donn&eacute;es : histoire, bilan, projets, ..., 
+perspective\", No. 35" section (:members (("\"Si j'avais un laboratoire ..., No. 38; and 
+\"L'Analyse des donn&eacute;es : histoire, bilan, projets, ..., 
+perspective\", No. 35" section nil nil [665 875]) ("English translation of 
+part of page 1" section nil nil [875 1057]) ("Electronic Journal for History of Probability and Statistics" section nil nil [1057 1684]) ("L'&Acirc;me au bout d'un rasoir, The 
+Soul at the Razor's Edge" section nil nil [1684 1904]) ("6th Annual Public Boole Lecture in Informatics" section nil nil [1904 2251]) ("Preprint" section nil nil [2251 2336]) ("Advance Access 9 Sept. 2008" section nil nil [2336 2490]) ("Software Accompanying:<br>
+Correspondence Analysis and Data Coding<br>
+with R and Java" section (:members (("Table of Contents" section nil nil [3692 4050]) ("online description - Chapman & Hall/CRC
+Computer Science & Data Analysis series" section nil nil [4050 4249]) ("Amazon" section nil nil [4249 4407]) ("Amazon.co.uk" section nil nil [4407 4856]) ("1. Software in R" section (:members (("The R Project for 
+Statistical Computing" section nil nil [4964 5091]) ("Correspondence analysis" section nil nil [5091 5228]) ("Supplementary rows." section nil nil [5228 5279]) ("Supplementary columns." section nil nil [5279 5375]) ("Background details, and
+examples of use on Intel Windows and Unix systems." section nil nil [5375 5493]) ("All functions in one (standalone) R/S-Plus file" section nil nil [5493 5613]) ("C source code for the clustering." section nil nil [5613 5687]) ("DLL library for use on 
+Intel/Windows systems" section nil nil [5687 5877]) ("R/S-Plus script
+that calls the C code" section nil nil [5877 6026]) ("FACOR - factors and clusters." section nil nil [6026 6083]) ("Print and format FACOR results." section nil nil [6083 6148]) ("VACOR - variables and clusters." section nil nil [6148 6207]) ("VACOR - variables and clusters, supporting 
+C code for clustering." section nil nil [6207 6303]) ("Print and format VACOR results." section nil nil [6303 6404]) ("Fuzzy or piecewise linear data coding." section nil nil [6404 6470]) ("Plot axes." section nil nil [6470 6509]) ("Data sets to be used with R programs." section nil nil [6509 6785]))) nil [4856 6785]) ("2. Text Processing" section (:members (("aviation-reports-data.tar" section nil nil [6936 7219]) ("txtanalysis.c program" section nil nil [7219 7348]) ("xtabulate.c program" section nil nil [7348 7484]) ("word_analysis.c" section nil nil [7484 7801]) ("arist10.txt" section nil nil [7801 7993]) ("docanalysis.c program" section nil nil [7993 8319]) ("doctabulate.c program" section nil nil [8319 9036]))) nil [6785 9036]) ("3. Software in Java" section (:members (("Sunsoft Sun Developer Network Site" section nil nil [9114 9199]) ("Tar file containing all *.java source 
+files." section nil nil [9199 9424]) ("Tar file containing all *.class class
+files." section nil nil [9424 9729]) ("Tar file containing a set of *.dat data 
+files" section nil nil [9729 9991]))) nil [9036 9991]) ("4. Updates to the Book" section (:members (("Errata" section (:members (("P. 35" section nil nil [10057 10174]) ("P. 37" section nil nil [10174 10627]))) nil [10031 10627]) ("Updates" section (:members (("facor" section nil nil [10671 10774]) ("casa2.prn" section nil nil [10774 10936]))) nil [10627 10936]))) nil [9991 10936]) ("5. Other R Software for Correspondence Analysis" section (:members (("CARME-N.ORG" section nil nil [11104 11160]))) nil [10936 11160]) ("6. Book Reviews and Survey Papers" section (:members (("Origins of modern data analysis
+linked to the beginnings and early development of computer science and
+information engineering" section nil nil [11225 11453]) ("Jan de Leeuw's 
+review of this book" section nil nil [11453 11886]) ("Review of M. Greenacre and 
+J. Blasius" section nil nil [11886 12080]) ("Review" section nil nil [12080 12323]))) nil [11160 12323]) ("7. Other Data Analysis and Signal Processing Software" section (:members (("Multivariate
+data analysis resources" section nil nil [12397 12595]) ("MR, a large suite of 
+programs for wavelet transform analysis of images and signals" section nil nil [12595 13026]))) nil [12323 13026]) ("8. Online Writings of J.P. Benz&eacute;cri" section (:members (("\"Si j'avais un laboratoire...\"" section nil nil [13197 13411]) ("\"Si j'avais un laboratoire...\" -
+2e version" section nil nil [13411 13541]) ("L'avenir de l'analyse des 
+donn&eacute;es" section nil nil [13541 13752]) ("A number of papers between  1954 and 1972" section nil nil [13752 14279]) ("Les Cahiers de l'Analyse des Donn&eacute;es" section nil nil [14279 14412]))) nil [13026 14412]) ("9. Linnaeus, Huyghens, Laplace" section (:members (("Linnaeus" section nil nil [14617 14667]) ("Huyghens" section nil nil [14667 14717]) ("Laplace" section nil nil [14717 14775]) ("Author's homepage." section nil nil [14775 14844]) ("Page d'acceuil." section nil nil [14844 14847]))) nil [14412 14415]))) nil [2490 2493]))) nil [569 575]))
+    :file "index.html"
+    :pointmax 14972
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0pre3"
+  :semanticdb-version "2.0pre3"
+  )

@@ -1,0 +1,71 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - Mines</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+<font color=red>
+<h1>Where is the minefield?</h1>
+<font color=black>
+<hr><p>
+<img src="../pic/minesani.gif">
+<p>
+
+Detecting a minefield in coastal and inshore waters may rely on supposed
+detections, and many spurious or clutter detections.  A representative 
+image of such point detections is shown, with the greater density shown as
+a horizontal band near the bottom of the image. The other two images in this
+animation are the 4th and 5th wavelet transform scales.  They can be used to 
+demarcate the minefield.
+
+<hr>
+</center>
+
+<b>Commands used</b><p>
+The point pattern set was generated in S-Plus using 1500 points for the
+Poisson clutter, and 200 points for the "stochastic bar" which were also
+distributed as a Poisson distribution but with an additive Gaussian component.
+Thus the problem is one of finding 200 "interesting" points among 1500
+uninteresting points.  The points' coordinates were read into IDL, an image
+produced, and this was written to a FITS file.
+<p>   
+The significance limits for detection were set up with 
+<i> mr_abaque -d</i>.  This was followed by the determining of the support
+image at each of 6 resolution scales, <i>mr_psupport -I c.fits -s xxx -p  
+cout</i>.  The support images were extracted using <i>mr_extract -x cout.mr 
+cout</i>.  Finally the support images were converted to GIF, following 
+color-coding (13 rainbow) in IDL.
+<p>
+Another important command is <i>mr_detect</i> which not only detects the 
+clusters, with support for lots of noise models, but also calculates and 
+outputs parameters for all objects or `blobs' found.  The objects or blobs
+can be at different resolution scales, or a combination of them.  
+
+<hr>
+
+
+<b>To probe further</b><p>
+<a href="http://www.stat.washington.edu/raftery/Onrgroup/onrgroup.html">Working 
+Group</a> on <i>Model-Based Clustering for Marked Spatial Point 
+Processes</i>, sponsored by Office of Naval Research.
+
+<p>
+
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, 1998.
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

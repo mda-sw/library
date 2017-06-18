@@ -1,0 +1,300 @@
+<html>
+<head>
+<title>Quick Start to Using MR/1 Version 2.0</title>
+</head>
+<body bgcolor=white>
+<h1>A Quick Start to Using MR/1 Version 2.0</h1>
+
+<h2>The Very Start</h2>
+
+This document contains a short overview of how you can start producing
+results with MR/1.  Along the way we will give hints and suggestions to
+get the most  effective use from this package.
+<p>
+MR/1 Version 2.0 extends Version 1.0 substantially with more wavelet and
+multiscale transforms, various extra image processing tool commands, 
+lossless compression, support tools for large images, commands for 
+edge detection, and multifractal analysis functionality.  A new package,
+MR/2, is available separately, with functionality for filtering, 
+deconvolution, source detection and other operations based on multiscale
+entropy.
+
+<p>
+On the MR/1 Version 2.0 
+CD which also contains the codes for MR/2 Version 1.0, 
+you will find the executables (for varying operating 
+systems - Dec, HP, Linux, IBM, and Sun; and Windows/DOS).  Here are the 
+top directories which you will find on the CD:
+
+<pre>
+COPYRIGHT           doc/                javadec.tgz         windows/
+COPYRIGHT.windows   idl/                javamr1/
+README              idlv5.tgz           javamr1.tgz
+README.windows      javadec/            unix/
+</pre>
+
+The documentation (directory doc) 
+consists of the more than 300 page User Manual, divided for convenience 
+into files vol1.ps, vol2.ps, ... , vol6.ps, 
+and the 
+30 page brochure entitled "Multiresolution and its Applications: an Overview",
+doc_demo.ps.
+<p>
+The IDL directory contains various subdirectories, one of which (pro) is the
+suite of programs you will use to run MR/1 directly in IDL.  Another 
+subdirectory contains the public suite of programs including inter alia
+the readfits and writefits IDL programs.  A further IDL directory contains
+help files for the MR/1 IDL programs.
+<p>
+The javadec directory contains a demonstration Java  applet for selective
+decompression of a previously compressed image.  The javamr1 directory 
+contains the Java user interface.
+<p>
+The windows and unix directories each contain the 
+license manager, and the executables, for (respectively) W95/W98/WNT and 
+a range of Unix platforms.  To activate your license, you will first need 
+to tell us (preferably by email to fmurtagh@multiresolution.com, or to 
+multires@hotmail.com or fmurtagh@acm.org) your hostname 
+(xxx.yyy.edu or whatever) and hostid.  The latter can be obtained on either
+Windows or Unix platforms by running the appropriate mrhost program, 
+available in either the windows or unix directory.  
+<p>
+Please also let us know your operating system, whether your license
+is to be valid indefinitely or is a limited time demo, whether your license
+is for all machines of the same operating system, whether multi-user, 
+and finally 
+whether MR/1 alone, or both MR/1 and MR/2, are wanted.
+<p>
+Two remarks on the license manager.  Firstly, if your machine is not 
+networked, then you will have to set the value of the environment
+variable CEA_LICENSE_HOST to localhost.  Secondly, if there is any problem
+in running the license manager, cea_lm, let us know immediately (since 
+optimization compilation options used caused a problem in the past 
+on some systems) 
+and we will explain what needs to be done.  
+<p>
+When we return the license key to you, you can install your license manager.
+
+<h2>First Steps</h2>
+
+MR/1 takes its cue from the input data, in regard to data precision.  That
+is why it is generally best to carry out processing on images in FITS format.
+MR/1 will take such input as 32-bit floating (4-byte real).  This is of 
+importance for noise modeling, for instance.  FITS format is easily supported
+in IDL.  To translate to GIF, with proper scaling, we have:
+
+<pre>
+
+a = readfits('ngc2997.fits')
+write_gif, 'ngc2997.gif', bytscl(a)
+
+</pre>
+
+Independently of IDL, in MR/1 we can also translate to 
+GIF, with rescaling, using
+
+<pre>
+
+im_convert -b ngc2997.fits ngc2997.gif
+
+</pre>
+
+This progam allows you also to convert in other directions, e.g. from 
+GIF to FITS.
+<p>
+With IDL one can display images of course.  Otherwise you can use xv or 
+ImageMagick's display program under Unix, or Photoshop under Windows, 
+to display GIF files.  To directly display FITS files, one possibility is  
+to use SAOimage, which is publicly available for a range of Unix platforms.
+Another FITS viewer program for MS Windows, Apple Mac and Unix platforms 
+is available at http://www.cv.nrao.edu/~bcotton/fitsview.html.
+
+
+<h2>Some FITS Images for Downloading</h2>
+
+A few FITS images for downloading are as follows.  Watch out - some are large.
+
+<ul>
+
+<li> <img src="../pic/ngc2997.jpg"> NGC 2997 galaxy. 
+     <a href="../pic/ngc2997.fits">FITS image</a> (267840 bytes).
+<li> <img src="../pic/gauss2.gif"> Point pattern clusters.
+     <a href="../pic/gauss2.fits">FITS image</a> (267840 bytes).
+<li> <img src="../pic/mamo.jpg"> Mammogram. 
+     <a href="../pic/mamo.fits">FITS image</a> (1054080 bytes).
+<li> <img src="../pic/raqr.jpg"> R Aqr jet.
+     <a href="../pic/raqr.fits">FITS image</a> (265024 bytes).
+<li> <img src="../pic/decngc.jpg"> NGC 2997 again, rotated.
+     <a href="../pic/decngc.fits">FITS image</a> (267840 bytes).
+<li> <img src="../pic/lena.jpg"> Lena test image.  
+     <a href="../pic/lena.fits">FITS image</a> (265024 bytes).
+<li> <img src="../pic/comet.jpg"> Comet core. 
+     <a href="../pic/comet.fits">FITS image</a> (1088640 bytes).
+<li> <img src="../pic/imag.jpg"> Galaxies and stars - small objects.
+     <a href="../pic/imag.fits">FITS image</a> (135360 bytes).
+<li> <img src="../pic/m51.jpg"> M51. 
+     <a href="../pic/m51.fits">FITS image</a> (36840 bytes).
+<li> <img src="../pic/simu1.gif"> Sky simulation.
+     <a href="../pic/simu1.fits">FITS image</a> (267840 bytes).
+<li> <img src="../pic/hstpsf.gif"> A pre-refurbishment HST PSF.
+     <a href="../pic/hstpsf.fits">FITS image</a> (265024 bytes).
+<li> <img src="../pic/xray.gif"> X-ray image (cluster A2390).
+     <a href="../pic/xray.fits">FITS image</a> (1054080 bytes).
+<li> <a href="../pic/glitch1.fits">Finally a 384-valued spectrum</a> (5760 bytes.)
+</ul>
+
+<h2>A Range of Examples</h2>
+
+<ul>
+
+<li> For visualization of the cometary core, using 6 resolution levels
+(-n 6),
+and writing the different level images out (-x) for independent display:
+<i>mr_transform -n 6 -x comet.fits comet</i>.
+The file <i>comet.mr</i> contains the wavelet transform (by default &agrave; 
+trous method).
+
+<p>
+<li> For the point pattern data, the significance limits 
+for detection were set up with <i>mr_abaque -d</i>. 
+This was followed by the
+determining of the support image at each of 6 resolution scales, 
+<i>mr_psupport -I gauss2.fits -s ptpatt -p ptout</i>. 
+The support images were extracted using <i>mr_extract -x ptout.mr ptout</i>. 
+<p>
+
+Another important command is <i>mr_detect</i> which not only 
+detects the clusters, with support for lots
+of noise models, but also calculates and outputs parameters 
+for all objects or `blobs' found. The
+objects or blobs can be at different resolution scales, or a 
+combination of them. 
+
+<p>
+<li>In the NGC2997 image, we looked for structures on different scales which
+were based on the wavelet transform.
+
+<p>
+
+To detect structures at levels 1 and 2, i.e. essentially stars, we use
+<i>mr_detect -n 7 -L 2 ngc2997.fits im_stars.fits</i> 
+Options <i> -n 7 -L 2</i> indicate, respectively, 7 scales for the analysis, 
+and scales 1 and 2 for object
+detection.
+To detect larger-scale structures, we use
+<i>mr_detect -n 7 -F 3 -L 6 -K ngc2997.fits im_gal.fits </i>
+The option <i> -K </i> keeps objects close to the image boundaries which 
+would otherwise (for safety) be
+ignored, and the <i>-F 3</i> option implies scale 3 is the starting scale 
+used for object detection.
+Extended structures were obtained by
+<i>ngc2997 - im_stars</i> (for example, in IDL, followed by writing of the 
+images as GIFs). 
+
+<p>
+<li>Compression of the mammogram image was carried out using
+<i>mr_comp -R 20 mamo.fits mamo.fits</i> which produces the compressed file,
+<i>mamo.fits.MRC</i>.  Decompression is carried out by the following 
+command:
+<i>mr_decomp -i mamo.fits.MRC -o mamo.fits</i>
+
+<p>
+<li>
+The X-ray image was filtered based on  <i>mr_filter -m 9</i> which, for a 
+512x512 images takes about 2-3 minutes elapsed time.
+
+<p>
+<li>
+The Earth observation example, using the urban/rural scene around Derry,
+used <i>mr_transform -t 5</i>.  The images were then histogram-equalized and
+dimmed using <i>xv</i>.
+
+<p>
+<li> 
+Using <i>mr_pfilter</i> on sparse image data (i.e. many pixels were 
+zero-valued - this data is being working on currently and will be made 
+available here at a later point) and 
+finding that the filtered images looked devoid
+of almost any structure, we checked the input data, and found that it had
+been preprocessed such that pixel values were of the order of 1.0 or 1.5.  
+This is not in keeping with the assumption of Poisson noise.  We instead
+used <i>mr_filter</i> with a model of undefined noise in this case.
+
+<p>
+<li>
+For various industrial vision inspection problems, where the images contain
+lots of structure, and where the faults to be discovered consist of small
+irregular blemishes, we have found that the multiscale morphological (min-max)
+transform performs very well.  Some resolution level, or levels, allow us to
+easily find and subsequently measure the blemishes.  
+
+<p>
+
+<li> For the example of microstructure of concrete using SEM (scanning 
+electron microscope) images, we used <i>mr_rfilter -n 3 -t 2</i>.  The
+images were histogram equalized for display in IDL.  A general remark - we
+have found speckle removal to be far more effective is a relatively low
+value of paramter <i>-n</i> is used, as we do here.
+
+<p>
+<li> More descriptions of commands used will follow, based on the "Palette
+of Multiresolution Applications" (http://hawk.infm.ulst.ac.uk:1998/multires),
+or the book "Image and Data Analysis: the Multiscale Approach" (Starck, 
+Murtagh and Bijaoui, Cambridge University Press, 1998), or the document
+"Multiresolution and Its Applications: an Overview" (Starck, 1998).
+
+</ul>
+<h2> Bugs - Corrections </h2>
+
+<ul> 
+<li> The mr_visu option 
+<pre>
+-v Type_Visu
+</pre>
+should read 
+<pre>
+-V Type_Visu
+</pre>
+(not least because option -v is already used for Verbose).  
+
+<p>
+
+<li> See anonymous ftp area 
+<p>
+
+strule.cs.qub.ac.uk
+
+<p>
+
+directory area pub/updates
+
+<p>
+
+for other updates, categorized by operating system.  
+
+</ul>
+
+<p>
+<hr>
+<center>
+<b>This page is</b> 
+<i>http://astro.u-strasbg.fr/~fmurtagh/multires/quick.html</i>
+<p>
+<b>Applications:</b> <i>http://astro.u-strasbg.fr/~fmurtagh/multires</i>
+<p>
+<b>MR/1 Software homepage:</b> <i>http://www.multiresolution.com</i>
+<p>
+<b>Contact:</b> <i>{info,sales,help,fmurtagh}@multiresolution.com</i> 
+or <i>fmurtagh@acm.org</a>
+<p>
+MR/1 Version 1.0 was available from about June 1998.  <br>
+MR/1 Version 2.0
+was available from July 1999, as was MR/2 Version 1.0.
+
+</center>
+
+<hr>
+</body>
+</html>
+
+

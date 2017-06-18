@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - GIS</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+<font color=red>
+<h1>Wavelet Transform and Noise Modeling of Spatial Data</h1>
+<font color=black>
+<hr><p>
+</center>
+
+See the following article, which has been submitted for publication:
+
+<p>
+
+"Spatial Representation of Economic and Financial Measures used in 
+Agriculture via Wavelet Analysis", M. Morehart 
+(US Department of Agriculture), F. Murtagh and J.-L. Starck
+(request copy from F. Murtagh, fmurtagh@acm.org).
+
+<p>
+
+<b>Abstract:</b> A foundation is set forth for use of the wavelet 
+transform as a
+spatial analysis tool for modelling the geographic representation of
+ economic and
+financial measures used in agriculture. This provides a framework from which to
+estimate a smooth nonparametric function which describes complex, multivariate
+relationships embedded in spatial data, with the resulting maps conveying large
+amounts of information in a familiar format. We illustrate this approach for
+tasks which include the graphical presentation of information, density
+estimation and wavelet-based nonparametric regression. A redundant wavelet
+transform is used, and we detail the properties which make it particularly
+appropriate for these objectives.
+
+<p>
+
+
+<a href="../pic/debt.gif"> Perspective plot (from south) of wavelet 
+transform of 1995 Debt Capacity Utilization Ratio.</a>  Data from USDA.
+Carried out in MR/1.
+
+<p>
+
+
+<a href="../pic/wheat.gif"> Result of wavelet regression, based on a 
+heteroscedastic noise model, of 1995 wheat dependence data.</a>   Data 
+from USDA.
+The noise modeling and filtering was carried out in MR/1 and IDL, followed
+by geo-referencing in ArcView.
+
+
+<p>
+
+<b> Commands used included:</b> <p>
+
+<i> mr_visu -v 3</i> for the perspective plot. <p>
+
+<i> mr_filter -m 8 -K -p -k</i> for wavelet regression with heteroscadistic
+noise (-m 8), suppression of isolated detected pixels (-k), ignoring of 
+the last smooth scale (-K), and detection of positive structure only (-p).
+
+<p>
+   
+<hr>
+
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

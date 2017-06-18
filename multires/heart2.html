@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - Echocardiography</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+
+<font color=red>
+<h1>Into the Heart</h1>
+<font color=black>
+<hr><p>
+<img src="../pic/heartr.gif">
+<p>
+The image used, avoiding textual annotation and other data. 
+<p>
+<img src="../pic/heartrf.gif">
+<p>
+The filtered image.  Wavelet scales 4 and 5 were retained, and here we
+see the sum of these two images.  
+
+<hr>
+
+<a href="../pic/heart.gif"><b>Animation</b> of input image and the filtered 
+image.</a>
+
+<hr>
+</center>
+
+<b>Commands used</b><p>
+
+The image in FITS format (32-bit real) was wavelet transformed
+(&agrave; trous method), <i>
+mr_transform -n 6 -x echoc.fits echocard </i>,
+and the output images translated to GIF in IDL.
+
+<p>
+
+<b>To probe further</b><p>
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, 1998.
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

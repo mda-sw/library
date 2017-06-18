@@ -1,0 +1,64 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - Comet</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+<font color=red>
+<h1>Comet - Into the Nucleus</h1>
+<font color=black>
+<hr><p>
+<img src="../pic/comet.gif">
+<p>
+</center>
+Periodic comet P/Swift-Tuttle observed with the 
+1.2m telescope at Calar Alto Observatory in Spain in 
+October and November 1992.  (Data courtesy of Dr K Birkle,
+Max-Planck-Institut f&uuml;r Astronomie, Heidelberg).  
+Irregularity of nucleus is indicative of the presence of jets in in the 
+coma.  See resolution 
+scales 4 and 5 of the wavelet transform, where these jets
+can be clearly seen.  
+<hr>
+<center>
+<a href="../pic/comets.gif"><img src="../pic/anmn.gif"></a> <br>
+<a href="../pic/comets1.gif"><img src="../pic/sca1.gif"></a>
+<a href="../pic/comets2.gif"><img src="../pic/sca2.gif"></a>
+<a href="../pic/comets3.gif"><img src="../pic/sca3.gif"></a>
+<a href="../pic/comets4.gif"><img src="../pic/sca4.gif"></a>
+<a href="../pic/comets5.gif"><img src="../pic/sca5.gif"></a>
+<a href="../pic/comets6.gif"><img src="../pic/resid.gif"></a>
+</center>
+<hr>
+<b>Commands used</b><p>
+
+The 512x512 image in FITS format (32-bit real) was wavelet transformed
+(&agrave; trous method), <i>
+mr_transform -n 6 -x str0256ln.fits str0256 </i>,
+and the output images translated to GIF in IDL,<i>
+write_gif,'comets1.gif',bytscl(image(99:429,99:429)) </i> 
+
+<p>
+
+<b>To probe further</b><p>
+<i>The Messenger</i>, European Southern Observatory, No. 73, pp. 37--39, 1993.
+<p>
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, 1998.
+<p>
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

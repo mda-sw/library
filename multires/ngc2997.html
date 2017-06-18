@@ -1,0 +1,83 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - Unpeeling Observations</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+<img src="../pic/galaxy.jpg">
+<p>
+<font color=red>
+<h1>Unpeeling Observations</h1>
+<font color=black>
+<hr><p>
+<img src="../pic/star.gif">
+<p>
+<b>Spiral galaxy NGC 2997
+<p>
+Objects detected at resolution scales 1 and 2
+<p>
+Difference between orignal and these objects
+<p>
+</b>
+</center>
+
+Observation and analysis requires separating out the different aspects of
+what we see.  More often than not, this involves parts of what we see which 
+are on different scales.  Wavelet analysis offers a very good way to do this.
+
+<p>
+
+<hr>
+<p>
+<center>
+The wavelet transform is shown in the following sequence of images.
+ 
+<p>
+<a href="../pic/aa.gif"><img src="../pic/ori.gif"></a><br>
+<a href="../pic/aa1.gif"><img src="../pic/sca1.gif"></a>
+<a href="../pic/aa2.gif"><img src="../pic/sca2.gif"></a>
+<a href="../pic/aa3.gif"><img src="../pic/sca3.gif"></a>
+<a href="../pic/aa4.gif"><img src="../pic/sca4.gif"></a>
+<a href="../pic/aa5.gif"><img src="../pic/sca5.gif"></a>
+<a href="../pic/aa6.gif"><img src="../pic/sca6.gif"></a>
+<a href="../pic/aa7.gif"><img src="../pic/resid.gif"></a>
+</center>
+<p>
+<hr>
+<b>Commands used</b><p>
+
+To detect structures at levels 1 and 2, i.e. essentially stars, we use<br>
+<i>mr_detect -n 7 -L 2 ngc2997.fits im_stars.fits</i> <br>
+Options <i>-n 7 -L 2</i> indicate, respectively, 7 scales for the analysis, 
+and scales 1 and 2 for object detection.</br>
+To detect larger-scale structures, we use<br>
+<i>mr_detect -n 7 -F 3 -L 6 -K ngc2997.fits im_gal.fits</i> <br>
+The option <i>-K</i> keeps objects close to the image boundaries which would
+otherwise (for safety) be ignored, and the
+<i>-F 3</i> option implies scale 3 is the starting scale used for object 
+detection.</br>
+Extended structures, as shown in the animation, are obtained by<br>
+<i>ngc2997 - im_stars</i> (for example, in IDL, followed by writing of the 
+images as GIFs).
+
+<p>
+
+<b>To probe further</b><p>
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, 1998.
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+Mathematics, Science and the Role of Data Analysis
+
+(Freely translated by Fionn Murtagh from section 7, 
+Philosophy of Data Analysis, J.P. Benzecri, 
+L'avenir de l'analyse des donnees, Behaviormetrika, 10, 1-11, 1983).
+
+In a "State of the Art Report", a collective work devoted to the 
+entirety of mathematical research in France, the authors note
+as a self-evident epistemological truth that "mathematics are gifted
+with a long time constant".  Doubtlessly they intend by that, that 
+the more memorable mathematical works are not those that provide a
+definitive solution to a given problem, but rather those that 
+uncover new perspectives that neither the cleverest of individuals, 
+nor the best coordinated of teams, have come up with over years of 
+work.    
+
+In data analysis, numerous disciplines have to collaborate.  The 
+role of mathematics, while essential, is modest, in the sense that
+classical theorems or elementary proof techniques are used almost
+exclusively.   But it is vital that certain abstract concepts 
+penetrate the mind-set of the users, the specialists who collect
+the data and have to orientate the analysis in line with the 
+fundamental problems of their science.  However the toolset of 
+computing develops at such a pace that research programmes that 
+were well nigh unachievable in the past have now come fully into the 
+orbit of the most accessible of computer devices or the web.   
+This very progress requires of data analysis to project, in 
+advance of the concrete work to be done, a vision of the 
+science as an indispensible motivation and justification.   
+
+This vision is philosophical.  It is not a matter of translating
+directly into mathematical terms the system of concepts of a 
+particular discipline, so as to link them in the model equations, 
+nor is it a matter of accepting the data as they manifest 
+themselves.  Rather it is a matter of elaborating on the data, 
+in a deep-going and thorough synthesis, allowing new entities to be 
+discovered, and thereby simple relationship between these
+new entities.
+
+Through differential calculus, contexts that were admirably 
+dissected into simple components were then translated into so 
+many fundamental laws.  We believe that it is reserved for 
+data analysis to express adequately the laws of that which is 
+complex in its very essence (living being, social body, 
+ecosystem) and cannot be dissected without changing its very nature. 

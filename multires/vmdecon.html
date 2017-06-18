@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+  <title>Integrated Object Detection and Deconvolution</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+<font color=red>
+<h1>Integrated Object Detection and Deconvolution</h1>
+<font color=black>
+<hr><p>
+</center>
+
+A vision model is a framework for carrying out object detection.  (In a 
+context other than astronomy, feature detection may be a more appropriate
+term.)  A vision model may be simple e.g. background + object(s) 
+superimposed, or it may be more sophisticated e.g. involving a multiscale
+transform.  The benefits of considering carefully the vision model used,
+for very fine-tuned work, have been discussed in Bijaoui and Ru&eacute;
+(1995), Ru&eacute; and Bijaoui (1997), and Starck et al. (1998).  
+
+<p>
+
+If we know that deconvolution will improve the result, then we have to 
+integrate deconvolution with our vision model.  An integrated algorithm
+for doing this is described in Starck (1999).  
+
+<p>
+
+<a href="vmnorm.ps">Fig. 1 (compressed Postscript, 180kB)</a> 
+shows isophotes of 
+objects detected using a vision model - multiscale transform with noise
+modeling - without deconvolution.  ISOCAM (a detector on board the ISO
+satellite) was used, and the data collected using the 6 arcsec lens at
+6.75 microns.  This was a raster observation with 10s integration time, 
+16 raster positions, and 25 frames per raster position.  The non-stationary
+noise was modeled using a root-mean-square error map (see Starck et al., 
+1999).  In the Fig., the isophotes are overplotted on an optical image,
+NTT, band V (from ESO's Paranal observatory), in order to identify the
+infrared sources.  <a href="vmdecon.ps">Fig. 2 (compressed 
+Postscript, 173kB)</a> 
+shows the same result, but this time based on vision modeling with 
+deconvolution.  The objects are the same, but the photometry is improved.
+It is clearly easier to identify the optical counterparts of the 
+infrared sources.  
+
+<p>
+   
+References
+
+<p>
+
+<ul>
+<li> A. Bijaoui and F. Ru&eacute;, "A multiscale vision model adapted 
+to astronomical images", Signal Processing, 46, 229-243, 1995.
+<li> F. Ru&eacute; and A. Bijaoui, "A multiscale vision model to analyse
+field astronomical images", Experimental Astronomy, 7, 129-160, 1997.
+<li> J.L. Starck, H. Aussel, D. Elbaz, D. Fadda and C. Cesarsky,
+"Faint source detection in ISOCAM images with PRETI", Astronomy and 
+Astrophysics, submitted, 1999.
+<li> J.L. Starck, "A combined approach for detection and deconvolution",
+Technical Report, CEA, Jan. 1999.
+<li> J.L. Starck, F. Murtagh and A. Bijaoui, Image and Data Analysis: The
+Multiscale Approach, Cambridge University Press, 1998.
+</ul>
+
+<hr>
+
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

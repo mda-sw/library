@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - Noise</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+<font color=red>
+<h1>Noise - the great foe</h1>
+<font color=black>
+<hr><p>
+<img src="../pic/mrfig1.gif">
+<p>
+
+Statistical noise is ever-present.  To combat it, we must understand our
+foe.  Such "understanding" is termed a model or a simulation.  It allows
+us to demarcate what we want and what we not want - signal versus noise. 
+
+<p>
+
+The animated image shows a range of extended and point-like objects.  Then
+a noisy version is shown.  Following that a noise-cleaned version is shown,
+which approximates well to the original.  The difference between noisy and 
+denoised shows an image which comes very close to pure (Gaussian) noise.
+
+<p>
+<hr>
+</center>
+<b>Commands used</b><p>
+
+To add noise to an image: <i>im_simu -g 10 simu1sky.fits imout.fits</i><br>
+To noise-filter: <i>mr_filter ut2.fits ut2o.fits</i>
+
+<p>
+
+<b>To probe further</b><p>
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, 1998.
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

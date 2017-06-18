@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - Hypertext Analysis</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+
+<font color=red>
+<h1>Information and Hypertext</h1>
+<font color=black>
+<hr><p>
+Cross-linkages in the Concise Columbia Encyclopedia (1989 2nd ed., online
+version).  A set of data relating to 12025 encyclopedia entries and to 
+9778 cross-references or links was rebinned 10-fold for computational 
+convenience to produce the 1203 times 978 entries by links array used here.
+The following image shows part of this array, subsequent to 
+row/column permutation to force nonzero values as far as possible onto the 
+diagonal.
+<p>
+<a href="../pic/cce.jpg">Show image of data (0.3 MB)</a>
+<p>
+Now we seek to find the most important "knots" or clusters.  The following
+is a filtered version.  
+<p>
+<a href="../pic/ccef.jpg">Show image of filtered data (0.3 MB)</a>
+<p>
+<hr>
+</center>
+
+<b>Commands used</b><p>
+
+<i>mr_detect in.fits out.fits </i> <br>
+<i>mr_detect -m 9 in.fits out.fits</i> (poisson few events)<br>
+<i>mr_detect -m 9 -w 2 in.fits out.fits</i> 
+(produces ellipses around clusters) <br>
+<i> mr_detect -m 9 -w 2 -L 3 -F 5 in.fits out.fits</i>
+(start and finish scales for cluster detection)<br>
+<p>
+The above figures are from SAOtng.
+
+<p>
+
+<b>To probe further</b><p>
+"Computational methods for intelligent information access", M.W. Berry,
+S.T. Dumais and T.A. Letsche, University of Tennessee, 38 pp., 1997, and 
+other papers. 
+<p>
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, 1998.
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

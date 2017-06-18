@@ -1,0 +1,207 @@
+<html><head><title>Multiresolution Analysis of a Seismological Signal
+</title></head>
+<body bgcolor=white>
+<h1>Multiresolution Analysis of a Seismological Signal</h1>
+
+<h2> 1. Filtering by Denoising</h2>
+
+The original data is shown in Fig. 1.  
+
+<p>
+<a href="seis1.gif">Fig. 1: original data.</a>
+<p>
+
+The noise is clearly non-stationary - it is low up to the event near time 
+point 1000, and then from time point 1500 onwards is is moderately low.  
+We used a non-stationary noise model, to clip noise on each level of a
+multiscale transform.  The transform used was the so-called <i>&agrave; 
+trous</i> ("with holes") wavelet transform.  The name &agrave; trous
+is due to the gaps used in the algorithm (which we won't go further into,
+here).  This wavelet transform is unlike widely used transforms due to 
+Mallat, Daubechies, Haar and others in that it is <i>redundant</i>: the 
+user gets a set of versions of the data, each of which are the same 
+length as the original input data.  These are the sequence of resolution 
+scales.  The values at each resolution scale are termed wavelet coefficients.
+A final smooth version of the data (which we have termed residual, although
+one must be careful that this word is used in statistics - in regression 
+analysis - in a very different sense) gives the following nice property: 
+at each time point, we can add together the wavelet coefficient values
+at  the successive resolution scales, plus the corresponding value in
+the smooth residual, to give exactly the input data value.  That suggests
+immediately one way to filter the data: just drop one or more resolution
+scale value entirely, and recreate the data.  
+
+<p>
+
+We could hope for a more sophisticated, statistically-based, alternative.
+This is to put small-valued wavelet coefficients to zero, at all resolution
+levels, if we feel that they are sufficiently small to be considered
+as noise only.  That raises the question as to what noise is.  Questions
+which this gives rise to include the following.  How does noise arise in the
+first place?  What is meant by a statistical noise model?  How do we decide
+(statistically) what our guidelines are, in order to decide what is and 
+what is not noise?  What is the justification for carrying out denoising
+at the multiple resolution levels provided by a wavelet transform?
+An example of doing such denoising is shown in Fig. 2. This is not too 
+bad in the regions to left and right of the earthquake event.  But we 
+haven't made much inroad into this event interval.  The difference between 
+original and filtered data (Fig. 3) shows this.  In fact, our program has
+"protected" the earthquake event region, thinking that it comprised some
+very significant values.  In a way this is true, and if we don't know how
+otherwise to filter the earthquake event interval, then it is maybe best
+to leave it alone.  
+
+<p>
+<a href="seis2.gif">Fig. 2: noise filtered data, based on a non-stationary
+noise model.</a>
+<p>
+
+<a href="seis3.gif">Fig. 3: the noise filtered data subtracted from the 
+original data, indicating exactly what we have found as noise.</a>
+<p>
+
+<h2>2. Wavelet Transform Visualization</h2>
+
+In the &agrave; trous wavelet transform we are using here
+a wavelet function very like the 
+Morlet wavelet, or the Mexican hat function: a bump in the centre, two 
+negative sidelobes, symmetric.  It is not a bad choice for a wavelet 
+function.  Others would argue that our redundant &agrave; trous wavelet 
+transform doesn't allow for orthogonality between resolution levels.  We 
+don't mind.  We feel it is a good choice for general open-minded 
+information-seeking in data. 
+
+<p>
+<a href="seis4.gif">Fig. 4: wavelet transform (using a redundant method,
+the B<sub>3</sub> spline &agrave; trous method). 
+</a>
+<p>
+
+Fig. 4 shows the succession of wavelet resolution scales (from upper left,
+to lower right) with the final smooth residual in the lower right.  
+The number of scales (5 + residual here) is set by the user.  An interesting
+thing happens by scale 5: the earthquake event in terms of time-interval
+is no longer significant enough to survive.  It has almost disappeared.  
+
+<p>
+
+To demarcate the earthquake event, we are looking for a sharp transition from
+what took place before, and maybe a sharp transition to normalcy which takes
+place afterwards.  A term commonly applied to this in image and signal 
+processing is edge detection.  We are looking for an edge, a sharp transition.
+In statistical time series analysis, another term is sometimes used, a
+change-point.  That term is more likely to imply a change from one state 
+to another stable state. Our search for an edge, or multiple edges, in Fig.
+1 is almost impossible, due to the noise in the data.  Noise filtering, as
+seen in Fig. 2, did help somewhat, but not maybe as much as we would have
+liked.  
+
+<p>
+
+We will find the different regime associated with the earthquake event by
+an unusual approach, which we have found to work well in similar 
+circumstances.  [It has also been used in (ref.) - I'm still looking...]  If 
+information exists on a number of resolution scale, as will be the case
+with very sharp exceptional information, then multiplying the information 
+provided by these scales will accentuate the contrast.  The multiplication
+is pixel-wise, or timestep-wise.  The result of doing this for all 
+scales (therefore no "selective ignorance" by removing scales, such as the 
+smooth residual, which we could have done) is shown in Fig. 5.  
+The ordinate (vertical axis of the plot) scale
+is huge.  We are interested in the relativities, and these show up the 
+region of interest.  Also shown are indications of component shocks of the
+earthquake event, and after-shocks.  
+
+<p>
+<a href="seis5.gif">Fig. 5: the product of all scales, to accentuate 
+edge-related contrasts.</a>
+<p>
+
+To help the interpretation of this contrast-rich result in Fig. 5, 
+Fig. 6 shows both it and the original data.  
+
+<p>
+<a href="seis6.gif">Fig. 6: the original data, Fig. 1, and the 
+product result of Fig. 5, shown together. </a>
+<p>
+
+
+<h2>Appendix</h2>
+
+The different tasks were carried out in IDL, an image processing package,
+and our own package, MR1/MR2 which allows for a lot of operations in 
+multiresolution image and signal analysis.  In addition a "snapshot" 
+window grabber, and a public domain image viewer, xv, were used in our
+Sun/Solaris environment. 
+
+<p>
+
+Steps followed:
+
+Given multiple column data, we used the programming language
+awk to quickly get just one 
+column of values.  The time steps corresponding to the values were not
+constant.  We ignored this and took the data as if it had constant 
+time increments.  Then we translated it into FITS (an image or signal 
+format, especially used in astronomy) using 
+<pre> 
+im1d_convert 1b.dat 1b.fits 
+</pre>
+There was no need to do this, beyond how we next read this into IDL:
+<pre> 
+s = readfits('1b.fits') 
+</pre>
+(The data could have been easily read as a stream of numbers into IDL.)
+<p>
+Next we use the filtering program 
+<pre> 
+mr1d_filter
+</pre> for example as 
+follows, where the non-stationary additive noise model is used (-m 5):
+<pre> 
+mr1d_filter, s, sfilt, opt='-m 5'
+</pre>
+This program does a few things which we don't want, in this work.  Firstly
+it masks the very sharp movements associated with the earthquake, since 
+these, it decides, are definitely not noise.  Secondly, it gives us back
+positive values only, thinking this data signal is an astronomical 
+spectrum (and so, negative values of collected light photons are somewhat
+problematic and thus ignored).  We easily get around the latter problem:
+<pre>
+s2000 = fltarr(2048)
+s2000 = s + 2000.0
+mr1d_filter, s2000, s2000filt, opt='-m 5'
+s2000filt = s2000filt - 2000.0
+plot,s2000filt
+plot,s2000filt - s
+</pre>
+The B<sub>3</sub> spline 6-level &agrave; trous wavelet transform is 
+carried out as follows:
+<pre>
+mr1d_trans, s, strans, OPT="-n 6"
+!p.multi=[0,3,2]
+plot,strans.coef(*,0)
+plot,strans.coef(*,1)
+plot,strans.coef(*,2)
+plot,strans.coef(*,3)
+plot,strans.coef(*,4)
+plot,strans.coef(*,5)
+</pre>
+The scale-based product contrast enhancement was carried out by:
+<pre>
+s1 = strans.coef(*,0)
+s2 = strans.coef(*,1)
+s3 = strans.coef(*,2)
+s4 = strans.coef(*,3)
+s5 = strans.coef(*,4)
+s6 = strans.coef(*,5)
+plot,s6*s5*s4*s3*s2*s1
+</pre>
+
+</body></html>
+
+
+
+
+
+

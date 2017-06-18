@@ -1,0 +1,50 @@
+;; Object mda-sw/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "mda-sw/"
+  :tables (list 
+   (semanticdb-table "index.html"
+    :major-mode 'html-mode
+    :tags '(("Multivariate Data Analysis Software and References" section nil nil [14 80]) ("var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-18128645-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();" section nil nil [80 563]) ("Fionn Murtagh's <br>
+<font color=red>Multivariate 
+Data Analysis Software and Resources" section (:members (("Fionn Murtagh's <br>
+<font color=red>Multivariate 
+Data Analysis Software and Resources" section (:members (("Contents" section (:members (("Software accompanying 
+the book:
+Correspondence Analysis and Data Coding with R and Java" section nil nil [1339 1709]))) nil [705 1709]) ("1. Hierarchical Clustering  Software in R/S-Plus" section (:members (("\"Readme\": Background details, and
+examples of use on Intel Windows and Unix (including Mac OS X) systems." section nil nil [2610 2777]) ("All 
+functions in one (standalone) R/S-Plus file" section nil nil [2777 2978]) ("R/S-Plus script
+that calls the C code. (This R script program is called: hcluswtd_c.r)" section nil nil [2978 3155]) ("C 
+source code for the clustering" section nil nil [3155 3263]) ("DLL library for use on 
+Intel/Windows systems" section nil nil [3263 3531]) ("Correspondence analysis area" section nil nil [3531 4812]))) nil [1709 4812]) ("2. MDA-J: Multivariate Data Analysis - Java" section (:members (("www.correspondances.info" section nil nil [4950 5156]))) nil [4812 5156]) ("3. Multivariate Data Analysis Software as Individual Java Applications" section (:members (("Documentation" section nil nil [5256 5379]) ("Fisher iris data" section nil nil [5379 5625]) ("Principal Components Analysis on correlations" section nil nil [5625 6185]) ("pcaoutput.txt" section nil nil [6185 6616]) ("Hierachical Clustering" section nil nil [6616 7040]) ("hcloutput.txt" section nil nil [7040 7429]) ("Correspondence Analysis on fuzzy coded input" section nil nil [7429 7838]) ("caoutput.txt" section nil nil [7838 8252]) ("Partitioning or k-means using minimal 
+distance criterion and exchange algorithm" section nil nil [8252 8778]) ("partoutput.txt" section nil nil [8778 8840]))) nil [5156 8840]) ("4. Gaussian Mixture Modeling with Bayes Factors" section (:members (("Program gmm-bic.c" section nil nil [9277 9338]) ("oil.dat, oil prices from Ross" section nil nil [9338 9557]) ("Output from the above." section nil nil [9557 9913]) ("Program" section nil nil [9913 10010]) ("Output from the foregoing." section nil nil [10010 10359]) ("homepage" section nil nil [10359 10447]))) nil [8840 10447]) ("5. Wavelet Transform on a Hierarchy or Dendrogram" section (:members (("New hierarchical Haar wavelet transform" section nil nil [10508 11042]))) nil [10447 11042]) ("6. Multivariate Data Analysis Software in Fortran (and C)" section (:members (("S-Plus/R area" section nil nil [11885 12077]) ("pcat.f" section nil nil [12077 12130]) ("pca.f" section nil nil [12130 12180]) ("spectr.dat" section nil nil [12180 12464]) ("pca.c" section nil nil [12464 12664]) ("partt.f" section nil nil [12664 12719]) ("part.f" section nil nil [12719 12961]) ("hct.f" section nil nil [12961 13013]) ("hc.f" section nil nil [13013 13057]) ("hcass.f" section nil nil [13057 13126]) ("hcden.f" section nil nil [13126 13384]) ("hcon2t.f" section nil nil [13384 13442]) ("hcon2.f" section nil nil [13442 13665]) ("ldat.f" section nil nil [13665 13719]) ("lda.f" section nil nil [13719 13764]) ("spectr2.dat" section nil nil [13764 13878]) ("mdalum.f" section nil nil [13878 13936]) ("mda.f" section nil nil [13936 13981]) ("luminosity.dat" section nil nil [13981 14230]) ("knn.f" section nil nil [14230 14299]) ("ngc.dat" section nil nil [14299 15504]) ("cat.f" section nil nil [15504 15556]) ("ca.f" section nil nil [15556 15600]) ("uno.dat" section nil nil [15600 15725]) ("cmdst.f" section nil nil [15725 15781]) ("cmds.f" section nil nil [15781 15829]) ("cities.dat" section nil nil [15829 15990]) ("sammon.f" section nil nil [15990 16041]) ("iris.dat" section nil nil [16041 16170]) ("koh.f" section nil nil [16170 16215]) ("iris_norm.dat" section nil nil [16215 16319]) ("iris.f" section nil nil [16319 16429]) ("sort.f" section nil nil [16429 16551]) ("levenshtein.f" section nil nil [16551 16661]) ("leiv1.f" section nil nil [16661 16743]) ("leiv2.f" section nil nil [16743 16799]) ("leiv3.f" section nil nil [16799 17053]) ("mst2d.f" section nil nil [17053 17219]) ("gmdh.f" section nil nil [17219 17266]) ("gmhd.dat" section nil nil [17266 17417]) ("Preliminary web
+     page." section nil nil [17417 17478]))) nil [11042 17478]) ("7. Links and Resources" section (:members (("Title pages and preface" section nil nil [17604 17676]) ("Contents" section nil nil [17676 17725]) ("Chapter 1" section nil nil [17725 17773]) ("Chapter 2" section nil nil [17773 17821]) ("Chapter 3" section nil nil [17821 17869]) ("Chapter 4" section nil nil [17869 17917]) ("Chapter 5" section nil nil [17917 18130]) ("271-page PDF file" section nil nil [18130 18254]) ("Lectures,  presentations" section nil nil [18254 18473]) ("Collection of time series" section nil nil [18473 18682]) ("Time
+series data library" section nil nil [18682 18854]) ("Prof. J.P. Benz&eacute;cri's original 
+correspondence analysis code" section nil nil [18854 18999]) ("NewMDSX - Multidimensional
+Scaling" section nil nil [18999 19274]) ("Bell Labs MDS programs" section nil nil [19274 19357]) ("Visual user interfaces" section nil nil [19357 19643]) ("File rfitsio.zip" section nil nil [19643 19864]) ("Pointers 
+    to, and addresses of, lots of
+     multivariate data analysis code" section nil nil [19864 20282]) ("Statlib" section nil nil [20282 20553]) ("Weka Machine Learning 
+     Project" section nil nil [20553 20719]) ("Mixture modeling page." section nil nil [20719 20857]) ("Java Look and Feel Design Guidelines" section nil nil [20857 21017]) ("JavaNumerics, 
+information on numerical computing in Java" section nil nil [21017 21243]) ("JAMA: 
+A Java Matrix
+Package" section nil nil [21243 21378]) ("Scientific Graphics Toolkit
+for creating interactive graphics applications" section nil nil [21378 21796]) ("Operations 
+Research resources 
+in Java" section nil nil [21796 21930]) ("Examples of application" section nil nil [21930 22011]) ("software" section nil nil [22011 22299]) ("a large 
+package, executables for common platforms" section nil nil [22299 22414]) ("for Windows PCs" section nil nil [22414 22540]) ("Homepage" section nil nil [22540 22543]))) nil [17478 17481]))) nil [584 587]))) nil [563 569]))
+    :file "index.html"
+    :pointmax 22622
+    :unmatched-syntax 'nil
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0pre3"
+  :semanticdb-version "2.0pre3"
+  )

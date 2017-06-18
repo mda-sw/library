@@ -1,0 +1,129 @@
+<html><head><title>FB</title></head>
+<body bgcolor=white>
+
+<hr>
+
+<ul>
+<li> Th&egrave;me 1: ACP (KLT) d'une image multibande.
+<li>  Th&egrave;me 2: utilisation d'un facteur de Bayes pour le nombre
+de segments dans une segmentation. 
+</ul>
+
+<hr>
+
+<h3> Images originelles (histogram-equalized) </h3>
+
+<img src="a1.jpg">
+<img src="a2.jpg">
+
+<p>
+
+<img src="a3.jpg">
+<img src="a4.jpg">
+
+<p>
+
+<img src="a5.jpg">
+<img src="a6.jpg">
+
+<p>
+
+<hr>
+
+<h3> Composantes principales successives.  Pourcentages 
+cumulatives de la variance 
+expliqu&eacute;es: 94%, 99.3%, 99.7%, 99.8%, 100%, 100%).
+</h3>
+
+<p>
+
+Matrice des corr&eacute;lations:
+<pre>
+    1.00     0.99     0.92     0.91     0.83     0.83 
+    0.99     1.00     0.94     0.93     0.86     0.86 
+    0.92     0.94     1.00     0.99     0.97     0.97 
+    0.91     0.93     0.99     1.00     0.98     0.98 
+    0.83     0.86     0.97     0.98     1.00     1.00 
+    0.83     0.86     0.97     0.98     1.00     1.00 
+</pre>
+
+(On voit que 1 et 2 sont presque identiques; et 3, 4, 5.) 
+<p>
+
+<img src="b1.jpg">
+<img src="b2.jpg">
+
+<p>
+
+<img src="b3.jpg">
+<img src="b4.jpg">
+
+<p>
+
+<img src="b5.jpg">
+<img src="b6.jpg">
+
+<p>
+
+<hr>
+<h3> Composantes principales successives suite &agrave; 
+histogram-equalization.</h3>
+
+<img src="c1.jpg">
+<img src="c2.jpg">
+
+<p>
+
+<img src="c3.jpg">
+<img src="c4.jpg">
+
+<p>
+
+<img src="c5.jpg">
+<img src="c6.jpg">
+
+<hr>
+<hr>
+
+<h3>
+Segmentation &agrave; partir de la bande propre, i.e. la premi&egrave;re
+composante principale des 6 bandes. </h3>
+
+M&eacute;thode: mod&egrave;le de Markov, Potts/Ising, loi gaussienne entre
+les labels et les pixels, EM, ICM.  Facteur de Bayes fourni par le 
+PLIC, Pseudolikelihood Information Criterion. (Normalement: la 1&egrave;re
+valeur <i>maximale</i> donne le no. de segments.) 
+
+<p>
+
+<img src="plic-fig.jpg">
+
+<p>
+
+Segmentation &agrave; 8 classes:
+
+<p>
+
+<img src="sout8.jpg">
+
+<p>
+
+A titre de comparaison, segmentation &agrave; 15 classes:
+
+<p>
+
+
+<img src="sout15.jpg">
+
+
+
+
+
+
+</body></html>
+
+
+
+
+
+

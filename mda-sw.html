@@ -1,0 +1,357 @@
+<html>
+<title>Multivariate Data Analysis Software and References</title>
+<body bgcolor=white>
+<h1>Fionn Murtagh's <br>
+<font color=red>Multivariate 
+Data Analysis Software and Resources </font><br> Page</h1>
+
+<hr>
+
+<h2>Contents:</h2>
+<ol>
+<li> Multivariate Data Analysis Software 
+<li> Where Is This Software Used?
+<li> Various Other Programs 
+<li> Other (Very!) Important Collections of Software
+<li> Complementary Reading in Connection with These Programs
+<li> Multivariate Data Analysis - Background Reading 
+</ol>
+
+<hr>
+
+
+<h2>1. Multivariate Data Analysis Software</h2>
+
+This is a collection of stand-alone routines, in Fortran (mostly) and C.  
+Sample data sets are available.  Indications are given on how to compile, link
+and run.  Download the programs and run on your system.  Many of these 
+programs were originally used on a VAX/VMS system, and were also used on Unix
+(SunOS, Solaris) systems.  
+Please notify the author of any problems (although the programs are
+provided "as is" and there are many evident improvements which could be made).
+These programs are used in conjunction with the DEA course on "Analyse 
+multivari&eacute;e en astronomie" taught by Fionn Murtagh at Strasbourg 
+Astronomical Observatory.  The example of compiling, linking and running 
+given for principal components analysis (in Fortran) is similar to what is 
+required for the other Fortran programs here.  
+
+<p>
+
+><b>Depending on your setup, these programs may have their texts run together.
+Save as "source" to have the programs properly formatted.</b>
+
+<p>
+
+<ul>
+<li> Principal components analysis (Fortran)<br> 
+     <a href="pcat.f">pcat.f</a>, driver program<br>
+     <a href="pca.f">pca.f</a>, routines used<br>
+     <a href="spectr.dat">spectr.dat</a>, small sample dataset, originally 
+     related to stellar spectra. <br>
+     To compile and link: f77 pcat.f pca.f -o pcat <br>
+     To run: pcat (output to screen, which may be directed to a file).
+<li> Principal components analysis (C)<br>
+     <a href="pca.c">pca.c</a>, program<br>
+     To compile and link: cc pca.c -lm -o pcac <br>
+     To run: pcac spectr.dat 36 8 R<br>
+     Or: pcac spectr.dat 36 8 r
+<li> Partitioning (Fortran)<br>
+     <a href="partt.f">partt.f</a>, driver program<br>
+     <a href="part.f">part.f</a>, routines used<br>
+     To compile and link: f77 partt.f part.f -o partt <br>
+     Set up to run on spectr.dat (hard-wired in partt.f).
+<li> Hierarchical clustering using stored dissimilarities (Fortran) <br>
+     <a href="hct.f">hct.f</a>, driver program <br>
+     <a href="hc.f">hc.f</a>, routines <br>
+     <a href="hcass.f">hcass.f</a>, cluster assignments routine <br>
+     <a href="hcden.f">hcden.f</a>, draw part of dendrogram <br>
+     To compile and link: f77 hct.f hc.f hcass.f hcden.f -o hct <br>
+     To run on spectr.dat (hard-wired): hct 
+<li> Hierarchical clustering without storage of dissimilarities (Fortran) <br>
+     <a href="hcon2t.f">hcon2t.f</a>, driver program <br>
+     <a href="hcon2.f">hcon2.f</a>, routines <br>
+     To compile and link: f77 hcon2t.f hcon2.f hcass.f hcden.f -o hcon2t <br>
+     To run on spectr.dat (hard-wired): hcon2t 
+<li> Linear discrimant analysis (Fortran) <br>
+     <a href="ldat.f">ldat.f</a>, driver program <br>
+     <a href="lda.f">lda.f</a>, routine <br>
+     <a href="spectr2.dat">spectr2.dat</a>, input dataset
+<li> Multiple distriminant analysis (Fortran) <br>     
+     <a href="mdalum.f">mdalum.f</a>, driver program <br>
+     <a href="mda.f">mda.f</a>, routine <br>
+     <a href="luminosity.dat">luminosity.dat</a>, input dataset<br> 
+     Additional diagnostics provided for this 3-class 
+     supergiant - giant - dwarf  dataset. <br>
+<li> K-nearest neighbors discriminant analysis - 2-class case (Fortran) <br> 
+     <a href="knn.f">knn.f</a>, driver program and routines used<br>
+     <a href="ngc.dat">ngc.dat</a>, data - class number, followed by11 
+     variables, for 500 objects. <br>
+     The data is a set of 500 objects derived from an HST WF/PC image, in 
+     the context of a study in star/cosmic ray hit discrimination.<br>
+     To use: copy ngc.dat to ngc2.dat, to provide a second dataset.  We 
+     check assignments among the latter, relative to the assignments of objects
+     in ngc.dat.  Hence, evidently for k=1 we must get exactly the correct
+     assignments in all cases.  But for k=2 and higher, we may find 
+     inconsistencies, which point to incorrect original class assignments. 
+     <br>
+     Note: for k = even number, we allow for no assignment decision.  I.e.
+     no clear majority.  
+     <br>
+     Both idential or proportional prior situations are considered (i.e. 
+     taking into account the relative numbers of class 1 and 2 memberships,
+     or not). 
+     <br>
+     Also we run through all cases from k = 1, 2, ..., 15, which takes some
+     time.  
+     <br>
+     To run: f77 knn.f -o knn
+     <br>
+     Then: knn (which takes ngc.dat and ngc2.dat as inputs, and produces 
+     output on screen).
+<li> Correspondence analysis (Fortran) <br>
+     <a href="cat.f">cat.f</a>, driver program <br>
+     <a href="ca.f">ca.f</a>, routines <br>
+     <a href="uno.dat">uno.dat</a>, input data (UNO voting)
+<li> Classical or metric multidimensional scaling (Fortran) <br>
+     <a href="cmdst.f">cmdst.f</a>, driver program <br>
+     <a href="cmds.f">cmds.f</a>, routines <br>
+     <a href="cities.dat">cities.dat</a>, input dataset <br>
+     Currently this program generates its own random input data.
+<li> Sammon mapping (Fortran) <br>
+     <a href="sammon.f">sammon.f</a>, program <br>
+     <a href="iris.dat">iris.dat</a>, input dataset (Fisher's iris data)
+<li> Kohonen self-organizing feature map (Fortran) <br>
+     <a href="koh.f">koh.f</a>, program <br>
+     <a href="iris_norm.dat">iris_norm.dat"</a>, input dataset (normalized
+     Fisher's iris data) <br>
+     <a href="iris.f">iris.f</a>, for information, program to normalize data
+</ul>
+<hr>
+
+<h2>1.5. Where Is This Software Used?</h2>
+<ul>
+<li> Hierarchical clustering in <a href="http://www.clustan.com">Clustan</a>,
+written in 1985.
+<li> Most of the above software is included in 
+<a href="http://www.eso.org/projects/esomidas">ESO-MIDAS, Munich Image
+Data Analysis System.</a>
+<li> Software is available for download from the <u>multiv</u>
+area of <a href="http://lib.stat.cmu.edu">Statlib.</a>
+<li> A Java and applet version of hierarchical clustering is available 
+at a site maintained by 
+<a href="http://www.biology.ualberta.ca/jbrzusto/cluster.php">
+John Brzustowski</a> (john@brzustowski.ca).
+<li> Command-line version for DOS and Unix also due to 
+<a href="ftp://www.biology.ualberta.ca/pub/jbrzusto/trees/source.zip">
+John Brzustowski (john@brzustowski.ca)</a>.
+<li> Hierarchical cluster analysis in C, due to 
+<a href="http://www.icsi.berkeley.edu/ftp/global/pub/ai/stolcke/software/cluster-2.9.tar.Z">Andreas Stolcke</a>.
+</ul>
+
+
+
+<hr>
+<h2>2. Various other programs</h2>
+
+<ul>
+
+<li> Sort routine (Fortran) <br>
+     <a href="sort.f">sort.f</a>
+<li> Weighted Levenshtein or edit distance between character strings (Fortran)
+     <br>
+     <a href="levenshtein.f">levenshtein.f</a>
+<li> Errors-in-variables regression, 2-dimensional (Fortran) <br>
+     <a href="leiv1.f">leiv1.f</a>, York (Can. J. Phys. 44, 1079-1086, 1966) <br>
+     <a href="leiv2.f">leiv2.f</a>, Fasano and Vio <br>
+     <a href="leiv3.f">leiv3.f</a>, Ripley <br>
+     All these programs are set up with sample driver routines and sample data.
+     They should perform exactly the same task.
+<li> Minimal spanning tree, efficient algorithm in 2 dimensions (Fortran) <br>
+     <a href="mst2d.f">mst2d.f</a>, program due to F.J. Rohlf, SUNY 
+<li> GMDH - group method for data handling, or Ivakhnenko polynomial 
+     method (Fortran) <br>
+     <a href="gmdh.f">gmdh.f</a>, program <br>
+     <a href="gmdh.dat">gmhd.dat</a>, sample data <br>
+     See book by Farrow on GMDH.
+<li> Point pattern matching approaches, software, data sets.  
+     <a href="http://astro.u-strasbg.fr/~fmurtagh/ptmtch">Preliminary web
+     page.</a>
+</ul>
+
+<hr> 
+
+<h2>3. Other (Very!) Important Collections of Software</h2>
+<ul>
+<li> <a href="http://www.astro.psu.edu/statcodes">Statistical 
+     codes for astronomy</a>, Penn State University (Eric D Feigelson, 
+     edf@astro.psu.edu).
+<li> <a href="online-sw.html">Pointers to, and addresses of, lots of
+     multivariate data analysis code</a>, a text file collected or summarized
+     by F. Murtagh from mail messages or digest announcements.  Look here for
+     whereabouts of code for: decision trees, clustering (C code), 
+     multidimensional scaling and lots of other psychometric mapping methods,
+     Voronoi diagrams, etc. 
+<li> <a href="http://lib.stat.cmu.edu/">Statlib</a>, major repository of 
+     statistical software, datasets, and information such as email lists and 
+     organisational addresses, at Carnegie Mellon University (Mike Meyer,
+     mikem@stat.cmu.edu).
+</ul>
+
+<hr>
+<h2>4. Complementary Reading in Connection with These Programs</h2>
+
+This is a selection of  books and papers by F. Murtagh.  Co-authors are 
+indicated.  Mostly 
+these are astronomy-related texts, but not exclusively.  Mostly they are 
+also related to the software methods implemented in the above programs.
+
+<ul>
+<li> Multidimensional Clustering Algorithms, Physica-Verlag, Heidelberg,
+     1985 (ISBN 3 7051 0008 4).
+<li> (With A. Heck) Multivariate Data Analysis, Kluwer, Dordrecht, 1987
+     (ISBN 90 277 2425 3, ISBN 90 277 2426 1).
+<li> (With C. Jaschek) Eds., Errors, Bias, and
+    Uncertainties in Astronomy, Cambridge University Press,
+    1990.  (ISBN  0-521-393000-0).
+<li> "La carte auto-organisatrice de Kohonen: extensions et 
+     applications", Proc. Ecole Modulad-ASU, Statistique et M&eacute;thodes
+     Neuronales, Y. Lechevallier et al., Eds., December 1995, in press.
+<li> "Unsupervised catalog classification", in D. Shaw,
+     H. Payne and J. Hayes, Eds., Astronomical Data Analysis Software
+     and Systems IV, Astronomical Society of the Pacific, 264-267, 1995.
+<li> (With M. Hern&aacute;ndez-Pajares), "The Kohonen self-organizing map
+     method: an assessment", Journal of Classification, 12, 165-190, 1995.
+<li> (With M. Hern&aacute;ndez-Pajares), "How tracer objects can improve
+     competitive learning algorithms in astronomy", Vistas in Astronomy, 38, 
+       317-330, 1994.
+<li> (With H.-M. Adorf) "Detecting cosmic ray hits on HST
+     WF/PC images using neural networks and other discriminant analysis 
+     approaches",
+     in V. Di Ges&ugrave;, L. Scarsi, R. Buccheri, P. Crane, M.C. Maccarone 
+     and H.U.
+     Zimmermann, Eds., Data Analysis in Astronomy IV, Plenum Press, New York, 
+     103-111, 1992.
+<li> "Cosmic ray discrimination on HST WF/PC images: object
+     recognition-by-example", in D.M. Worrall, C. Biemesderfer and J. Barnes,
+     Eds., Astronomical Data Analysis Software and Systems I, 265-273, 1992.
+<li> "Contiguity-constrained clustering for image analysis", Pattern 
+     Recognition Letters, 13, 677-683, 1992.
+<li> "Multivariate analysis and classification of large astronomical 
+     databases (with discussion)", in G.J. Babu and E.D. Feigelson, Eds., 
+     Statistical Challenges in Modern Astronomy, Springer-Verlag, New York, 
+     449-474, 1992.
+<li> "Multivariate analysis and pattern recognition methods:
+     a short review and some current directions", in J.D. Barrow, 
+     A.B. Henriques, M.T.V.T. Lago and M.S. Longair, Eds.,
+     The Physical Universe: The Interface Between Cosmology, Astrophysics
+      and Particle Physics, Springer-Verlag, 253-264, 1991.
+<li> "Multivariate methods for data analysis", in Aa. Sandqvist 
+     and T.P. Ray, Eds., Central Activity in Galaxies, Springer-Verlag,
+     Berlin, 209-235, 1993.
+<li> "Multilayer perceptrons for classification and regression", International
+     Journal of Neurocomputing, 2, 183-197, 1990/1991.
+<li> (With Ph. Nobelis)  "Statistical software", 
+     in: C. Jaschek and F. Murtagh, Eds., Errors, Bias, and Uncertainties in 
+     Astronomy, Cambridge University Press, 245-260, 1990.
+<li> "Multivariate analysis methods: background and example",
+    in: W.C. Seitter, H.W. Duerbeck and M. Tacke, Eds., Large Scale
+    Structures in the Universe: Observational and Analytical Methods,
+    Springer-Verlag, Berlin, 308-314, 1988.
+<li> "Image analysis problems in astronomy", in: 
+     V. Cantoni, V. Di Ges&ugrave; and S. Levialdi, Eds., Image 
+     Analysis and Processing II, Plenum Press, New York, 81-94, 1988.
+<li> "Classification problems in astronomy", in: H.H. Bock
+     Ed., Classification and Related Methods of Data Analysis,
+     North-Holland, Amsterdam, 23-32, 1988.
+<li> (With D. Ponz) "Image processing, databases, and
+     statistical software: the common interface", Statistical Software
+     Newsletter, 12, 129-132, 1986.
+<li> (With A. Lauberts) "A curve matching problem in
+     astronomy", Pattern Recognition Letters, 4, 465-469, 1986
+</ul>
+<hr>
+<h2>5. Multivariate Data Analysis - Background Reading</h2>
+ 
+The following contains various web resources.  Some are really very good.
+ 
+<ul>
+<li><a href="http://www.yorku.ca/dept/psych/lab/psy6140/index.htm">
+Multivariate data analysis and statistical linear models in psychology
+research</a> - a course outline.  Useful are the following:
+<ul>
+<li> <a href="http://www.yorku.ca/dept/psych/lab/psy6140/books614.htm">
+Annotated list of books for multivariate analysis in psychology and social
+science.</a>  About 19 books.  (Some of the best books are characterized as
+'not standard', 'dry', 'skimpy' - these are really very good! -
+e.g. Gnanadesikan, 1977; Morrison, 1990; Overall and Klett, 1972; Tatsuoka,
+1988.)
+<li> <a href="http://www.yorku.ca/dept/psych/lab/psy6140/lrabib.htm">Regression
+references</a>, psychology and social science orientation.  Includes
+structural equations and path analysis, logistic regression, applications.
+<li> <a href="http://www.yorku.ca/dept/psych/lab/psy6140/fa/factorbi.htm">
+Annotated factor analysis bibliography</a>, over 130 references.
+<li> <a href="http://www.yorku.ca/dept/psych/lab/psy6140/mds/mdsbib.htm">
+Multidimensional scaling bibliography</a>, a good list of essential
+references.
+</ul>
+<li> <a href="http://www.statsoft.com">Online textbook</a>, accessible from
+this page, on: canonical analysis, cluster analysis, classification trees,
+correspondence analysis, data mining techniques, discriminant analysis,
+factor analysis, general linear models, stepwise regression,
+graphical techniques, linar regression, multidimensional scaling, neural
+networks, partial least squares, survival analysis, time series forecasting,
+and lots more.  Wow!  Succinct description, large set of references.
+(Often a plug for the package Statistica  from StatSoft - but software
+manuals are often a very good soure of background information.) 
+<li><a href="http://www.ee.ic.ac.uk/hp/staff/dmb/matrix/intro.html">Matrix
+reference manual</a>.  Reference information about linear algebra and
+the properties of matrices.  Mike Brookes, Imperial College of Science,
+Technology and Medicine, Electrical Engineering Department, Exhibition
+Road, London SW7 2BT, England.  Quite a good handy reference for various
+types of matrics, and linear algebra operations.
+<li> <a href="http://www.micheloud.com/FXM/COR/E/index.htm">Correspondence
+analysis - an online text</a>.
+<a href="http://www.micheloud.com/FXM/COR/index.htm">Analyse des
+correspondances - m&ecirc;me chose en fran&ccedil;ais</a>.  Comprehensive,
+but uses an awful typeface.
+ <li> <a href="http://www.okstate.edu/artsci/botany/ordinate">Ordination
+methods for ecologists</a>.  Ordination methods are what are called
+scaling methods in the social sciences, or dimensionality reduction methods.
+A bibliography:
+<a href="http://alize.ere.umontreal.ca/~casgrain/cca_bib/index.html">
+An annotated bibliography of canonical correspondence analysis
+and related constrained ordination methods 1986-1996</a>.
+<li> <a href="http://www.cs.monash.edu.au/~dld/cluster.html">Mixture
+modeling page.</a>  Mixture modeling is cluster analysis, assuming the
+clusters consist of a possibly superimposed mixture of Gaussian or other
+parametric forms.  The job then is to estimate the parameters of the
+distribution.  This page contains various other links also.  Very good stuff.
+</ul> 
+<hr>
+<h2>6. Datasets</h2>
+ 
+Datasets can be revealing... They can illustrate particular classes of
+method.
+ 
+<ul>
+<li> <a href="http://www-personal.buseco.monash.edu.au/~hyndman/TSDL">Time
+series data library</a>.  Over 500 time series from various domains.  Very
+good.
+<li> More to be added... UCI repository etc.
+</ul> 
+<hr>
+
+<p>
+
+Email author: <a href="mailto:fmurtagh@astro.u-strasbg.fr">fmurtagh@astro.u-strasbg.fr</a>.
+
+<br>
+
+Last update: 2001-May-24.
+<br>
+<i>The address of this page is: http://astro.u-strasbg.fr/~fmurtagh/mda-sw</i>
+<hr>
+</body>
+</html>
+
+

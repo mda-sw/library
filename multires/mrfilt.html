@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>Image and Data Analysis - The Multiscale Approach</title>
+</head>
+
+<body bgcolor=white >
+<img align=left src="../pic/galicon.jpg">
+<ul>
+<font color=red>
+<h1>Options for program: mr_filter </h1>
+</font>
+
+<p>
+
+<hr><p>
+
+<pre>
+$ mr_filter
+Usage: mr_filter options in_image out_image
+
+   where options =  
+         [-f type_of_filtering]
+              1: Multiresolution thresholding 
+              2: Multiresolution soft thresholding 
+              3: Iterative multiresolution thresholding 
+              4: Adjoint operator applied to the multiresolution support  
+              5: Hierarchical thresholding 
+              6: Hierarchical Wiener filtering 
+              7: Multiresolution Wiener filtering 
+              8: Median filtering 
+              9: Average filtering 
+              10: Bspline filtering 
+              11: Donoho hard thesholding 
+              12: Donoho soft thesholding 
+              default is Multiresolution thresholding.
+
+        [-t type_of_multiresolution_transform]
+              1: linear wavelet transform: a trous algorithm 
+              2: bspline wavelet transform: a trous algorithm 
+              3: wavelet transform in Fourier space 
+              4: morphological median transform 
+              5: morphological minmax transform 
+              6: pyramidal linear wavelet transform 
+              7: pyramidal bspline wavelet transform 
+              8: pyramidal wavelet transform in Fourier space: algo 1 
+                 (diff. between two resolutions) 
+              9: pyramidal wavelet transform in Fourier space: algo 2 
+                 (diff. between the square of two resolutions) 
+              10: pyramidal median transform 
+              11: pyramidal laplacian 
+              12: morphological pyramidal minmax transform 
+              13: decomposition on scaling function 
+              14: Mallat's wavelet transform (7/9 filters) 
+              15: Feauveau's wavelet transform 
+              16: Feauveau's wavelet transform without undersampling 
+              17: G transform (morphological min-max algorithm) 
+              18: Haar's wavelet transform 
+             default is bspline wavelet transform: a trous algorithm
+
+         [-g sigma]
+             sigma = noise standard deviation
+             default is automatically estimated.
+
+         [-c gain,sigma,mean]
+             Poisson + readout noise, with: 
+                 gain = gain of the CCD
+                 sigma = read-out noise standard deviation
+                 mean = read-out noise mean
+             default is no (Gaussian).
+
+         [-m type_of_noise]
+              1: Gaussian noise 
+              2: Poisson noise 
+              3: Poisson noise + Gaussian noise 
+              4: Multiplicative noise 
+              5: Non-stationary additive noise 
+              6: Non-stationary multiplicative noise 
+              7: Undefined uniform noise 
+              8: Undefined noise 
+              9: Poisson noise with few events 
+             default is Gaussian noise
+
+         [-n number_of_scales]
+             Number of scales used in the multiresolution transform
+             default is 4.
+             default is 6 in case of poisson noise with few events.
+
+         [-s nsigma]
+             Thresholding at nsigma * SigmaNoise
+             default is  3.
+
+         [-i number_of_iterations]
+             Maximum number of iterations
+             default is 10.
+
+         [-e epsilon]
+             Convergence parameter
+             default is 0.001000.
+             default is 0.000010 in case of poisson noise with few events.
+
+         [-w support_file_name]
+             Creates an image from the multiresolution support 
+             and save to disk.
+
+         [-k]
+             Suppress isolated pixels in the support. Default is no.
+
+         [-K]
+             Suppress the last scale. Default is no.
+
+         [-p]
+             Detect only positive structure. Default is no.
+
+         [-E Epsilon]
+             Epsilon = precision for computing thresholds
+                       (only used in case of poisson noise with few events)
+             default is 1.00e-03 
+
+         [-S SizeBlock]
+             Size of the  blocks used for local variance estimation.
+             default is 7.
+
+         [-N NiterSigmaClip]
+             Iteration number used for local variance estimation.
+             default is 1.
+         [-F first_detection_scale]
+             First scale used for the detection 
+             default is 1.
+
+
+         [-R RMS_Map_File_Name]
+              RMS Map.  If this option is set, 
+              the noise model is automatically fixed to:
+                 Non-stationary additive noise
+
+         [-W WindowSize]
+             Window size for median and average filtering.
+             default is 5.
+
+         [-v]
+             Verbose. Default is no.
+
+         [-P]
+             Suppress the positivity constraint.
+
+</pre>
+<p>
+
+<hr>
+</BODY>
+</HTML>
+
+
+
+

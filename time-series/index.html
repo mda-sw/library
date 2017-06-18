@@ -1,0 +1,40 @@
+<html><head><title>Times Series</title></head>
+<body bgcolor=white><h1>Time Series</h1>
+
+The following time series were used in, among other work, F. Murtagh,
+"Identifying the ultrametricity of time series".  
+
+<p>
+
+The program used in this work: 
+<a href="equil-time-series.c">equil-time-series.c</a>  You will also need 
+<a href="nrutil.h">nrutil.h</a> for a few definitions.
+<br>
+Examples of use: 
+<br>
+equil-time-series 1326 2 ftse1326.dat
+<br>
+(Input time series ftse1326.dat; number of values to be read, 1326, must 
+be equal to, or less than, the number of values in the file; and the value 
+of 2, number of categories used in the coding, should be fixed always at 2.)
+<br>
+equil-time-series 1326 2 r
+<br>
+(Use 1326 uniformly distributed random values.)
+
+<p>
+
+<ul>
+<li> <a href="ftse1326.dat">FTSE (1326)</a>
+<li> <a href="usdeur9802.dat">USD/EUR (1169)</a>
+<li> <a href="sunspot.dat">Sunspots (2739)</a>
+<li> <a href="stock.dat">Stock (1374)</a>
+<li> <a href="eye3.dat">Eyegaze (1471)</a>
+<li> <a href="subject1-eeg-colorado-band4.dat">EEG-chan4 (2500)</a>
+<li> <a href="subject1-eeg-colorado-band5.dat">EEG-chan5 (2500)</a>
+<li> <a href="futures-high.dat">Futures (6160)</a>
+<li> <a href="bytes-ave-hr-34718.dat">Server bytes (34,726)</a>
+<li> <a href="mississippi.dat">Mississippi (43829)</a>
+</ul>
+
+</body></html>

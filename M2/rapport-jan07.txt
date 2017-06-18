@@ -1,0 +1,67 @@
+Rediger un rapport de 4 pages (une limite de 6 pages est a etre 
+respecte s'il y a des figures) sur un des themes suivants.
+
+A me rendre (de preference par courriel) avant le 15 janvier 2007.
+
+
+Themes 
+
+1. Quelle est l'importance pour l'astronomie de la classification 
+basee sur les reseaux neuronaux?  Quels sont les domaines 
+priviligies d'application actuels?  
+
+Voir par exemple:
+
+a) Journal: Neural Networks
+Volume 16 ,  Issue 3-4  (April 2003)
+2003 Special issue: Neural network analysis of complex scientific 
+data: Astronomy and geosciences
+
+b) http://people.na.infn.it/~longo/Curriculum_pub/lavori/rev_18.pdf
+"Applications of neural networks in astronomy and astroparticle 
+physics", A. Ciaramella et al., 2005.
+
+
+2. Decrire comment on devrait s'adresser au probleme de 
+connaitre le nombre de classes dans un echantillon etudie.  
+Discuter des travaux ulterieurs qui ont renverses les 
+conclusions de Mukherjee et al.
+
+Three Types of Gamma-Ray Bursts
+Author(s)   Soma Mukherjee, Eric D. Feigelson, Gutti Jogesh Babu, 
+  Fionn Murtagh, Chris Fraley, and Adrian Raftery
+Identifiers	 The Astrophysical Journal, volume 508, part 1 (1998), 
+  pages 314-327
+DOI: 10.1086/306386
+Bibcode: 1998ApJ...508..314M
+
+3. La selection de modeles: discuter et dresser l'etat de l'art concernant
+la recherche du nombre de classes et le nombre d'attributs qu'il faut
+pour les caracteriser.  Voir Mukherjee et al. (1998), cite ci-dessus
+et aussi:
+
+How many cosmological parameters?
+Andrew R. Liddle
+Monthly Notices of the Royal Astronomical Society
+Volume 351 Issue 3 Page L49 - July 2004
+doi:10.1111/j.1365-2966.2004.08033.x
+Volume 351 Issue 3
+ 
+4. Dresser un bilan de la classification (classification 
+automatique, analyses factorielles, etc.) des spectres, 
+a partir de l'ouvrage suivant et de 2 autres articles (a 
+etre selectionnes et lus) sur ce theme: 
+
+Chapter on IUE spectral analysis in: 
+F Murtagh and A Heck, Multivariate Data Analysis, Kluwer,
+1987  (see expanded version on-line)
+
+5. Dresser un bilan sur la classification morphologiques des
+galaxies, a partir de ce site web et les citations qu'on y trouve:
+Stephen C. Odewahn
+Automated Morphological Galaxy Classification
+http://www.astro.caltech.edu/~sco/sco1/research/morph_types/mt.html
+
+6. Autre theme lie a de travail actuel, mais a discuter avec moi et 
+a etre precise avant.  
+

@@ -1,0 +1,146 @@
+Object     t_rlx      Rgc    Zg  log(M/   c    [Fe/H]    x     x0
+           years      Kpc   Kpc   M.)
+
+M15        1.03e+8   10.4   4.5   5.95   2.54   -2.15   2.5   1.4
+M68        2.59e+8   10.1   5.6   5.1    1.6    -2.09   2.0   1.0
+M13        2.91e+8    8.9   4.6   5.82   1.35   -1.65   1.5   0.7
+M3         3.22e+8   12.6  10.2   5.94   1.85   -1.66   1.5   0.8
+M5         2.21e+8    6.6   5.5   5.91   1.4    -1.4    1.5   0.7
+M4         1.12e+8    6.8   0.6   5.15   1.7    -1.28  -0.5  -0.7
+47 Tuc     1.02e+8    8.1   3.2   6.06   2.03   -0.71   0.2  -0.1
+M30        1.18e+7    7.2   5.3   5.18   2.5    -2.19   1.0   0.7
+NGC 6397   1.59e+7    6.9   0.5   4.77   1.63   -2.2    0.0  -0.2
+M92        7.79e+7    9.8   4.4   5.62   1.7    -2.24   0.5   0.5
+M12        3.26e+8    5.0   2.3   5.39   1.7    -1.61  -0.4  -0.4
+NGC 6752   8.86e+7    5.9   1.8   5.33   1.59   -1.54   0.9   0.5
+M10        1.50e+8    5.3   1.8   5.39   1.6    -1.6    0.5   0.4
+M71        8.14e+7    7.4   0.3   4.98   1.5    -0.58  -0.4  -0.4
+
+
+Splus5
+so.data <- scan("sodata.dat",list(a=0,b=0,c=0,d=0,e=0,f=0,g=0,h=0))
+sodata <- cbind(log(so.data$a),so.data$b,so.data$c,so.data$d,
+                so.data$e,so.data$f,so.data$g,so.data$h)
+Following not needed?
+dimnames(sodata)<-list(NULL,c("log(t_rel)","R_gc","Z_g",
+                "log(mass)","c","[Fe/H]","x","x_0"))
+dimnames(sodata)[[1]] <- list("M15","M68","M13","M3","M5","M4",
+                "47 Tuc","M30","NGC 6397","M92","M12","NGC 6752",
+                "M10","M71")
+motif()
+pairs(sodata)
+source('hc.q')
+dyn.open('hc.o')
+sodata.hier <- hc(sodata)
+lbls <- c("M15","M68","M13","M3","M5","M4","47 Tuc","M30", "NGC 6397",
+                 "M92","M12","NGC 6752","M10","M71")
+plclust(sodata.hier,labels=lbls)
+minvals <- apply(sodata,2,min)
+maxvals <- apply(sodata,2,max)
+matminv <- matrix(minvals,nrow=14,ncol=8,byrow=T)
+intrvl  <- maxvals - minvals
+matintv <- matrix(intrvl,nrow=14,ncol=8,byrow=T)
+sodatan <- (sodata - matminv)/ matintv
+pairs(sodatan)
+sodata.hier <- hc(sodata)
+plclust(sodata.hier,labels=lbls)
+> sodata
+           log(t_rel) R_gc  Z_g log(mass)    c [Fe/H]    x  x_0 
+     "M15"   18.45024 10.4  4.5      5.95 2.54  -2.15  2.5  1.4
+     "M68"   19.37234 10.1  5.6      5.10 1.60  -2.09  2.0  1.0
+     "M13"   19.48883  8.9  4.6      5.82 1.35  -1.65  1.5  0.7
+      "M3"   19.59006 12.6 10.2      5.94 1.85  -1.66  1.5  0.8
+      "M5"   19.21367  6.6  5.5      5.91 1.40  -1.40  1.5  0.7
+      "M4"   18.53401  6.8  0.6      5.15 1.70  -1.18 -0.5 -0.7
+  "47 Tuc"   18.44048  8.1  3.2      6.06 2.03  -0.71  0.2 -0.1
+     "M30"   16.28361  7.2  5.3      5.18 2.50  -2.19  1.0  0.7
+"NGC 6397"   16.58183  6.9  0.5      4.77 1.63  -2.20  0.0 -0.2
+     "M92"   18.17094  9.8  4.4      5.62 1.70  -2.24  0.5  0.5
+     "M12"   19.60241  5.0  2.3      5.39 1.70  -1.61 -0.4 -0.4
+"NGC 6752"   18.29964  5.9  1.8      5.33 1.59  -1.54  0.9  0.5
+     "M10"   18.82615  5.3  1.8      5.39 1.60  -1.60  0.5  0.4
+     "M71"   18.21489  7.4  0.3      4.98 1.50  -0.58 -0.4 -0.4
+> sodatan
+            [,1]       [,2]       [,3]      [,4]       [,5]       [,6] 
+ [1,] 0.65283562 0.71052632 0.42424242 0.9147287 1.00000000 0.05421687
+ [2,] 0.93067691 0.67105263 0.53535354 0.2558140 0.21008403 0.09036145
+ [3,] 0.96577854 0.51315789 0.43434343 0.8139535 0.00000000 0.35542169
+ [4,] 0.99628003 1.00000000 1.00000000 0.9069767 0.42016807 0.34939759
+ [5,] 0.88286883 0.21052632 0.52525253 0.8837209 0.04201681 0.50602410
+ [6,] 0.67807665 0.23684211 0.03030303 0.2945736 0.29411765 0.57831325
+ [7,] 0.64989595 0.40789474 0.29292929 1.0000000 0.57142857 0.92168675
+ [8,] 0.00000000 0.28947368 0.50505051 0.3178295 0.96638655 0.03012048
+ [9,] 0.08985771 0.25000000 0.02020202 0.0000000 0.23529412 0.02409639
+[10,] 0.56867773 0.63157895 0.41414141 0.6589147 0.29411765 0.00000000
+[11,] 1.00000000 0.00000000 0.20202020 0.4806202 0.29411765 0.37951807
+[12,] 0.60745861 0.11842105 0.15151515 0.4341085 0.20168067 0.42168675
+[13,] 0.76610143 0.03947368 0.15151515 0.4806202 0.21008403 0.38554217
+[14,] 0.58192027 0.31578947 0.00000000 0.1627907 0.12605042 1.00000000
+
+            [,7]      [,8] 
+ [1,] 1.00000000 1.0000000
+ [2,] 0.83333333 0.8095238
+ [3,] 0.66666667 0.6666667
+ [4,] 0.66666667 0.7142857
+ [5,] 0.66666667 0.6666667
+ [6,] 0.00000000 0.0000000
+ [7,] 0.23333333 0.2857143
+ [8,] 0.50000000 0.6666667
+ [9,] 0.16666667 0.2380952
+[10,] 0.33333333 0.5714286
+[11,] 0.03333333 0.1428571
+[12,] 0.46666667 0.5714286
+[13,] 0.33333333 0.5238095
+[14,] 0.03333333 0.1428571
+
+plclust(sodata.hier,labels=lbls,main="Hierarchical clustering 
+      (Ward's) of globular clusters")
+source('pca.q')
+dyn.open('pca.o')
+sodatanpca <-pca(sodatan,2)
+
+clbls <- c("log(t_rel)","R_gc","Z_g","log(mass)","c","[Fe/H]","x","x_0")
+sodatanpca$evals*100.0/sum(sodatanpca$evals)
+plot(sodatanpca$cproj[,1],sodatanpca$cproj[,2],xlab=
+      "Principal component 1",ylab="Principal component 2",
+       main="Principal plane (48%, 24% of variance)",type="n")
+text(sodatanpca$cproj[,1],sodatanpca$cproj[,2],clbls)
+plaxes(sodatanpca$cproj[,1],sodatanpca$cproj[,2])
+plot(sodatanpca$rproj[,1],sodatanpca$rproj[,2],xlab=
+       "Principal component 1",ylab="Principal component 2",
+       main="Principal plane (48%, 24% of variance)",type="n")
+text(sodatanpca$rproj[,1],sodatanpca$rproj[,2],lbls)
+plaxes(sodatanpca$rproj[,1],sodatanpca$rproj[,2])
+
+
+
+
+plaxes
+function(a, b)
+{
+        segments(min(a), 0, max(a), 0)
+        segments(0, min(b), 0, max(b))
+}
+
+
+
+Elements of interpretation:
+
+_fig1: pairwise plots
+Normalization doesn't change plot appearances but makes for big diff
+in Euclidean distance
+_fig2: hiclust
+_fig3: PCA, vbes
+_fig4: PCA, objects
+
+0. Pairwise plots - note strong correlation.
+   We _could_ look at labeled locations in these plots if we wished.
+1. Note in PCA-vbes how different [Fe/H] is - cf. paper.
+2. Note in PCA-obj how this is associated with obj.
+3. Note how hiclust dovetails with PCA-obj, e.g. {M30, NGC 6397} being
+'third' cluster, and upper part of PCA-obj plane being more or less 
+split down the middle to give the two big clusters.
+Note that PCA is best fit to 8-dim space.
+
+
+

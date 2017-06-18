@@ -1,0 +1,537 @@
+=======================================================================
+ MR/1 Multiscale Analysis Newsletter ... Issue No. 1 ... January 1999
+=======================================================================
+
+Contents 
+========
+
+1.1 Introduction.  
+    10,000 article hits on the wavelet transform and multiscale analysis
+    in astronomy alone; some current important trends; the next issue of 
+    the MR/1 Multiscale Analysis Newsletter.   
+1.2 A selection of recent papers, with annotations.
+1.3 Briefing #1 - Entropy, and why it is important.
+1.4 Briefing #2 - Wavelet-based time series prediction.
+1.5 MR/1 version 2 - What is to be expected in this release.
+1.6 Contact details.
+
+=======================================================================
+1.1 Introduction
+=======================================================================
+
+In introducing the Tutorial on "Multiscale Transform Methods in 
+Astronomy" just before the ADASS (Astronomical Data Analysis and
+Software Systems) Conference on Sunday 1 November last, in Champaign IL, 
+we said that a search of the astronomical literature on ADS (the 
+Astrophysical Data System, http://adswww.harvard.edu) gave 500 results 
+for a query using the terms "wavelet", or "multiscale", or 
+"multiresolution".  We did this again in early January (January 10, for 
+the record) and found 10,025 hits.  Gulp!  Interest in wavelet and 
+multiscale methods is growing apace (even if, clearly enough, we would 
+have to check out exactly what is being indexed in such article 
+titles).
+
+This is quite understandable, and not just because of our perennial 
+need for 'better quality results for less effort on our part'.  We 
+see this tendency as having even more portent for the medium and longer
+term future.  The quantities of data, and the ever increasing needs for 
+highly effective results, fast, means that we have got to think very 
+carefully about how to pre-structure our data and information.  To 
+pre-structure means to compile, if you wish to use the term from 
+computer programming.  The breakthrough aspect of multiscale methods
+will be seen when they are used to pre-structure our databases, as part 
+and parcel of data dissemination in progressive transmission and 
+similar technologies, in human-centered visualization and data display 
+(such methods support, naturally, focus or region of interest), and in 
+powerful local and adaptive data analysis techniques.  Just the last 
+of these is being dynamically and profitably developed at the present 
+time.  
+
+Lots of activity is going on, and similarly very exciting work remains 
+to be accomplished.  This Newsletter, we hope, will appear about every 
+6 months.  It arises out of our own work, - the book published by 
+Cambridge University Press in 1998, and the software package, MR/1, 
+released also in 1998.  Details of these can be found below.  The real 
+aim of this Newsletter, however, is to bring you news on new 
+methodological approaches in this area, and details of just some of 
+the exciting recent work which has just been published, or will be 
+soon.  Hence this Newsletter is open to you to describe your recent 
+and important results, in straightforward terms for the specialist who 
+is not necessarily a professional in your particular domain.
+
+In the next issue we are planning briefings on geographical (or 
+spatial) data analysis, and on multiscale image registration and 
+matching in the context of video (or image sequence) processing.
+
+========================================================================
+1.2 A Selection of Recent Papers, With Annotations.
+========================================================================
+
+1.2.1. Z. Geradts and J.Bijhold, "Forensic video investigation with real 
+time digitized uncompressed video image sequences", submitted to 
+Photonics East, Boston.  "...we describe the use and processing of image 
+sequences for forensic investigations.  ... Advanced methods for image 
+restoration can be incorporated in these procedures for batch processing.  
+A discussion is given on the presentation of processed images in movie
+files for court."
+
+1.2.2. Z. Geradts, J.Bijhold and R.Hermsen, "Pattern recognition in a 
+database of cartridge cases", submitted to Photonics East, Boston.  
+"... spent ammunition for forensic investigation. ... For automatic 
+comparison of these images it is necessary to extract ... the useful 
+parts of the images.  On databases of 2000 images several processing 
+steps have been tested and compared."
+
+1.2.3. F. Murtagh, T. Daubos, Z. Geradts, J.L. Starck and J. 
+Campbell, "Improving video image quality using automated 
+wavelet-based image addition", submitted to SPIE Conference on 
+Wavelet Applications, Denver, CO, July 1999.  The  mr_fusion program 
+in MR/1 is used for this work, and an IDL user interface has been
+created to facilitate the data management.  
+
+1.2.4. J.L. Starck and M. Pierre, "Structure detection in low 
+intensity X-ray images", Astronomy and Astrophysics Supplement, 128, 
+397-407, 1998.  From the abstract: "In the context of assessing and 
+characterizing structures in X-ray images, we compare different
+approaches. Most often the intensity level is very low and 
+necessitates a special treatment of Poisson statistics."
+
+1.2.5. J.L. Starck and F. Murtagh, "Automatic Noise Estimation from 
+the Multiresolution Support", Publications of the Astronomical 
+Society of the Pacific, 110, 193-199, 1998.  "We describe an 
+automated approach for determining the noise associated with 
+astronomical images."
+
+1.2.6. M. Pierre and J.L. Starck, "X-ray structures in galaxy 
+cluster cores", Astronomy and Astrophysics, 330, 801-818, 1998.  
+"Using a set of ROSAT HRI deep pointings, we investigate the 
+presence of small-scale structures in the central regions of 
+clusters of galaxies. Our sample comprises 23 objects up to 
+z=0.32, 13 of them known to host a cooling flow. Structures are 
+detected and characterized using a wavelet analysis, their 
+statistical significance being assessed by a rigorous treatment 
+of photon noise."
+
+1.2.7. M. Morehart, F. Murtagh and J.L. Starck, "Spatial 
+representation of economic and financial measures used in 
+agriculture via wavelet analysis", accepted for publication in 
+International Journal of Geographical Information Science.  "A 
+foundation is set forth for use of the wavelet transform as a
+spatial analysis tool for modelling the geographic representation 
+of economic and financial measures used in agriculture."
+
+1.2.8. M. Morehart, F. Murtagh, J.-L. Starck and Y. Bi, "Spatial 
+data analysis using the wavelet transform: representation of
+economic and financial measures in agriculture", in Ph. Nanopolous, 
+P. Garonna and C. Lauro, Eds., Proceedings NTTS'98, International 
+Seminar on New Techniques and Technologies for Statistics, 
+Eurostat, Luxembourg, 1998, pp. 339-344.
+
+1.2.9. J.L. Starck and F. Murtagh, "Multiscale entropy filtering",
+accepted for publication in Signal Processing.  "We present in this
+paper a new method for filtering an image based on a new definition
+of its entropy.  A large number of examples illustrate the results.
+Comparisons are performed with other wavelet-based methods."  [See
+Briefings #1 and #2 in this issue.]
+
+1.2.10. F. Murtagh and J.L. Starck, "Image processing through 
+multiscale analysis and measurement noise modeling", Statistics
+and Computing, accepted for publication.
+
+1.2.11. F. Murtagh, "Wedding the wavelet transform and multivariate
+data analysis", Journal of Classification, 15, 161-183, 1998. 
+
+1.2.12. F. Murtagh and A. Aussem, "Using the wavelet transform for 
+multivariate data analysis and time series forecasting", in 
+Data Science, Classification and Related Methods, C. Hayashi, 
+H.H. Bock, K. Yajima, Y. Tanaka, N. Ohsumi and Y. Baba, eds., 
+Springer-Verlag, 617-624, 1998.  
+
+1.2.13. F. Murtagh and J.-L. Starck, "Pattern clustering based on 
+noise modeling in wavelet space", Pattern Recognition, 31, 847-855, 
+1998.  "We describe an effective approach to object or feature 
+detection in point patterns via noise modeling. ... We use the 
+close relationship between image (pixelated) and point 
+representations to achieve the result of a clustering method with 
+constant-time computational cost."
+
+1.2.14. J.-L. Starck, F. Murtagh and R. Gastaud, "A new entropy 
+measure based on the wavelet transform and noise modeling",  IEEE 
+Trans. on Circuits and Systems II: Analog and Digital Signal 
+Processing, 45, 1118-1124, 1998.  [See Briefing #1 in this issue.]
+
+1.2.15. F. Murtagh, J.-L. Starck and M. Louys, "Very high quality 
+image compression based on noise modeling",  International
+Journal of Imaging Science and Technology, 9, 38-45, 1998.
+
+1.2.16. M. Louys, J.-L. Starck, S. Mei, F. Bonnarel and F. Murtagh,
+"Astronomical image compression", Astronomy and Astrophysics Supplement
+Series, submitted.  "The goal of this paper is to present and compare 
+a range of powerful compression methods (fractal, wavelets, other 
+multiscale methods, JPEG) applied to  astronomical images. Quality is 
+quantified from visual appearance, and from photometric and astrometric 
+measurements. Computational requirements of each method are discussed.
+We also review the implications of Web-based storage and transmission, 
+stressing what we term progressive vision."
+
+1.2.17. J.L. Starck and F. Murtagh, "Automatic noise estimation 
+from the multiresolution support", Publications of the Astronomical 
+Society of the Pacific, 110, 193-199, 1998. 
+
+1.2.18. A. Aussem and F. Murtagh, "A neuro-wavelet strategy for Web 
+traffic forecasting", Journal of Official Statistics, 1, 65-87, 1998.
+"An extensive set of http logs is converted to a univariate traffic 
+time series on the basis of the average number of bytes transferred 
+over a one-minute period. We first provide measurements of the 
+degree of self-similarity in our traces. Then, a wavelet transform 
+is used to decompose the time series and, to each individual wavelet 
+series, we fit a Dynamical Recurrent Neural Network model."
+
+1.2.19.  A. Aussem, J. Campbell and F. Murtagh, "Wavelet-based feature 
+extraction and decomposition strategies for financial forecasting", 
+Journal of Computational Intelligence in Finance, 6, 5-12, 1998.
+[See Briefing #2 in this issue.]
+
+1.2.20. Zheng G., J.L. Starck, J. Campbell and F. Murtagh, "The 
+wavelet transform for filtering financial data streams, Journal of 
+Computational Intelligence in Finance, submitted.  [See Briefing #2
+in this issue.]
+
+1.2.21. K.K. Simhadri, S.S. Iyengar and R.J. Holyer, "Wavelet-based
+feature extraction from oceanographic images", IEEE Transactions on 
+Geoscience and Remote Sensing, 36, 767-778, 1998.  "Features in 
+satellite images of the oceans often have weak edges.  These images 
+also have a significant amount of noise, which is either due to the 
+clouds or atmospheric humidity.  ... This paper presents a new 
+computational scheme based on multiresolution decomposition for 
+extracting the features of interest from the oceanographic images 
+by suppressing the noise.  The multiresolution analysis from the 
+median presented by Starck-Murtagh-Bijaoui is used for the noise
+suppression."
+
+========================================================================
+1.3 Briefing #1 - Entropy, and Why it is Important.
+========================================================================
+
+In this first briefing, we aim to describe the importance of a selected
+current development.  Important new results deserve to be known and made
+use of!
+
+We use a new definition of entropy, which incorporates resolution scale
+and a noise model, to characterize "informative structure" in data.  
+Why this is necessary will be explained in the following.
+
+The term "entropy" is due to Clausius (1865), and the concept of 
+entropy was introduced by Boltzmann into statistical mechanics, in 
+order to measure the number of microscopic ways that a given 
+macroscopic state can be realized. Shannon (1948) founded the
+mathematical theory of communication when he suggested that the
+information gained in a measurement depends on the number of possible
+outcomes out of which one is realized. Shannon also suggested that 
+the entropy can be used for maximization of the bits transferred under
+a quality constraint. Jaynes (1957) proposed to use the entropy measure
+for radio interferometric image deconvolution, in order to select between
+a set of possible solutions that which contains the minimum of 
+information, or following his entropy definition, that which has 
+maximum entropy. In principle, the solution verifying such a condition 
+should be the most reliable.  Much work has been carried out in the 
+last 30 years on the use of entropy for the general problem of data 
+filtering and deconvolution. 
+
+Traditionally information and entropy are determined from events and 
+the probability of their occurrence.  Signal and noise are basic
+building-blocks of signal and data analysis in the physical and
+communication sciences.  Instead of the probability of an event, we are
+led to consider the probabilities of our data being either signal or
+noise. 
+ 
+Consider any data signal with interpretative value.  Now consider a
+uniform "scrambling" of the same data signal.  (Starck et al., 1998,
+illustrate this with the widely-used Lena test image.)  Any traditional
+definition of entropy, the main idea of which is to establish a relation
+between the received information and the probability of the observed
+event, would give the same entropy for these two cases.  A good 
+definition of entropy should instead satisfy the following criteria:
+ 
+1. The information in a flat signal is zero.
+2. The amount of information in a signal is independent of the
+   background.
+3. The amount of information is dependent on the noise. A given 
+   signal Y (Y = X + Noise) doesn't furnish the same information if 
+   the noise is high or small.
+4. The entropy must work in the same way for a signal value which has a
+   value B + epsilon (B being the background), and for a signal value  
+   which has a value B - epsilon.
+5. The amount of information is dependent on the correlation in the
+   signal.  If a signal S presents large features above the noise, it
+   contains a lot of information. By generating a new set of data from
+   S, by randomly taking the values in S, the large features will
+   evidently disappear, and this new signal will contain less 
+   information.  But the data values will be the same as in S.
+ 
+To cater for background, we introduce the concept of multiresolution 
+into our entropy.  We will consider that the information contained in 
+some dataset is the sum of the information at different resolution 
+levels, j.  A wavelet transform is one choice for such a multiscale 
+decomposition of our data.  We define the information of a wavelet 
+coefficient wj(k) at position k and at scale j as I = - ln (p(wj(k))), 
+where p is the probability of the wavelet coefficient.  Entropy, 
+commonly denoted as H, is then defined as the sum over all positions,
+k, and over all scales, j, of all I.  
+
+For Gaussian noise we continue in this direction, using Gaussian
+probability distributions, and find that the entropy, H, is the sum 
+over all positions, k, and over all scales, j, of 
+(wj(k)^2)/(2 sigma^2 j) (i.e. the coefficient squared, divided by 
+twice the standard deviation squared of a given scale).  Sigma, or 
+the standard deviation, is the (Gaussian) measure of the noise.  We 
+see that the information is proportional to the energy of the 
+wavelet coefficients.  The higher a wavelet coefficient, then the 
+lower will be the probability, and the higher will be the 
+information furnished by this wavelet coefficient.
+ 
+Our entropy definition is completely dependent on the noise 
+modeling.  If we consider a signal S, and we assume that the noise 
+is Gaussian, with a standard deviation equal to sigma, we won't 
+measure the same information compared to the case when we consider 
+that the noise has another standard deviation value, or if the 
+noise follows another distribution.
+
+Returning to our example of a signal of substantive value, and a 
+scrambled version of this, we can plot an information versus scale 
+curve (e.g. log(entropy) at each scale using the above definition, 
+versus the multiresolution scale).  For the scrambled signal, the 
+curve is flat.  For the original signal, it increases with scale.  
+ 
+We can use such an entropy versus scale plot to investigate 
+differences between encrypted and unencrypted signals, to study 
+typical versus atypical cases, and to differentiate between 
+atypical or interesting signals. 
+
+To read further:
+
+J.L. Starck, F. Murtagh and R. Gastaud, "A new entropy measure 
+based on the wavelet transform and noise modeling", IEEE 
+Transactions on Circuits and Systems - II: Analog and Digital 
+Signal Processing, 45, 1118-1124, 1998. [Reference 1.2.9 above.]
+
+========================================================================
+1.4 Briefing #2 - Wavelet-Based Time Series Prediction.
+========================================================================
+
+Wavelet and other multiscale transforms are tantalizing for financial,
+meteorological and other time series modeling and prediction.  They 
+seem to encapsulate the ideas of Kondratieff and others who have sought 
+to explain the economic and other phenomena by means of superimposed 
+cycles.  Multiscale transforms seem to offer a near miraculous 
+decomposition of our data into cyclical (frequency) and scale-related 
+components.  It is small wonder therefore that they may well be useful 
+tool for interpreting and analyzing our data.
+
+However there are some problems.  Firstly, any wavelet or other 
+transform using decimation makes life difficult for us, to the extent
+that we wish to use the information in the different resolution scales.  
+We can certainly do that, but it is awkward to associate what is 
+going on at a particular scale and with other scales.  Using some 
+wavelet transform which produces a non-decimated, or redundant, output 
+is helpful from this point of view.  The a trous wavelet transform, 
+using a B3 spline scaling function, and other non-decimated wavelet
+transforms do have what some consider to be a drawback - the 
+different resolution scales are not orthogonal.  We must say, however,
+that this has never been an issue of concern in practice for us.  It
+is clear, of course, that certain applications, like compression, or
+processing which can take advantage of zero correlation guaranteed by
+orthonormal wavelet transforms, are not what we are focusing on right
+now.
+ 
+Apart from interpretability, redundant transforms can provide 
+shift-invariance, i.e. whether we start off with x(100) or x(110) 
+will not make any difference in the output produced further on, at
+x(120), say.  
+
+The boundaries of our time series can be a problem, though.  We usually
+don't care about the end of our data around x(1), x(2), etc.  But when
+we are at time point t, then x(t), x(t-1), etc. are very important 
+values.  We will base our forecast on information mainly extracted 
+around this boundary of the data.  The a trous wavelet transform based
+on the B3 spline works very well for many applications, but it is 
+highly problematic when used with such time-varying data.  Either 
+we have to use values x(t+1), x(t+2), etc. which in principle (or in 
+practice!) we do not know.  Or we program a quick fix in the region of
+time point t, so that only known data x(t), x(t-1), etc. can be used.
+The latter option, though, weakens greatly our transform exactly in 
+the region which is of most importance to us.
+
+To face this problem, we have developed a new wavelet transform, 
+based on the same algorithm as the a trous transform, but instead
+of the B3 spline a box function is used.  This is therefore a 
+novel implementation - a non-decimated one - of the well-known 
+and widely-used Haar transform.  Our a trous Haar transform, or 
+non-decimated Haar transform, solves the above problems admirably.
+It provides for a decomposition which can be used subsequently for
+prediction.  It is suitable for use with real-time data streams.
+
+To read further: 
+
+Zheng G., J.L. Starck, J. Campbell and F. Murtagh, "The wavelet 
+transform for filtering financial data streams, Journal of 
+Computational Intelligence in Finance, submitted.  [Reference 
+1.2.20 above.]
+
+========================================================================
+1.5 MR/1 Version 2 - New release to be available about May 1999.
+========================================================================
+
+New features available in this version are as follows.  Note - there
+will be NO price disadvantage for purchasers of MR/1 Version 1. 
+
+Input -- Output
+  stdin -- stdout implemented
+  im1d_convert -- format conversions (including an Excel format) 
+  JPEG input/output support
+
+Image (new programs)
+  im_edge -- 15 methods for edge detection
+  im_get -- extract a subimage
+  im_put -- insert a subimage
+  im_op -- operation between images
+
+Wavelet transform 1D
+  seven new wavelet transforms:
+    1) a trous algorithm with a wavelet equal to the derivative 
+       of a B3-spline
+    2) continuous WT with a wavelet equal to the derivative of 
+       a Gaussian
+    3) bi-orthogonal transform  
+    4) bi-orthogonal transform via lifting scheme  
+    5) Wavelet packets 
+    6) Wavelet packets via lifting scheme
+    7) Wavelet packets using the a trous algorithm
+    
+    for transforms 3 and 5, several filters are available:
+              1: Antonini 7/9 filters 
+              2: Daubechies filter 4 
+              3: Haar filter 
+              4: Odegard 7/9 filters
+              
+    for transforms 4 and 6, several lifting methods are available:
+              1: Lifting scheme: CDF WT 
+              2: Lifting scheme: median prediction 
+              3: Lifting scheme: integer Haar WT 
+              4: Lifting scheme: integer CDF WT 
+              5: Lifting scheme: integer (4,2) interpolating transform 
+
+  mr1d_trans
+  option allowing to kill the border
+
+  mr1d_recons (new program)
+  
+  mr1d_filter
+   more noise models
+  
+Wavelet transform 2D
+  six new transforms
+    1) half pyramidal wavelet transform
+    2) Mixed pyramidal wavelet and median transform
+    3) Mixed half pyramidal wavelet and median transform
+    4) Dyadic Mallat
+    5) lifting scheme: five methods are available
+              1: Lifting scheme: CDF WT 
+              2: Lifting scheme: median prediction 
+              3: Lifting scheme: integer Haar WT 
+              4: Lifting scheme: integer CDF WT 
+              5: Lifting scheme: integer (4,2) interpolating transform 
+    6) undecimated Haar transform: a trous algorithm
+    
+    + new filters are available for the (bi-) orthogonal wavelet transform
+      Available filters are:
+              1: Antonini 7/9 filters 
+              2: Daubechies filter 4 
+              3: Haar filter 
+              4: Odegard 7/9 filters 
+   
+  mr_extract, mr_insert  work also with band (-B option)
+  
+  modif mr_transform with -x option ==> we extract now bands 
+                                        instead of scales.
+  
+  new programs:
+  mr_edge: multiscale edge detection (first derivative)
+  mr_at_edge: multiscale edge detection (second derivative)
+  mr_rec_edge: image reconstruction from the multiscale edges
+     
+Compression
+  mr_comp:
+  using block compression, the image is no longer stored in memory.
+  For GIF, this is not possible, but the memory has been optimized.
+
+  mr_decomp: ditto
+  
+  optimization of mr_comp
+  25% less computation time for compression for the PMT
+  
+  new programs:
+  mr_lcomp: lossless compression by lifting scheme
+  
+  mr_upresol
+  XLIVE (Large Image Visualization Environment)
+
+Deconvolution:
+  more deconvolution methods, and more options allowing more flexibility
+
+Detection: 
+  the point spread function can be used in object/feature detection 
+  allowing us to combine detection and deconvolution
+
+Fractals - 1D multifractal signal analysis
+  fr1d_create_ds
+  fr1d_chain
+  fr1d_ana
+
+Virtual memory: can be activated for processing images which are 
+  larger than the available swap space
+  
+
+
+As you can see, a lot of new options will be available in MR/1 Version 2.
+The User Manual is 150 pages in length.
+
+========================================================================
+1.6 Contact details.
+========================================================================
+
+Web address:                            http://visitweb.com/multires
+which is an alias for: http://ourworld.compuserve.com/homepages/multires
+
+Email addresses:                        multires@hotmail.com
+A different address is:                 multires@compuserve.com 
+Fionn Murtagh can be reached also at:   fmurtagh@acm.org
+
+
+
+Postal address:                         Multi Resolutions Ltd.
+                                        Culmore House West
+                                        70 Culmore Point
+                                        Londonderry BT48 8JW
+                                        Northern Ireland, UK
+
+Telephone/fax/answering machine:        +44 1504 359541
+
+
+
+Postal address and telephone/fax numbers are expected to change towards
+the end of February 1999.  Check the Web address for any such changes.
+
+
+
+The expected date of Issue No. 2 of this Newsletter is June 1999.  
+
+========================================================================
+
+
+
+
+
+
+
+

@@ -1,0 +1,741 @@
+\documentstyle[palatino,11pt]{article}
+\textheight=21truecm            % height of the text on the page
+\textwidth=15truecm             % width of the text on the page
+\begin{document}
+
+\section*{Free Text Information Retrieval:}
+
+\section*{An Assessment of Publicly Available Unix-Based Systems}
+
+\bigskip
+
+\bigskip
+
+F. Murtagh, Feb. 1994
+
+\bigskip
+
+\bigskip
+
+{\bf Summary:} Arising out of interest in approaches for content-based
+image retrieval from the HST image archive, we prototyped free text
+retrieval systems using accepted proposal abstracts (hence: what the 
+later associated images were meant to deal with).  Other possible 
+applications of such free text retrieval systems 
+in  observatory operations are described.  We used 
+widely available, publicly accessible, (Sun) Unix-based  software tools only.
+We discuss these experiments here in terms of client-server implementation, 
+support for phrases in queries, etc.  We also review the applicability of the
+IAU Astronomical Thesaurus, and object name resolvers, in this context.  We 
+conclude with a number of recommendations for future work.
+
+\section{Introduction}
+
+To support information retrieval in astronomy, we believe that it is 
+advantageous if the retrieval engine is astronomically-knowledgeable.  
+In other words, the user ought not to have to fight against the limitations
+of the indexing or querying system.  Consider, for example, a retrieval 
+system which rejects a partially numeric object name 
+(e.g.\ 47 Tuc) on the grounds of supporting character-text only.
+
+Organisationlly, we see this work as: (i) selecting important desiderata,
+and (ii) finding tools which support these requirements.
+
+As such desiderata, we have chosen the following issues: (i) Is there a 
+comprehensive astronomical vocabulary available, which ought to be in 
+large measure supported by a retrieval system?  We use the IAU Thesaurus,
+towards this end.  (ii) The next phase will involve support of astronomical
+object names: what tools are available to support free text querying based 
+on object names?  (iii) A third phase will seek to go beyond that: to 
+support additional semantic requests (e.g. not simply the term ``wavelength'',
+but rather ``wavelengths less than 7000 
+\AA''; fuzzy attributes such as ``distant'', etc.).
+
+
+\section{Data: HST accepted observing proposal abstracts}
+
+We took the accepted observing proposals, for HST, for the first
+four cycles (1989--1993), and experimented with publicly available 
+information retrieval software tools which support free text querying.  
+Imposed keywords may be available as part of the proposal texts.  However
+such imposed keyword systems are often either limited in scope, or are only
+partially carried out. Free text deriving of keywords is a feasible 
+alternative, which is considerably more user-friendly. 
+
+A typical HST observing proposal abstract is shown in the following.
+
+\begin{footnotesize}
+\begin{verbatim}
+     676                                             676propnum                
+Prop. Type:  GO                                                                
+
+              GALAXIES & CLUSTERS   -- (  GAS & DUST  ) -- 
+3840- CT - "THE ABUNDANCES AND TIME EVOLUTION OF CARBON, NITROGEN AND OXYGEN IN
+               STAR-FORMING GALAXIES"          
+    Continuation of Program Number  3840       
+    Keywords :  
+
+    Proposers: Evan D. Skillman (PI; University Of Minnesota), R.Dufour (Rice 
+               University), D.Garnett (Space Telescope Science Institute), 
+               M.Peimbert (Unam; Mexico), G.Shields (University Of Texas), 
+               E.Terlevich (Royal Greenwich Observatory; United Kingdom), 
+               R.Terlevich (Royal Greenwich Observatory; United Kingdom), 
+               S.Torres-Peimbert (Unam; Mexico)   
+
+    We propose to observe UV emission lines of carbon, nitrogen, and oxygen 
+    from high-surface brightness extragalactic H II regions drawn from a sample
+    of irregular and spiral galaxies having a large spread of known oxygen  
+    abundance (2% solar to nearly solar). From the emission-line data we will 
+    derive C/O and N/O abundance ratios for which systematic uncertainties -
+    due to reddening corrections, temperature and density effects, and     
+
+
+    mismatched aperture sizes (typical in IUE+optical studies) - are greatly 
+    reduced. We will use the derived abundances to study the time evolution of
+    C/O and N/O in nearby galaxies, and compare the results with those obtained
+    from observations of stars in our own Galaxy. We will be able to test the 
+    suggestion (from far-infrared observations of H II regions) that nitrogen 
+    abundances derived from optical spectra are systematically in error by
+    factors of two or more. We will also be able to measure the gas phase 
+    abundance of silicon, allowing us to study Si depletion as a function of 
+    metallicity. Our target sample size of 28 is sufficiently large to study 
+    both trends in relative abundances and search for anomalous regions (for
+    example, those affected by the presence of WR stellar winds). The order of
+    magnitude increase in s/n over IUE will allow the measurement of C/O and
+    C/N with the requisite accuracy for the first time.      
+                                                                      
+\end{verbatim}
+\end{footnotesize}
+
+The proposal number, here, is 3840.  The number 676 is a sequence number which
+we inserted, and used for certain experiments.  A number of line skips, 
+new page indicators, etc. have been removed (to improve display) in this 
+sample.  
+
+Three objectives of free text querying of 
+observation proposal abstracts are envisaged:
+
+\begin{enumerate}
+
+\item As an aid to observation proposal assessors, and scheduling planners,
+it is helpful to look for closely related proposals.
+
+\item As an aid to the user who is preparing a proposal, it is useful to
+check on what has been already achieved, and by whom, using general phrases
+which express his or her envisaged research.
+
+\item As a general approach to image retrieval from the HST image archive,
+we may search through the proposal abstracts, which we hope express in a 
+few natural language sentences what the associated images (observed later)
+are meant to contain.
+
+\end{enumerate}
+
+The 1434 HST proposal abstracts in the first four cycles of HST observing 
+contained both GTO (Guaranteed Time Observer) and GO (Guest Observer) 
+proposals.  About 400 propsal abstracts were duplicated in
+the initial set of experiments (WAIS-related) carried out, so that we
+dealt with about 1854 proposals in these initial experiments.  
+Apart from a minor 
+additional computational requirements, there was no difficulty with
+such redundancy. 
+
+Typically a proposal abstract consisted of from one to two 
+dozen lines of free text, 
+preceeded by title, principal investigators and co-investigators, 
+sometimes keywords, a proposal number in 
+one of about half a dozen line layout formats, extraneous character 
+information such as
+page feeds, occasional extraneous comments relating to changes in the 
+proposal, occasional mispellings (``Rayleight''), sections containing 
+short lists of acronyms, etc.  However the essential
+proposal abstract was clear to a human reader, and we sought to use the
+abstract information with only limited cleaning and reformatting.
+
+In the first section below, detailing WAIS, all abstracts were in one ASCII 
+file
+with a line of dash separators between successive abstracts.  In the section
+detailing {\it lq-text}, each abstract was put in an individual 
+ASCII file.
+
+Unix tools such as {\it grep} are not usable, on the grounds of computational
+requirements.  Inverted files are necessary, and the tools described here 
+use such data structures to facilitate subsequent free text searching.
+
+
+\section{Free text retrieval, using a client-server tool}
+
+WAIS (Fullton, 1993) 
+%permits the user's client software to collect together 
+%the necessary elements of the query, and to send them via network to the
+%database host, where the server software carries out the search and returns
+%the results.  In such a situation the server software has already been used
+%to construct an inverted file of the free text to be searched through.
+%WAIS 
+is a networked information retrieval system, using TCP/IP
+to connect client applications to information servers.  The Z39.50 query 
+protocol is used to communicate between clients and servers.
+
+We began with WAIS, given the usefulness of this client-server approach to 
+information retrieval, but we found difficulties which made us subsequently
+look for alternative tools.  The version of WAIS used is important, given that
+various versions are in use: we used freeWAIS version 0.202 for indexing
+and WAIS version 8 beta 5 for querying.  It must be
+stressed that the default mode of operation of WAIS was used.  
+Other versions of WAIS could have been considered, as well as changes 
+or enhancements to the code.
+
+WAIS allows any number of a large range of file formats to be indexed.  We
+chose to have dash separating lines between proposal abstracts, which were
+all stored in one large file.  Case (lower, upper) is ignored when using
+WAIS. This property is availed of also in the case of other retrieval tools 
+discussed below.
+
+We found that single-word queries were
+necessary, rather than phrases (this necessity will be discussed below).  
+This had the unwelcome by-product that a query such as ``X ray'' would 
+seek matches associated with ``X'' and with ``ray''; and matches with the 
+latter word would yield hits with the author name ``Ray'' of which there
+were a number in the HST abstract proposal collection.  To bypass this
+problem, we used
+a version of the abstract proposal from which we removed all personal names
+of principal investigators and co-investigators. 
+In a similar way, a number of occurrences of header-type information,
+including details of certain acronyms used, had to be deleted from the 
+HST abstract proposals file before indexing.  If WAIS had allowed us to 
+use strict phrase queries, this problem could have been mitigated.
+
+In what sense 
+is phrase support for queries lacking in WAIS?  If a query
+consists of the terms ``absolute temperature scale'', one will get hits 
+related to ``absolute magnitude'' or to ``distance scale''. (In the version
+of WAIS used, putting the search string in quotation marks did not alter
+the fact that WAIS provided the best set of hits, if necessary by 
+breaking up the search string.)  WAIS provides
+best-matching results, if necessary by being very flexible with the 
+arrangement of the words used in the user's query.  But astronomy is a 
+``phrase-rich'' domain: phrases such as those mentioned must be kept in their
+given form.  Faced with the dangers involved in WAIS's treatment of phrases,
+we took the decision to only allow single-word queries.  At least in doing
+that, we thought, we could impose greater (semantic, astronomical) control
+over WAIS.
+
+The IAU Thesaurus (Shobbrook and Shobbrook, 1993) is a 
+(hierarchically-structured) list of 
+astronomically-appropriate words and phrases.  We broke up all pharses in the
+Thesaurus
+into single words, and removed replications.  We deleted terms beginning
+with numbers (e.g. 13, from ``13 cm line'') since these would be confused
+with HST abstract proposal numbers.  We added a list of chemical and 
+atomic element
+names, and names of planets, constellations, etc.  From our list of 
+words, we deleted trailing plurals (``s'', ``ies'', ``ae'') and replaced 
+these with a wild-card symbol (*), since WAIS supports wild-cards in 
+querying.  
+
+We then set up a script to run a WAIS query associated with each word in our
+list: in all, 1715 queries.  This took about 80 minutes CPU time on a 
+SPARCstation 10.  A number of programs were then written to create and
+process the resulting proposal abstract versus index term association matrix. 
+
+Hits with all WAIS-allowed scores (1000 downwards) were retained. 
+In all queries, the maximum number of proposal abstracts returned ceilinged
+at 264.  This was related to the particular scoring mechanism which gives 
+additional weight to multiple occurrences of terms, and 
+normalizes with respect to the best retrieval in the database.
+
+%The index term versus proposal abstract dependency matrix is shown in 
+%Fig. y.  We recall that there were a few hundred repeated occurrences of 
+%abstracts here.  
+We experimented with a number of ways to summarize this
+information: row and column permuting, as successfully used by Packer (1989)
+for citation analysis; correspondence analysis and principal components
+analysis; and the Kohonen neural network method, a simultaneous 
+clustering and non-linear dimensionality-reduction method.  We obtained
+good results, in reordering rows and columns, when we used rare index terms
+(less than or equal to 20 associated proposal abstracts).  For clustering,
+we found difficulty in characterizing the clusters found.  
+This was related to the lack of semantic content in isolated
+words (``absolute'', ``active'', ``apparent'', ``brightness'', etc.).  We
+concluded that the strict treatment of phrases was a sine qua non for
+taking astronomical semantics into account. 
+
+
+\section{Free text retrieval, supporting phrases, using lq-text}
+
+{\it Lq-text}, due to Liam Quin, 
+ is available by anonymous ftp from
+ftp.cs.toronto.edu.  We used version 1.13 (although individual
+commands had version numbers preceding this).  {\it Lq-text} is a text
+information retrieval utility, using indexing,  which 
+supports phrases and keyword-in-context.
+It does not support the Z39.50 or related protocols, and is not 
+immediately interfaceable to WAIS.  It is currently  still under development.
+
+Advantages of {\it lq-text} include: phrase retrieval is supported,
+including phrases which are broken by ends of lines; dashes are 
+ignored (``Lyman-alpha'', ``Lyman alpha''); and in the default 
+mode, case is ignored.  Disadvantages include: in the default
+setting, words are between 3 and 18 characters in length (thus
+``UV'' is ignored); boolean queries are supported but 
+awkwardly, by ranking and intersecting; and strings which consist
+entirely of numeric data, or start with numeric characters, are
+excluded. 
+
+Following indexing, the indexing directory can be specified explicitely or
+with an environment variable. 
+%The indexing is carried out. The indexes are directed into 
+%the directory specified in environment variable LQTEXTDIR.  
+%Specification of directory containing indexes is necessary.  
+In the following
+the ordinary Unix system prompt is {\tt command>}, and 
+{\it lq-text}'s response is shown in footnote size font.
+
+%\begin{verbatim}
+%
+%command> setenv LQTEXTDIR lq-text-dir
+%
+%\end{verbatim}
+
+Query phrase support (qualifier ``v'' implies verbose mode):
+
+\begin{verbatim}
+command> lqphrase -v "IRAS galaxies"
+
+\end{verbatim}
+
+\begin{footnotesize}
+\begin{verbatim}
+lqphrase: lqtext directory "/diskc/fmurtagh/lq-text-dir"
+Word IRAS --> Iras, 32 matches
+Word galaxies --> galaxies, 1981 matches
+3       38      1   3   hstprop3913
+\end{verbatim}
+\end{footnotesize}
+
+Although there were 32 matches with the word ``IRAS'', and 1981 with
+``galaxies'', only in document ``hstprop3913'' did these come together as 
+a phrase.  We are not interested here in the remaining numeric information 
+returned, relating to offsets in the text of the word found. 
+A KWIC (keyword in context) option follows.
+
+\begin{verbatim}
+command> lqkwik `lqphrase "IRAS galaxies"`
+\end{verbatim}
+
+\begin{footnotesize}
+\begin{verbatim}
+91) that ultraluminous   IRAS galaxies are      : hstprop3913
+\end{verbatim}
+\end{footnotesize}
+
+Another support option is to show more of the context of what
+has been found.  A screen with up to 6 (default) lines before 
+and after the phrase or word, for each hit, is presented using
+command ``lqshow''.
+
+\begin{verbatim}
+
+command> lqshow `lqphrase "IRAS galaxies"`
+
+\end{verbatim}
+
+\begin{footnotesize}
+
+\begin{verbatim}
+
+Block 3/Word 38 in document: hstprop3913
+
+    the time dependence of the merger rate for massive galaxies. This will put
+
+    on a firmer observational footing the present theoretical estimates of how
+
+    many ellipticals were made by mergers. (2) We plan to pursue a suggestion
+
+    by Kormendy, Sanders & Cowie (1991) that ultraluminous IRAS galaxies are
+
+    local analogs of protogalaxies. The proposed objects have precisely the
+
+    properties expected of elliptical galaxies forming by dissipative collapse.
+
+    They contain intense starbursts that are shrouded by dust. Since even the
+
+    oldest giant ellipticals have solar or higher metallicities, all giant
+
+
+\end{verbatim}
+
+\end{footnotesize}
+
+Handling of singulars and plurals often worked well.
+We did find some limitations on stemming.  For instance ``protogalaxies'' 
+apparently truncated the ``s'', and provided hits corresponding to this 
+plural only; whereas ``protogalaxy'' caught both singulars and plurals.
+
+Multiple phrase support is illustrated in the following.  We get information
+on the number of hits associated with the individual words in the phrase.
+The list of documents, containing the phrase, has repititions when there 
+are multiple occurrences of the phrase.
+
+\begin{verbatim}
+
+command>  lqphrase -v "IRAS starburst galaxies" "spectral energy distri
+butions" "massive galaxies" "elliptical galaxies" "protogalaxies"
+
+\end{verbatim}
+
+\begin{footnotesize}
+
+\begin{verbatim}
+
+lqphrase: lqtext directory "/diskc/fmurtagh/lq-text-dir"
+
+Word IRAS --> Iras, 32 matches
+Word starburst --> starburst, 113 matches
+Word galaxies --> galaxies, 1981 matches
+1       1       3   99  hstprop3913
+2       3       1   3   hstprop3913
+
+Word spectral --> spectral, 272 matches
+Word energy --> energy, 131 matches
+Word distributions --> distributions, 282 matches
+3       51      1   0   hstprop1045
+4       2       15  64  hstprop2607
+2       17      1   0   hstprop2719
+3       7       1   0   hstprop3543
+2       15      1   0   hstprop3913
+3       18      1   0   hstprop4072
+3       18      1   0   hstprop4142
+3       19      95  96  hstprop4311
+8       15      97  64  hstprop4581
+6       22      1   0   hstprop4842
+1       28      1   0   hstprop5395
+3       60      1   0   hstpropFS23
+
+Word massive --> massive, 168 matches
+Word galaxies --> galaxies, 1981 matches
+3       11      1   0   hstprop3913
+2       0       1   0   hstprop5447
+
+Word elliptical --> elliptical, 138 matches
+Word galaxies --> galaxies, 1981 matches
+1       3       3   98  hstprop1057
+0       15      3   98  hstprop1114
+0       16      1   2   hstprop1242
+1       19      1   0   hstprop1248
+2       35      9   64  hstprop1248
+0       10      3   98  hstprop2295
+0       13      1   2   hstprop2405
+1       7       2   66  hstprop2405
+2       16      1   0   hstprop2405
+2       30      1   0   hstprop2405
+5       4       1   0   hstprop2405
+1       2       3   98  hstprop2607
+2       50      1   0   hstprop2607
+1       3       4   98  hstprop2719
+1       3       3   98  hstprop3225
+1       2       3   98  hstprop3265
+0       16      1   130 hstprop3333
+1       1       3   98  hstprop3448
+2       27      1   0   hstprop3448
+1       18      2   66  hstprop3545
+1       2       3   98  hstprop3647
+3       5       3   96  hstprop3647
+2       27      1   0   hstprop3657
+3       0       1   0   hstprop3657
+3       52      3   96  hstprop3913
+3       0       3   96  hstprop4085
+1       2       3   98  hstprop4205
+9       22      3   96  hstprop4366
+6       1       3   96  hstprop4644
+1       5       3   98  hstprop4838
+5       10      3   96  hstprop4903
+5       10      3   96  hstprop4904
+6       1       3   96  hstprop4905
+2       18      17  64  hstprop5396
+2       32      1   0   hstprop5416
+2       13      1   0   hstprop5430
+3       43      15  64  hstprop5436
+2       38      18  96  hstprop5446
+4       15      3   96  hstprop5465
+4       4       1   0   hstprop5496
+0       6       127 66  hstpropFC03
+1       4       2   66  hstpropFC03
+2       14      1   0   hstpropFC03
+2       4       3   96  hstpropWC02
+0       7       3   98  hstpropWC08
+1       9       3   96  hstpropWC08
+1       7       16  96  hstpropWD02
+
+Word protogalaxies --> protogalaxies, 9 matches
+4       4       1   1   hstprop1233
+3       54      1   1   hstprop3181
+3       54      1   1   hstprop3331
+3       43      3   97  hstprop3913
+
+\end{verbatim}
+
+\end{footnotesize}
+
+Thus, in the last segment of what was retrieved (as shown just above), 
+``protogalaxies'' was found 9 times, but 4 
+documents were affected in all.
+
+{\it Lq-text} offers good support for phrases.  
+%We see no immediate
+%need to constrain these phrases to come from the IAU Thesaurus.  
+On the 
+other hand, {\it lq-text} does not offer a basis for the support of 
+astronomical object naming
+conventions (cf.\ lack of support for numeric-starting, or fully numeric,
+strings).  
+%It is also a pity that it is not implemented in
+%a client-server fashion, nor does it aim to be.
+
+\section{Integrating the IAU Thesaurus with lq-text as retrieval engine}
+
+The availability of a controlled vocabulary is advantageous for a user
+who has not carried out querying before.  We used the IAU Thesaurus for 
+this purpose.  The IAU Thesaurus is ``phrase rich'': two- and three-word
+phrases are very common (``spectral types'', ``absorption lines'', etc.).
+Thus {\it lq-text} is an appropriate retrieval system, for such phrases.
+
+Potentially important 
+properties  of the IAU Thesaurus were more difficult to use.
+Use of the hierarchical structure of the words and phrases in the Thesaurus 
+was eschewed.  Words or phrases at all hierarchical levels in the Thesaurus
+were used on an equal footing.  This lead to redundancies: e.g. ``abell 
+clusters'' appear under ``clusters'' and under ``clusters of galaxies''.  
+Such redundancies were removed, leaving a total of 1427 phrases retained. 
+(The original IAU Thesaurus list had contained 5356 lines, many dozen of
+which were blank, separating lines.)
+
+A simple script was used to run a query of the HST abstract data collection
+corresponding to each of these phrases.  Thus {\it lq-text} was invoked 
+1427 times.  The computational requirement for this was about one minute on
+a SPARCstation 1.  
+
+An additional problem was posed by the requirement of {\it lq-text}
+that a word be three characters or greater in length.  This implied that
+a phrase like ``Am star'' or ``Ap star'' both collapsed to 
+``star''.  Under these
+circumstances there was considerable redundancy in the queries.  To counter
+this, the set of queries was liberally edited by hand to remove some of 
+these phrases.  A few dozen phrases were deleted, for this reason.  
+{\it Lq-text} also restricts usage of words beginning with numeric
+characters (e.g. problematic for object names such as 47 Tuc).
+
+The number of phrases which were found to be present one or more times in
+the HST proposal abstract collection was 286.  The dependency array, crossing
+1434 proposal abstracts with 286 phrases, is shown in Fig. 1.  There remain
+redundant phrases: ``star'' or ``galaxy'' still appear a number of times.  
+Thus, the vertical axis of Fig. 1 has a number of horizontal rows associated
+with the word ``star''.  Such redundancy is not a problem, and causes at
+worst an unnoticeable amount of computational overhead. 
+
+The dependencies shown in Fig. 1 can -- in principle -- be used to provide
+clusters of associated propsal abstracts, or to allow proposal abstracts to 
+be located in a factor space (Ossorio, 1966) or in a space of dimensionality 
+lower than 286 using latent semantic axes (Deerwester et al., 1990).  But
+how feasible is this?  We checked out the clustering tendencies of the 
+data shown in Fig. 1, and simultaneously the feasibility of projecting either
+proposal abstracts, or index term phrases, non-linearly into a two-dimensional
+space.  The Kohonen ``self-organizing'' feature map iteratively finds a 
+grid structure of pseudo-proposal abstracts (286-dimensional vectors, which
+will represent a cluster of proposal abstracts).  Using a regular $8 \times 8$ 
+grid, we found the following numbers of proposal abstracts associated 
+with each 
+``bin'':
+
+\begin{verbatim}
+
+    37     0   241    44    41    11     1    70
+     0     0    57     0     0     0     1    11
+    26     0    52     3     8    73     0     2
+    21     0    26     2     1     4     0    29
+     8     0     9     0     2    15     0     2
+    94     0    43     3     5    19     0    33
+     6     0     7     0     0     0     4    10
+   124    10    40     0    62     4    18   155
+
+\end{verbatim}
+
+Other grid dimensions could be used.  We see from the above, however, that
+the largest cluster returned had 241 associated proposal abstracts.
+
+To characterize the 64 ($= 8 \times 8$) ``bins'' above, we looked at the 
+index term phrases which were strongly associated with each ``bin''.  
+Technically, this procedure is as follows.  Each proposal abstracts is a
+286-valued binary (0 or 1) vector.  Each ``bin'' vector, or pseudo-proposal
+abstract, is initially a 286-valued vector with uniformly distributed random
+values between 0 and 1.  The Kohonen procedure makes these ``bin'' vectors
+accurately reflect an associated cluster of proposal abstracts.  When this
+was done, we simply looked at each of the 286 values associated with a 
+``bin'' vector, and a value greater than 0.5 in value $j$ ($1 \leq j \leq 
+286$) indicated strong association between index term phrase $j$ and this 
+``bin'' vector. 
+
+The $8 \times 8$ grid was characterizable as follows:
+
+
+\begin{verbatim}
+
+---    ---    stars    stars     plan.     ---     solar    solar
+                                 nebul.            syst.    syst.
+
+---    ---    stars     ---       ---      ---     solar    solar
+                                                   syst.    syst.
+
+gal.   ---   astro-    astro-     solar   solar     ---      gal. 
+              phys.     phys.     syst.   syst. 
+
+gal.   ---   astro-    astro-     solar   solar     ---      QSOs
+              phys.     phys.     syst.   syst.
+
+gal./  ---   astro.     ---        ---    atrom.    ---      ---
+QSOs          obs.
+
+gal./  ---    obs.      obs.      motion  motion    ---     photom.
+QSOs
+
+QSOs   ---   QSOs       ---        ---     ---      gal.    gal.
+                                                    clust.  clust.
+
+QSOs   QSOs  QSOs       ---       QSOs     ---      gal.    gal.
+                                                    clust.  clust.
+
+\end{verbatim}
+
+Here, ``gal.'' is ``galaxies'', ``plan. nebul.'' is ``planetary nebulae'',
+``astrom.'' is ``astrometry'', ``gal. clust.'' is ``galaxy clusters'',
+``astrophys.'' is ``astrophysics'', ``astro. obs.'' is ``astronomical 
+observations'' and ``obs.'' is ``observations''.  With the exception 
+of the latter three categories (which appear somewhat amorphous: we did
+not pursue them further), most others are fairly clear.  
+Furthermore, in general, they appear at contiguous locations in the
+above diagram: note ``solar syst.'' or ``stars'', for example.  Allowing
+for wrap-around (not explicitly catered for in our algorithmic 
+implementation of the Kohonen method), the QSO-related ``bins'' are  also 
+fairly adjacent to one another, compared to any other category.
+
+This 2-d map of abstract proposals suffices for our purposes: the 
+interrelationships and interdependencies between proposals and -- more
+importantly --  between the index terms derived from the IAU Thesaurus
+have a reasonable degree of internal consistency and coherence.  This
+permits us to conclude that the IAU Thesaurus, used in this way, provides
+at least an initial, suitable  controlled vocabulary for query-support
+with this data.
+
+
+\section{Other publicly available retrieval engines}
+
+\begin{enumerate}
+
+\item As already mentioned, {\it grep} 
+and other related Unix tools are not feasible
+on computational grounds.  The prior construction of an inverted file is a 
+sine qua non for feasible free text information retrieval.
+
+\item Qt (``Query Text'') is available from ftp.uu.net in 
+usenet/comp.sources.unix/volume27.  It does not have phrase support 
+(indirect possibilities do exist, through use of a permuted index), nor is
+it a  client-server system.  It is effective for constructing and
+handling an inverted file list; and boolean queries.  It is also 
+well-documented, and easy to use.
+
+\item Frakes and Baeza-Yates (1992) provide a comprehensive introduction to 
+algorithmic information retrieval.  Accompanying C source code programs 
+are available from ftp.vt.edu lexical analysis and handling stop lists,
+stemming, thesaurus construction, boolean operations, and so on.  
+
+\item Essence (available at ftp.cs.colorado.edu:/pub/cs/distribs/essence)
+is a software tool, which produces WAIS-compatible indexes, but which 
+addresses better the following issue: what type of information should one
+derive from files which are not ASCII text files.  
+Examples include binary, archive,
+C and C header, directory, object, TeX, etc., files.  Ordinarily a user
+will have files of these various types at hand. 
+
+
+
+\end{enumerate}
+
+
+\section{Conclusions}
+
+We examined the client-server WAIS retrieval tool, and found certain
+difficulties in its support of queries consisting of phrases; and 
+its outputing of the best scoring hits was less useful for our purposes
+than simply outputing all possible occurrences of the query terms.  
+Needless to say, these conclusions are
+based on the use of a particular version of WAIS.  
+
+We examined the retrieval system, {\it lq-text}, and found it adequate
+for our purposes in its support of phrases.  It is a stand-alone Unix
+utility, and unless wedded to a system like WAIS, it does not run in a
+client-server mode.  Again the version used by us should be taken into
+account.  We have shown how a controlled vocabulary such as that provided
+by the IAU Thesaurus can be integrated with the {\it lq-text} retrieval engine.
+In fact, a user's desired observing program can easily be written in the 
+form of a proposal abstract; this can be indexed by {\it  lq-text}, and 
+all phrases retained from the IAU Thesaurus can be found in this text;
+in the framework of our experiments, above, this would provide us with a 
+286-valued binary vector corresponding to the user's proposed research; 
+this vector can then be matched against all vectors associated with 
+the 1434 accepted HST proposal abstracts in order to provide the user with 
+a number of sufficiently similar abstracts. 
+
+All in all, the IAU Thesaurus provides an adequate controlled vocabulary.
+Further work will investigate the hierarchical structure of the Thesaurus,
+and how that may be used to provide more semantic information in this 
+integration of Thesaurus and retrieval engine. 
+
+A difficulty in the use of {\it lq-text} 
+arose in regard to supported word length (between
+3 and 18 characters, which can be altered in the code).  Astronomical 
+abbreviations are often of one or two characters.  Rather than altering
+{\it lq-text} to allow for such abbreviations and short astronomical 
+names, we see a need for a more thorough strategy in regard to support
+of astronomical object names.  These should be processed separately.
+A system such as SIMBAD provides a comprehensive name resolver, and 
+also a hierarchical object classification scheme.  The first major problem
+facing us
+is to automatically extract all astronomical object names, or classes
+of object, from free text.  Once this is done, a remote call to SIMBAD 
+can provide synonym and classification information.
+
+\section*{References}
+
+\begin{enumerate}
+
+\item J. Fullton, ``WAIS'', in A. Heck and F. Murtagh, Eds., {\it Intelligent
+Information Retrieval: The Case of Astronomy and Related Space Sciences},
+Kluwer, Dordrecht, 1993, pp. 113--118.
+
+\item R.M. Shobbrook and R.R. Shobbrook, {\it The Astronomy Thesaurus}, Version
+1.1, IAU, 1993.
+
+\item P.G. Ossorio, ``Classification space: a multivariate procedure for
+automatic document indexing and retrieval'', {\it Multivariate Behavioral
+Research}, {\bf 1}, 479--524, 1966.
+
+\item 
+S. Deerwester, S.T. Dumais, G.W. Furnas, T.K. Landauer and R. Harshman,
+``Indexing by latent semantic indexing'', {\it Journal of the American 
+Society of Information Science}, {\bf 41}, 391--407, 1990.
+
+\item C.V. Packer, ``Applying row-column permutations to matrix 
+representations of large citation networks'', {\it Information Processing and
+Management}, {\bf 25}, 307--314, 1989.
+
+\item W.B. Frakes and R. Baeza-Yates, Eds., {\it Information Retrieval: Data 
+Structures and Algorithms}, Prentice-Hall, 1992.
+
+\end{enumerate}
+
+
+
+\end{document}
+
+\bye
+

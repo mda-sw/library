@@ -1,0 +1,577 @@
+\documentstyle[11pt]{article}
+\pagestyle{empty}
+\begin{document}
+
+{\bf Extended Abstract for:} 11th IAPR International 
+Conference on Pattern Recognition,
+The Hague, August 30 -- September 3, 1992.
+
+\medskip
+
+{\bf Conference:} Pattern Recognition Methodology and Systems.
+
+\bigskip
+
+\bigskip
+
+\bigskip
+
+\begin{center}
+{\large{\bf A Feature-Based $O(N^2)$ Approach to Point Pattern Matching}}
+
+\bigskip
+
+F. Murtagh\footnote{Affiliated to the Astrophysics Div., Space Science Dept.,
+European Space Agency.}
+
+Space Telescope -- European Coordinating Facility
+
+European Southern Observatory 
+
+Karl-Schwarzschild-Str. 2
+
+D-8046 Garching/Munich (Germany)
+
+Email: murtagh@scivax.stsci.edu, fmurtagh@eso.org, fionn@dgaeso51.bitnet.
+
+\end{center}
+
+\section*{Abstract}
+
+We describe a new algorithm for the astronomical problem of matching star 
+lists, given by their 
+2-dimensional coordinates.  This algorithm is feature-based, and is of
+$O(n^2)$ computational complexity.
+
+\section{Introduction}
+
+The problem of point pattern matching arises in 2-dimensional photometry,
+and in matching star lists against catalog information.  The former area
+will be most at issue in this paper.  Star lists (i.e. centroids of
+star positions) can arise through different point spread function (PSF) 
+fitting procedures, or 
+different 2-d photometry packages used on the same field; or through 
+the reduction of images based on different color filters; 
+or through reduction of partially-overlapping images taken at different
+times or with different detectors.
+
+The term ``point'' (coordinates, ordinarily in 2-dimensional space) 
+will be used 
+interchangeably with star centroid or central location in this article.
+A matching of some points from one list with some points in the 
+other list(s) is sought.  Equivalently the transformation which optimally 
+maps one list into the other is sought.  This allows subsequent judgement
+of the methods which produced the point lists, or the data on which they
+were based, etc.
+
+The next section reviews some approaches adopted for this problem, in 
+astronomy and in computer vision generally.
+
+\section{A Short Review of Approaches}
+
+The matching of 2- or 3-dimensional points from two lists is a very common
+problem.  Approaches which have been availed of include: least squares
+(Umeyama, 1991); a geometric approach (Griffin and Alexopoulos, 1989); 
+matching of Delauney triangulations (Ogawa, 1986); branch-and-bound to 
+expedite exhaustive search (Wong and Salay, 1986); and constraint satisfaction
+solved using a Hopfield-Tank neural network (Parvin and Medioni, 1989).
+Many further references can be found in
+the works cited.
+
+We now briefly review three approaches used in the astronomical context.
+
+Routine {\tt PAIR}, authored by A. Lauberts, has been in use in the European
+Southern Observatory for many years.  It assumes a translation between
+$A$ and $B$.  The Euclidean distance between each point $i$ in $A$ and each
+point $i^{\prime}$ in $B$ is determined.  If $i^{\prime} = i + c$, then
+$d^2(i,i^{\prime}) = c^2$ for matched points, and one would expect a 
+spread distribution of values for distances with points $i^{\prime\prime}$ 
+which ought
+not to be matched.  Thus the mode of all pairwise distances (between all $i$ in
+$A$ and all $i^{\prime}$ in $B$) allows the value $c$ to be determined.  This
+approach is invariant to translation and random perturbation.  
+
+The use of a Delauney triangulation to capture affine-invariant information
+on point pattern interrelationships has been mentioned.  
+Groth (1986) implements an all-triangles matching approach.  A range of
+speed-ups are applied to cut down on the matching of all triangles from
+the first list, i.e. $O(n^3)$, with a similar list from the second list.
+The principle efficiency tactic is to only match triangles with a 
+ratio of longest side to shortest side which is within some tolerance.  
+Groth finds the order of magnitude increase in computation to be improved
+from $O(n^6)$ to $O(n^{4.5})$.  It is recommended that the number of points
+in both lists be limited to between 20 and 30 points for computational reasons,
+and such a selection may be
+carried out on the basis of the magnitudes associated with points.
+
+Stetson (1990), discussing an algorithm he developed many years earlier,
+also implemented a triangle-based matching algorithm.  Points
+are considered in increasing order of magnitude.  Following an initial 
+matching of a small number (three) of highly-weighted points, further points are
+added one at a time.  Hence the procedure, reasonably, is biased towards  
+points of large weight.  
+Imprecision in measurement of magnitudes is taken into account insofar
+as rank orders of magnitudes are used.
+
+\section{The Proposed Method}
+
+For each point, $i$,  in either list, a ``world view'' vector is determined.
+This vector represents the $n-1$ other points in a given 
+list, as ``seen'' from the point $i$.  Relative to an initially arbitrary
+horizontal axis, the angles subtended by the $n-1$ other points to the
+given point, $i$, are determined, and sorted.  We consider here, and in
+our experimentation, only 2-dimensional point-sets: angles could not be
+trivially sorted in higher dimensions. At the angle subtended by
+$j$ relative to $i$, we consider the effect of $j$ as being related to
+$d(j,i)$, the usual Euclidean distance.  
+
+We wish the effect of faraway
+points, $j$, to be high in value, since for consistency we will later adopt the
+convention that a large matching value is an unfavorable one.  Hence, rather
+than simply taking the effect of $j$ on $i$ to be $d(i,j)$, we define it to 
+be $K - d(i,j)$ where $K$ is a constant which is somewhat greater than
+the maximum $d(i,j)$ for all $i,j$.  
+
+We experimented with the
+inverse of the distance, but we not find it better than $K - d$.   
+We also experimented with the incorporation of 
+magnitudes into this ``effect-of-$j$-on-$i$'' term, 
+leading for example to $w_j/d^2(i,j)$ where
+$w_j$ was the magnitude of star $j$.  An alternative scheme is to use
+$\mid w_i - w_j \mid . (K - d(i,j))$.  We  currently recommend against doing
+this.  The reason is that there can be appreciable differences in the 
+distributions of the values of the two terms (differences of $w$, 
+$d$).  Consequently one or other
+of these terms can predominate.  Standardization or normalization, per se, does
+not allow us to bypass this difficulty.
+
+To summarize: with each point $i$ in a given point-list containing in total
+$n$ points, we now have have a set of ``effect'' terms induced by the 
+remaining $n-1$ points.  These ``effect'' terms, $ \{ p_{ji} \mid j = 1, 2, 
+\dots, n; \ 
+j \neq i \}$ have value $p_{ij} = K - d(i,j)$.  Furthermore, this set of
+``effect'' terms is 
+ordered by the angle between  $j$ and an arbitrary axis through $i$.  Without
+loss of generality, this arbitrary axis may be taken as parallel to the
+x-axis of the given coordinate values, and the ordering may be determined
+in a counter-clockwise fashion.  The ``world view'' of point $i$ is thus
+expressed by this ordered set of $n-1$ values.  Matching will later be
+carried out by seeking a point, or points, in the second list with a similar
+``world view''.
+
+The ``world view'' list of $i$ may be interpreted as the set of projections
+(defined in a particular way) of $n-1$ points onto the unit circle of center
+$i$.
+
+Any ``world view'' in point set $A$ is an ordered $(n-1)$-list.  Any ``world
+view'' in point set $B$ is an ordered $(m-1)$-list.  Optimally matching
+vectors of differing lengths can be carried out using dynamic programming.
+See Kruskal (1983), Sankoff and Kruskal (1983), or Hall
+and Dowling (1980), for discussion and practical examples.  We adopted a
+different approach.  Given that 2-dimensional data is under consideration,
+the angles necessarily lie between $0^o$ and $360^o$.  Hence, instead of 
+using the given ordered list, we map this into a list of length 36
+corresponding to the ``world view'' of a point sampled at $10^o$ intervals.
+The choice of $10^o$ intervals is quite arbitrary -- it could be $5^o$ or
+$1^o$ -- but we have found it to offer a good compromise between 
+sensitivity and computational cost.  To determine the ``world view'' at 
+a given angle (at an interval of $10^o$ from the previous and subsequent
+angles), we interpolated from values of $p$ at the angles which were larger
+and smaller.  Note that we must allow for the fact that angles mod $360$ are 
+used.  Linear interpolation was used: it was simple to 
+implement, and gave satisfactory results.   
+ 
+One aspect of this interpolation will be commented upon.  Points which are
+outlying have a ``world view'' which in entirely encompassed within a 
+limited range of angles.  This angle interval can be small (e.g. considerably
+less than $45^o$).  We found it unproductive to determine (interpolated)
+$p$ values outside of this angle interval.  Hence we did not approach the
+interpolation on the basis of a sequence of angles with $10^o$ separations,
+determining $p$ values on each occasion.  Rather, we took the initially
+given set of angles associated with any point's ordered ``world view''
+list; and {\it interpolated} at the $10^o$-separation angles which were
+covered or spanned by this.  
+
+As is clear from the foregoing, particular implementation choices were made
+in a number of instances.  The overall problem can be stated as follows.
+
+\begin{itemize}
+
+\item $ \theta_{ij} $ is the angle subtended at $i$ by $j$.
+
+\item $ p_{ij} $ is defined in an interval spanned by $[\theta_l, 
+\theta_h]$
+for any $i$: $$ \theta_l = \min_j \theta_{ij} \leq 
+\theta_{ij} \leq \theta_h = \max_j \theta_{ij}   $$.
+Furthermore $p_{ij}$ is taken as continuous on this interval.
+
+\item Given $$\{ p_{ij} \mid j \} \ \ \ (1 \leq j \leq n-1) , $$ 
+determine $$\{ p_{ik} \mid k \} \ \ \  (1 \leq k \leq 36) . $$
+
+\end{itemize}
+
+The ``world view'' of any point, expressed as an ordered 36-list, is now
+directly comparable irrespective of what point-set the point came from,
+and the matching can be straightforwardly carried out.  Such
+a matching is invariant to: (i) translation; (ii) scaling, even though
+for very discrepant scales it may be necessary to consider normalizing the
+values of $p$; this amounts to normalizing the $K - d$ terms, for example
+to the [0, 1] interval; (iii) small random perturbations; and (iv) the addition
+or deletion of points in one list relative to the other.  We have not 
+investigated rotation at this time.  We would approach this by considering 
+all possible
+matchings between $A$ and 36 versions of $B$: i.e.\ the ``world view'' vectors
+of $B$ would be all together rotated by $10^o$ in successive versions.  We 
+would seek a best matching from the 36 results.
+
+It is clear that addition or deletion of points alters, even if to a small
+extent, the ``world views'' of points.  Hence spurious and false matches
+can be expected.  In matching, i.e. in calculating the Euclidean distance
+between the ordered 36-lists which comprise the ``world views'', we have
+discretized the resultant distances to a [0, 10] confidence scale.  This 
+allows the results to be expressed as: ``Point $i$ from the first list is
+mapped onto point $i^{\prime}$ from the second list, with confidence 4'', for
+example.  Only matches of confidence 1, i.e. small distances between
+``world view'' profiles, are used to determine an expression for the 
+overall transformation between $A$ and $B$.
+
+Even within these high-confidence matches, there can be discrepancies.
+An average high-confidence transformation could be determined, which takes 
+$A$ into $B$.
+We instead favored a robust estimate, and found the median of these
+high-confidence values to provide satisfactory results.
+
+Our approach requires $O(n^2)$ time to determine the ``world views'' of
+all points; and subsequently $O(n^2)$ time to carry out the matching.  
+Storage is seen to be $O(n^2)$.  
+
+\section{Results}
+
+
+Figs.\ 1 and 2 show the result of two reductions of images of the open cluster
+M11, obtained and studied by P.B. Stetson using his DAOPHOT 2-dimensional image
+photometry package in 1985.  Note, for
+example, how 28, 26 and 43, 61, 58, 24 in the first point-set ought to map 
+onto 27, 25 and 36, 57, 52, 23.  Note that 38, 20, 45, 14 in the upper
+left-hand side of the first  point-set are absent in the second point-set.
+The matching
+obtained by Stetson's matching approach (discussed above) is shown in 
+Table 1.
+
+\begin{center}
+\bigskip
+
+\underline{Figs. 1 and 2, Table 1, Figs. 3 and 4, Table 2 in this order,
+near here.}
+
+\end{center}
+
+\bigskip
+
+
+The results obtained by the approach described in this paper are shown
+in Table 2. 
+
+Figs.\ 3 and 4 were derived from a figure in Groth (1986).  A digitized 
+photographic image provided the stars in one set, and the points in the
+other set were culled from a catalog.  Eighteeen points in Fig. 3 correspond
+exactly with points in Fig. 4. The results obtained are shown in
+Table 3.
+
+\section{Discussion}
+
+We have presented a very efficient algorithm for point pattern matching,
+and demonstrated its success in handling invariance of the following types:
+translation, scaling, perturbation, random insertions and deletions.  We
+believe that rotation can also be handled without undue difficulties.
+This algorithm has considerably better computational complexity characteristics,
+compared to algorithms which are currently in use as auxiliary tools in the
+area of 2-dimensional photometry.
+
+Within the framework of the approach described, there are numerous further
+possibilities for further fine-tuning.  These will be investigated in due
+course.  The definition of a ``world view'' could perhaps be strengthened
+by spherical factor analysis, a little used technique which was
+investigated by Domeng\`es and Volle (1979).  It is intriguing to ask if this
+approach could lead to an even more sensitive/expressive ``world view''
+profile for a given point.
+
+We do not {\it directly} use the stellar magnitudes in our matching procedure.
+In some instances this may be faulted for not making use of very reasonable
+information.  In other cases, less than fully accurate measurement of 
+magnitudes could make this advantageous.  Differing presuppositions make the
+approach described in this article complemenatary to the triangle-based
+mapping, rather than a replacement for such an algorithm.
+Future work will seek to further improve the already satisfactory results
+yielded by the proposed algorithm.
+
+\section*{References}
+
+\begin{enumerate}
+
+\item D. Domeng\`es and M. Volle, ``Analyse factorielle sph\'erique: une
+exploration'', {\it Annales de l'INSEE}, No. 35, 3--84, 1979.
+
+\item P.M. Griffin and C. Alexopoulos, ``Point pattern matching using
+centroid bounding'', {\it IEEE Transactions on Systems, Man, and Cybernetics},
+{\bf 19}, 1274--1276, 1989.
+
+\item E.J. Groth, ``A pattern-matching algorithm for two-dimensional
+coordinate lists'', {\it The Astronomical Journal}, {\bf 91}, 1244--1248,
+1986.
+
+\item P.A.V. Hall and G.R. Dowling, 
+``Approximating string matching''.
+{\it Computing Surveys}, {\bf 12}, 381--402, 1980.
+
+\item M.D. Johnston and H.-M. Adorf, ``Scheduling with neural networks --
+the case of Hubble Space Telescope'', {\it Journal of Computers and
+Operations Research}, 1991, in press.
+
+\item J.B. Kruskal, 
+``An overview of sequence comparison: time warps, string
+edits, and macromolecules''. {\it SIAM Review}, {\bf 25}, 201--237, 1983.
+
+
+\item H. Ogawa, ``Labeled point pattern matching by fuzzy relaxation'', 
+{\it Pattern Recognition}, {\bf 17}, 569--573, 1984.
+
+\item H. Ogawa, ``Labeled point pattern matching by Delauney triangulation
+and maximal cliques'', {\it Pattern Recognition}, {\bf 19}, 35--40, 1986.
+
+\item B. Parvin and G. Medioni, ``A constraint satisfaction network for
+matching 3D objects'', Proc.\ IJCNN, vol. II, pp. 281--286, 1989.
+
+\item D. Sankoff  and J.B. Kruskal, 
+{\it Time Warps, String Edits, and
+Macromolecules: The Theory and Practice of Sequence Comparison}.
+New York: Addison-Wesley, 1983.
+
+\item P.B. Stetson, ``The techniques of least squares and stellar 
+photometry with CCDs'', preprint, Dominion Astrophysical Observatory,
+1990, 83 pp.
+
+\item A.K.C. Wong and R. Salay, ``An algorithm for constellation matching'',
+Proc.\ Eight International Conference on Pattern Recognition, Paris, France,
+1986, Vol. 1, IEEE Computer Society Press, pp. 546--554, 1986.
+
+\item S. Umeyama, ``Least-squares estimation of transformation parameters
+between two point patterns'', {\it IEEE Transactions on Pattern Analysis
+and Machine Intelligence}, {\bf 13}, 376--380, 1991.
+
+\end{enumerate}
+
+\newpage 
+Figure Captions
+
+\bigskip
+
+\bigskip
+
+\bigskip
+
+Fig. 1: A point-set, to be compared with Fig. 2.
+
+\bigskip
+
+Fig. 2: A point-set, to be compared with Fig. 1.
+
+\bigskip
+
+Fig. 3: A point-set, to be compared with Fig. 4.
+
+\bigskip
+
+Fig. 4: A point-set, to be compared with Fig. 3.
+
+\newpage
+
+\begin{table}
+\begin{center}
+
+\begin{tabular}{c c} 
+List A  & List B \\ \hline
+1  &  1 \\
+2  &  2 \\
+3  &  3 \\
+4  & 4 \\
+5 & 5 \\
+6 & 6 \\
+7 & 7 \\
+9 & 8 \\
+10 & 9 \\
+11 & 10 \\
+12 & 11 
+\end{tabular}
+
+\medskip
+
+Estimated transformation:
+
+$$ x_1 = -5.4316 + 0.9991 x_2  -0.0002 y_2 $$
+
+$$ y_1 = -61.3214 + -0.0011 x_2 + 0.9988 y_2 $$
+
+\caption{Result of matching using P.B. Stetson's routine, on data shown in 
+Figs. 1 and 2.}
+\end{center}
+
+\end{table}
+
+\ \ 
+
+\newpage
+
+\ \ 
+
+\begin{center}
+
+\begin{tabular}{c c c} 
+List A  & List B & Confidence \\ \hline
+
+  1  &  54  &    8 \\
+  2  &   2  &    1 \\
+  3  &   3  &    1 \\
+  4  &  61  &    6 \\
+  5  &   5  &    1 \\
+  6  &   6  &    1 \\
+  7  &   7  &    1 \\
+  8  &  35  &    6 \\
+  9  &   8  &    2 \\ 
+ 10  &   9  &    2 \\
+ 11  &  10  &    1 \\
+ 12  &  11  &    2 \\
+ 13  &  12  &    1 \\
+ 14  &  52  &    3 \\
+ 15  &  15  &    1 \\
+ 16  &  16  &    1 \\
+ 17  &  19  &    1 \\
+ 18  &  20  &    1 \\
+ 19  &  18  &    1 \\
+ 20  &  25  &    1 \\
+ 21  &  22  &    1 \\
+ 22  &  62  &    6 \\
+ 23  &  26  &    1 \\
+ 24  &  23  &    1 \\
+ 25  &  24  &    1 \\ 
+ 26  &  25  &    1 \\
+ 27  &   1  &    5 \\
+ 28  &  27  &    1 \\ 
+ 29  &  55  &    9 \\
+ 30  &  31  &    8 \\ 
+ 31  &   1  &    1 \\
+ 32  &  32  &    1 \\
+ 33  &  53  &    2 \\
+ 34  &  66  &    1 \\
+ 35  &  32  &    1 \\
+ 36  &  34  &    1 \\
+ 37  &  28  &    1 \\
+ 38  &  36  &    1 \\
+ 39  &  33  &    2 \\
+ 40  &  39  &    1 
+\end{tabular}
+\end{center}
+
+\newpage
+
+\begin{table}
+\begin{center}
+\begin{tabular}{c c c} 
+List A  & List B & Confidence \\ \hline
+ 41  &  37  &    1 \\
+ 42  &  38  &    1 \\
+ 43  &  13  &    2 \\
+ 44  &  58  &    2 \\
+ 45  &   1  &   10 \\
+ 46  &  49  &    4 \\
+ 47  &  40  &    1 \\
+ 48  &  46  &    1 \\
+ 49  &  44  &    1 \\
+ 50  &  44  &    1 \\
+ 51  &  24  &    5 \\
+ 52  &  24  &    5 \\
+ 53  &  48  &    1 \\
+ 54  &  35  &    7 \\
+ 55  &  50  &    3 \\
+ 56  &  51  &    1 \\
+ 57  &  54  &    3 \\
+ 58  &  52  &    1 \\
+ 59  &  53  &    1 \\
+ 60  &  55  &    8 \\
+ 61  &  13  &    1 \\
+ 62  &  44  &    1 \\
+ 63  &  61  &    1 \\
+ 64  &  58  &    1 \\
+ 65  &  62  &    1 \\
+ 66  &  59  &    1 
+\end{tabular}
+
+\medskip
+
+Note: confidence high--low: 1--10.
+
+\medskip
+
+Translation vector which takes first list points into second: 
+$-5.5900 \ \ -61.7800$.
+
+\medskip
+
+\caption{Results of feature-based algorithm on point-lists shown in Figs. 1 and
+2.}
+
+\end{center}
+\end{table}
+
+\newpage 
+\begin{table}
+\begin{center}
+\begin{tabular}{c c c} 
+List A  & List B & Confidence \\ \hline
+  1 &  1 &  1 \\
+  2 &  9 &  3 \\
+  3 &  3 &  3 \\
+  4 & 20 &  6 \\
+  5 &  4 &  2 \\
+  6 &  6 &  2 \\
+  7 &  7 &  2 \\
+  8 &  8 &  1 \\
+  9 &  9 &  1 \\
+ 10 & 10 &  2 \\
+ 11 &  2 &  2 \\
+ 12 & 12 &  1 \\
+ 13 & 19 &  2 \\
+ 14 & 14 &  1 \\
+ 15 & 15 &  1 \\
+ 16 & 20 &  5 \\
+ 17 & 17 &  1 \\
+ 18 & 18 &  1 \\
+ 19 &  9 &  2 \\
+ 20 &  6 &  3 \\
+ 21 & 10 &  2 \\
+ 22 &  5 &  4 \\
+ 23 &  2 &  6 \\
+ 24 & 17 & 10 \\
+ 25 & 25 &  8 
+\end{tabular}
+
+\medskip
+
+Note: confidence high--low: 1--10.
+
+\medskip
+
+Translation vector which takes first list points into second: 
+$         0.0 \ \ 0.0$.
+
+\medskip
+
+\caption{Results of feature-based algorithm on point-sets shown in Figs. 3 and
+4.}
+\end{center}
+\end{table}
+
+\end{document}
+
+\bye
+

@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - Synthetic Aperture Radar</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+<font color=red>
+<h1>ERS image - SAR, Synthetic Aperture Radar</h1>
+<font color=black>
+<p>
+<img src="../pic/sarh.gif">
+<p>
+<img src="../pic/sarhf.gif">
+<p>
+
+A SAR image taken by the European Space Agency's ERS satellite (ERS-1 or -2) 
+is shown on 
+the left.  It contains a lot of what is termed speckle, - the radar image is
+deflected by foliage, soil, water, buildings.  Note the "sparkle" half way 
+up towards the right - this is caused by some reasonably
+large area more or less exactly reflecting back the radar signal.  The 
+second image
+is a filtered version of this image.   It could be used to 
+much more easily pick out and demarcate areas of similar trees, or of urban
+areas, for instance. 
+
+
+<p>
+<hr>
+</center>
+
+<b>Commands used</b><p>
+
+<i>mr_filter -m 4  -t 10  in.fits out.fits</i> <br>
+This entails use of (i) a multiplicative noise model for the filtering,
+based on (ii) a pyramidal median transform.
+<p>
+Another command is <i>mr_rfilter</i> with options for noise modeling being
+Rayleigh, log-transformed Rayleigh and square-transformed Rayleigh.
+<p>
+
+<hr>
+
+
+<b>To probe further</b><p>
+
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, 1998.
+<p>
+<hr>
+<center>
+<a href="http://hawk.infm.ulst.ac.uk:1998/multires">Applications entry page</a> 
+|
+<a href="http://ourworld.compuserve.com/homepages/multires">MR/1 package</a> | 
+<a href="http://ourworld.compuserve.com/homepages/multires">Courses</a> |
+<a href="http://www.cup.cam.ac.uk">Cambridge Univ Press</a>  
+</center>
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,2390 @@
+<head>
+<title>Online Software for Clustering</title>
+<body bgcolor=white>
+<h1>Online Software for Clustering</h1>
+
+
+<hr>
+<font color="red">
+This page is <i>very</i> old.  The following pages, associated with this 
+one, are updated: </font>
+
+<ul>
+<li> <a href="http://astro.u-strasbg.fr/~fmurtagh/mda-sw">Fionn Murtagh's
+Multivariate Data Analysis Software and Resources Page</a>
+<li> <a href="http://www.correspondances.info">Software and data for 
+Correspondence Analysis</a>
+</ul>
+<hr>
+<p>
+
+
+This is a short review of programs and packages available for public 
+access, by anonymous ftp or web.  It takes the form
+of cuts-and-pastes from newsgroup postings or email messages. No attempt 
+has been made to list codes which can be had by directly contacting the 
+author.  No attempt has been made to list system-specific 
+sites (e.g. SAS, XLisp-Stat).  No attempt has been made
+ to list commercial or shareware codes.  No guarantees are given 
+nor implied in respect to software referred to here.  
+
+<p>
+
+F. Murtagh (fmurtagh @ astro.u-strasbg.fr, 
+f.murtagh @ qub.ac.uk), May 1994.  Updates Sept. 1994, 
+July 1995, October 1996, February 1997, March 1997, November 1997, March 
+1998, April 1998, May 1998, January 1999, July 1999, March 2000, June 2000,
+April 2001, May 2001, June 2001, May, August 2002, May 2004.
+
+<p>
+
+<hr>
+
+<ul>
+
+<li> <b>Statlib: a major site for statistical software of all sorts. </b>
+
+<pre>
+Gopher to lib.stat.cmu.edu
+Anonymous ftp to lib.stat.cmu.edu
+URL: <a href="http://lib.stat.cmu.edu/">http://lib.stat.cmu.edu/</a>
+
+Here are some areas to check out:
+
+CMLIB - Core Mathematics Library from NIST.  CLUSTER "is a 
+sublibrary of Fortran subroutines for cluster analysis and related 
+line printer graphics.  It includes routines for clustering 
+variables and/or observations using algorithms such as direct 
+joining   and splitting, Fisher's exact optimization, single-link, 
+K-means, and minimum mutations, and routines for estimating missing 
+values.  The subroutines in CLUSTER are described in the book 
+"Clustering Algorithms" by J. A. Hartigan."
+
+APSTAT - Selected Algorithms Transcribed from Applied Statistics. 
+Mostly Fortran.  Includes implementations of: minimal spanning tree,
+single-link hierarchical clustering, discriminant analysis of 
+categorical data, branch and bound algorithm for feature subset 
+selection, etc. 
+
+GENERAL - Software of General Statistical Interest.  Includes the 
+3-d interactive data display package, XGobi.  Algorithms for convex
+hull, and Delaunay triangulation.  Mclust, model-based clustering
+routines (Banfield and Raftery).  MVE, minimum volume ellipsoid 
+estimator (Rousseeuw), PROGRESS, robust regression (Rousseeuw and 
+Leroy), MARS, projection pursuit. Nonlinear discriminant analysis. 
+LOESS regression.  Etc.
+
+MULTI - Multivariate Analysis and Clustering.  Hierarchical clustering,
+principal components analysis, discriminant analysis.  Former are 
+mainly Fortran.  Macintosh programs for multivariate data analysis and 
+graphical display, linear regression with errors in both variables, 
+software directory including details of packages for phylogeny 
+estimation and to support consensus clustering.
+
+And of course...
+
+MULTIV - Clustering, PCA, Correspondence Analysis, from F. Murtagh. 
+
+From Tim Hesterberg, May 17 2002:
+
+   I just downloaded your 1994 version of multiv from statlib.
+For the most part it runs under Splus6 with no modifications.
+In particular, it appears that the .q files do not need to be modified
+to work with newer versions of S+ based on SV4; that was a pleasant surprise.
+   I did run into the following problems:
+
+(1) On Linux and Windows sammon.f fails to compile.
+The fix is to switch these two lines:
+
+      dimension x(n,m), y(n,p), dstar(ndis), d(ndis)
+      integer   n,m,p,i,j,k,iter,maxit,diag
+so that p is declared integer before being used.
+
+(2) The examples in help(bea) fail to run, because they require
+an object `a' which does not exist.  I got them to run by first
+doing 
+        a <- author.count
+
+(3) In help(ca), change:
+text(corr$rproj[,1], corr$rproj[,2], labels=dimnames(bfposneg[[1]]))
+to:
+text(corr$rproj[,1], corr$rproj[,2], labels=dimnames(bfposneg)[[1]])
+
+(4) The examples at the bottom of help(ca) fail to run, because they
+depend on the existence of objects `a', `b', `c' which are not
+defined in the library or earlier in the help file.
+
+
+</pre>
+
+<li> <b>Netlib: a major site for numerical analysis software, including 
+eigenvalue/vector packages EISPACK, SVDPACK, etc. </b>
+
+<pre>
+Anonymous ftp to netlib.att.com
+
+The programs from the "First and Second Multidimensional Scaling
+Packages
+of Bell Laboratories" are available in the 
+subdirectory 
+<a href="http://netlib.att.com/netlib/mds">
+netlib/mds</a>.
+</pre>
+
+<li> <b>Tooldiag (Thomas W. Rauber): "an experimental package for the 
+analysis and visualization of sensorial data.</b>  It permits the 
+selection of features for a supervised learning task, the error 
+estimation of a classifier based on continuous multidimensional
+feature vectors and the visualization of the data".
+
+<pre>
+It can be obtained via anonymous, binary ftp from ftp.fct.unl.pt -
+pub/di/packages as tooldiag1.5.tar.Z.
+</pre>
+
+<li>
+<b>ALN (Adaptive Logic Network; William W. Armstrong, Dept. of Comp.
+Sci., University of Alberta.  arms@cs.ualberta.ca): "belongs to 
+the class of artificial neural systems.</b>  ... uses only simple 
+logical functions AND, OR, and NOT.  In hardware, computations 
+would be done in parallel in a tree of combinational logic gates."
+
+<pre>
+Demonstration software in C-source form is available to researchers
+for non-commercial purposes only. (Contact author.)
+</pre>
+
+<li>
+<b>Cluster (Andreas Stolcke, stolcke@ICSI.berkeley.edu): "cluster 
+utility.</b> ... performs Hierarchical Cluster Analysis (HCA) on a set 
+of vectors and outputs the result in a variety of formats on standard 
+output. ... performs Principal Component Analysis (PCA) on a set of 
+vectors and prints the transformed set of vectors on standard output."
+
+<a href="http://www.icsi.berkeley.edu/ftp/global/pub/ai/stolcke/software/cluster-2.9.tar.Z">
+http://www.icsi.berkeley.edu/ftp/global/pub/ai/stolcke/software/cluster-2.9.tar.Z</a>  
+<br>
+(Information update P Ravi Prakash, 2000-9-19.)
+<p>
+
+<li><b>Voronoi diagram/Delaunay triangulation.</b>
+
+<pre>
+Summary of responses to message in Vision-List Digest (20 April 1994)
+- see below for compiler, and subscription details to this Digest:
+ 
+Algorithm by Steve Fortune is available from netlib@research.att.com
+Use:  "send sweep2 from voronoi"
+The alg calculates both Voronoi and Delaunay diagrams.
+ 
+Quickhull by anonymous ftp from geom.umn.edu
+get /pub/software/qhull.tar.Z
+The alg calculates the Delaunay triangulation and convex hull.
+ 
+nnsort.c
+Dave Watson <watson@maths.uwa.edu.au> sent me a copy of nnsort.c which
+computes the Delaunay triangulation and convex hull in 2D and 3D.
+ 
+deltree.c
+Olivier Devillers <Olivier.Devillers@sophia.inria.fr> sent a copy of
+deltree.c which computes the Voronoi/Delaunay diagrams and also has a
+function that returns the nearest neighbour pt. in the diagram to any
+arbitarily chosen point. He also includes an interactive interface in
+SunView. (Comments in French)
+ 
+Books:
+"Computational Geometry in C", by Joseph O'Rourke, Cambridge 
+University Press, 1994, ISBN 0-521-44592-2.  This has complete 
+programs for Voronoi/Delaunay diagrams.
+ 
+[Msg. from feisal@ldc.uwi.tt, in moderated Vision-List Digest 
+membership requests to vision-list-request@teleos.com]
+
+3-d voronoi diagrams:
+
+vcs (John M. Sullivan, Geometry Center, Univ. Minn.; 
+sullivan@geom.umn.edu): "code for 3-d voronoi diagrams".
+Available by anonymous ftp from: geom.umn.edu:pub/vcs.tar.Z
+</pre>
+
+<li><b>Message dealing with CART-type methods.</b>
+
+<pre>
+Newsgroups: sci.stat.math,sci.stat.edu,sci.stat.consult
+From: saswss@hotellng.unx.sas.com (Warren Sarle)
+Date: Sun, 11 Sep 1994 18:35:20 GMT
+ 
+In "CART- Classification and Regression Trees", sci.stat.math article
+<34t1t0$m2i@search01.news.aol.com>, ajhorovitz@aol.com (AJHorovitz) writes:
+|>
+|> CART-Classification and Regression Trees (Algorithms produced by
+|> California Statistical Software (Breiman, et al, 1984) and Interface by
+|> SALFORD SYSTEMS)
+|> ...
+|> CART is a new tree structured statistical analysis program that can
+|> automatically search for and find the hidden structure in your data. Based
+|> on the original work of some of the world's leading statisticians, CART is
+|> the only "stand-alone" tree-based program that can give you statistically
+|> valid results.
+ 
+Since the task of distributing information on empirical decision tree
+methodology seems to have fallen on me, I feel I should correct the
+misinformation in the post quoted above.
+ 
+I asked AJHorovitz whether he intended to say that FIRM, Knowledge
+Seeker, and Data Splits (to name but a few '"stand-alone" tree-based
+programs') are statistically invalid. The gist of his reply was that
+only cross-validation yields statistically valid results.
+ 
+FIRM and Knowledge Seeker do multiplicity-adjusted significance tests.
+While some statisticians have philosophical objections to significance
+tests, branding significance tests as invalid in advertising literature
+strikes me as misleading as anything in the Systat/Statistica debate.
+ 
+Even if we grant that significance tests are statistically invalid, we
+are left with the fact that Data Splits and IND both do the same kind of
+cross-validation as CART does. So the claim that 'CART is the only
+"stand-alone" tree-based program that can give you statistically valid
+results' is clearly incorrect.
+ 
+I set follow-ups to sci.stat.edu, since that is where the recent
+debate on statistical software marketing has been going on.
+ 
+Here is my summary of empirical decision tree software. I updated the
+information on CART to give Salford Systems address.
+ ..................................................................
+There are many algorithms and programs for computing empirical decision
+trees.  Several families can be identified with typical characteristics
+as listed below:
+ 
+   The CART family: CART, tree (S), etc.
+      Motivation: statistical prediction.
+      Exactly two branches from each nonterminal node.
+      Cross-validation and pruning are used to determine size of tree.
+      Response variable can be quantitative or nominal.
+      Predictor variables can be nominal or ordinal, and continuous
+         predictors are supported.
+ 
+   The CLS family: CLS, ID3, C4.5, etc.
+      Motivation: concept learning.
+      Number of branches equals number of categories of predictor.
+      Only nominal response and predictor variables are supported
+         in early versions, although I'm told that the latest version
+         of C4.5 supports ordinal predictors
+ 
+   The AID family: AID, THAID, CHAID, MAID, XAID, FIRM, TREEDISC, etc.
+      Motivation: detecting complex statistical relationships.
+      Number of branches varies from two to the number of categories
+         of predictor.
+      Statistical significance tests (with multiplicity adjustments
+         in the later versions) are used to determine size of tree.
+      AID, MAID, and XAID are for quantitative responses.
+      THAID, CHAID, and TREEDISC are for nominal responses, although
+         the version of CHAID from Statistical Innovations, distributed
+        by SPSS, can handle a quantitative categorical response.
+      FIRM comes in two varieties for categorical or continuous response.
+      Predictors can be nominal or ordinal and there is usually
+        provision for a missing-value category.
+      Some versions can handle continuous predictors, others cannot.
+ 
+There are also a variety of methods that do splits on linear
+combinations rather than single predictors. I have not yet constructed
+a taxonomy for such methods.
+ 
+Some programs combine two or more families. For example, IND combines
+methods from CART and C4 as well as Bayesian and minimum encoding
+methods. Knowledge Seeker combines methods from CHAID and ID3 with
+a novel multiplicity adjustment.
+ 
+There are numerous unresolved statistical issues regarding these
+methods.  Perhaps the most important is how big should the tree be?
+CART supporters claim that its pruning method using cross-validation is
+superior to the significance testing method used in the AID family.
+However, pruning is very easy and quick to do in the AID family since
+the p-values are computed while growing the tree and no cross-validation
+is required for pruning. The validity of CART cross-validation is
+suspect because CART seems to produce much smaller trees than the AID
+family, even using very conservative significance levels for the latter,
+which one would expect to validate well although empirical evidence is
+scarce.  I have not seen any published comparison of CART and AID
+methods. This would make an excellent topic for a thesis.
+ 
+Some references:
+ 
+Breiman, L., Friedman, J.H., Olshen, R.A. & Stone, C.J. (1984),
+_Classification and Regression Trees_, Wadsworth: Belmont, CA.
+ 
+Chambers, J.M. amd Hastie, T.J. (1992), _Statistical Models in S_,
+Wadsworth & Brooks /Cole: Pacific Grove, CA.
+ 
+Hawkins, D.M. & Kass, G.V. (1982), "Automatic Interaction Detection",
+in Hawkins, D.M., ed., _Topics in Applied Multivariate Analysis_,
+267-302, Cambridge Univ Press: Cambridge.
+ 
+Morgan & Messenger (1973) _THAID--a sequential analysis
+program for the analysis of nominal scale dependent variables_,
+Survey Research Center, U of Michigan.
+ 
+Morgan & Sonquist (1963) "Problems in the analysis of survey data
+and a proposal", JASA, 58, 415-434. (Original AID)
+ 
+Morton, S.C. (1992) "New advances in statistical dendrology", Chance,
+5, 76-79. See also letter to editor in volume 6 no. 1.
+ 
+Quinlan, J.R. (1993), _C4.5: Programs for Machine Learning_, Morgan
+Kaufman: San Mateo, CA.
+ 
+The following information on software sources has been culled from
+previous posts and may be out of date or inaccurate:
+ 
+C4.5
+   C source code for a new, improved decision tree algorithm known as
+   C4.5 is in the new book by Ross Quinlan (of ID3 fame). "C4.5:
+   Programs for Machine Learning", Morgan Kaufmann, 1992. It goes for
+   $44.95.  With accompanying software on magnetic media it runs for
+   $69.95.  ISBN # 1-55860-238-0
+ 
+CART
+   Salford Systems, 341 N44th Street #711, Lincoln NE 68503, USA.
+   Academic price is $399.00 (US).
+ 
+   SYSTAT Corporation distributes a PC version of CART. They can be
+   reached at SYSTAT, Inc., 1800 Sherman Avenue, Evanston, IL 60201,
+   USA.  Phone: (708) 864-5670, FAX: (708) 492-3567.
+ 
+CHAID
+   PC version from SPSS (800) 543-5831.
+   Mainframe version from Statistical Innovations Inc., 375 Concord
+   Avenue Belmont, Mass. 02178
+ 
+Data Splits
+   From Padraic Neville (510) 787-3452, $10 for preliminary release.
+ 
+FIRM
+   `FIRM Formal Inference-based Recursive Modeling', University of
+   Minnesota School of Statistics Technical Report #546, 1992.  The
+   writeup and a diskette containing executables is available from the
+   U of M bookstore for $17.50. Incredible bargain!
+ 
+IND
+   Version 2.0 should be available soon at a modest price from NASAs
+   COSMIC center in Georgia, USA. Enquiries should be directed to:
+   mail (to customer support): service@cossack.cosmic.uga.edu Phone:
+   (706) 542-3265 and ask for customer support FAX: (706) 542-4807.
+ 
+Knowledge Seeker
+   Phone 613 723 8020.
+ 
+PC-Group
+   is available from Austin Data Management Associates,
+   P.O. Box 4358, Austin, TX 78765, (512) 320-0935.  It runs on IBM
+   and compatible personal computers with 512K of memory, and costs
+   $495.  A free demo version of the program is available upon
+   request.
+   New address, 20 July 1998 - new company name:
+   Stepwise Systems, Inc.
+   P.O. Box 4358
+   Austin, Texas 78765   
+   Phone: 512-327-8861
+   Email: pcg@stepsys.com
+   Web:   www.stepsys.com
+
+tree
+   S: phone 800 462-8146
+ 
+TREEDISC
+   SAS macro using SAS/IML and SAS/OR available free from SAS Institute
+   technical support (919) 677-8000.
+ 
+-- 
+ 
+Warren S. Sarle       SAS Institute Inc.   The opinions expressed here
+saswss@unx.sas.com    SAS Campus Drive     are mine and not necessarily
+(919) 677-8000        Cary, NC 27513, USA  those of SAS Institute.
+</pre>
+
+<li><b>Machine learning in C++.</b>
+
+<pre>
+From: Ronny Kohavi <ronnyk@cs.stanford.edu>
+Date: Tue, 24 Jan 1995 
+
+    <A HREF="http://robotics.stanford.edu:/users/ronnyk/mlc.html">
+    MLC++, a Machine Learning library in C++.</A>
+
+MLC++ is a library of C++ classes and tools for supervised Machine
+Learning being developed at the Robotics lab in Stanford University.
+
+Ronny Kohavi (ronnyk@CS.Stanford.EDU, 
+<a href="http://robotics.stanford.edu/~ronnyk">http://robotics.stanford.edu/~ronnyk</a>)
+</pre>
+
+<li><b>LVQ - learning vector quantization.</b>
+
+<pre>
+From: jmerelo@kal-el.ugr.es (J.J. Merelo Guervos)
+Date: 30 Dec 1994 11:27:34 GMT
+Subject: Announcing S-LVQ 1.0.1
+ 
+Dear fellow netters:
+        After getting some bug reports from users, I have fixed S-LVQ and
+produced a new version, which is basically a bug fix from 1.0. Here is 
+the blurb.
+ 
+S-LVQ is a quite simple program to perform Kohonen's LVQ algorithm. I
+know there is a very good program already made by Kohonen's team
+(LVQ_PAK), but, anyways, I had done it for my own purposes and thought
+it would be a good idea to release it into the public domain; it could
+be useful to somebody.
+ 
+Some features:
+-Command line interface to set the training file, test or validation
+file, number of neurons and number of epochs.
+-Easy file setup
+-Graphics interface written in TCL/TK, whichs allows to set the
+parameters and visualizes the results, as points if the
+training/weight vectors are 2-dimensional, and as lines if it is not.
+ 
+Changes from version 1.0:
+-Autoconfiguration
+-Bug fixes for Sun SPARCstations.
+ 
+If you want to know more about Kohonen's LVQ, this is the main
+reference:
+ 
+Kohonen, T.; "The Self-Organizing Map", Procs. IEEE, vol. 78,
+pp. 1464- 1480, 1990.
+
+It's available from the usual sources, that is 
+1. FTP: get it at <a href="ftp://kal-el.ugr.es/pub/s-lvq-1.0.1.tar.gz">ftp://kal-el.ugr.es/pub/s-lvq-1.0.1.tar.gz</a>
+2. ftpmail: use your favorite ftpmail server, or send a message to
+ftpmail@kal-el.ugr.es with the body
+open
+get s-lvq
+close
+You'll receive an uu-encoded version of the former program
+3. WWW: connect to GeNeura's home page at
+<a href="http://kal-el.ugr.es/geneura.html">http://kal-el.ugr.es/geneura.html</a>, and follow instructions. 
+ 
+-- 
+Dr. JJ Merelo
+Grupo Geneura ---- Univ. Granada
+<pre>
+
+<li><b>LVQ_PAK</b>
+
+<pre>
+Some time ago we released the software package "LVQ_PAK" for
+the easy application of Learning Vector Quantization algorithms.
+Corresponding public-domain programs for the Self-Organizing Map (SOM) 
+algorithms are now available via anonymous FTP on the Internet. 
+ 
+"What does the Self-Organizing Map mean?", you may ask --- See the
+following reference, then: Teuvo Kohonen. The self-organizing map.
+Proceedings of the IEEE,  78(9):1464-1480, 1990.
+ 
+In short, Self-Organizing Map (SOM) defines a 'non-linear projection'
+of the probability density function of the high-dimensional input data
+onto the two-dimensional display. SOM places a number of reference
+vectors into an input data space to approximate to its data set in an
+ordered fashion.
+ 
+This package contains all the programs necessary for the application
+of Self-Organizing Map algorithms in an arbitrary complex data
+visualization task.  
+ 
+This code is distributed without charge on an "as is" basis.
+There is no warranty of any kind by the authors or by Helsinki
+University of Technology.
+ 
+In the implementation of the SOM programs we have tried to use as
+simple code as possible. Therefore the programs are supposed to
+compile in various machines without any specific modifications made on
+the code. All programs have been written in ANSI C. The programs are 
+available in two archive formats, one for the UNIX-environment, the
+other for MS-DOS. Both archives contain exactly the same files. 
+ 
+These files can be accessed via FTP as follows:
+ 
+1. Create an FTP connection from wherever you are to machine
+   "cochlea.hut.fi". The internet address of this machine is 
+   130.233.168.48, for those who need it.
+ 
+2. Log in as user "anonymous" with your own e-mail address as password.  
+ 
+3. Change remote directory to "/pub/som_pak". 
+ 
+4. At this point FTP should be able to get a listing of files in this
+   directory with DIR and fetch the ones you want with GET. (The exact 
+   FTP commands you use depend on your local FTP program.) Remember 
+   to use the binary transfer mode for compressed files.
+ 
+The som_pak program package includes the following files:
+ 
+  - Documentation:
+      README             short description of the package 
+                         and installation instructions
+      som_doc.ps         documentation in (c) PostScript format
+      som_doc.ps.Z       same as above but compressed
+      som_doc.txt        documentation in ASCII format
+ 
+  - Source file archives (which contain the documentation, too):
+      som_p1r0.exe       Self-extracting MS-DOS archive file
+      som_pak-1.0.tar    UNIX tape archive file
+      som_pak-1.0.tar.Z  same as above but compressed
+ 
+ 
+An example of FTP access is given below
+ 
+unix> ftp cochlea.hut.fi (or 130.233.168.48)
+Name: anonymous
+Password: <your email address>
+ftp> cd /pub/som_pak
+ftp> binary
+ftp> get som_pak-1.0.tar.Z
+ftp> quit
+unix> uncompress som_pak-1.0.tar.Z
+unix> tar xvfo som_pak-1.0.tar
+ 
+See file README for further installation instructions.
+ 
+All comments concerning this package should be
+addressed to som@cochlea.hut.fi.
+</pre> 
+
+<li><b>Multivariate analysis package.</b>
+
+<pre>
+Date:    Mon, 20 Feb 1995 08:01:37 +0000
+From:    "Warren L. Kovach" <lists@KOVCOMP.DEMON.CO.UK>
+Subject: WWW: Statistical and data analysis software
+ 
+I am pleased to announce my new World Wide Web pages focusing on
+shareware and public domain statistical and data analysis
+software.  The URL is:
+ 
+<a href="http://www.compulink.co.uk/kovcomp">http://www.compulink.co.uk/kovcomp</a>
+ 
+These pages provide detailed information about and shareware copies
+of my programs MVSP and Oriana.  MVSP is a multivariate statistical
+program for MS-DOS that calculates a variety of cluster analyses as
+well as PCA, PCO, and correspondence/detrended correspondence
+analysis.  Oriana is my new circular statistics/orientation analysis
+package for Windows.
+ 
+The pages also have a list of resources on the Internet related to
+statistical software.  In particular, there are many links to WWW
+pages and FTP sites that have software.  I hope to maintain a
+definitive list of sources of shareware and public domain software on
+the Internet.  If you know of sites that are not yet on my list I
+would appreciate hearing about them.
+ 
+For a bit of fun, there is also a page with information about the
+Isle of Anglesey, in North Wales, the home of Kovach Computing
+Services, and links to other WWW pages about Wales.  Come and learn
+how to pronounce one of the longest placenames in the world!
+ 
+--
+Dr. Warren L. Kovach           Internet: WarrenK@kovcomp.demon.co.uk
+Kovach Computing Services               tel./fax: +44-(0)1248-450414
+85 Nant-y-Felin, Pentraeth, Anglesey         CompuServe: 100016,2265
+Wales LL75 8UY U.K.          WWW: <a href="http://www.compulink.co.uk/kovcomp">http://www.compulink.co.uk/kovcomp</a>
+</pre> 
+
+<li><b>MML - minimum message length measure.</b>
+
+<pre>
+Message to CLASS-L list on 5 July 1995:
+
+Re fuzzy clustering, how about probabilistic clustering?:  i.e. we
+give a number of classes and then each data "thing" is probabilistically
+assigned to the various classes.
+ 
+Wallace founded the information-theoretic Minimum Message Length (MML)
+principle in 1968 (see also subsequent closely related work of Rissanen
+called 'MDL') with a clustering program called Snob.   Snob is freely
+licensed for academic research, see Wallace and Dowe(1994) for details
+and many references, and see ~ftp/pub/snob/ on bruce.cs.monash.edu.au
+for Fortran source code.
+ 
+Some references to Snob (due to me, I believe) and other clustering algorithms
+(collated by Ray Liere) is given below.    Doug Fisher's Cobweb algorithm is
+not mentioned by Ray Liere, presumably because Ray thought everyone on that
+mailing list knew it.   I mention Cobweb now, and apologise to anyone whose
+favoUrite algorithm has not been mentioned  -  and invite them to tell me or
+CLASS-L of it.
+ 
+Please feel free to e-mail me (David Dowe, dld@cs.monash.edu.au) for
+further info on Snob or on MML.      Please flame no-one :-) .
+
+Regards (and further info follows).      - David Dowe.
+>
+>From owner-inductive@hermes.csd.unb.ca Tue May 30 09:54:08 1995
+>Date:         Mon, 29 May 1995 20:48:55 -0300
+>From: Ray Liere <lierer@mail.CS.ORST.EDU>
+>Subject:      Summary: Unsupervised Conceptual Clustering
+>To: Multiple recipients of list INDUCTIVE <INDUCTIVE@hermes.csd.unb.ca>
+>
+>A few days ago (24 May), I posted a request for ideas on unsupervised
+>conceptual clustering, especially methods that are not based on the
+>assumption that each data object is categorized into exactly one
+>of the clusters.
+>
+>As you have seen, some responses were posted directly to this list.
+>I have also received several email replies.
+>
+>My thanks to everyone for the very constructive assistance. I received
+>many good leads to explore.
+>
+>And ... following is the promised summary of email responses that I received:
+>=====
+>>From: Chunyu Kit <C.Kit@dcs.shef.ac.uk>
+>> i am doing machine learning of NL grammar rules. i need an
+>> appropriate clustering approach to classify the higher categories
+>> found into some clusters that are expected to have some
+>> kind of correspondence to those ones in linguistic theories,
+>> like NP, PP, etc.
+>=====
+>>From: Daniel Fu <daniel@cs.uchicago.edu>
+>> there's a system OLOC (Overlapping concepts) that was described
+>> in the Machine Learning Journal maybe a year ago. It's shares a lot
+>> with COBWEB.
+>=====
+>>From: blw@utrc.utc.com (Brad Whitehall)
+>> Look at the CLUSTER and CLUSTER/s systems of Stepp and Michalski.
+>> They actually went to great pains to make it so clusters did NOT overlap.
+>> Michalski is now at George Mason University and might even be able
+>> to supply you with some code.
+>>
+>> I would also look at Fuzzy Clustering. I think you might find it much
+>> more useful for the types of problems described in your note.
+>=====
+>>From: dld@bruce.cs.monash.edu.au (David L Dowe)
+>> Chris Wallace developed Minimum Message Length (MML) in 1968, developing
+>> the Snob program for unsupervised conceptual clustering and also applying
+>> it to a real world problem of seal skulls in the same, 1968 paper.
+>>
+>> The most recent Snob reference is
+>> C S Wallace and D L Dowe, "Intrinsic classification by MML - the Snob
+>> program", Proc. 7th Australian Joint Conference on Artificial Intelligence
+>> (UNE, Armidale, NSW, Australia, November 1994), World Scientific, pp 37-44.
+>>
+>> and you might wish to look at ~ftp/pub/snob/ on bruce.cs.monash.edu.au .
+>>
+>> See also:
+>> C.S. Wallace, `Classification by Minimum-Message-Length
+>> Inference' S.G. Akl et al (eds.) Advances in Computing and
+>> Information - ICCI'90, Niagara Falls, Lecture Notes in Computer
+>> Science, No.468, Springer-Verlag, pp 72-81, 1990.
+>>
+>> Wallace.C.S., `An Improved Program for Classification', ACSC-9, vol 8, no
+>> 1, pp 357-366, February 1986.
+>>
+>> Wallace C.S. & Boulton, D.M., `An Information Measure for
+>> Classification' \fIComputer Journal\fP, Vol.11, No.2, 1968,
+>> pp 185-194.
+>>
+>> MML is described in the 1968 paper and in
+>> Wallace.C.S, Freeman.P.R., `Estimation and Inference by Compact Coding',
+>> The Journal of the Royal Statistical Society, Series B, Methodology, 49, 3,
+>> 1987, pp 223-265.
+>>
+>> with some outline in Wallace and Dowe(1994) and introductory material in
+>> C S Wallace and D L Dowe, "MML estimation of the von Mises concentration
+>> parameter", Technical Report #93/193, Department of Computer Science, Monash
+>> University, Clayton 3168, Australia.
+>>
+>> Autoclass is similar to the 1990 Snob (see Wallace, 1990, pp 78-80).
+>> The only changes to Snob since (Wallace and Dowe, 1994) have been to permit
+>> Poisson and (von Mises) circular variables.
+>>
+>> Peter Cheeseman is a former student of Prof. Wallace.
+>>
+>> Snob permits over-lapping mixtures. In fact (Wallace and Dowe, 1994;
+>> and earlier Wallace Snob work) it can lead to statistically biassed answers
+>> if you don't.
+>=====
+>>From: RORWIG@BPA.ARIZONA.EDU (Richard E. Orwig)
+>> We've done conceptual clustering using a Hopfield net and Kohonen net on
+>> textual data. The Hopfield technique was reported in Chen, Hsu, Orwig,
+>> Hoopes, and Nunamaker in last year's October _Communications of the ACM_.
+>>
+>> My dissertation (completed this past month) reports the use of a Kohonen
+>> self-organizing map for textual clustering. It should hit the microfilm
+>> service in a couple of weeks.
+>>
+>> A major difference between the two is exactly your point -- the Hopfield
+>> neural net creates conceptual cluster headings and uses the keywords to
+>> organize the text documents. Documents containing keywords in two or more
+>> cluster headings will map to two or more respective clusters. The Kohonen
+>> algorithm, on the other hand, maps the document to its "best" region on a
+>> two-dimensional concept map. I've had the map define a conceptual region
+>> on the map with no data in it because the documents which all contained the
+>> concept fit better in other regions.
+>=====
+>>From: rbanerji@sjuphil.sju.edu (Ranan Banerji)
+>> All my life I had a problem with clustering. Any clustering method is
+>> based on some idea of similarity, proximity etc., be they numerical,
+>> symbolic or whatever. This similarity is determined by what the researcher
+>> considers similar. Very often in an application area we need to think of
+>> two objects as similar when they demand similar action, or some other
+>> problem dependent criterion of similarity. Whenever I have looked, it
+>> has seemed to me that the similarity imposed by the problem and the
+>> similarity imposed by the intuition is not the same. So the problem lies
+>> in getting a match between the two measures. The problem of computational
+>> complexity (which seems to be the thing bothering you) comes way after that.
+>> Refining the clustering method (to somehow get around the mismatch) is
+>> what gives rise to the complexity. I have spent my life trying to
+>> develop and improve methods for getting the correct match, i.e to
+>> solving the so-called "representation problem". My own advice would
+>> be, concentrate on sharpening your intuition of the problem so you can
+>> prove to yourself that your measure matches the measure imposed by the
+>> problem. Once you have done that, any fast-and-easy technique of
+>> clustering will work.
+>=====
+>>From: beatriz <lacruz@cc.unizar.es>
+>> I do not agree Autoclass allows an object in only one class
+>> because it assigns probabilities to any object.
+>> One of the advantages of Autoclass is that works in domains
+>> with noise and overlapping classes. Ver: "Bayesian classification"
+>> P. Cheeseman et al, 1988.
+>=====
+>
+>Ray Liere
+>lierer@mail.cs.orst.edu
+ 
+----------------------------------------------------------------------------
+
+More on SNOB, Feb. 1997, from:
+
+(Dr.) David Dowe, Dept of Computer Science, Monash University, Clayton,
+Victoria 3168, Australia  dld@cs.monash.edu.au     Fax:+61 3 9905-5146
+<a href="http://www.cs.monash.edu.au/~dld/">http://www.cs.monash.edu.au/~dld/</a>
+<a href="ftp://ftp.cs.monash.edu.au/software/snob/">ftp://ftp.cs.monash.edu.au/software/snob/</a>
+<a href="http://www.cs.monash.edu.au/~dld/mixture.modelling.page.html">http://www.cs.monash.edu.au/~dld/mixture.modelling.page.html</a> 
+
+------
+<a href="ftp://ftp.cs.monash.edu.au/software/snob/Snob.README">Snob</A>: 
+Software developed by Chris Wallace and
+<a href="http://www.cs.monash.edu.au/~dld/">David Dowe</A>
+for mixture modelling and clustering using the information-theoretic
+Minimum Message Length (MML) principle.
+Snob deals with data from Gaussian, multi-nomial (Bernoulli), Poisson and
+von Mises circular distributions, and deals with missing data.
+Snob has <a href="ftp://ftp.cs.monash.edu.au/software/snob/">software for non-commercialuse</A>, detailed <a 
+href="ftp://ftp.cs.monash.edu.au/software/snob/snob.documentation">documentation</A>, 
+a <a href="ftp://ftp.cs.monash.edu.au/software/snob/Snob.README">ReadMe</A> file; with <a href="/~dld/AIStats97_Snob_mix.ps">paper in postscript</A> and  
+<a href="http://www.cs.monash.edu.au/~dld/ref.to.latest.mixture.paper">latest paper</A> being available.
+
+----------------------------------------------------------------------------
+
+Autoclass:
+<a href="http://ic-www.arc.nasa.gov/ic/projects/bayes-group/group/html/autoclass-c-program.html">http://ic-www.arc.nasa.gov/ic/projects/bayes-group/
+group/html/autoclass-c-program.html</a>
+
+Version 2.0, available 8 June 1995 (C code).  
+
+New address for Autoclass, 15 Feb. 1999:
+
+<a href=""http://ic-www.arc.nasa.gov/ic/projects/bayes-group/group/autoclass/autoclass-c-program.html">http://ic-www.arc.nasa.gov/ic/projects/bayes-group/group/autoclass/autoclass-c-program.html</a>
+
+Information on SNOB is also available at above site.  
+</pre>
+
+<li><b>Additive trees.</b>
+
+<pre>
+Availability of hte ADDTREE/P and EXTREE programs (message from James
+E. Corter, jec34@COLUMBIA.EDU, to the CLASS-L list on 28 July 1995):
+
+     Programs for fitting additive trees and extended trees to
+proximity data are now available commercially, and over the INTERNET
+in the form of PASCAL source code and DOS-executable code.  The
+ADDTREE/P program for fitting additive trees incorporates a variant
+(Corter, 1982) of the basic Sattath & Tversky algorithm (Sattath &
+Tversky, 1977).  The EXTREE program (Corter & Tversky, 1986) fits
+the extended tree model.
+ 
+     A procedure based on the Sattath-Tversky-Corter algorithm for
+fitting additive trees is available in the latest release (version
+6.0) of SYSTAT for DOS, available from SPSS Inc., 444 N. Michigan
+Avenue, Chicago, IL 60611  (312) 329-3500.  Also, a standalone version
+(DOS-executable) of the ADDTREE/P program (Corter, 1982) written in
+the PASCAL language is available free of charge from the author.  No
+support is available with this version, and there is a upper limit on
+the number of objects that can be modeled of 80.  The EXTREE program
+for fitting extended trees is also available (maximum n = 32). Those
+with access to a file transfer program such as FTP on the INTERNET
+can retrieve the DOS-executable versions as follows.  First, FTP to
+ftp.ilt.columbia.edu and login as "anonymous", then connect ("cd")
+to the directory "users/corter".  The program and documentation
+files can then be retrieved with the usual GET command (be sure to set
+the file transfer type to "BINARY" before GETing the executable files).
+Gopher users can get the files by gophering to gopher.ilt.columbia.edu
+and connecting to "users/corter".  Finally, PASCAL source code for
+the ADDTREE/P and EXTREE programs is maintained at an INTERNET site:
+the "netlib/mds" library at AT&T Bell Labs.  This resource may be
+accessed via email, by sending a message to the INTERNET address
+netlib@research.att.com containing only the single line
+   send readme index from mds
+ 
+                REFERENCES
+Corter, J.E.  (1982).  ADDTREE/P: A PASCAL program for fitting
+additive trees based on Sattath & Tversky's ADDTREE program.
+Behavior Research Methods and Instrumentation, 14, 353-354.
+ 
+Corter, J.E., & Tversky, A. (1986).  Extended similarity trees.
+Psychometrika, 51, 429-451.
+ 
+Sattath, S., & Tversky, A.  (1977).  Additive similarity trees.
+Psychometrika, 42, 319-345.
+
+=====================================
+James E. Corter
+Dept. of Measurement, Evaluation,
+  and Applied Statistics
+Teachers College, Columbia University
+New York, NY  10027
+INTERNET: jec34@columbia.edu
+=====================================
+</pre>
+
+<li><b>Machine learning algorithms and data collections.</b>
+
+<pre>
+CLASS-L - 7 Aug 1995 to 23 Aug 1995
+
+Date:    Wed, 23 Aug 1995 18:58:09 +0200
+From:    Jean-Luc Voz <Voz@DICE.UCL.AC.BE>
+Subject: ELENA Classification databases and technical reports available
+
+Dear colleagues,
+
+The partners of the Elena project are pleased to announce you the
+availability of several databases related to classification together
+with two technical reports.
+
+ELENA is an ESPRIT III Basic Research Action project (No. 6891)
+>From July 92 to June 95 the ELENA project investigated several
+aspects of classification by neural networks, including links
+between neural networks and Bayesian statistical classification,
+incremental learning,...
+The project includes theoretical work on classification algorithms,
+simulations and benchmarks, especially on realistic industrial
+data. Hardware implementation, especially VLSI option, is the
+last objective.
+
+The set of databases available is to be used for tests and benchmarks
+of machine-learning classification algorithms.
+The databases are splitted into two parts: ARTIFICIALly generated
+databases, mainly used for preliminary tests, and REAL ones, used for
+objective benchmarks and comparisons of methods.
+
+The choice of the databases has been guided by various parameters, such
+as availability of published results concerning conventional
+classification algorithms, size of the database, number of attributes,
+number of classes, overlapping between classes and non-linearities of
+the borders,...  Results of PCA and DFA preprocessing of the REAL
+databases are also included, together with several measures useful for
+the databases characterization (statistics, fractal dimension,
+dispersion,...).
+
+All these databases and their preprocessing are available together
+with a postcript technical report describing in details the different
+databases ('Databases.ps.Z' - 45 pages - 777781 bytes) and a report
+related to the comparative benchmarking studies of various algorithms
+('Benchmarks.ps.Z' - 113 pages - 1927571 bytes) well-known by the
+Statistical and Neural Network communities (MLP, RCE, LVQ, k_NN, GQC)
+or developped in the framework of the Elena project (IRVQ, PLS).
+
+A LaTeX bibfile containing more than 90 entries corresponding to
+the Elena partners bibliography related to the project is also
+available ('Elena.bib') in the same directory.
+
+All files are available by anonymous ftp from the following directory:
+
+<a href="ftp://ftp.dice.ucl.ac.be/pub/neural-nets/ELENA/databases">ftp://ftp.dice.ucl.ac.be/pub/neural-nets/ELENA/databases</a>
+
+The databases are splitted into two parts: the 'ARTIFICIAL' ones, being
+generated in order to obtain some defined characteristics, and for
+which the theoretical Bayes error can be computed,  and the 'REAL'
+ones, collected in existing real-world applications.
+
+The ARTIFICIAL databases ('Gaussian', 'Clouds' and 'Concentric')
+were generated according to the following requirements:
+  - heavy intersection of the class distributions,
+  - high degree of nonlinearity of the class boundaries,
+  - various dimensions of the vectors,
+  - already published results on these databases.
+They are restricted to two-class problems, since we believe it yield
+answers to the most essential questions.
+The ARTIFICIAL databases are mainly used for rapid test purposes on newly
+developed algorithms.
+
+The REAL databases ('Satimage', 'Texture', 'Iris' and 'Phoneme') were
+selected according to the following requirements:
+  - classical databases in the field of classification (Iris),
+  - already published results on these databases (Phoneme,
+      from the ROARS ESPRIT project and 'Satimage' from the STATLOG ESPRIT
+      project),
+  - various dimensions of the vectors,
+  - sufficient number of vectors (to avoid the ``empty space phenomenon'').
+  - the 'Texture' database, generated at INPG for the Elena project is
+      interesting for its high number of classes (11).
+
+##############################################################################
+
+                                ###########
+                                # DETAILS #
+                                ###########
+
+The 'Benchmarks' technical report
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The 'Benchmarks.ps' Elena report is related to the benchmarking studies of
+various classifiers.  Most of the classifiers which were used for the
+benchmark comparative studies are are well known by the neural network
+and machine learning community.  These are the k-Nearest Neighbour
+(k_NN) classifier, selected for its powerful probability density
+estimation properties; the Gaussian Quadratic Classifier (GQC), the
+most classical statistical parametric simple classification method; the
+Learning Vector Quantizer (LVQ), a powerful non-linear iterative
+learning algorithm proposed by Kohonen; the Reduced Coulomb Energy
+(RCE) algorithm, an incremental Region Of Influence algorithm; the
+Inertia Rated Vector Quantizer (IRVQ) and the Piecewise Linear
+Separation (PLS) classifiers, developed in the framework of the Elena
+project.
+
+The main objectives of the 'Benchmarks.ps' Elena report report are the
+following:
+- to provide an overall comprehensive view of the general problem of
+    comparative benchmarking studies and to propose a useful common
+    test basis for existing and further classification methods,
+- to obtain objective comparisons of the different chosen classifiers on
+    the set of databases described in this report (each classifier being
+    used with its optimal configuration for each particular database),
+- to study the possible links between the data structures of the databases
+    viewed by some parameters, and the behavior of the studied classifiers
+    (mainly the evolution of their the optimal configuration parameters).
+- to study the links between the preprocessing methods and the
+    classification algorithms from the performances and hardware constraints
+    point of view (especially the computation times and memory requirements).
+
+Databases format
+~~~~~~~~~~~~~~~
+All the databases available are in the following format (after decompression) :
+
+ - All files containing the databases are stored as ASCII files for
+    their easy edition and checking.
+ - In a file, each of the n lines is reserved for each vectorial sample
+    (instance) and each line consists  of d floating-point numbers (the
+    attributes) followed  by the class label (which must be an integer).
+
+  Example:
+
+ 1.51768 12.65 3.56 1.30 73.08 0.61 8.69 0.00 0.14 1
+ 1.51747 12.84 3.50 1.14 73.27 0.56 8.55 0.00 0.00 0
+ 1.51775 12.85 3.48 1.23 72.97 0.61 8.56 0.09 0.22 1
+ 1.51753 12.57 3.47 1.38 73.39 0.60 8.55 0.00 0.06 1
+ 1.51783 12.69 3.54 1.34 72.95 0.57 8.75 0.00 0.00 3
+ 1.51567 13.29 3.45 1.21 72.74 0.56 8.57 0.00 0.00 1
+
+ There are NO missing values.
+
+If you desire to get a database, you MUST do it in ftp the binary mode.
+So if you aren't in this mode, simply type 'binary' at the ftp prompt.
+
+         EXAMPLE: to get the "phoneme" database :
+
+                      cd REAL
+                      cd phoneme
+                      binary
+                      get phoneme.txt
+                      get phoneme.dat.Z
+                      get ...
+                      cd ...
+                      ...
+                      quit
+
+          After your ftp session, you simply have to type
+                'uncompress phoneme.dat.Z'
+          to get the uncompressed datafile.
+
+ Contents of the 'ARTIFICIAL' directory
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  The databases of this directory contain only the 'ARTIFICIAL'
+  classification problems.
+  The present 'ARTIFICIAL' databases are only two-class problems, since it
+  yields answers to the most essential questions.
+  For each problem, the confusion matrix corresponding to the theoretical
+  Bayes boundary is provided with the confusion matrix obtained by a k_NN
+  classifier (k chosen to reach the minimum of the total Leave-One-Out error).
+
+  These databases were selected to use for preliminary test and to study the
+  behavior of the implemented algorithms for some particular problems:
+
+  - Overlapping classes:
+     The classifier should have the ability to form a decision boundary
+     that minimizes the amount of misclassification for all of the overlapping
+     classes.
+
+  - Nonlinear separability:
+     The classifier should be able to build decision regions that separate
+     classes of any shape and size.
+
+  There is one subdirectory for each database. In this subdirectory,
+  there is :
+
+  - A text file providing detailed information about the related database
+    ('databasename.txt').
+
+  - The compressed database ('databasename.dat.Z).
+    The different patterns of each database are presented in a random order.
+
+  - For bidimensional databases, a postscript file representing the 2-D
+    datasets (those files are in eps format).
+
+  For each subdirectory, the directoryname is the same as the name chosen
+  for the concerned database.  Here are the directorynames with a brief
+  description.
+
+  - 'clouds'
+
+    Bidimensional distributions : the class 0 is the sum of three different
+    normal distributions while the the class 1 is another normal, overlapping
+    the class 0.
+      5000 patterns, 2500 in each class.
+    This allows the study of the classifier behavior for heavy intersection
+    of the class distributions and for high degree of nonlinearity of the
+    class boundaries.
+
+  - 'gaussian'
+
+    A set of seven databases corresponding to the same problem, but with
+    dimensionality ranging from 2 to 8.
+    This allows the study of the classifier behavior for different
+    dimensionalities of the input vectors, for heavy overlapped
+    distributions and for non linear separability.
+    Theses databases where already studied by Kohonen in:
+      Kohonen, T. and Barna, G. and Chrisley, R., "Statistical Pattern
+      Recognition with Neural Networks: Benchmarking Studies",
+      IEEE Int. Conf. on Neural Networks, SOS Printing, San Diego, 1988.
+    In this paper,the performances of three basis types of neural-like
+    networks (Backpropagation network, Boltzmann machine and Learning
+    Vector Quantization) is evaluated and compared to the theoretical limit.
+
+  - 'concentric'
+
+    Bidimensional uniform concentric circular distributions.
+        2500 instances, 1579 in class 1, 921 in class 0.
+    This database may be used to study the linear separability of the
+    classifier when some classes are nested in other without overlapping.
+
+Contents of the 'REAL' directory
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The databases of this directory contain only the real
+classification problem sets selected for the Elena benchmarking studies.
+There is one subdirectory for each database. In this subdirectory,
+there are:
+
+- a text file giving detailed information about the related database
+  (`databasename.txt'),
+- the compressed original database in the Elena format
+  (`databasename.dat.Z'); the different patterns of each database being
+  presented in a random order.
+- By the way of a normalization process, each original feature will have
+  the same importance in a subsequent classification process.
+  A typical method is first to center each feature separately and than
+  to reduce it to a unit variance; this process has been applied on all
+  the REAL Elena databases in order to build the ``CR'' databases
+  contained in the ``databasename_CR.dat.Z'' files.
+
+The Principal Components Analysis (PCA) is a very classical method in pattern
+recognition [Duda73].  PCA reduces the sample dimension in a linear way
+for the best representation in lower dimensions keeping the maximum of
+inertia. The best axe for the representation is however not necessary
+the best axe for the discrimination. After PCA, features are selected
+according to the percentage of initial inertia which is covered by the
+different axes and the number of features is determined according to
+the percentage of initial inertia to keep for the classification
+process. This selection method has been applied on every REAL database
+after centering and reduction (thus on the databasename_CR.dat files).
+When quasi-linear correlations exists between some initial features,
+these redundant dimensions are removed by PCA and this preprocessing is
+then recommended. In this case, before a PCA, the determinant of the
+data covariance matrix is near zero; this database is thus badly
+conditioned for all process which use this information (the quadratic
+classifier for example).
+
+The following files, related to PCA are also available for the REAL databases:
+- ``databasename_PCA.dat.Z'', the projection of the ``CR'' database on its
+   principal components (sorted in a decreasing order of the related
+   inertia percentage),
+- ``databasename_corr_circle.ps.Z'', a graphical representation of the
+    correlation between the initial attributes and the two first
+    principal components,
+- ``databasename_proj_PCA.ps.Z'', a graphical representation of the
+    projection of the initial database on the two first principal
+    components,
+-  ``databasename_EV.dat'', a file with the eigenvalues and associated
+    inertia percentages
+
+The Discriminant Factorial Analysis (DFA) can be applied to a learning
+database where each learning sample belongs to a particular class
+[Duda73]. The number of discriminant features selected by DFA is fixed
+in function of the number of classes (c) and of the number of input
+dimensions (d); this number is equal to the minimum between d and c-1.
+In the usual case where d is greater than c, the output dimension is
+fixed equal to the number of classes minus one and the discriminant
+axes are selected in order to maximize the between-variance and to
+minimize the within-variance of the classes. The discrimination power
+(ratio of the projected between-variance over the projected
+within-variance) is not the same for each discriminant axis: this ratio
+decreases for each axis. So for a problem with many classes, this
+preprocessing will not be always efficient as the last output features
+will not be so discriminant. This analysis uses the information of the
+inverse of the global covariance matrix, so the covariance matrix must
+be well conditioned (for example, a preliminary PCA must be applied to
+remove the linearly correlated dimensions). The DFA preprocessing
+method has been applied on the 18 first principal components of the
+'satimage_PCA' and 'texture_PCA' databases (thus by keeping only the 18
+first attributes of these databases before to apply the DFA
+preprocessing) in order to build the 'satimage_DFA.dat.Z' and
+'texture_DFA.dat.Z' database files, having respectively 5 and 10
+dimensions (the 'satimage' database having 6 classes and 'texture'
+11).
+
+  For each subdirectory, the directoryname is the same as the name chosen
+for the contained database.  Here are the directorynames with a brief
+numerical description of the available databases.
+
+  - phoneme
+
+    French and Spannish phoneme recognition problem.
+  The aim is to distinguish between nasal (AN, IN, ON) and oral
+  (A, I, O, E, E') vowels.
+
+      5404 patterns, 5 attributes (the normalized amplitudes of the five
+     first harmonics), 2 classes.
+
+     This database was in use in the European ESPRIT 5516 project ROARS.
+  The aim of this project is the development and the implementation of a
+  REAL time analytical system for French and Spannish phoneme
+  recognition.
+
+  - texture
+
+    The aim is to distinguish between 11 different textures (Grass lawn,
+  Pressed calf leather, Handmade paper, Raffia looped to a high pile, Cotton
+  canvas, ...), each pattern (pixel) being characterised by 40 attributes
+  built by the estimation of fourth order modified moments in four orientations:
+  0, 45, 90 and 135 degrees.
+
+    5500 patterns, 11 classes of 500 instances (each class refers to a type
+    of texture in the Brodatz album).
+
+    The original source of this database is:
+  P. Brodatz "Textures: A Photographic Album for Artists and Designers",
+  Dover Publications, Inc., New York, 1966.
+    This database was generated by the Laboratory of Image Processing
+  and Pattern Recognition (INPG-LTIRF Grenoble, France) in the development
+  of the Esprit project ELENA No. 6891 and the Esprit working group ATHOS
+  No. 6620.
+
+  - satimage (*)
+
+    Classification of the multi-spectral values of an image of the Landsat
+  satellite. Each line contains the pixel values in four spectral bands
+  of each of the 9 pixels in a 3x3 neighbourhood and a number indicating
+  the classification label of the central pixel (corresponding to the type
+  of soil: red soil, cotton crop, grey soil, ...).
+  The aim is to predict this classification, given the multi-spectral
+  values.
+
+     6435 instances, 36 attributes (4 spectral bands x 9 pixels in
+    neighbourhood), 6 classes.
+
+    This  database was in use in the European StatLog project, which
+  involves comparing the performances of machine learning,
+  statistical, and neural network algorithms on data sets from REAL-world
+  industrial areas including medicine, finance, image analysis, and
+  engineering design:
+
+    D. Michie, D.J. Spiegelhalter, and C.C. Taylor, editors.
+    Machine learning, Neural and Statistical Classification.
+    Ellis Horwood Series In Artificial Intelligence,
+    England, 1994.
+
+  - iris (*)
+
+   This is perhaps the best known database to be found in the pattern
+   recognition literature.  Fisher's paper is a classic in the field
+   and is referenced frequently to this day.  (See Duda & Hart, for
+   example.)  The data set contains 3 classes of 50 instances each,
+   where each class refers to a type of iris plant.  One class is
+   linearly separable from the other 2; the latter are NOT linearly
+   separable from each other.
+   4 attributes (sepal length, sepal width, petal length and petal width).
+
+ (*) These databases are taken from the ftp anonymous "UCI Repository Of
+     Machine Learning Databases and Domain Theories"
+     (ics.uci.edu: pub/machine-learning-databases):
+  Murphy, P. M. and Aha, D. W. (1992). "UCI Repository of machine
+  learning databases" [Machine-readable data repository]. Irvine, CA:
+  University of California, Department of Information and Computer Science.
+
+ [Duda73]
+ Duda, R.O. and Hart, P.E.,
+ Pattern Classification and Scene Analysis,
+ John Wiley & Sons, 1973.
+
+##############################################################################
+
+The ELENA PROJECT
+~~~~~~~~~~~~~~~~
+  Neural networks are now known as powerful methods for empirical
+  data analysis, especially for approximation (identification,
+  control, prediction) and classification problems. The ELENA project
+  investigates several aspects of classification by neural networks,
+  including links between neural networks and Bayesian statistical
+  classification, incremental learning (control of the network size
+  by adding or removing neurons),...
+
+  URL: <a href="http://www.dice.ucl.ac.be/neural-nets/ELENA/ELENA.html">http://www.dice.ucl.ac.be/neural-nets/ELENA/ELENA.html</a>
+
+  ELENA is an ESPRIT III Basic Research Action project (No. 6891).
+  It involves:
+        INPG (Grenoble, F),
+        UPC (Barcelona, E),
+        EPFL (Lausanne, CH),
+        UCL (Louvain-la-Neuve, B),
+        Thomson-Sintra ASM (Sophia Antipolis, F)
+        EERIE (Nimes, F).
+
+  The coordinator of the project can be
+  contacted at:
+
+      Prof. Christian Jutten,
+      INPG-LTIRF,
+      46 av. Flix Viallet,
+      F-38031 Grenoble Cedex,
+      France
+
+      Phone: +33 76 57 45 48,
+      Fax: +33 76 57 47 90,
+      e-mail: chris@tirf.inpg.fr
+
+A simulation environment (PACKLIB) has been developed in the project;
+it is a smart graphical tool allowing fast programming and
+interactive analysis. The PACKLIB environment greatly simplifies the
+user's task by requiring only to write the basic code of the
+algorithms, while the whole graphical input, output and relationship
+framework is handled by the environment itself.  PACKLIB is used for
+extensive benchmarks in the ELENA project and in other situations
+(image processing, control of mobile robots,...). Currently, PACKLIB
+is tested by beta users and a demo version available in the public
+domain.
+  URL: <a href="http://www.dice.ucl.ac.be/neural-nets/ELENA/Packlib.html">http://www.dice.ucl.ac.be/neural-nets/ELENA/Packlib.html</a>
+
+##############################################################################
+
+IF YOU HAVE ANY PROBLEM, QUESTION OR PROPOSITION, PLEASE E_MAIL the following.
+
+  VOZ Jean-Luc or Michel Verleysen
+  Universite Catholique de Louvain
+  DICE - Lab. de Microelectronique
+  3, place du Levant
+  B-1348 LOUVAIN-LA-NEUVE
+
+  E_mail : voz@dice.ucl.ac.be
+           verleysen@dice.ucl.ac.be
+
+</pre>
+
+<li><b>Multidimensional scaling.</b>
+
+<pre>
+Multidimensional scaling (from message from F. Murtagh, June 1995):
+
+On Statlib (<a href="http://lib.stat.cmu.edu/">http://lib.stat.cmu.edu/</a>), Fortran or C code, go to S and
+then to multiv, where a Sammon map program in Fortran is available.  
+Under ripley there should be a better implementation, but maybe more
+more integrated into S (to be checked again...). 
+
+For Netlib, go to <a href="http://www.netlib.org/">http://www.netlib.org/</a>, then 'The Netlib Repository', then 
+mds for all the 1960s Bell Labs material. 
+
+
+   *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+   |                                                                     |
+   *   Netlib/MDS is a collection of FREE programs for multidimensional  *
+   |   scaling and related methods.                                      |
+   *                                                                     *
+   |   -- NEW: Four entries covering PREFMAP3, SINDSCAL, and KYST2       |
+   *                                                                     *
+   |   -- NEW: Several DOS executable files                              |
+   *                                                                     *
+   |   -- Programs may be obtained by email, ftp, and web browser.       |
+   *                                                                     *
+   *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+Netlib/MDS is a collection of programs having to do with multidimensional
+scaling and related methods, including PREFMAP, SINDSCAL (INDSDCAL), ADDTREE,
+EXTREE, KYST, MDSCAL, HICLUST, and MDPREF (some in multiple versions).
+
+Netlib/MDS is one of many libraries (currently about 140) which are
+maintained at and distributed by Netlib at several sites around the world.
+
+For further information, send email containing only this line
+
+     send readme from mds
+
+to
+     netlib@netlib.bell-labs.com
+
+Our thanks to
+
+        Patrick Groenen (Leiden University, The Netherlands),
+        Phipps Arabie (Rutgers University, USA),
+        Jacqueline Meulman (Leiden University, The Netherlands),
+
+for providing the new programs, and to Joaquin Sanchez (Complutense
+University, Spain) for other help.
+
+<>----------------<>----------------<>----------------<>-----------------<>
+             Joseph B Kruskal, Bell Labs, Lucent Technologies
+                    Room 2C-281, Murray Hill, NJ 07974
+                   EMAIL kruskal@research.bell-labs.com
+ PHONE 908-582-3853                                       FAX 908-582-2379
+ HOMEPAGE <a href="http://cm.bell-labs.com/cm/ms/departments/sia/kruskal/index.html">http://cm.bell-labs.com/cm/ms/departments/sia/kruskal/index.html</a>
+<>----------------<>----------------<>----------------<>-----------------<>
+</pre>
+
+<li><b>Classification trees.</b>
+
+<pre>
+Maria Wolters asked:
+
+> I'm looking for public domain classification tree induction software.
+> Our target data is linguistic (letters & part-of-speech tags).
+
+the Other Phylogeny Programs web page at our PHYLIP web site lists 88
+packages (yes, there are that many!), many of them freely copyable.  It also
+has a link to the Classification Society's list of freely copyable
+classification software.
+
+The URL is:
+
+   <a href="http://evolution.genetics.washington.edu/phylip/software.html">http://evolution.genetics.washington.edu/phylip/software.html</a>
+
+--
+Joe Felsenstein         joe@genetics.washington.edu     (IP No. 128.95.12.41)
+ Dept. of Genetics, Univ. of Washington, Box 357360, Seattle, WA 98195-7360 USA
+
+------------------------------------------------------------------------------
+
+From:    "Ted E. Dunning" <ted@APTEX.COM>
+Subject: Re: Classification tree software for symbolic data
+
+   ... Maria Wolters wants decision tree software ...
+
+look at the following http pages
+
+<a href="http://www.sgi.com/Technology/mlc/trees.html">http://www.sgi.com/Technology/mlc/trees.html</a>
+<a href="http://www.cs.jhu.edu/~salzberg/announce-oc1.html">http://www.cs.jhu.edu/~salzberg/announce-oc1.html</a>
+</pre>
+
+<li><b>Model-based clustering.</b>
+
+<pre>
+Date: Tue, 11 Mar 97 13:44:51 -0800
+From: raftery@stat.washington.edu
+To: mclust@stat.washington.edu
+Subject: New model-based clustering software and papers
+
+Several new pieces of software and papers on model-based clustering
+are now available over the Web, produced by the MCLUST project
+at the University of Washington. They can be accessed from 
+<a href="http://www.stat.washington.edu/raftery/Research/Mclust/mclust.html">http://www.stat.washington.edu/raftery/Research/Mclust/mclust.html</a>
+(click on "Papers" or "Software").
+
+
+The new software is:
+
+* mclust-em: 2-dimensional model-based clustering with clutter using the 
+        EM algorithm
+
+* Principal Curve Clustering Software 
+
+* Nearest Neighbor Cleaning of Spatial Point Processes 
+
+
+The new papers are:
+
+* Principal Curve Clustering with Noise. 
+     Derek Stanford and Adrian E. Raftery. 
+
+* Non-parametric Maximum Likelihood Estimation of Features in Spatial Point 
+   Processes Using Voronoi Tesselation (revised version). 
+     Denis Allard and Chris Fraley
+
+* Linear Flaw Detection in Woven Textiles using Model-Based Clustering. 
+     John G. Campbell, Chris Fraley, Fionn Murtagh and Adrian E. Raftery.
+
+* Algorithms for Model-Based Gaussian Hierarchical Clustering.
+     Chris Fraley.
+
+* Nearest Neighbor Clutter Removal for Estimating Features in 
+   Spatial Point Processes.
+     Simon Byers and Adrian E. Raftery
+
+------------------------------------------------------------------------------
+
+Date: Thu, 13 Mar 1997 10:04:44 +1300
+From: Murray Jorgensen <maj@WAIKATO.AC.NZ>
+
+Yet more model-based clustering software
+
+Emboldened by the announcement of the MCLUST project group at the
+University of Washington the MULTIMIX group at the University of Waikato
+(Lynette Hunt and Murray Jorgensen) announce the availability of the
+MULTIMIX program, which clusters data having both categorical and
+continuous variables, possibly containing missing observations.
+
+The class of models fitted is described in the (Plain) TeX code which
+follows and generalizes both Latent Class Analysis and Mixtures of
+Multivariate Normals.
+
+We hope soon to have this software available on our ftp site. If you are
+interested in downloading this software please send us you email address
+and we will notify you when the program will be available.
+
+
+Date: Tue, 11 Nov 1997 16:31:14 +1300
+From: Murray Jorgensen <maj@WAIKATO.AC.NZ>
+ 
+I announced earlier this year on this list that the _Multimix_ program
+would 'shortly' be available. Multimix was written by Lyn Hunt to fit
+mixture models to multivariate data sets as an alternative to other
+approaches to cluster analysis (unsupervised learning).
+ 
+I apologise for the delay, but I am please to announce that Multimix can
+now be downloaded from
+ 
+                <a href="ftp://ftp.math.waikato.ac.nz/pub/maj/">ftp://ftp.math.waikato.ac.nz/pub/maj/</a>
+ 
+We have decided to make the Fortran 77 source code available so that you
+will be able to customise Multimix to your own data and platform. The sizes
+of the multidimensioned arrays used in Multimix are governed by parameter
+statements which may need to be changed from the supplied values to suit
+your needs.
+ 
+For those who are not accustomed to a statistical modelling approach I
+should make clear that in specifying the model it is important to keep the
+number of estimated parameters as low as possible consistant with a good
+fit to the data. Unlike some other approaches Multimix does not attempt to
+determine an optimal number of clusters. We recommend that you first
+explore solutions with 2, 3, 4, ... clusters before attempting to go any
+further. (I say this because when I requested information about array
+parameter settings it emerged from several emails that several respondants
+were seeking what we would regard as quite a large number of clusters.)
+ 
+Before attempting to fit your own data we recommend that you try to
+reproduce the output for the Cancer example data and model supplied.
+ 
+The file README.TXT describes the files available in this distribution and
+I will paste it into this email below as well. Read the paper
+TALK.DVI/TALK.PS before getting started, then read NOTES.DVI or NOTES.PS
+ for some program documentation. Happy mixture modelling!
+ 
+Multimix.for    contains the program code for fitting a finite
+                mixture of K groups to the data.
+ 
+[Missing.for]   contains a version of Multimix.for which can handle
+                missing values in the variables. [Currently
+                unavailable while minor changes are being made.]
+ 
+Talk.dvi        Dvi and Postscript versions of a paper presented
+Talk.ps         on 23 August 1996 to the conference ISIS96,
+                Information, Statistics and Induction in Science,
+                held in Melbourne, Australia.[Published in the
+                proceedings of the Conference, edited by D. L. Dowe,
+                K. B. Korb and J. J. Oliver, World Scientific:
+                Singapore]
+ 
+Notes.ps        is a postscript file giving information about the
+                input required to run Multimix. Please read this
+                file.
+ 
+Read3.for       contains program code for setting up a
+                parameter input file for program Multimix. This is
+                useful when setting up the first few runs with a data
+                set. Later it is easier to modify existing files
+                with a text editor.
+ 
+Flexi           This subdirectory contains a Bayesian smoothing
+                program written by Martin Upsdell. It is not connected
+                with Multimix in any way. Read about Flexi in
+                Flexi/Info.txt. Martin's email address is
+                upsdellm@agresearch.cri.nz.
+ 
+ 
+EXAMPLE OF DATA FILE, INPUT FILE, AND OUTPUT FILES
+ 
+Cancer11.dat    contains the cancer data file.
+ 
+Cancerdesc.txt  A description of the data in Cancer11.dat.
+ 
+2band.dat       contains a parameter input file for the cancer data.
+                A two-component mixture model is to be fitted. The
+                variables are partitioned into blocks. Each block or
+                'cell' is assumed independent of the others within
+                each component. In the model fitted by 2band.dat
+                the distributions of the variables in each block are
+                1       Univariate Normal
+                2       3-category Discrete
+                3       2-category Discrete
+                4       Trivariate Normal
+                5       7-category Discrete
+                6       Univariate Normal
+                7       Univariate Normal
+                8       Univariate Normal
+                9       Univariate Normal
+                10      2-category Discrete
+                There is some re-ordering of variables to make the
+                variables in each block contiguous. An initial grouping
+                of the observations into two clusters is specified.
+                Alternatively initial parameter values could have
+                been given.
+ 
+General.out     is the output file generated when using the parameter
+                file 2band.dat.
+ 
+Groups.out      contains the group assignment and the posterior
+                probabilities of assignment to the two groups when
+                using the parameter file 2band.dat.
+ 
+ 
+Queries to Murray Jorgensen <maj@waikato.ac.nz>.
+Murray Jorgensen,  Department of Statistics,  U of Waikato, Hamilton, NZ
+-----[+64-7-838-4773]---------------------------[maj@waikato.ac.nz]-----
+
+</pre>
+
+<li><b>Miscellaneous.</b>
+
+<pre>
+Date: Wed, 12 Mar 1997 13:39:13 -0800 (PST)
+From: Jan Deleeuw <deleeuw@math.ucla.edu>
+
+Let me point out once again that for projects like this the
+Journal of Statistical Software is a nice repository. Statlib
+is a zoo, without any proper organization. JSS provides peer
+review, nice formatting, guestbooks for comments, demos when
+appropriate, code testing by reviewers. Moreover JSS gets
+hundreds of hits each day. Of course authors maintain copyright,
+i.e. they can put code in statlib, on their own ftp servers,
+sell it, whatever, in addition to submitting to JSS.
+
+See <a href="http://www.stat.ucla.edu/journals/jss/v01/i04/">http://www.stat.ucla.edu/journals/jss/v01/i04/</a> for a recent
+clustering example (still partly under conbstruction).
+</pre>
+
+<li><b>A range of Java, Fortran and C programs for multivariate analysis.</b>
+
+<pre>
+<a href="http://astro.u-strasbg.fr/~fmurtagh/mda-sw">http://astro.u-strasbg.fr/~fmurtagh/mda-sw</a>
+
+NEW, August 2002: Java application versions of some of these programs, 
+to be expanded over the coming months.  
+</pre>
+
+<li><b>DOS programs.</b>
+
+<pre> <a href="http://www.pitt.edu/~csna/Milligan/readme.html">
+DOS-based programs from Glenn Milligan </a>at Ohio State University
+</pre>
+
+<li><b>Spatial analysis.</b>
+
+<pre>
+D&eacute;partement des Sciences biologiques, 
+Universit&eacute; de Montr&eacute;al 
+
+<A name=casgrain HREF="http://www.fas.umontreal.ca/BIOL/legendre">The R Package</A>:  Multivariate and spatial analyses. 
+Spatial autocorrelation, Mantel
+tests, many kinds of clustering methods and more!
+ 
+<A
+HREF="http://www.fas.umontreal.ca/BIOL/legendre">
+Permute! 3.2</A>: Multiple regression on distance (Mantel test),
+ultrametric (Double permutation test) and additive (Triple permutation
+test) matrices. 
+</pre>
+
+<li><b>Independent Component Analysis (ICA) and Blind 
+Separation of Sources (BSS).</b>
+
+<pre>
+From: cia@hare.riken.go.jp, connectionists list, Wed, 12 Nov 97.
+
+Just to let you know of the http availability of a new software 
+for Independent Component Analysis (ICA) and Blind Separation of
+Sources (BSS).
+ 
+The Laboratory for Open Information Systems in the Research Group of
+Professor S. AMARI, (Brain-Style Information Processing Group) BRAIN
+SCIENCE INSTITUTE -RIKEN, JAPAN announces the availability of OOLABSS
+(Object Oriented LAboratory for Blind Source Separation), an
+experimental laboratory for ICA and BSS.
+ 
+OOLABSS has been developed by Dr. A. CICHOCKI and Dr. B. ORSIER (both
+worked on the concept of this software and on the
+development/unification of learning algorithms, while Dr. B. ORSIER
+designed and implemented the software in C++ under Windows95/NT).
+ 
+OOLABAS  offers an interactive environment for experiments
+with a very wide family of recently developed on-line adaptive learning
+algorithms for Blind Separation of Sources and Independent Component
+Analysis.
+ 
+OOLABSS is free for non-commercial use. The current version is still
+experimental but is reasonably stable and robust.
+ 
+The program has the following features:
+ 
+1. Users can define their own activation functions for each neuron 
+   (processing unit) or use a global activation function 
+   (e.g. hyperbolic tangent) for all neurons.
+ 
+2. The program also enables automatic (self-adaptive) selection of
+   quasi optimal activation functions (time variable or switching) 
+   depending on the stochastic distribution of extracted source signals 
+   (so called extended ICA problem).
+ 
+3  Users can add a noise both to sensors signals as well as to synaptic 
+   weights.
+
+4. The number of sources, sensors and outputs of the neural network can be
+   arbitrary defined by users.  
+ 
+5. In the case where the number of source signals is completely unknown one 
+   of the proposed approaches enables not only to estimate source signals
+   but also to estimate correctly their number on-line 
+   without any pre-processing, like pre-whitening or Principal Component 
+   Analysis (PCA).
+ 
+6. The problem of optimal updating of a learning rate (step) is 
+   a key problem encountered in a wide class of on-line adaptive 
+   learning algorithms. Relying on properties of nonlinear low-pass 
+   filters a family of learning algorithms for self-adaptive 
+   (automatic) updating of learning rates (global one or 
+   local-individual for each synaptic weight) are implemented 
+   in the program. 
+   The learning rates can be self-adaptive, i.e. quasi optimal
+   annealing of learning rates is automatically provided in a stationary 
+
+   environment. In a non-stationary environment the learning rates 
+   adaptively change their value to provide good tracking abilities.
+   The users can also define their own function for changing the 
+   learning rate.
+ 
+6. The program enables to compare performance of several different 
+   algorithms.
+ 
+7. Special emphasis is given to robust algorithms with respect to 
+   noise and outliers and equivariant feature (i.e. independence of 
+   asymptotic performance for ill conditioning of the mixing process). 
+  
+8. Advanced graphics: illustrative figures are produced and can be
+   easily printed. Encapsulated Postscript files can be produced for
+   easy integration into word processors. Data can be pasted to the
+   clipboard for post-processing using specialized software like
+   Matlab or even spreadsheets.
+ 
+9. Users can easily enter their own data (sensors signals, or sources and 
+   mixing matrix, noise, a neural network model, etc.) in order to 
+   experiment with various kind of algorithms. 
+ 
+10. Modular programming style: the program code is based on 
+    well-defined C++ classes and is very modular, which makes it
+    possible to tailor the software to each user's specific needs.
+ 
+Please visit OOLABSS home page at URL:
+<a href="http://www.bip.riken.go.jp/absl/orsier/OOLABSS">http://www.bip.riken.go.jp/absl/orsier/OOLABSS</a>
+ 
+The version is 1.0 beta, so comments, suggestions and bug
+reports are welcome at the address: oolabss@open.brain.riken.go.jp
+</pre>
+
+<li> <a href="http://www.clustan.com">Clustan</a>, package for 
+Unix and Windows, including
+ClustanGraphics for drawing ordered trees and proximity matrices.
+
+<li> <b>Independent Component Analysis, ICA</b>
+
+<pre>
+FastICA, a new MATLAB package for independent component analysis,
+is now available at:
+
+<a href="http://www.cis.hut.fi/projects/ica/fastica/">
+http://www.cis.hut.fi/projects/ica/fastica/</a>
+
+FastICA is a public-domain package that implements the fast
+fixed-point algorithm for ICA, and features an easy-to-use graphical
+user interface.
+
+The fixed-point algorithm is a computationally highly efficient method
+for ICA: in independent experiments it has been found to be 10-100
+times faster than conventional gradient descent methods for ICA.
+Another advantage of the fixed-point algorithm is that it can be
+used to perform projection pursuit, estimating the independent
+components one-by-one.
+
+
+Aapo Hyvarinen
+on behalf of the FastICA Team at the Helsinki University of Technology
+<a href="mailto:fastica@mail.cis.hut.fi">fastica@mail.cis.hut.fi</a>
+
+</pre>
+
+<li> <b>CLOPT: Constructing Parsimonious Trees from Proximity Data</b>
+
+<p>
+Documentation, DOS32, W3.1, W95, OS/2 executables, source code, test data
+and results, GIF images of trees output.  Rand index.  All available at
+<a href="http://137.132.218.143/clopt">http://137.132.218.143/clopt</a>.
+<p>
+From N. Sriram, 
+<a href="mailto:swknasri@LEONIS.NUS.EDU.SG">swknasri@LEONIS.NUS.EDU.SG</a>
+
+<li> <b>RASA version 2.2 software for measuring phylogenetic
+signal and data analysis</b>
+
+<pre>
+
+Please note that RASA version 2.2 software for measuring phylogenetic
+signal and data analysis has been uploaded and can be downloaded
+at the following URL as a binhexed, self-extracting archive:
+
+<a href="http://test1.bio.psu.edu/LW/list.htm">http://test1.bio.psu.edu/LW/list.htm</a>
+
+and by anonymous ftp at
+
+        loco.biology.unr.edu (pub) (rasa)
+
+This software (for Mac only) corrects a serious bug in the power&effect
+analysis option in RASA 2.1.  Please pass this announcement along to any
+user you may know who might not be a subscriber to CLASS-L.
+
+RASA 2.2 also offer two null hypothesis formulations: the original,
+analytical, equiprobable null and a new permutation null that provides a
+better fit of the test to the student-t distribution.
+
+Other features include:
+
+a tool for the detection of otherwise cryptic long edge taxa, which cause
+inconsistency of methods of tree-building.  This tool (the taxon variance
+plot) was recently described in
+
+        Lyons-Weiler, J., and G.A. Hoelzer. 1997.  Escaping from the
+        Felsenstein Zone by detecting long branches in phylogenetic data.
+        Molecular Phylogenetics and Evolution 8:375-384.
+
+a test for the suitability of outgroup taxa for rooting trees, to be
+described in
+
+
+        Lyons-Weiler, J., G.A. Hoelzer and R.J. Tausch. 1998.  Optimal
+        Outgroup Analysis. Biological Journal of the Linnean Society
+        (in press).
+
+new experimental treatments of phylogenetic data, including a type of
+waveform analysis that reveals structure in biological sequences
+
+        The software is menu-driven, with the following options
+        (some not yet activated):
+
+                2.1 File Menu
+                        2.1.1 Open
+                        2.1.2 Open Several
+                        2.1.3 Open Results
+                        2.1.4 Close
+                        2.1.5 Save Results As
+                        2.1.6 Export Modified Matrix
+                        2.1.7 Print
+
+                        2.1.8 Quit
+                2.2 Analysis Menu
+                        2.2.1 Signal Content
+                        2.2.2 SC Recursive
+                        2.2.3 Optimal Outgroup Analysis
+                        2.2.4 Power and Effect
+                        2.2.5 Colonization/Extinction Ratio
+                        2.2.6 Character Compatibility
+                        2.2.7 Signal Waveform
+                2.3 Graphs
+                        2.3.1 Regression
+                        2.3.2 Taxon Variance Plot
+                        2.3.3 Show Signal Waveform
+                        2.3.4 Residual Plots
+                        2.3.5 RASA Table
+                        2.3.6 Show Data Matrix
+                2.4 Data
+                        2.4.1 Include/Exclude Taxa
+                        2.4.2 Define Outgroup Taxa
+                      2.4.3 Remove Invariant Characters
+                        2.4.4 Remove APPARENT Autapomorphies
+                        2.4.5 Recode Purines and Pyrimidines
+                        2.4.6 Create Combined Data Matrix
+                        2.4.7 Delete Noisy Characters
+                2.5 Windows
+                        2.5.1 Clear the Screen
+                        2.5.2 Main Display
+                        2.5.3 Help
+                        2.5.4 References
+                        2.5.5 Acknowledgements
+                        2.5.6 Close All
+
+        Please send questions to weiler@equinox.unr.edu
+
+Message 
+Date: Thu, 19 Feb 1998 16:38:18 -0800
+From: James Francis Lyons-Weiler weiler@ERS.UNR.EDU
+
+Update message, Fri, 25 Sep 1998, James Lyons-Weiler <jfl8@psu.edu>
+</pre>
+
+<li> <b>TiMBL 2.0, Tilburg Memory Based Learner</b>
+
+<pre>
+
+
+   The ILK (Induction of Linguistic Knowledge) Research Group at Tilburg
+University, The Netherlands, announces the release of a new version of
+TiMBL, Tilburg Memory Based Learner (version 2.0).
+
+TiMBL is a machine learning program implementing a family of
+Memory-Based Learning techniques. TiMBL stores a representation of the
+training set explicitly in memory (hence `Memory Based'), and
+classifies new cases by extrapolating from the most similar stored
+cases. 
+
+TiMBL features the following (optional) metrics and speed-up
+optimalizations that enhance the underlying k-nearest neighbor 
+classifier engine:
+
+- Information Gain weighting for dealing with features of differing
+  importance (the IB1-IG learning algorithm).
+- Stanfill & Waltz's / Cost & Salzberg's (Modified) Value Difference
+  metric for making graded guesses of the match between two
+  different symbolic values.
+- Conversion of the flat instance memory into a decision tree, 
+  and inverted indexing of the instance memory, both yielding
+  faster classification.
+- Further compression and pruning of the decision tree, guided 
+  by feature information gain differences, for an even larger 
+  speed-up (the IGTREE learning algorithm).
+
+The current version is a complete rewrite of the software, and
+offers a number of new features:
+
+- Support for numeric features.
+- The TRIBL algorithm, a hybrid between decision tree and nearest
+  neighbor search.
+- An API to access the functionality of TiMBL from your own C++ 
+  programs.
+- Increased ability to monitor the process of extrapolation from 
+  nearest neighbors.
+- Many bug-fixes and small improvements.
+
+TiMBL accepts commandline arguments by which these metrics and
+optimalizations can be selected and combined. TiMBL can read the C4.5
+and WEKA's ARFF data file formats as well as column files and compact
+(fixed-width delimiter-less) data
+
+
+You are invited to download the TiMBL package for educational or
+non-commercial research purposes. When downloading the package you
+are asked to register, and express your agreement with the license
+terms. TiMBL is *not* shareware or public domain software. If you have 
+registered for version 1.0, please be so kind to re-register for the 
+current version.
+
+The TiMBL software package can be downloaded from
+
+      http://ilk.kub.nl/software.html
+
+or by following the `Software' link under the ILK home page at
+http://ilk.kub.nl/ .
+
+The TiMBL package contains the following:
+
+- Source code (C++) with a Makefile.
+- A reference guide containing descriptions of the incorporated
+  algorithms, detailed descriptions of the commandline options,
+  and a brief hands-on tuturial.
+- Some example datasets.
+- The text of the licence agreement.
+- A postscript version of the paper that describes IGTREE.
+
+The package should be easy to install on most UNIX systems.
+
+Background:
+
+Memory-based learning (MBL) has proven to be quite successful in a
+large number of tasks in Natural Language Processing (NLP) -- MBL of
+NLP tasks (text-to-speech, part-of-speech tagging, chunking, light
+parsing) is the main theme of research of the ILK group. At one point
+it was decided to build a well-coded and generic tool that would
+combine the group's algorithms, favorite optimization tricks, and
+interface desiderata. The current incarnation of this is now version
+2.0 of TiMBL.
+
+We think TiMBL can make a useful tool for NLP research, and, for that
+matter, for any other domain in machine learning.
+
+For information on the ILK Research Group, visit our site at
+ 
+       http://ilk.kub.nl/
+
+On this site you can find links to (postscript versions of)
+publications relating to the algorithms incorporated in TiMBL and on
+their application to NLP tasks.
+
+The reference guide ("TiMBL: Tilburg Memory-Based Learner, version
+2.0, Reference Guide.", Walter Daelemans, Jakub Zavrel, Ko van der
+Sloot, and Antal van den Bosch. ILK Technical Report 99-01) can be
+downloaded separately and directly from
+
+       http://ilk.kub.nl/~ilk/papers/ilk9901.ps.gz
+
+For comments and bugreports relating to TiMBL, please send mail to
+
+       Timbl@kub.nl
+
+</pre>
+
+<li> <b>Data repository</b>
+
+<pre>
+
+      <a href="http://kdd.ics.uci.edu/">The UCI KDD Archive</a>
+
+
+The UC Irvine Knowledge Discovery in Databases (KDD) Archive is a new online
+repository (http://kdd.ics.uci.edu/) of large datasets which encompasses a
+wide variety of data types, analysis tasks, and application areas. The primary
+role of this repository is to serve as a benchmark testbed to enable
+researchers in knowledge discovery and data mining to scale existing and
+future data analysis algorithms to very large and complex data sets.
+
+This archive is supported by the Information and Data Management Program at the
+National Science Foundation, and is intended to expand the current UCI Machine
+Learning Database Repository (http://www.ics.uci.edu/~mlearn/MLRepository.html)
+to datasets that are orders of magnitude larger and more complex.
+
+We are seeking submissions of large, well-documented datasets that can be made
+publicly available. Data types and tasks of interest include, but is not
+limited to:
+
+         Data Types                 Tasks
+
+         multivariate               classification
+         time series                regression
+         sequential                 clustering
+         relational                 density estimation
+         text/web                   retrieval
+         image                      causal modeling
+         spatial                    visualization
+         multimedia                 discovery
+         transactional              exploratory data analysis
+         heterogeneous              data cleaning
+         sound/audio                recommendation systems
+
+
+Submission Guidelines: Please see the UCI KDD Archive web site for detailed
+instructions.
+
+Stephen Bay (sbay@ics.uci.edu)
+librarian
+
+</pre>
+
+
+<li> <b> Fixed Point Cluster Analysis </b>
+
+Here is a software for those who want to test a new approach to
+cluster analysis.
+Fixed Point Clustering can produce overlapping, non-exhaustive clusters.
+Fixed Point Clusters are
+data subsets which do not contain any outlier, but all other points of the
+data set are outliers w.r.t. the Fixed Point Cluster. For further
+explanations see manuals and paper on my homepage
+<a href="http://www.math.uni-hamburg.de/home/hennig/">
+http://www.math.uni-hamburg.de/home/hennig/</a>
+
+FIXMAHAL is a software for
+finding spherical shaped clusters by means of the Mahalanobis distance.
+(There was a request to class-l to get a software that can cope with
+collinearity. This is possible with FIXMAHAL.)
+FIXREG is a software
+for finding linear regression clusters. Both programs are written in C
+and are freely available from my homepage.
+
+The programs should be stable but the methods are still under development.
+So I appreciate every kind of comment.
+
+Best regards,
+Christian Hennig
+
+Dr. Christian Hennig
+- Statistische Beratung -
+Institut fuer Mathematische Stochastik
+Bundesstrasse 55
+D-20146 Hamburg
+Tel: x40/42838 4907, privat x40/631 62 79
+hennig@math.uni-hamburg.de
+http://www.math.uni-hamburg.de/home/hennig/
+
+</pre>
+
+
+<li> <b>R</b>
+
+<pre>
+
+
+R is a public statistical package with
+many utilities of use to statisticians. The main
+R master site is 
+<a href="http://www.ci.tuwien.ac.at/R/"> 
+http://www.ci.tuwien.ac.at/R/</a>
+and 
+a US mirror site is 
+<a href="http://cran.stat.wisc.edu/">http://cran.stat.wisc.edu/</a>
+
+</pre>
+
+
+<li> <b>Smoothing Spline Package</b>
+
+<pre>
+
+Date: Tue, 6 Jul 1999 11:40:14 -0500
+From: Chong Gu <chong@stat.purdue.edu>
+
+Dear fellow R users,
+
+I just uploaded a new package gss to ftp.ci.tuwien.ac.at.  The package
+name gss stands for General Smoothing Spline.
+
+In the current version (0.4-1), it handles nonparametric multivariate
+regression with Gaussian, Binomial, Poisson, Gamma, Inverse Gaussian,
+and Negative Binomial responses.  I am still working on code for
+density estimation and hazard rate estimation to be made available in
+future releases.
+
+On the modeling side, gss uses tensor-product smoothing splines to
+construct nonparametric ANOVA structures using cubic spline, linear
+spline, and thin-plate spline marginals.  The popular
+(main-effect-only) additive models are special cases of nonparametric
+ANOVA models.  The syntax of gss functions resembles that of the lm
+and glm suites.
+
+Among new features that are not available from other spline packages
+are the standard errors needed for the construction of Wahba's Bayesian
+confidence intervals for smoothing spline fits, so you may want to try
+out gss even if you only wants to calculate a univariate cubic spline
+or a single term thin-plate spline.
+
+For those familiar with smoothing splines, gss is a front end to
+RKPACK, which encodes O(n^3) generic algorithms for reproducing kernel
+based smoothing spline calculation.
+
+Reports on bugs and suggestions for improvements/new features are most
+welcome.
+
+Chong Gu
+
+</pre>
+
+<li> <b>Bayes Net Toolbox</b>
+
+<pre>
+
+I am pleased to announce a major new release of the Bayes Net Toolbox,
+a software package for Matlab 5 that supports inference and learning
+in directed graphical models. Specifically, it supports exact and
+approximate inference, discrete and continuous variables, static and
+dynamic networks, and parameter and structure learning. Hence it can
+handle a large number of popular statistical models, such as the
+following:
+ 
+PCA/factor analysis, logistic regression, hierarchical mixtures of
+experts, QMR, DBNs, factorial HMMs, switching Kalman filters, etc.
+ 
+For more details, and to download the software, please go to
+    <a href="http://www.cs.berkeley.edu/~murphyk/Bayes/bnt.html">http://www.cs.berkeley.edu/~murphyk/Bayes/bnt.html</a>
+ 
+The new version (2.0) has been completely rewritten, making it much
+easier to read, use and extend. It is also somewhat faster.  The main
+change is that I now make extensive use of objects. (I used to use
+structs, and a dispatch mechanism based on the type-tag
+system in Abelson and Sussman.)  In addition, each inference
+algorithm (junction tree, sampling, loopy belief propagation, etc.) is
+now an object. This makes the code and documentation much more
+modular. It also makes it easier to add special-case algorithms, and
+to combine algorithms in novel ways (e.g., combining sampling and
+exact inference).
+ 
+I have gone to great lengths to make the source code readable, so it
+should prove an invaluable teaching tool. In addition, I am hoping
+that people will contribute algorithms to the toolbox, in the spirit
+of the open source movement.
+ 
+Kevin Murphy
+ 
+
+</pre>
+
+
+<li> <b>Fuzzy Clustering Package</b>
+
+<pre>
+I would very much appreciate if you could add a link to my fuzzy
+clustering algorithms on the web (<a href="http://www.fuzzy-clustering.de">www.fuzzy-clustering.de</a>).  
+The fc package (UNIX, C++, GPL licensed) comes along with a number 
+of fuzzy clustering algorithms and tools for data manipulation 
+and visualization.
+
+Dipl.-Inform. Frank Hoeppner
+University of Applied Sciences OOW
+Constantiaplatz 4
+D-26723 Emden
+e-mail hoeppner@et-inf.fho-emden.de
+www http://www.fuzzy-clustering.de
+
+
+</pre>
+
+<li> <b>Latent Class Analysis</b>
+
+<p> 
+Latent class analysis package.   Dr.
+Jay Magidson (Statistical Innovations) will be giving a workshop on Latent
+Class Analysis at the CSNA Annual Meeting, St Louis MO, 2001.  
+<a href="http://www.latentgold.com">Further information</a>, including 
+links to a free software download and tutorial.
+
+
+<p>
+<li> <b>Three-Mode Data Analysis</b>
+
+<p>
+Comprehensive site, 
+The Three Mode Company, including: bibliographies,
+software, data sets, addresses of active three-mode researchers, news
+about  three-mode activities.
+<p>
+Web address of <a href="http://three-mode.leidenuniv.nl">
+The Three-Mode Company</a>, three-mode.leidenuniv.nl
+<p>
+Information:
+<p>
+P.M. Kroonenberg, Department of Education, Leiden University
+Wassenaarseweg 52, 2333 AK Leiden, The Netherlands.
+Tel. *31-71-527 3446; Fax *31-71-527 3945
+kroonenb at fswrul.fsw.leidenuniv.nl
+
+
+<p>
+<li> <b>Principal Curves</b>
+
+<p>
+<pre>
+
+From: Balazs Kegl <KEGL@IRO.UMONTREAL.CA>
+
+I updated my Principal Curves web page and moved it to 
+
+<a href="http://www.iro.umontreal.ca/~kegl/research/pcurves/"> 
+http://www.iro.umontreal.ca/~kegl/research/pcurves/ </a>
+
+Recent references are included, and a new version of the java implementation 
+of the Polygonal Line Algorithm [1,2] is available. The most important new 
+features are 
+
+- arbitrary-dimensional input data 
+- loading/downloading your own data and saving the results 
+- adjusting the parameters of the algorithm in an interactive fashion 
+
+
+[1] B. Kegl, A. Krzyzak, T. Linder, and K. Zeger 
+"Learning and design of principal curves" 
+IEEE Transactions on Pattern Analysis and Machine Intelligence 
+vol. 22, no. 3, pp. 281-297, 2000. 
+http://www.iro.umontreal.ca/~kegl/research/publications/keglKrzyzakLinderZeger99.ps 
+
+[2] B. Kegl 
+"Principal curves: learning, design, and applications," 
+Ph. D. Thesis, 
+Concordia University, Canada, 1999. 
+http://www.iro.umontreal.ca/~kegl/research/publications/thesis.ps 
+
+Balazs Kegl 
+
+Balazs Kegl Assistant Professor 
+E-mail: kegl@iro.umontreal.ca Dept. of Computer Science and Op. Res. 
+Phone: (514) 343-7401 University of Montreal 
+Fax: (514) 343-5834 CP 6128 succ. Centre-Ville 
+http://www.iro.umontreal.ca/~kegl/ Montreal, Canada H3C 3J7 
+
+</pre>
+
+<p>
+<li> <b>Support Vector Machines</b>
+<p>
+
+<pre>
+A new version of SVM-Light (V5.00) is available, as well as my
+dissertation "Learning to Classify Text using Support Vector Machines",
+which recently appeared with Kluwer.
+
+The new version can be downloaded from
+
+     <a href="http://svmlight.joachims.org/">http://svmlight.joachims.org/</a>
+
+SVM-Light is an implementation of Support Vector Machines (SVMs) for
+large-scale problems. The new features of this version are the 
+following:
+
+- Learning of ranking functions (e.g. for search engines), in addition
+  to classification and regression.
+- Bug fixes and improved numerical stability.
+
+The dissertation describes the algorithms and methods implemented in
+SVM-light. In particular, it shows how these methods can be used for
+text classification. Links are on my homepage
+
+     <a href="http://www.joachims.org/">http://www.joachims.org/</a>
+
+Cheers
+Thorsten
+---
+Thorsten Joachims
+Assistant Professor
+Department of Computer Science
+Cornell University
+http://www.joachims.org/
+
+</pre>
+
+
+<p>
+<li><b>ICA - Independent Component Analysis, BSS - Blind Source Separation</b>
+<p>
+
+<pre>
+From: Andrzej CICHOCKI 
+Date: Fri, 23 Aug 2002
+
+We would like to announce availability of software packages 
+called ICALAB for ICA (Independent Component Analysis),
+BSS (Blind Sources Separation) and BSE (Blind Signal Extraction).
+ICALAB for Signal Processing and ICALAB for Image Processing are two
+independent packages for MATLAB that implement a number of efficient
+algorithms for ICA employing HOS (higher order statistics), BSS employing
+SOS (second order statistics) and LTP (linear temporal prediction), and
+BSE employing various SOS and HOS methods.
+After some data preprocessing, these packages can also be used also for
+MICA (multidimensional independent component analysis) and NIBSS (non
+independent blind source separation).
+The main features of both packages are an easy-to-use graphical user
+interface, and implementation of computationally powerful and
+efficient algorithms.
+Some implemented algorithms are robust with respect to additive white
+noise.
+The packages are available on our web pages:
+<a href="http://www.bsp.brain.riken.go.jp/ICALAB">
+http://www.bsp.brain.riken.go.jp/ICALAB</a>
+
+Any critical comments and suggestions are welcomed.
+Best regards,
+Andrzej Cichocki
+
+
+</pre>
+
+<p>
+<li><b>Dirichlet Diffusion Trees</b>
+<p>
+
+<pre>
+From: Radford Neal
+To: connectionists@cs.cmu.edu
+CC: Radford Neal
+Subject: New software release / Dirichlet diffusion trees
+Date: Mon, 30 Jun 2003 11:38:50 -0400
+Announcing a new release of my
+SOFTWARE FOR FLEXIBLE BAYESIAN MODELING
+Features include:
+* Regression and classification models based on neural networks and
+Gaussian processes
+* Density modeling and clustering methods based on finite and infinite
+(Dirichlet process) mixtures and on Dirichlet diffusion trees
+* Inference for a variety of simple Bayesian models specified using
+BUGS-like formulas
+* A variety of Markov chain Monte Carlo methods, for use with the
+above models, and for evaluation of MCMC methodologies
+Dirichlet diffusion tree models are a new feature in this release.
+These models utilize a new family of prior distributions over
+distributions that is more flexible and realistic than Dirichlet
+process, Dirichlet process mixture, and Polya tree priors. These
+models are suitable for general density modeling tasks, and also
+provide a Bayesian method for hierarchical clustering. See the
+following references:
+Neal, R. M. (2003) "Density modeling and clustering using Dirichlet
+diffusion trees", to appear in Bayesian Statistics 7.
+Neal, R. M. (2001) "Defining priors for distributions using Dirichlet
+diffusion trees", Technical Report No. 0104, Dept. of Statistics,
+University of Toronto, 25 pages. Available at
+http://www.cs.utoronto.ca/~radford/dft-paper1.abstract.html
+The software is written in C for Unix and Linux systems. It is free,
+and may be downloaded from
+http://www.cs.utoronto.ca/~radford/fbm.software.html
+
+Radford M. Neal radford@cs.utoronto.ca
+</pre>
+
+<p>
+<li><b>Probabilistic Reasoning Language</b>
+<p>
+
+<pre>
+From: Avi Pfeffer
+To: connectionists@cs.cmu.edu
+Subject: Announcing IBAL release
+Date: Tue, 01 Jul 2003 11:04:38 -0400
+Readers of this list may be interested in the following announcement:
+I am pleased to announce the initial release of IBAL, a general purpose
+language for probabilistic reasoning. IBAL is highly expressive, and its
+inference algorithm generalizes many common frameworks as well as
+allowing many new ones. It also provides parameter estimation and
+decision making. All this is packaged in a programming language that
+provides libraries, automatic type checking, etc.
+IBAL may be downloaded from http://www.eecs.harvard.edu/~avi/IBAL.
+Avi Pfeffer
+</pre>
+
+
+
+</ul>
+<p>
+<hr>
+Last update: 28 May 2004.
+<p>
+Author and contact point: Fionn Murtagh, fmurtagh @ astro.u-strasbg.fr
+</body>
+</html>
+

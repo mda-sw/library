@@ -1,0 +1,518 @@
+\documentstyle{elsart}
+\input psfig
+\begin{document}
+ 
+\begin{frontmatter}
+\title{Multiresolution Transforms for Object Detection and for Image 
+Transmission}
+
+\author{F. Murtagh}
+\address{Space Telescope -- European Coordinating Facility, European Southern
+Observatory, D-85748 Garching, Germany.  (Affiliated to
+Astrophysics Division, Space Science Department, European Space Agency.)}
+\author{J.-L. Starck}
+\address{CEA, DSM/DAPNIA, CE-Saclay, F-91191 Gif-sur-Yvette Cedex, France.}
+\author{P.F. Honor\'e}
+\address{CEA, DSM/DAPNIA, CE-Saclay, F-91191 Gif-sur-Yvette Cedex, France.}
+\author{W. Zeilinger}
+\address{Institut f\"ur Astronomie, Universit\"at Wien, A-1180 Austria.}
+
+\begin{abstract}
+Multiresolution transforms have been used with great effectiveness in many 
+areas of astronomical image processing.  Here we seek to extend their 
+applicability in two directions.  Firstly, we use such transforms to 
+detect objects in fields containing point sources, or a mixture of point 
+sources and large, extended objects.  Secondly, we discuss the efficient 
+transfer of (compressed) images using current World-Wide Web technology.
+\end{abstract}
+ 
+\end{frontmatter}
+
+\section{Introduction}
+
+In \cite{starck95} an approach to image compression is described, which is 
+based on a pyramidal multiresolution transform of the image; noise removal
+through a statistical model of the image; and then quadtree coding and 
+quantization of the noise-filtered image.  In \cite{white-nice95}, a number 
+of comments were made about the comparative performance of this method and
+algorithmic implementation.  A version of this paper is available at  
+http://www.eso.org/$\sim$fmurtagh/wavelets.html 
+
+In this paper, we seek to use such pyramid, compressed image data in order
+to achieve two distinct objectives: (i) carry out astronomical image 
+interpretation, and seek to understand where such an image data structure
+can help us in this task; and (ii) look at implementations for efficient
+image transfer, based on the compressed image.  
+
+\section{Object Detection}
+
+\subsection{Introduction}
+
+A pyramidal or other multiresolution representation of an image can be used
+to facilitate the extraction of information from an image.  Imposing a 
+certain ``syntax'' on the image in this way may be of aid to the user in 
+regard to the image's ``semantics'': i.e.\ a structuring imposed on the image
+may help in interpretation of the image.
+
+For large objects in an image, a well-resolved galaxy for example, or for
+superimposed objects, a multiscale approach is a very plausible one.  Such 
+an approach has been pursued in \cite{bijaoui89}, \cite{bijaoui90},
+ \cite{bijaoui91a}, \cite{BIJAOUI93},  
+\cite{bijaoui94_1}, \cite{slezak90}, \cite{slezak93}.
+
+Here we consider the case of images with sparsely located, small astronomical
+objects.  For search and analysis of a particular class of objects, we 
+use one privileged scale of a multiresolution transform.  An object ``map''
+or boolean image may be derived from the multiresolution support.  Such a 
+boolean image may be further cleaned of detector faults, and unwanted objects,
+using mathematical morphology (or Minkowski) operators.  
+
+\subsection{The Problem and the Data}
+
+Earlier work \cite{meurs94} aimed at finding faint edge-on galaxies 
+in WF/PC images.  For each object found, properties such as number of pixels
+in the object,  peak-to-minimum
+intensity difference, a coefficient characterizing the azimuthal profile, and
+the principal axis ellipticity, were used to allow discrimination between 
+potentially relevant objects, on the one hand, and faint stars or detector
+faults, on the other hand.
+
+Here we are concerned with the study of globular cluster systems surrounding
+\index{globular clusters}
+elliptical galaxies.  
+NGC 4636 was discussed by Kissler et al.\ \cite{kissler93}, 
+\index{NGC 4636}
+and characterized as a rich
+globular cluster system in a normal elliptical galaxy.
+Fig.\ \ref{ch10orig} shows an HST WF/PC image of NGC 4697, taken in 
+\index{NGC 4697}
+May 1994 (hence pre-refurbishment).  This image is of dimensions close to 
+$1600 \times 1600$, where the optically inactive borders have been removed,
+and where one can see left-over features where the images produced by the 
+four different CCD chips have been mosaiced together.  
+
+\begin{figure}[t]
+\centerline{
+\hbox{
+\psfig{figure=ch10_orig.ps,height=9cm,width=9cm,clip=}
+}}
+\caption{HST WF/PC image of NGC 4697.  Globular clusters surrounding the galaxy are of interest.}
+\label{ch10orig}
+\end{figure}
+
+
+\subsection{Pyramidal Median Image Transform and Minkowski Operators}
+
+Pyramidal transforms based on the median transform were reviewed in 
+\cite{starck95}.  The pyramid data structure offers a storage-efficient
+\index{median transform, multiresolution}
+structuring of the image.  A given resolution level may be expanded up to 
+the original image's dimensions, if this proves convenient for later 
+processing.  B-spline interpolation can be used to reconstruct the original
+dimensionality.  We used the pyramidal median transform, with 4 resolution 
+levels.
+
+Fig.\ \ref{ch10seg3} shows the level 3 resolution level (at full 
+dimensionality) which has been booleanized on the basis of a 3-sigma 
+threshold, and under the assumption that the image's noise characteristics
+were modelled correctly by additive Poisson and Gaussian read-out noise
+(the latter of zero mean, gain 7.5 $e^-$/DN, and variance 13 $e^-$/pixel).  
+Cosmic ray hits were removed (at least to a first order) by consideration of
+a number of exactly similarly registered frames.
+
+\begin{figure}[h]
+\centerline{
+\hbox{
+\psfig{figure=ch10_seg3.ps,height=9cm,width=9cm,clip=}
+}}
+\caption{Resolution level 3, booleanized, version of Fig.\ 1.}
+\label{ch10seg3}
+\end{figure}
+
+
+One sees in Fig.\ \ref{ch10seg3} that, in some measure, the objects of 
+interest are with high confidence among the contiguous boolean regions. 
+Unlike traditional adaptive thresholding procedures for object detection 
+in astronomy, the multiresolution transform used here takes much of this
+burden from the user.  Adaptivity for irregular background or objects 
+superimposed on larger, diffuse objects, is built in to our approach.  
+Detection thresholds are premised on the image's noise properties.
+
+One also sees in Fig.\ \ref{ch10seg3} 
+that this particular resolution level did not perform
+particularly well in revealing all of the large elliptical object, for which a
+different scale would be more appropriate.  
+Detector faults (cold pixel areas, column overflow or bleeding) have been 
+fairly well removed, but not all (see the very low-valued ``circle'' of pixels
+in the upper right quadrant; or the just noticeable differences in the four
+quadrants in Fig.\ \ref{ch10seg3}).  
+
+To ``fill in'' parts of the large diffuse galaxy object, and thus to avoid 
+later having to sift through parts of it which manifest themselves as
+small object-like, we used two dilations, using as structuring element:
+\index{mathematical morphology}
+\index{morphology, mathematical}
+\index{dilation}
+\index{structuring element}
+$$ s = \left(     \begin{array}{cccc}
+          0 & 1 & 1 & 0  \\
+          1 & 1 & 1 & 1  \\
+          1 & 1 & 1 & 1  \\
+          0 & 1 & 1 & 0  
+         \end{array}    \right)
+$$
+
+Such a structuring element is based on a priori knowledge of the object
+sought, viz.\ point symmetric, and of small size.  
+
+Following this, 5 openings were applied, i.e.\ 5 erosions to kill off smaller,
+\index{opening}
+\index{erosion}
+spurious objects (left-overs of cosmic ray hits, thin detector faults) and 
+5 dilations to re-establish a sufficient hinterland around potentially 
+relevant objects for later analysis.  Fig.\ \ref{ch102d5o} shows the 
+resulting image.
+
+\begin{figure}[h]
+\centerline{
+\hbox{
+\psfig{figure=ch10_2d5o.ps,height=9cm,width=9cm,clip=}
+}}
+\caption{Following 2 dilations and 5 openings applied to Fig.\ 2.}
+\label{ch102d5o}
+\end{figure}
+
+The ``blobs'' of Fig.\ \ref{ch102d5o} are then labelled; their corresponding
+original image pixel values are used to determine a range of parameters which
+are relevant for discrimination: size and magnitude information, and profile 
+fits of Gaussians assessed by $\chi^2$ discrepancy.  In addition, we output
+for user convenience a plot of the object numeric labels at their centre 
+positions.  Planned work will output astronomical coordinates for each object
+found in this way, to allow matching against relevant catalogue information.
+
+\subsection{Conclusion}
+
+We have investigated this approach to finding objects with particular, 
+clearly-specified properties (faint globular clusters).  For more massive,
+large-scale object trawling in image databases, we have found that varying 
+assumptions about
+the desired types of objects can be partially met in this framework.  
+
+One  aim of the broad-ranging application of this method is to characterize
+the information content of images, through carrying out a preliminary 
+object detection and analysis.  The image's content can be summarized 
+through statistics related to number of objects present, their maximum and 
+average sizes (numbers of pixels), and other other easily determined 
+characterizations.  
+
+\section{Image Transmission over Networks}
+\index{image transmission}
+\index{progressive image transmission}
+\index{transmission, image}
+
+The decomposition of the image into a set of resolution scales, and
+furthermore the fact that they are available in a pyramidal data 
+structure, can be used for effective transmission of image data (see 
+\cite{percival93}).  
+Current work on World-Wide Web progressive image transmission capability
+has used bit-plane decomposition \cite{lalich95}.
+Using resolution-based and pyramidal transfer and
+display with WWW-based information transfer 
+is a further step in this direction.
+
+We prototyped a number of approaches to image transmission, based on 
+compressed images, and these will be briefly described.  
+First, a few particular aspects of this issue will be
+noted.
+ 
+\begin{enumerate}
+\item There are a number of somewhat different image transmission 
+  scenarios.  In the case of image delivery from a large image database
+  (e.g. the Hubble Space Telescope archive, http://arch-http.hq.eso.org/)
+  quick-look compressed images are available to guide the user in whether 
+  or not the images are really desired.  In the case of storage management 
+  by an individual user, analogous to the use of a Unix command such as 
+  {\tt compress} for text, efficient storage may be coupled with efficient
+  on-the-fly uncompression and viewing.  In the case of research 
+  collaborators sharing images (not on the same scale as the image database
+  scenario above), network bandwidth may be a relatively scarce resource.
+  In the following, our thoughts are principally related to the last of these
+  scenarios.
+\item Astronomical images are noisy, and certainly if they are real-valued, 
+  then true lossless compression is highly unusual.
+\item WWW support for in-lining of images does not extend to FITS.  Therefore
+  there may be grounds for providing GIF or JPEG versions of a FITS image, 
+  to facilitate viewing.
+\item Actions can be defined for viewing (or performing other operations) at 
+  the client end of the transmission, based on the content type of the image
+  file being transmitted.  It is important to note that the client's local
+  configuration usually does not override the WWW server's recommended 
+  content type.
+\end{enumerate}
+ 
+Three main options led to the following prototypes:
+ 
+\begin{enumerate}
+ 
+\item The web server which stores the multiresolution compressed images
+ (we will use file extension .MRC, and take the decompression executible 
+ as \verb+mr_decomp+),
+ takes care of the uncompress process and sends back the requested image as
+ a FITS file. This option only requires a FITS image viewer such as 
+ SAOimage on the client machine. 
+
+The main drawback of this option is the load on the network since
+a decompressed image is sent from the server to the client.
+ 
+ For this prototype, the server needs a CGI script which calls
+ \verb+mr_decomp+ on the MRC file of the requested image. And the client needs
+ to configure the browser to recognize FITS images and locate the appropriate
+ viewer. This configuration depends on the browser and the client machine.
+  This is achieved by mapping the document MIME type, \verb+image/x-fits+,
+ to the \verb+.fits+ filename extension and to the FITS viewer's application.
+ 
+        On Unix, one  adds a line:\\
+ \verb+image/x-fits .fits+\\
+ to the \verb+.mime.type+ file and a line:\\
+ \verb+image/x-fits saoimage -fits %s 2> /dev/null;+\\
+ to the \verb+.mailcap+ file.
+ Reference may be made to one's browser documentation for information on 
+ setting up application programs.
+ 
+
+\item   The client decompresses the MRC file locally. The server sends back an
+ MRC file to the client browser which calls \verb+mr_decomp+ to get a FITS
+ image.
+ Therefore \verb+mr_decomp+ must be installed on the client machine. This
+ client machine must be 
+powerful enough to run the decompression smoothly.
+ This option saves network bandwidth: only compressed files are
+ transferred.
+
+ 
+\begin{description}
+\item   The decompression is made via the MIME scheme. Therefore, a new
+ application has to be added:\\
+ \verb+ application/x-mrdecomp; mr_decomp %s tmp 1> info.txt+   \\
+ \verb+ && cat info.txt && saoimage -fits tmp.fits 2> /dev/null;+
+\item   The decompression is made on-the-fly by the browser (like 
+ the \verb+gunzip+ text
+ decompression process). The only browser which can be configured in this
+ way  is
+ Netscape$^{\mathrm{TM}}$. For this prototype, the X11 application default
+ resource,
+ \verb+*encodingFilters+, had to be modified in this way:
+\begin{verbatim}
+*encodingFilters:                                 \
+        x-compress :  : .Z     : uncompress -c  \n\
+        x-gzip     :  : .z,.gz : gzip -cdq      \n\
+        x-mrdecomp :  : .MRC   : mr_decomp -s   \n
+\end{verbatim}
+\end{description}
+ 
+
+       To make MRC image files available, the server has to be reconfigured
+ to recognize the MRC file type, i.e.\ 
+the .MRC and .fits filename extensions.  For
+ the CERN httpd server, 
+the following entries are added to the configuration file:\\
+                                     \\
+ \verb+AddEncoding .MRC  x-mrdecomp+,\\
+ \verb+AddType .MRC    application/x-mrdecomp     binary+\\ and\\
+ \verb+AddType .fits   image/x-fits               binary+\\
+ 
+\item An intermediate server could take care of the decompression. Consider
+  a com\-pres\-sed image at address 
+{\tt http://ecf.hq.eso.org/$\sim$fmurtagh/dss.bin}.
+  For convenience, we are using content type {\tt .bin} here.  Next, consider
+  another site with an appropriate script for uncompressing and arranging the
+  image for viewing.  This could have address: 
+  {\tt http://www.eso.org/cgi-bin/ pit-client}.  The reference to the image, 
+  and the processing which the image is to undergo, is then
+  {\tt intermediate server?image}.  This can be entered easily in a browser
+  form, if
+  required.  We experimented with scripts for (i) full uncompression, (ii)
+  uncompression up to a fixed number of resolution scales, e.g. 2, and
+  for both of these, (iii), conversion to GIF so as to allow in-lined viewing.
+ 
+\end{enumerate}
+
+ 
+         Another option has also been studied: an intermediate proxy server
+ is used to decompress the MRC file and
+ to send the FITS image to the browser. The proxy may also be used to cache
+ the MRC file or the FITS image. This elegant option combines the main
+ advantages of the previous options since it saves the wide area network
+ bandwidth between the remote MRC file server and the local proxy server.
+ The decompression program, \verb+mr_decomp+, 
+runs on a single machine, the proxy server
+ (and so this saves the user local CPU), and this process 
+ is transparent to a user who may access any MRC
+ publishing server.\\
+ 
+        Another possible direction is to take advantage of the multiresolution
+ process  to send the image resolution-by-resolution
+ (from the lowest to the highest). For example, one  may request
+ the lowest resolution of an image to have a ``quicklook'' of this image and
+ afterwards ask for the next resolutions until you are satisfied with
+ the image's quality and noise level. The FITS image is reconstructed locally
+ from the files that are sent one-by-one to the client.  This is progressive
+image transmission.
+
+To summarize two options described above, let the .MRC compressed file be
+transmitted, translated to FITS (decompressed), and sent to the user's local
+FITS viewer using the MIME mechanism described above.  Futhermore, let a 
+faster on-the-fly extraction of a resolution  level 1  image also be available
+to the user.  Then the corresponding HTML file and CGI script are as 
+follows:
+
+\begin{verbatim}
+HTML file:
+
+<A HREF="sn1987a.fits.MRC">
+<IMG SRC="/icon/sn1987a.gif" ALT="sn1987a">sn1987a</A>:  
+<A HREF="/cgi-bin/mrdecomp?-r_1_-i_/opt/web/public/sadam/sn1987a.fits.MRC">
+quick-look</A>
+
+
+CGI script, and mrdecomp executable:
+
+#!/bin/ksh
+echo Content-Type: image/x-fits
+echo
+      QUERY_STRING=$(sed  -e "
+      s/_/ /g" <<-!
+      $QUERY_STRING
+!
+      )
+/opt/gnu/bin/mr_decomp $QUERY_STRING -o /tmp/temp.fits ; 
+                    cat /tmp/temp.fits; rm temp*
+\end{verbatim}
+
+Note in the above that the full directory path precedes the image file name,
+from which resolution level 1 (\verb+-r 1+) is to be extracted.  
+
+\section{Conclusion}
+
+The object detection approach described here was motivated by the
+multiresolution data structure, which has been a derivative product of our
+work on multiresolution transforms.  The effectiveness of the approach 
+described has been exemplified, 
+in comparison to more traditional ways of tackling
+the same problem (in general, based on local thresholding).  By way of future
+work, we note that a single resolution level only was used in our 
+experiments to initially demarcate the objects.  Can other
+resolution levels be used, at this early stage of the processing,
+to contribute additional important information?
+
+We have also demonstrated how Web-based transfer of compressed images can be 
+carried out in a straightforward manner.  Clearly progressive image 
+transmission will also be important in the future, and we have indicated 
+some work which is proceeding towards this end.  In the future, also, 
+agent-based computing will be of great importance, with widespread support 
+for Java and similar Web browsing systems. 
+
+
+
+\begin{thebibliography}{99}
+
+\bibitem{bijaoui89} A. Bijaoui, E. Slezak and G. Mars,
+``D\'etection des objets faibles dans des images c\'elestes \`a l'aide de 
+la transformation ondelette'', 
+{\it 12i\`eme Colloque du GRETSI},  209, Juin 1989 
+%209-211
+
+\bibitem{bijaoui90} A. Bijaoui,
+``Wavelets and astronomical image analysis'', 
+{\sl Wavelets, Fractals and Fourier Transforms: new developments and new
+applications.}, 195, IMA/SMAI/ERCOFTAC Conference December 1990. Eds.
+M. Farge,
+J.C.R. Hunt and J.C. Vassilicos, Oxford University Press, Oxford, 1993.
+%195-212
+
+\bibitem{bijaoui91a} A. Bijaoui,
+``Wavelets and the Analysis of Astronomical Objects'', 
+{\it Large-Scale Structures in Non linear Physics}, 340, Ed. 
+%340-347
+J.D. Fournier
+and 
+P.L. Sulem, Springer-Verlag, Berlin, 1991.
+
+\bibitem{BIJAOUI93} A. Bijaoui, ``Astronomical image inventory by the 
+wavelet transform'', in {\it Wavelets and Applications}, Y. Meyer, S. Roques,
+eds.  Editions 
+Fronti\`eres, Gif-sur-Yvette, 551, 1993.
+%551-556
+
+
+\bibitem{bijaoui94_1} A. Bijaoui, P. Bury, and E. Slezak, ``Catalog analysis
+with multiresolution insights.  I. Detection and characterization of 
+significant structures'', report, 1994.
+
+\bibitem{huang91} L. Huang, A. Bijaoui, {\it Experimental Astronomy}, 
+1, 311, 1991.
+
+\bibitem{huffman87} G. Held, T.R. Marshall, {\it Data Compression},
+Wiley, New York, 1987.
+
+\bibitem{hung93}
+ A.C. Hung, PVRG-JPEG CODEC 1.0, Portable Video Research Group, 
+Stanford University (anonymous ftp to: havefun.stanford.edu:/pub/jpeg), 1993.
+
+\bibitem{kissler93} M. Kissler, T. Richtler, E.V. Held, E.K. Grebel, S. 
+Wagner, and M. Cappaccioli, 1993, {\it ESO Messenger}, 32
+
+\bibitem{lalich95} V. Lalich-Petrich, G. Bhatia, and L. Davis, in R. Holzapfel, ed., 
+ Poster Proceedings,
+{\it Third International WWW Conference}, 
+Darmstadt '95, Frauenhofer Institute for
+Computer Graphics, Darmstadt, 159, 1995.
+
+\bibitem{meurs94} E.J.A. Meurs, F. Murtagh and H.-M. Adorf, IAU General 
+Assembly, 1994.
+
+\bibitem{percival93} J.W. Percival and R.L. White, in 
+R.J. Hanisch, R.J.V. Brissenden and J. Barnes, eds., 
+{\it Astronomical Data Analysis Software
+and Systems II}, ASP Conf. Ser., San Francisco, 321, 1993.
+
+
+\bibitem{press92_1} W.H. Press, in D.M. 
+Worrall, C. Biemesderfer and J. Barnes, eds., 
+{\it Astronomical Data Analysis
+Software and Systems I}, ASP, San Francisco, 3, 1992.
+
+\bibitem{samet84} H. Samet, {\it ACM Computing Surveys}, 16, 187, 1984.
+
+\bibitem{slezak90} E. Slezak, A. Bijaoui and G. Mars,
+ ``Structures identification from galaxy counts: use of the wavelet 
+   transform'', {\it Astron. and Astrophys.}, 227, 301, 1990.
+%301-316
+
+\bibitem{slezak93} E. Slezak, V. de Lapparent, and A. Bijaoui,  ``Objective 
+detection of voids and high density structures in the first
+   CfA redshift survey slice'', {\it Ap. J.},
+409, 517, 1993.
+%517-529
+
+\bibitem{starck95} J.-L. Starck, F. Murtagh, B. Pirenne and M. Albrecht,
+``Astronomical image compression based on noise suppression'',
+{\it PASP}, 1995, submitted.
+
+\bibitem{veran94} J.P. V\'eran, and J.R. Wright, in 
+{\it Astronomical} {\it Data Analysis
+Software and Systems III}, ASP, San Francisco (anonymous ftp to: 
+uwila.cfht.hawaii.edu:/pub/compfits), 1994.
+
+\bibitem{white92} R. White, M. Postman, Lattanzi, in H.T. 
+MacGillivray and E.B. Thompson, eds., {\it Digitized Optical Sky Surveys},
+Kluwer, Dordrecht, 167 (anonymous ftp to stsci.edu:/software/hcompress), 1992.
+
+\bibitem{white-nice95} R. White, this meeting.
+
+\end{thebibliography}
+
+\end{document}
+
+\end
+

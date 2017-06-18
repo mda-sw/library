@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution - Solid State Physics</title>
+</HEAD>
+<BODY BGCOLOR=white TEXT=black LINK=blue ALINK=gray VLINK=gray>
+<center>
+  <font size=+1>AFM Image of Semiconductor Quantum Dots</font><br>
+</center>
+<p>
+
+
+<ul>
+<li> <a href="afm3.gif">Input image.</a> Image from Ian Farrer, 
+if10004@cam.ac.uk, <a href="http://www.sp.phy.cam.ac.uk/~if10004/AFM/index.html">(further information).</a>
+<li> <a href="afm3_list.ps">List of objects detected, with properties.</a>
+Postscript file (derived from LaTeX table).
+<li> <a href="afm3_obj.ps">Map of object positions.</a> Postscript.
+<li> <a href="afm3_subobj.ps">Map of sub-object positions.</a> Postscript.
+<li> Command used: <br>
+    <i>mr_detect -i 2 -n 3 -K -g 1 image3.fits image3out</i><br>
+    where from the input image, image3.fits, 
+     files image3out_obj.ps, image3out_subobj.ps and image3.tex,
+    among others are produced, together with a noise filtered image,
+    image3out.fits.  Parameters are: -i 2, only use 2 iterations to refine
+    the "photometric" properties measured (not relevant here); -n 3, use
+    a small number of resolution scales, 3; -K, take account of "objects"
+    close to the image boundary; -g 1, use just one standard deviation to 
+    define the signal signficance level.  <br>
+    See <a href="http://ourworld.compuserve.com/homepages/multires/manual.htm">
+    MR/1 User Manual</a>, online HTML (limited) version.  
+</ul>
+
+
+</center>
+</BODY>
+</HTML>

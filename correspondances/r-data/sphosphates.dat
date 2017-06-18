@@ -1,0 +1,22 @@
+# Comment:  col labels are recognized as one less.
+# Access row and col lables as 
+# a <-  read.table("c:/datasets/sphosphates.dat", row.names=1)
+# dimnames(a)[1]        for rows
+# dimnames(a)[2]        for cols
+# Note: read.table uses scan, and can be a lot less efficient.
+      eBL   eUS  eJR    eMR    eSN    eTG    eTN  eCC
+iBL     0  1305    0   3573     25    500    110  293  
+iCA     2  8335    0      0      0      8      0    0
+iFR  1311  2691   70   4891   1484   2526   1697    4
+iDL  1322  3808    0   1445    261    200    288  1442
+iIT    42  1883  194   2881     67    195    493    0
+iJP     0  4426  522   1540    239     93      0    0
+iNL   299  1484    0   1853    249   1584     59   84
+iSP    20   339    0   5073      2     85     11    0
+iUK   122   645    2   2852    971    36     197    0
+iIN     0  2559  996   1149    218     0     134    0
+iBR    29  4918    0   1398     15     0     241    0
+iPL     0  1284  271   3311     33   540     548  1996
+iRM     0   768  483   1541      6   138      22  1206
+iEE     2   201  136   1398      0     0     333  5533
+

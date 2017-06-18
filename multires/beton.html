@@ -1,0 +1,123 @@
+<html><title>Image Analysis of Microstructure of Concrete</title>
+<body bgcolor=white>
+<h1>Short Report on <br>
+Image Analysis of Microstructure of Concrete</h1>
+
+In Basheer et al. (1999) it is explained how concrete is taken as a 
+three phase material, consisting of 
+<ol>
+<li> aggregate particles,
+<li> cement matrix - paste, and 
+<li> the interfacial transition zone (ITZ).
+</ol>
+
+The latter is found in the immediate vicinity of aggregate surface.  It 
+differs from the bulk hydrated cement paste in morphology, composition and 
+density.  Rather than the cement aggregate bond being the major factor
+in the strength of concrete, it is asserted that the ITZ has a significant
+effect on permeability and durability.   In Basheer et al. (1999) 
+concrete samples of predefined composition were imaged, visually-defined
+thresholding was carried out, and porosity measurements were made (based
+on greyscale values) within specified thickness bands of coarse aggregate.
+
+<p>  
+
+The aggregate/paste/ITZ is examined using back-scattered electron (bse) 
+images of polished sections of concrete.  Such Scanning Electron Microscope
+(SEM) images are subject to significant speckle.  <a href="s702nz_512_he.gif">
+Fig. 1</a> shows an example, which is a 512x512 cutout of a larger 
+1024x1024 image, here shown histogram-equalized.  
+
+<p>
+
+We see two ways to put the procedure of Basheer et al. (1999) 
+on a more effective footing: firstly,
+define the thresholds based on distribution mixture modeling of the 
+image greyscale intensity distribution; and, secondly, since this cannot
+be feasibly done on the available speckled images, first remove this speckle.
+
+<p>
+
+Speckle is multiplicative noise, and is typical of synthetic aperture 
+radar (SAR) or acoustic images. The statistical modeling of speckle is
+discussed in Section 5.3 of MR (1999).  We used the MR/1 package (MR, 1999) 
+to  despeckle the image shown in Fig. 1.  The result is shown in 
+<a href="s702nz_n3_t2_512_he.gif">Fig. 2</a> for  the same 512x512 
+area.  Despeckling the 1024x1024 image takes a few seconds elapsed time 
+on a Sun UltraSparc 10.  A wavelet transform is used, with noise 
+modeling, to allow for speckle filtering on a range of resolution 
+scales.  
+
+<p>
+
+To compare the input and despeckled output images, we show a 64x64 
+subregion here side by side.  As before, these images are shown 
+histogram-equalized to improve the contrast.
+
+<p>
+
+<img src="s702nz_64_he.gif">
+<img src="s702nz_n3_t2_64_he.gif">
+
+<p>
+
+The difference in intensity distribution in these images is quite
+significant.  <a href="s702nz_hist_plot.gif">Fig. 3</a> shows the 
+intensity distribution of the given SEM image.  It is clear than there
+is little by way of heuristic pointers towards where one should place 
+thresholds leading to image segmentation.  
+<a href="s702nz_n3_t2_hist_plot.gif">Fig. 4</a> shows the intensity 
+distribution, again based on the 1024x1024 image, following filtering
+to remove speckle.  Here, the distribution is much more amenable to the 
+fitting of Gaussians.  
+
+<p>
+
+We may comfortably hypothesize that, by the law
+of large numbers, the different constituents of the image each follow a
+Gaussian distribution.  It is our task to disentangle these, in most cases
+partially, superimposed Gaussians.  This can be done through an iterative
+fitting procedure (Celeux and Govaert, 1995). In Campbell et al. (1999),
+this mixture model fitting approach was used for setting thresholds in 
+images containing various types of production faults in textiles.
+Furthermore in Campbell et al. (1999), we select the best model - 
+helping significantly in selecting the best thresholds - by use of a 
+Bayesian model selection procedure.  One appropriate measure is the 
+BIC (Bayes Information Criterion), the theory of which was developed in 
+Kass and Raftery (1995).  
+
+<p>
+
+Overall, this is a very effective procedure, 
+and since the intensity distribution, only, is being processed it is highly 
+efficient (a second or two on a normal workstation).   It is an approach 
+which we believe will lead to a solution which is quite robust for 
+varying lighting conditions, or compositions of the concrete being studied.  
+It is, as we have seen, capable of providing an objective procedure for the
+setting of the thresholds.  Finally, it requires, as noted, that the 
+images be despeckled prior to analysis.  
+
+
+
+
+
+<p>
+
+<h3>References</h3>
+
+<ol>
+<li> P.A.M. Basheer, L. Basheer, D.A. Lange and A.E. Long, "Reliability
+of thresholding to determine the size of interfacial transition zone",
+preprint.
+<li> J.G. Campbell, C. Fraley, D. Stanford, F. Murtagh and A.E. Raftery,
+"Model-based methods for textile fault detection", International Journal 
+of Imaging Systems and Technology, 1999, in press.
+<li> G. Celeux and G. Govaert, "Gaussian parsimonious clustering models",
+Pattern Recognition, 28, 781-793, 1985. 
+<li> R.E. Kass and A.E. Raftery, "Bayes factors", Journal of the 
+American Statistical Association, 90, 773-795, 1995.  
+<li> MR: The Multiresolution Analysis Software, User Manual, 1999.
+</ol>
+  
+</body>
+</html>

@@ -1,0 +1,51 @@
+``Forty years ago a memorable academic year started, the ravages
+of which are often deplored but also I must confess to having
+been the happy beneficiary.
+
+Charged by Prof Daniel Dugu\'e with the teaching of the
+diplome d'Etudes Approfondies (DEA) de Statistique -- the Advanced
+Studies degree in Statistics, constituting the first part of a
+doctorate, I chose Data Analysis as the theme of the course.
+Prof Dugu\'e laughed and said this covered all of statistics!
+Under this broad banner, I wanted intended to multiply
+Correspondence Analyses.  With such analyses, thanks to the
+patience of Brigitte Cordier, working on an IBM 1620 -- a
+pocket calculator today but one that the Dean Yves Martin
+provided for the price of a Chateau! -- I was able, in Rennes,
+to aim at conquering linguistics, economics, and other fields.
+
+To analyze, data were necessary.  I was resolved to send the
+students of the DEA  to collect sheafs of these precious flowers.
+
+From my first class, I announced that the students should
+undertake internships.  But this call, repeated from week to week,
+had no response.  The students thought that, if they survived a
+written exam and an oral then no-one could ask them for more.
+Other than by cramming, they would have nothing to gain from the
+novelty of an excursion into practical things.  Moreover, even if
+they accepted or even were enticed by my project then who would
+host their intership?
+
+The pretty month of May 1968 would change all that!
+
+Living in Orl\'eans, I did not hear the shouting from Lutetia
+[i.e.\ from Paris and also from the university; Lutetia, or
+Lut\`ece, is the name of a town pre-existing Paris and the
+Ar\`enes de Lut\`ece
+is a public park very close to Universit\'e Pierre et Marie Curie,
+Paris 6]  but
+only distant echoes.  Finally, in September, both boss and
+students had to resign themselves to each take back their role,
+each cautiously but also brazenly!
+
+Since the month of May, the university was stigmatized as being
+arthritic, not offering a preparation for life.  Not I but others
+had extolled internships.  Machine-like of course the students came
+to tell me that they wanted to carry out internships.  I had triumphed!
+Yes, yes, they confessed in stammering, you had told us.
+
+It was just so too for those who in November 1967 had refused any
+intern, now in September 1968 were keen to save their native land
+by pampering young people.  The way opened up for Correspondence
+Analysis, a methodology that in practice was very soon associated
+with hierarchical clustering.''

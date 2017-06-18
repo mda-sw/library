@@ -1,0 +1,95 @@
+-----------------------------------------------------------------------
+ 
+A challenge is to remove the need for a person ever to have to 
+think up a file name.
+ 
+T. Berners-Lee:
+ 
+Edupage, 9 June 1996.
+BERNERS-LEE ON THE WEB
+World Wide Web inventor Tim Berners-Lee is gratified that people find the
+Web useful, but disappointed that for most people, the Web is a browsing
+activity rather than a creative one.  He'd like to see Web technology speed
+up, and the computers used to access it made easier to use.  "The Web has
+many ways to grow.  It is acquiring richness in interface, with 3-D and
+real-time audio and video.  I hope that we can finish the process of hiding
+the computers and the Net.  A challenge is to remove the need for a person
+ever to have to think up a file name."  (Investor's Business Daily 7 Jun 96 A1)
+ 
+-----------------------------------------------------------------------
+ 
+Emperor Meiji's 'Charter Oath', April 1868:
+ 
+'Knowledge shall be sought for all over the world and thus shall be
+strengthened the imperial polity'.
+ 
+P. 103, R. Storry.
+ 
+-----------------------------------------------------------------------
+ 
+John Tzetzes (c. 1110-1180) ... His range was immense ... He had
+a phenomenal memory ... philological commentaries on works of 
+classical Greek poetry ... works of scholarship in verse ... long,
+allegorical commentaries ... encyclopedia of Greek mythology ...
+long hexameter poems ... works of popularization ...
+Tzetzes compiled a collection of his letters, as did many of his 
+contemporaries.  He then went on, however, and equipped it with a 
+gigantic commentary in nearly 13,000 lines of 'political' verse,
+which is a veritable encyclopedia of miscellaneous knowledge.  
+Later he went on to add the elements of a prose commentary on his
+commentary.  The whole work conveys an impression of scholarship
+without an object, of a powerful engine driving nothing.  Tzetzes
+was in some ways a misfit and a failure in his own society.  Yet 
+his devotion of immense energy and erudition to a trivial end is
+a feature found elsewhere in the literature of the twelfth century,
+and points to a breakdown in the structure of Byzantine society and
+Byzantine life, a growing discrepancy between ends and means.  
+ 
+R. Browning, The Byzantine Empire, CUA Press 1992.
+ 
+-----------------------------------------------------------------------
+ 
+Maybe the search for the next great compelling application is 
+really the search for human identity.
+ 
+Douglas Coupland, "Microserfs", WIRED Magazine 1994.
+ 
+-----------------------------------------------------------------------
+
+"The effort of using machines to mimic the human mind has always 
+struck me as rather silly.  I would rather use them to mimic something
+better".
+ 
+E.W. Dijkstra, "On the cruelty of really teaching computing science",
+CACM, 32, 1398-1404, 1989.
+ 
+----------------------------------------------------------------------
+
+Virtually every current UI (user interface) is more or less a clone 
+of the Macintosh UI from 1984.  
+
+Web browsers are applications in the style of the currently dominant
+UI paradigm, so they are inherently ill suited for the task of 
+browsing the Web.  
+
+... cannot represent every signle Web object in a navigation UI ... 
+methods to reduce the clutter...
+Aggregation ...
+Summarization ...
+Filtering ...
+Elision ...
+
+The traditional information retrieval concepts of precision and recall
+are not well suited for the Web becasue they implicitly assume that
+users want a complete set of relevant documents.  On the Web, nobody
+will ever have the time to read all the relevant documents, and it is
+more important to guide the user to a small number of high-quality
+documents than to achieve completeness.
+
+
+From J. Nielsen, "User interface directions for the Web", CACM, Jan.
+1999, 42, 65-72.
+
+---------------------------------------------------------------------------
+
+

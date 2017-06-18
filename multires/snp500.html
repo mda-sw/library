@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+  <title>Multiresolution Applications - S&P 500</title>
+</HEAD>
+<BODY bgcolor=white  TEXT=black LINK=blue ALINK=gray VLINK=gray>
+
+<center>
+<font color=red>
+<h1>Finance - superimposed cycles</h1>
+<font color=black>
+<hr><p>
+<Font Size=+2><b>S&P 500 closing prices</b></font><br>
+  <img src="../pic/snp500.gif"><p>
+Forecasting of financial time-series may be enhanced if we can get at the
+underlying cycles and fluctuations.  Let's see what a wavelet transform can
+provide.
+<p>
+<A HREF="snpwv.html"><font size=+1>Wavelet transform</font></A><p>
+<p>
+But... "future" information has been used here to provide the wavelet 
+coefficients at each scale.  This isn't right!!  The following gives a result
+which respects time.  It is an additive decomposition.  It is not a wavelet
+transform (the different scales are not of mean zero).  It is based on a 
+sliding, and growing, window, on the basis of which a wavelet transform is 
+carried out.
+<p>
+<A HREF="snptm.html"><font size=+1>Time-based multiscale transform</font></A>  
+<p>
+Based on the latter, the first reference cited below finds up to 86% correct
+prediction of the trend - up or down - 5 days ahead.  
+<p>
+<hr>
+</center>
+<b>To probe further</b><p>
+"Wavelet-Based Feature Extraction and Decomposition Strategies for 
+Financial Forecasting", A Aussem, J Campbell and F Murtagh, <i>Journal of 
+Computational Intelligence in Finance</i>, 1998.
+<p>
+<i>Image and Data Analysis: The Multiscale Approach</i>, J-L Starck,
+F Murtagh and A Bijaoui, Cambridge University Press, 1998.
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+
+
+
+

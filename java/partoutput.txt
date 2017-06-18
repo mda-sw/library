@@ -1,0 +1,53 @@
+ K-Means using Spaeth's exchange algorithm,
+ initialized using first PC projections.
+ Input file name: iris0.dat
+ No. of rows, n     = 150
+ No. of columns, m  = 4
+ No. of clusters, k = 3
+ Variable means:
+       5.8433       3.0573       3.7580       1.1993
+
+ Variable standard deviations:
+       0.8253       0.4344       1.7594       0.7597
+
+ Cluster number, cardinality = 0 51.0
+ Cluster number, cardinality = 1 50.0
+ Cluster number, cardinality = 2 49.0
+Initial cluster means:
+         5.0039         3.4078         1.4980         0.2608
+         5.8760         2.7920         4.2980         1.3660
+         6.6837         2.9633         5.5592         2.0061
+
+Compactness = 88.32479791916776
+EPOCH NUMBER IS = 1
+New compactness = 87.93614893957593
+New compactness = 85.1450000000001
+New compactness = 83.46943137254912
+New compactness = 83.03672115384626
+New compactness = 83.01270468187285
+New compactness = 82.8060641025642
+New compactness = 82.09710999598566
+New compactness = 81.04853623188419
+New compactness = 80.88974747474761
+New compactness = 80.28246103896117
+New compactness = 79.67857241942079
+New compactness = 79.56893103448292
+EPOCH NUMBER IS = 2
+New compactness = 79.40682472095925
+New compactness = 79.02616666666685
+New compactness = 78.85566582597751
+EPOCH NUMBER IS = 3
+New compactness = 78.85144142614622
+EPOCH NUMBER IS = 4
+
+Cluster centers:
+         5.0060         3.4280         1.4620         0.2460
+         5.9016         2.7484         4.3935         1.4339
+         6.8500         3.0737         5.7421         2.0711
+
+Final cluster cardinalities:
+        50.0000        62.0000        38.0000
+
+Assignments:
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 2 2 2 2 1 2 2 2 2 2 2 1 1 2 2 2 2 1 2 1 2 1 2 2 1 1 2 2 2 2 2 1 2 2 2 2 1 2 2 2 1 2 2 2 1 2 2 1
+

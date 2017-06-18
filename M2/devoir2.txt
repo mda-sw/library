@@ -1,0 +1,14 @@
+Devoir, M2, janvier 2007, Methodes inverses
+
+
+Decrire dans une page l'utilisation de la 
+transformee en ondelettes soit pour le filtrage ou 
+debruitage, soit pour la deconvolution.  
+
+Justifier le choix de la transformee en ondelettes.
+
+Quelle est la motivation pour l'utilisation de la 
+transformee en ondelettes dans un tel cas?
+
+
+A rendre: avant le 10 fevrier.

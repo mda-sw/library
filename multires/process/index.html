@@ -1,0 +1,939 @@
+<html><head><title>Multiresolution Analysis of Financial, Environmental
+ and Process 
+Signals</title></head><body bgcolor=white>
+<h1>Multiresolution Analysis of Financial, Environmental
+ and Process Signals</h1>
+
+<h2>1. Introduction</h2>
+
+The following is a short summary of our past work on the modeling and 
+forecasting of environmental and financial signals or data streams.  It 
+is followed by a review of the most important aspects of our current
+work, in developing a new wavelet transform, innovative
+ approaches to feature
+selection based on simultaneous 
+frequency (roughly: wave) and spatial (roughly: 
+pattern) decompositions of the phenomena we observe, 
+and a new approach to signal enhancement based on informativeness,
+or information content.
+
+<p>
+
+First, though, we discuss past work, which leads to a range of conclusions
+on the type of data and problem domain which needs to be matched up with 
+a corresponding appropriate
+ pattern recognition or signal processing analysis method.  
+ 
+
+<ol>
+<li> At the European Southern Observatory (headquartered at Munich, Germany)
+in a series of articles, the first of which included Murtagh et al. (1992a, 
+1992b), we set out to model and forecast (or nowcast) meteorological and
+other environmental data.  The motivation was astronomical observatory 
+operations support.  
+
+<p>
+
+The first problem was to forecast ambient temperature, so that 
+the telescope enclosure could be kept at a constant temperature by feedback 
+to heating or, more likely, cooling systems.  Our results were very good, 
+based on simple nearest neighbor prediction, using an exogenous 
+variable also (pressure, related to changes in meteorological frontal 
+systems).  
+
+<p>
+The second problem was exceptionally difficult.  We sought to nowcast 
+astronomical "seeing" (observational quality, measured as the size of the
+blur produced by a distant star with no diffraction spikes) using a range
+of ambient environmental measures.  The difficulty of the problem arose,
+firstly, 
+from data being often missing, due to instrumental down-times.  Appropriate
+time and spatial resolution scales for the analysis were proposed by 
+domain experts (Marc Sarazin's role is to test 
+all aspects of candidate sites for 
+astronomical instruments).  A much greater difficulty
+was whether there was any dependence at all between seeing and ambient
+conditions.  In fact, we also carried out in-depth analysis of radiosonde
+balloon-borne ascent data, to no avail.  The radiosonde data suffered 
+enormously from being driven by wind and so not tracing out a vertical 
+column; and having a varying height before the balloon burst and the 
+data feed stopped.  (My own view is that the only data really worth having, 
+in order to analyze vertical air columns, would be from atmospheric
+tomography based, for instance, 
+on GPS satellites and ground stations.  But this won't work... because 
+astronomical observatories are located in parts of the world with 
+minimal GPS ground station coverage.)  At any rate, the overall objective
+was to predict seeing so that if more mediocre conditions were expected,
+then less high quality observing tasks could be scheduled, and appropriate
+instrumentation set up.  The abysmally bad quality data used meant that
+we restricted most of our work to nowcasting.  
+
+<p>
+
+Motivated by our use of nearest neighbor prediction in the temperature
+studies, in the seeing work we used a more sophisticated methodology to
+seek patterns and dependencies in the past.  We used correspondence 
+analysis (see, e.g., Murtagh and Heck, 1985, and many other works), using
+fuzzy coding of data, and developed a possibility theory framework for
+the interpretation of the results.  The motivation for a possibility 
+theory framework was that if the dependencies were patently very low, then 
+could we at least find some general dependencies, in particular past time
+periods, which allowed good seeing to be associated with simultaneous
+low relative humidity, high pressure, and low temperature (for example)? 
+The results were of interest -
+we found potentially useful patterns from the historic data - but  
+the study design did not allow for any thoughts of operational use.  
+
+<p>
+
+When univariate or multivariate time series could be assembled, we used
+a dynamic (i.e. unfolding in time) and recurrent (for very high order
+modeling) trainable neural network (DRNN) 
+for modeling and prediction.  The big advantage of the DRNN lies in the 
+possibility to find extremely parsimonious connectionist models.  Thus, 
+a network model with 4 nodes could potentially replace a far larger 
+multilayer perceptron and all sorts of headaches associated with the 
+latter's architecture and training algorithms.  A by-product of a highly
+parsimonious network is the possibility of modeling, simply, chaotic 
+behavior (and chaotic behavior was surmised for astronomical seeing), i.e.
+finding a simple chaotic relationship.  
+
+<p>
+
+Work on this theme is described in Aussem et al. (1994, 1995, 1996), 
+Murtagh et al. (1995), and  Murtagh and Sarazin (1997).
+
+<p>
+
+<li> In the European project "Neurosat - 
+Processing of Environmental Observing Satellite Data with Neural Networks"
+(Environment and Climate Programme, Forth Framework, 1996-1999) in which
+we were a partner, with tasks related to forecasting of ocean upwelling
+off the Mauretanian coast, again the data quality was very poor.   Neural
+network modeling and prediction results can be found in Murtagh et al.
+(1998a, 1998b, 
+2000), Zheng et al. (1998). Objectives included nowcasting 
+and forecasting, and missing data imputation.  A novel information fusion 
+methodology was developed, based on satellite-observed sea surface 
+temperature data, and simulation model (ocean global circulation model,
+OGCM) data, which was based on the wavelet transform (Zheng et al., 1999). 
+
+<p>
+
+<li> The use of higher frequency data (i.e. greater quantities of data),
+with better quality, from telecommunications and finance, led to the
+use of the wavelet and closely-related multiscale transform methods. 
+In Aussem and Murtagh (1997, 1998), Murtagh et al. (1996, 1997), and
+Murtagh and Aussem (1997, 1998), one of the themes pursued was that 
+any spatial and frequency decomposition of our data could provide a 
+useful means to fit and extrapolate, independently, the different spatial 
+and frequency bands.  Then the extrapolated results could be recombined
+into a forecast value or set of values.  Going further, we can ignore
+the results of certain spatial and frequency bands if they prove unreliable,
+e.g. by being too noisy.  An additive decomposition produced by some 
+redundant transform like the &agrave; trous wavelet transform has various
+properties which are advantageous.  In fact, it would be downright 
+cumbersome to use any non-redundant wavelet transform for what is,
+ultimately, a pattern recognition task.  
+
+<p>
+
+<li> Telecommunications traffic analysis - a simple problem based on 
+web logfile analysis, motivated by results in the literature showing that
+local area network traffic is fractal in nature - was carried out by 
+Aussem and Murtagh (1998) using wavelet preprocessing and neural network 
+prediction.  This work was continued with financial signal processing.
+
+<p>
+
+<li> Work in financial analysis was reported on in two papers in the 
+Journal of Computational Intelligence in Finance (JCIF), Aussem et al. (1998)
+and Zheng et al. (1999).  Experimentation was carried out in different 
+packages, including DRNN (dynamic recurrent neural network) in C (personal
+code); wavelet-based modeling and filtering in MR/1 and MR/2 (originally
+in C++, executables available commercially, also IDL (image and signal 
+processing system from Research Systems Inc.) and Java front-ends,
+see <a href="http://www.multiresolution.com">
+www.multiresolution.com</a>; Visual Basic implementation of two 
+transforms from this (personal code); multilayer perceptron in C (personal
+code); plots and some data file handling in S-Plus and other systems.  
+
+<p>
+
+While predictions were carried out in these JCIF papers, the major interest
+was in feature selection.  Preprocessing using wavelet transforms was 
+used for this.  The reasons for choosing wavelet transforms 
+are simply the following: environmental 
+and financial phenomena are taken as the superimposition of a range of 
+(scale- and frequency-dependent) components.  Many different wavelet
+transforms can be used, or for that matter non-wavelet multiscale 
+transforms.  In the following sections, we will look at why we use
+particular transforms in preference to others.  Our choice of certain
+methods is  unique compared to the work of others (e.g. the  limited
+options supported by 
+<a href="http://www.corniceresearch.com">Cornice Research</a>), and 
+many alternatives were investigated also.
+
+<p>
+
+Our approaches to feature selection have also been innovative, with a 
+range of approaches  appraised in Aussem et al. (1998) and Zheng et al.
+(1999).  Noise modeling of signals of very varying origin is something
+which MR/1 and MR/2 handle uniquely.  The entropy-based framework for 
+noise-finding and removal, described in Starck et al. (1998), Starck and
+Murtagh (1999, 2000), is also highly innovative and we will describe 
+the most salient aspects of this work  below.  
+
+</ol>
+
+<h2>2. A Question of Time: Modeling Time-Varying Data</h2>
+
+A time series (time-varying signal, in economics, process control, medical
+signal processing,  light curve in astronomy) differs from a 
+spectrum (trace, vector, 
+in chemical or astronomical spectroscopy, etc.) in one vital 
+respect: the values are ordered in time.  In the latter category, 
+recognition of features (spectral lines) is often the aim of the analysis.
+Denoising based on a multiscale method may be a good way to improve
+the quality of the data for doing this.  In the former case, however, 
+no wavelet-based approach (other than our own!) is known to us for 
+correctly handling such data.  For prediction this issue of taking the 
+temporal aspect of the data properly into account is quite critical.
+
+<p>
+
+Our requirement for handling time-varying data signals is as follows.  
+Consider a financial index (for example), with 1000 values.  We wish to 
+know the 1 or more than 1 subsequent values.  So to help our extrapolation
+into the future, we carry out a wavelet transform on our values
+ x(1) to x(1000).
+Keep the last values of our wavelet coefficients, at time-point t=1000.  
+This is <i>the</i> most critical value for our prediction.  
+
+<p>
+
+At time-point t=1001, do the same, keeping just the last set of wavelet
+coefficients corresponding to this time step, t=1001.  Continue doing this 
+up to t=2000.  Good.  This is precisely how we must carry out the wavelet
+transform in real life.  We have data up to time t=1000, so we can work on 
+this.  Time t=1001 comes, and so we can now work on that. And so on.
+
+<p>
+
+But is this a wavelet transform?  Alas, no, for most wavelet functions.  To
+see this compare what we have obtained with a wavelet transform on the 
+data set x(1) to x(2000).  They are not the same.  So our sliding time 
+window approach, which is our only option in facing a real data stream, 
+produces a nice but irrelevant result.
+
+<p>
+
+<a href="atrous-running-example.gif">Figure 1:</a> 
+Our problem: shown is the last smoothed version of the data 
+(Dow Jones Industrial Averages) with an &agrave; trous wavelet transform,
+and the corresponding curve from the "sliding time window" approach 
+starting from the 500th data value onwards.
+
+<p>
+
+<a href="atrous-running-example-scale5.gif">Figure 2:</a> 
+Again the same problem: shown is the 5th scale, from a 6-scale analysis, 
+using the &agrave; trous wavelet transform on the DJIA data, full data
+set and "sliding time window" starting from the 500th data value onwards.
+
+<p>
+
+In Figs. 1 and 2, the scaling (or low pass, or smoothing) function used
+is the B<sub>3</sub> spline.  In the &agrave; trous algorithm, this yields
+a wavelet function which is quite similar to a Mexican hat function or 
+the Morlet wavelet function.  
+
+<p>
+ 
+Using the full data set leads to an unhistorical output (which is fine
+if we are not interested in the time evolution of our signal).  Using the 
+real-time analysis approach, the "sliding time window" leads to... 
+who knows what?
+
+<p>
+
+In Zheng et al. (1999) we developed a new transform termed the "Haar &agrave;
+trous" wavelet transform.  This is, firstly, 
+because the wavelet function and scaling 
+function used are just like in the Haar wavelet transform (respectively, 
+a step function and a box function), which goes back to work by Haar in the
+early part of the 20th century.  Secondly, this new transform is redundant,
+and is implemented using the &agrave; trous algorithm.  It does a fine job 
+for us in respecting the all important end of the signal.  Real-time 
+implementation leads to the same result as directly applying this transform
+to all of the data.  
+
+<p>
+
+<a href="haaratrous-running-example.gif">Figure 3:</a> Analogous to Fig. 1,
+only this time using the Haar &agrave;
+trous wavelet transform.  Beyond time-point 500, the curves are the same.
+
+<p>
+
+<a href="haaratrous-running-example-scale5.gif">Figure 4:</a> 
+Analogous to Fig. 2,
+only this time using the Haar &agrave;
+trous wavelet transform.  Beyond time-point 500, the curves are the same.
+
+<h2>3. Filtering by Selective Ignorance</h2>
+
+The data used is shown in Fig. 5.  
+
+<p>
+
+<a href="djia.gif">Figure 5:</a> DJIA data used. 
+
+<p>
+
+The set of resolution levels produced by the Haar &agrave; trous wavelet
+transform are shown in Fig. 6, and the corresponding resolution scales
+for the B<sub>3</sub> spline &agrave; trous wavelet transform are shown in 
+Fig. 7. As we have seen the former (seen in Fig. 6) is consistent with 
+a real-time implementation.  The latter (seen in Fig. 7) is useful 
+for an unhistoric analysis since it is symmetric, unlike the more jagged
+Haar  &agrave; trous transform.  
+
+<p>
+
+<a href="haaratrous_1_6.gif">Figure 6:</a> Haar &agrave; trous wavelet
+transform resolution levels.  
+
+<p>
+
+<a href="atrous_1_6.gif">Figure 7:</a> B<sub>3</sub> spline
+ &agrave; trous wavelet
+transform resolution levels.  
+
+
+Let us look at whether there is a lag bias introduced by the wavelet 
+transform.  Fig. 8 shows the last smoothed scale overplotted on the 
+input data, in the case of the Haar &agrave; trous wavelet
+transform.  Fig. 9 shows the corresponding last smoothed scale overplotted
+on the input data in the case of the ("unhistorical") B<sub>3</sub> spline
+ &agrave; trous wavelet
+transform.  
+
+<p>
+
+<a href="haaratrous_orig_s6.gif">Figure 8:</a> Original data, with 
+Haar &agrave; trous wavelet transform last smoothed scale overplotted.
+
+<p>
+
+<a href="atrous_orig_s6.gif">Figure 9:</a> Original data, with 
+ B<sub>3</sub> spline &agrave; trous 
+("unhistoric") wavelet transform last smoothed scale overplotted.
+
+<p>
+
+Fig. 8 looks like it tracks the input data less well than the symmetric
+wavelet used in Fig. 9.  This is confirmed by calculating the totaled
+squared discrepancy between the two curves in both cases. But wait!  If 
+we look at at more wavelet scales, which together provide a better 
+approximation of our original data, then we find a better result.  
+Fig. 10 shows this.
+
+<p>
+
+<a href="haaratrous_orig_s6_s5_s4.gif">Figure 10:</a> Original data, with 
+Haar &agrave; trous wavelet transform fit overplotted.  The latter consists
+of the last smoothed scale, plus the next most smooth wavelet scale (the
+5th), 
+plus the next (the 4th).  
+
+<p>
+
+From this we conclude that a good fit to the data is possible, but on 
+condition that only the most high frequency wavelet scales are removed.
+This, therefore, is one approach to filtering.
+
+<p>
+
+As a parting remark, we note also that if smoothing (implying excellent
+fit to the data) is what the user wants, then attention should be paid to the
+millions of person-years of work in this area in the statistical literature.
+
+<h2>4. Filtering based on Data Informativeness</h2>
+
+We are going  to base our methods on informative structure in our given 
+data.  Information is inversely related to entropy or "orderedness".
+Consider a set of, say, 1000 DJIA values.  We know from Fig. 5 that the
+trend is upwards in this data.  That alone gives us hope of a somewhat
+reasonable estimate of some subsequent values.  
+So the entropy, or orderedness,
+is greater than what it could otherwise be, and the informativeness of the
+time-ordered sequence of data values is correspondingly lower than what it
+could be.  Consider an alternative of random data values, taken at random
+from the DJIA data.  Then predicting the next value to be sampled would be
+a great deal more difficult.   In that case, the informativeness of the
+sequence of values would be very high - we are learning something totally
+new and unexpected at each and every time step - and the entropy or 
+orderedness would be very low.   So structure or orderedness in our data
+helps a lot in our modeling and prediction tasks.  No wonder therefore
+that entropy is widely used in signal enhancement and pattern recognition. 
+ High entropy means that our models can fit the data well, and that the
+data is predictable.  We like entropy!
+
+<p>
+
+Traditionally information and entropy are determined from events and 
+the probability of their occurrence.  Our innovation is to claim that
+in real-life, we must always take signal (the substance of what we are
+dealing with) and noise into account.   Signal and noise are basic
+building-blocks of the observed data.  
+ Instead of the probability of an event, we are
+led to consider the probabilities of our data being either signal or
+noise.  We proposed therefore (Starck et al., 1998, Starck and Murtagh, 
+1999, Starck et al., 2000) a new definition of entropy, satisfying a 
+number of properties which include:
+
+<ul>
+<li> The information in a flat signal is zero.  No change in a share price
+   implies zero usable information.
+<li> The amount of information in a signal is independent of the
+   background trend. But what is the latter?  There is clearly a whole
+   continuum of candidates for background trend.  We allow for this 
+   by taking a range of resolution scales into account.
+<li>  The amount of information is dependent on the noise. A given 
+   signal Y (Y = X + Noise) doesn't furnish the same information if 
+   the noise is high or small.
+<li> Changes up or down are equally relevant for entropy: 
+the entropy must work in the same way for a signal value which has a
+   value B + epsilon (B being any average value we care for), 
+   and for a signal value which has a value B - epsilon.
+<li> The amount of information is dependent on the correlation in the
+   signal.  If a signal S presents large features  (pronounced bear 
+   or up movements, for example)  above the noise, it
+   contains a lot of information. By generating a new set of data from
+   S, by randomly taking the values in S, the large features will
+   evidently disappear, and this new signal will contain less 
+   information.  But the data values will be identical to heretofore.
+</ul>
+
+
+To cater for background trend (and the myriad possible definitions 
+thereof), we introduce the concept of multiresolution 
+into our entropy.  We will consider that the information contained in 
+some dataset is the sum of the information at different resolution 
+levels, j.  A wavelet transform is one choice for such a multiscale 
+decomposition of our data.  We define the information of a wavelet 
+coefficient w<sub>j</sub>(k) at position k and at scale j as I = - ln 
+(p(w<sub>j</sub>(k))), 
+where p is the probability of the wavelet coefficient.  Entropy, 
+commonly denoted as H, is then defined as the sum over all positions,
+k, and over all scales, j, of all I.  
+
+<p>
+
+For Gaussian noise we continue in this direction, using Gaussian
+probability distributions, and find that the entropy, H, is the sum 
+over all positions, k, and over all scales, j, of 
+(w<sub>j</sub>(k)<sup>2</sup>)/(2 sigma<sup>2</sup> j) 
+(i.e. the coefficient squared, divided by 
+twice the standard deviation squared of a given scale).  Sigma, or 
+the standard deviation, is the (Gaussian) measure of the noise.  We 
+see that the information is proportional to the energy of the 
+wavelet coefficients.  The higher a wavelet coefficient, then the 
+lower will be the probability, and the higher will be the 
+information furnished by this wavelet coefficient.
+
+<p>
+ 
+Our entropy definition is completely dependent on the noise 
+modeling.  If we consider a signal S, and we assume that the noise 
+is Gaussian, with a standard deviation equal to sigma, we won't 
+measure the same information compared to the case when we consider 
+that the noise has another standard deviation value, or if the 
+noise follows another distribution.
+
+<p>
+
+Returning to our example of a signal of substantive value, and a 
+scrambled version of this, we can plot an information versus scale 
+curve (e.g. log(entropy) at each scale using the above definition, 
+versus the multiresolution scale).  For the scrambled signal, the 
+curve is flat.  For the original signal, it increases with scale.  
+ We can use such an entropy versus scale plot to investigate 
+differences between encrypted and unencrypted signals, to study 
+typical versus atypical cases, and to differentiate between 
+atypical or interesting signals. 
+
+<p>
+
+In filtering, two aspects are perhaps
+paramount: firstly, a very good fit between input data and filtered data, 
+and secondly the removal of as much noise as possible.  The first criterion
+can be expressed as minimizing the entropy of the difference of 
+input data and filtered data.  The second criterion can be expressed as 
+minimizing the entropy of the filtered data.  (Why?  Because noise-free
+data has low entropy.)  So far so good.  The next step makes our job less
+easy.  We may well want to trade off quality in the first of these two 
+criteria relative to the second, or vice versa.  The correct balance between
+the criteria is not clear cut.
+
+<p>
+
+In Starck and Murtagh (1999) a whole range of novel approaches to 
+facing this trade-off were discussed.  One of the most esthetic is the 
+following.  Let us vary our trade-off parameter such that the final 
+value of criterion 1 (remember: entropy of difference of input data and
+filtered data)  corresponds faithfully to the noise  in our data.  By 
+ensuring this consistency, which amounts to a constraint on the 
+optimization problem we have to solve, we are formulating the problem as a
+"closed" one, without recourse to any user-specified threshold.  
+
+<p>
+
+How do we know what the noise is in our data?  We may know our data well
+enought to answer this.  (This will certainly apply to 
+the case of instrumentation
+in the physical sciences.)  Starck and Murtagh (1998) provide answers in
+regard to automatic procedures for noise estimation.  Finally, we can 
+visually and otherwise validate our results (e.g., to being with,
+ by plotting the difference
+between filtered data and original data).  
+
+<p>
+
+
+As mentioned, to filter noise we really must take multiple resolution 
+levels into account.  But how we do this is not important.  We want some 
+good decomposition of the data, and we want to recreate the data following
+noise removal.  We can be as "unhistoric" as we wish.  The symmetric 
+B<sub>3</sub> spline &agrave; trous transform performs very well.  Any
+asymmetry in the wavelet function will serve to emphasize discontinuities,
+and this we believe is not desirable in this instance.  We use a noise
+model which takes the noise as non-stationary (hence 
+a heteroskedastic model) and additive.  Fig. 11 shows, left, from top to 
+bottom the input data, the filtered data, and both overlaid.  Fig. 11, 
+right, shows 100 values close-up.
+
+<p>
+
+<a href="djia-filtered-mw1d-m5.gif">Figure 11:</a> Left, from top to bottom
+ - original, filtered and both superimposed.  Right, close-up of time-points
+1000 to 1100.
+
+<p>
+
+
+<h2>Simple and Reliable Prediction from a Wavelet Transform</h2>
+
+In separating out the slowing 
+changing from the rapidly changing components in our data, it should be 
+relatively easy for us to fit the former with polynomial approximations, 
+and then extrapolate into the future.  This avoids the costly training (and
+selection of architecture) typical of a neural network interpolation and 
+extrapolation model.  It also sidesteps a statistical (ARIMA etc. 
+or Kalman filter) approach because we have simplified and 
+homogenized the data at each resolution level.  
+
+<p>
+[To be continued.]
+
+
+<h2>7. Conclusions</h2>
+
+
+<h2>References</h2>
+
+<ol>
+
+<li> A. Aussem, F. Murtagh  and M. Sarazin, ``Dynamical recurrent neural 
+networks and pattern recognition methods for time series prediction: 
+application to seeing and temperature forecasting in the context of ESO's VLT
+Astronomical Weather Station'', <b>Vistas in Astronomy</b>, <b>38</b>, 
+357-374, 1994.
+
+<li> A. Aussem, F. Murtagh and M. Sarazin, ``Dynamical recurrent neural
+networks - towards environmental time series prediction'', <b>International
+Journal of Neural Systems</b>, 6, 145-170, 1995.
+
+<li> A. Aussem, F. Murtagh and M. Sarazin, ``Fuzzy astronomical seeing
+nowcasts with a dynamical and recurrent connectionist network'', <b>
+International Journal of Neurocomputing</b>, 13, 353-367, 1996.
+
+<li> A. Aussem and F. Murtagh, ``Combining neural network forecasts on
+      wavelet-transformed time series'', <b>Connection Science</b>,
+      9, 113-121, 1997.
+
+<li> A. Aussem, J. Campbell and F. Murtagh, ``S&amp;P500 forecasting using
+a neuro-wavelet approach'', <b>Journal of Computational Intelligence in 
+Finance</b>, 6, 5-12, 1998.
+
+<li> A. Aussem and F. Murtagh, ``A neuro-wavelet strategy for Web traffic 
+forecasting'', <b>Journal of Official Statistics</b>, 1, 65-87, 1998.
+
+<li> MR/1 and MR/2, Multiresolution Analysis Software, Version 2.0, 
+User Manual 300 pp., Multi Resolutions Ltd., 
+<a href="http://www.multiresolution.com">http://www.multiresolution.com</a>.
+
+<li> F. Murtagh and A. Heck, <b>Multivariate Data Analysis</b>, Kluwer,
+1985.  (The Fortran 
+code associated with this book is currently being rewritten
+in Java, and the book's contents are being greatly extended.) 
+
+<li> F. Murtagh, M. Sarazin, M. and H.M. Adorf, ``Using ancillary data to
+improve astronomical observing: forecasting of telescope thermal environment
+and of seeing'', in A. Heck and F. Murtagh (Eds.), <b>Astronomy from 
+Large Databases II</b>, European Southern Observatory, Garching, 1992a,
+393-398.
+
+<li> F. Murtagh, M. Sarazin and H.M. Adorf, ``Prediction of
+telescope thermal environment and astronomical seeing'', in 
+M.-H. Ulrich, Ed.,
+<b>Progress in Telescope and Instrumentation Technologies</b>, European 
+Southern Observatory, Garching, 1992b, 377-380.
+
+<li> F. Murtagh and M. Sarazin, ``Nowcasting astronomical seeing: a
+study of ESO La Silla and Paranal'', 
+<b>Publications of the Astronomical Society of the Pacific</b>, <b>105</b>,
+932-939, 1993.
+
+<li> F. Murtagh, A. Aussem and M. Sarazin, ``Nowcasting astronomical 
+seeing: towards an operational approach'', <b>Publications of the 
+Astronomical Society of the Pacific</b>, <b>107</b>, 702-707, 1995.
+
+<li> F. Murtagh, A. Aussem  and O.J.K. Kardaun,
+``The wavelet transform in multivariate
+  data analysis'', <b>COMPSTAT'96</b>, A. Prat, Ed., 
+Physica-Verlag, 1996, pp. 397-402.
+
+<li> F. Murtagh and M. Sarazin, ``Nowcasting astronomical seeing and
+forecasting telescope environment for the ESO VLT'', in 
+T. Subba Rao and
+M.B. Priestley, Eds.,
+<b>Applications of Time Series Analysis in Astronomy and Meteorology</b>,
+Chapman And Hall, 1997, 320-328.
+
+
+<li> F. Murtagh, A. Aussem and J.L. Starck, ``Multiscale data analysis
+- information fusion and constant-time clustering'', <b>Vistas in 
+Astronomy</b>, 41, 359-364, 1997.  
+(Special issue, proceedings of European 
+Science Foundation workshop, Granada, April 1997, editors R. Molina, 
+F. Murtagh and A. Heck).
+
+<li> F. Murtagh and A. Aussem, 
+``New problems and approaches related to large
+databases in astronomy'', <b>Statistical Challenges in 
+Modern Astronomy II</b>, 
+G.J. Babu and 
+  E.D. Feigelson, eds., Springer-Verlag, 123-133, 1997.
+
+<li> F. Murtagh and A. Aussem, ``Using the wavelet transform for 
+multivariate data analysis and time series forecasting'', in
+<b>Data Science, Classification and Related
+Methods</b>, C. Hayashi, H.H. Bock, K. Yajima, Y. Tanaka, N. Ohsumi 
+and Y. Baba, eds., Springer-Verlag, 617-624, 1998.
+
+<li> F. Murtagh, G. Zheng, J. Campbell,
+A. Aussem, M. Ouberdous, E. Demirov, W. Eifler, M. Crepon,
+``Data imputation and nowcasting in the environmental sciences using
+clustering and connectionist modeling'', 
+<b>Compstat'98</b>, R. Payne and P. Green, Eds., 
+Springer-Verlag, 1998, pp. 401-406.
+
+<li> F. Murtagh, A. Aussem, J.-L. Starck, J.G. Campbell and G. Zheng,
+``Wavelet-based decomposition methods for feature extraction and 
+forecasting'', in <b>Proceedings OESI-IMVIP'98, Optical Engineering 
+Society of Ireland and Irish Machine Vision and Image Processing Joint
+Conference</b>, D. Vernon, Ed., NUI Maynooth,  1998, pp. 55-67. 
+
+<li> F. Murtagh, G. Zheng, J.G. Campbell and A. Aussem, "Neural network
+modeling for environmental prediction", 
+<b>Neurocomputing Letters</b>, 30, 65-70, 2000.
+
+<li> J.L. Starck, F. Murtagh and A. Bijaoui, <b>Image Processing and 
+Data Analysis: 
+The Multiscale Approach</b>, Cambridge University Press, 1998.  (Hardback and
+softback, ISBN 0-521-59084-1 and 0-521-59914-8.)
+
+
+<li> J.-L. Starck, F. Murtagh and R. Gastaud,
+"A new entropy measure based on the wavelet transform and noise modeling",
+<b>IEEE Transactions on Circuits and Systems II: Analog and Digital
+Signal Processing</b>, 45, 1118-1124, 1998.
+
+
+<li>
+J.-L. Starck and F. Murtagh, "Automatic noise estimation from the 
+multiresolution support",   Publications of the Astronomical 
+Society of the Pacific, 110, 193-199, 1998.
+
+<li> J.L. Starck and F. Murtagh, ``Multiscale entropy filtering'',
+<b>Signal Processing</b>, 76, 147-165, 1999.
+
+<li> J.L. Starck, F. Murtagh, F. Bonnarel and S. Couvidat, "Multiscale
+entropy", <b>IEEE Transactions on Information Theory</b>, 
+submitted, 2000.
+
+<li>  G. Zheng, S.   
+Rouxel, A. Aussem, J. Campbell, F. Murtagh, M. Ouberdous, E. Demirov, W.
+Eifler and M. Cr&#233;pon, ``Forecasting of ocean state using 
+satellite-sensor 
+data'', in <b>Proceedings of the Ocean Data Symposium, Dublin 1997</b>,
+B. Cahill, Ed., Irish Marine Data Centre, Marine Institute, 1998, abstract
+p. 23 of hardcopy book, full article on CD proceedings.
+
+<li> G. Zheng, J.L. Starck, J.G. Campbell and F. Murtagh, 
+``Multiscale transforms for filtering financial data streams'', 
+<b>Journal of Computational Intelligence in Finance</b>, 7, 18-35, 1999.
+<a href="http://strule.cs.qub.ac.uk/~gzheng/financial-engineering/finpapermay99.html">Paper available online.</a>
+
+<li> G. Zheng, J. Campbell and F. Murtagh, "Information fusion of model
+and observed data for missing data imputation in oceanography", in 
+P.F. Whelan, Ed., <b>IMVIP'99 - Irish Machine Vision and Image
+Processing Conference 1999</b>, Dublin City University, 228-237.
+
+</ol>
+
+<h2> Appendix 1: Main Commands Used</h2>
+
+MR/1 and MR/2 commands <pre>mr1d_trans, mw1d_filter</pre>
+were used.  
+
+<p>
+
+For filtering, 
+
+<p>
+
+<pre>
+mw1d_filter -m 5 djindus.fits djiaout.fits
+</pre>
+
+<p>
+
+Plots were produced in IDL.
+
+<p>
+
+For the "shifting window" analysis, we ran <pre>mr1d_trans</pre> 
+repeatedly in IDL:
+
+<p>
+
+<pre>
+
+; .run mr1d_trans 
+; .run delete
+; a0 = readfits('djindus.fits')
+; .run run_mr1d_trans_seq
+; run_mr1d_trans_seq, a0
+; a0run = fltarr(1317, 6)
+; run_mr1d_trans_seq, a0, a0run
+
+
+PRO run_mr1d_trans_seq, a0, a0run 
+n = n_elements(a0)
+n0 = 500
+
+for i = n0-1, n-1 do begin
+    mr1d_trans, a0(0:i), a0out, OPT="-t 5 -n 6"
+    for j = 0, 5 do begin
+        a0run(i,j) = a0out.coef(i,j)
+    endfor
+endfor
+
+return
+end
+
+</pre>
+
+
+<h2> Appendix 2: Prediction Based on Multiscale Polynomial Fitting</h2>
+
+Usage of the following, for example:
+
+<pre>
+p = mr1d_predict(a(0:999), npredict=20, ncoef=2, LoScale=3)
+plot, a(1000:1019)
+oplot, p
+</pre>
+
+Note: use ncoef = 2 or 3, and LoScale = 3, or better 4 or 5 (for NScale = 5). 
+
+<pre>
+
+;+
+; NAME: 
+;       MR1D_PREDICT
+;
+; PURPOSE: 
+;       Considering a temporal signal S with n measures (S[0..n-1]), 
+;       MR1D_PREDICT estimates (or predicts) the next values S[n .. n+dt].
+;       A multiscale transformation is first applied, followed by filtering
+;       in the wavelet space. At each scale, a predictor is then applied,
+;       and the predicted signal is obtained from the reconstruction of
+;       the predicted signal. 
+;
+; CALLING:
+;       Result = MR1D_PREDICT(Signal, wave=wave, PredWave=PredWave, 
+;                             NPredict=NPredict, Nscale=Nscale, 
+;                             OPT=OPT, NCoef=NCoef, LoScale=LoScale)
+;                   
+;
+; INPUT:
+;      Signal: 1D array; input signal 
+;
+; KEYWORDS:
+;     wave: 2D array; filtered wavelet coefficient
+;
+;     PredWave: 2D array; Predicted wavelet coefficient
+;
+;     NPredict: number of values to predict. Default is one.
+;
+;     Nscale: number of scales used for the wavelet transform
+;
+;     NCoef: Number of coefficients used for the prediction. Default is 3.
+;
+;     OPT: string which contains the differents options accepted by the
+;          mw1d_filter C++ program.
+;
+;     LoScale: lowest scale (i.e. highest frequency) to start from 
+; 
+;          
+; OUTPUTS:
+;           Result: IDL 1D array of size equal to NPredict. Predicted values.
+;             
+;
+; EXTERNAL CALLS
+;           mw1d_filter (C++ program)
+;
+; EXAMPLE:
+;   > p = mr1d_predic(S)
+;   > print, p
+;       calculate the first predicted value following S
+;
+;   > p = mr1d_predic(S, NPREDICT=3, NCOEF=5)
+;       calculate the three first values following S using 5 
+;       wavelet coefficients
+;       at each scale for the prediction.
+;
+;   > p = mr1d_predict(s(0:499), NPredict=100, Ncoef=4, Nscale=6, LoScale=5)
+;       predict 100 values (not a good idea with such a polynomial fitting
+;       method!), based on 4 wavelet coefficients, and using only the 
+;       last (smoothest) wavelet scale and the smoothest (residual) scale
+;       (scales 5 and 6, indicated by LoScale=5).  Hardly surprisingly
+;       for polynomial fitting, we find that the polynomial order (Ncoef-1)
+;       should be small, and LoScale should be high - thereby using only
+;       a highly smoothed version of the data.  
+;
+; HISTORY:
+;       Written: Jean-Luc Starck 1998.
+;       November, 1998 File creation
+;       Updated, November 1999, to include LoScale, F Murtagh
+;-
+
+
+function mr1d_predict, Signal, wave=wave, PredWave=PredWave, NPredict=NPredict, 
+Nscale=Nscale, OPT=OPT, NCoef=NCoef, LoScale=LoScale
+
+Rec = -1
+if N_PARAMS() LT 1 then begin 
+        print, 'CALL SEQUENCE: Pred = mr1d_predict(Signal, NPredict=NPredict, OP
+T=Opt, NCoef=NCoef, LoScale=LoScale'
+        goto, DONE
+        end
+
+if not keyword_set(NPredict) then  NPredict = 1
+if not keyword_set(NCoef) then  NCoef  = 3
+if not keyword_set(Nscale) then Nscale =  5
+if not keyword_set(LoScale) then LoScale =  1
+if LoScale GT Nscale then begin
+   print, 'LoScale cannot be great than number of scales'
+   goto, DONE
+   end
+
+; Nx = (size(Signal))[1]
+sss = size(Signal)
+Nx = sss(1)
+print, 'npix = ', nx
+
+OPT_SCALE = '-n '+ strcompress(string(Nscale),/REMOVE_ALL)
+OPT_TRANS = '-t 5 '+  OPT_SCALE
+ 
+NameSig = 'xx_signal.fits'
+NameOut = 'xx_out.fits'
+NameMRFILTER = 'xx_mrfilter.fits'
+
+writefits,  NameSig,  Signal
+if not keyword_set(OPT) then OPT = " "
+OPT = OPT + OPT_SCALE + " -w " +  NameMRFILTER + " "
+
+com = 'mw1d_filter ' +  OPT + NameSig  + ' ' +  NameOut
+; print, com
+spawn, com
+Filter = readfits(NameOut, /silent);
+Wave = readfits(NameMRFILTER, /silent); 
+;help, wave
+ 
+ResultPred = dblarr(NPredict)
+ResultPredErr =  dblarr(NPredict)
+TabWavePred =  dblarr(NPredict, Nscale)
+TabWavePredError =  dblarr(NPredict, Nscale)
+
+TabScaleCoefX =  double(indgen(NCoef))
+TabScaleCoefY =  dblarr(NCoef)
+TabScalePredX = double(indgen(NPredict)+NCoef)
+;print, TabScaleCoefX
+;print, TabScalePredX
+TabScalePredY = dblarr(NPredict)
+Step=1
+; 
+for i=LoScale-1,Nscale-1 do BEGIN
+   for j=0,NCoef-1 do BEGIN
+       Pos = nx-1-j*Step
+       if (Pos LT 0) then Pos = 0
+       TabScaleCoefY(NCoef-j-1) = Wave(Pos, i)
+   END
+   for j=0,NPredict-1 do BEGIN
+       ; interpolation des donnees
+       ;   TabScaleCoefX = position des donnees
+       ;   TabScaleCoefY = valeurs des coeff
+       ;   TabScalePredX = position des valeurs a predire
+       ;TabScalePredY = interpolate(TabScaleCoefX, TabScaleCoefY, TabScalePredX)
+       Tx = TabScaleCoefX
+       Ty = TabScaleCoefY
+       Px = TabScalePredX
+       polint, TabScaleCoefX, TabScaleCoefY, TabScalePredX(j), p, pe
+       
+       ; print, 'Pos = ', TabScaleCoefX
+       ; print, 'Val = ', TabScaleCoefY
+       ; print, 'P = ', p
+       TabWavePred(j,i) = p
+       TabWavePredError(j,i) = pe
+       ;print, ' Scale, Predicted seqno., pred. error: ', i,j,pe
+       END
+   Step = 2*Step
+   END
+;reconstruct the predicted signal
+mr1d_paverec, TabWavePred, ResultPred
+PredWave = TabWavePred
+
+; reconstruct the predicted error
+mr1d_paverec, TabWavePredError, ResultPredErr
+
+; 
+; Rec = fltarr(Nx + NPredict)
+; Rec(0:nx-1) = Filter
+; Rec(nx:nx+NPredict-1) = ResultPred
+Rec = ResultPred 
+
+DONE:
+return, rec
+
+
+end
+</pre>
+
+</body></head>
+
+

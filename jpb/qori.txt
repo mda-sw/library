@@ -1,0 +1,255 @@
+program qori;uses memtypes,quickdraw,osintf,toolintf,sane,uver5,utrir5;
+ var
+  ve,w,w1,w2,d,memi,nivc,nivn,reste,long,amax,dir,i1,er1,u,iz1,
+  al,s,smin,sp,cars,carm,carq,n,c,ia,ic,id,ip,is,ih,ijh,
+  cn,na,nb,nz,la,lb,ina,li,q,r,ng,np,i,j,j1,j2,jj,ij,jp,jh,js,a,ap,b1,b,
+  carti,cari,caris,cartj,carj,carjs,carf,care,carel,cares,carte:integer;
+  ff,ffl,PDS,INR,QLT,CO2,CTR:longint;
+  fin:file of integer;ffs:single;p1ww:pww;
+  ft:text;
+  norm,pod,pop,rdf,mtot,tr,lam,di,fijij,trace,dr,d2,fre,res: extended;
+  k1ji,g1ji:kji;gi:pti;t1k:tk;p1i,p2j:ptr;
+  fjj,Phaj:sjj;
+  carac,repa,resu,rep,reps,repg,repc,che,rup:char;
+  titre,nomba,nomf:string;ttri:stringptr;
+  lmt,adj:string[7];sgli:pzgl;
+  spgj,sig1i,sig1t:pzgi;sql,sqe:zigle;
+
+  riri:ricla;ptrc1:ptrc;firi:file of integer;
+  fi:ptdri; phj,dj,fj,rj,ffj,lama:rtj;
+  tampi:array[1..titab]of integer;
+  pza,zz:itj;
+  Fpa:prtj;
+  pr1a,s1u:ptni;
+{$S sym} {$U udiaq5}
+procedure diagu(phaj0,fjj0,dj0,zz0,pza0,rj0,lama0:ptr;
+     carj:integer);external;
+procedure renorm;begin
+w:=aamax;if (carj-1<w) then w:=carj-1;
+for a:=1 to w do for j:=1 to carj do Phaj[a]^[j]:=ffj[j]*Phaj[a]^[j];end;
+{$S exit}
+procedure preligni;begin
+     res:=fre*mtot;if (res=0) then res:=1;d2:=-1;
+     for j:=1 to carj do begin
+         ffj[j]:=ffj[j]/res;
+  if not(fj[j]=0) then d2:=d2 +(sqr(ffj[j])/fj[j]) end;
+     if (d2<0) then d2:=0;
+     for a:=1 to carf do begin Fpa^[a]:=0;
+         for j:=1 to carj do Fpa^[a]:=Fpa^[a]+(ffj[j]*Phaj[a]^[j]) end;end;
+procedure lignage;begin
+     PDS:=round(1000*fre);  INR:=round(1000*d2*fre/trace);
+     if (d2=0) then  QLT:=0 else begin dr:=0;
+         for a:=1 to care do dr:=dr+sqr(Fpa^[a]); QLT:=round(1000*dr/d2)
+end;
+     write(ft,chr(124),sigler(sql):4,chr(124),QLT:4,PDS:4,INR:4,chr(124));
+     write(sigler(sql):4);
+     for a:=1 to care do begin ff:=round(1000*Fpa^[a]);
+         CTR:=round(1000*fre*sqr(Fpa^[a])/lama[a]);
+  if (d2=0) then CO2:=0 else CO2:=round(1000*sqr(Fpa^[a])/d2) ;
+  write(ft,ff:5,CO2:4,CTR:4,chr(124)); write(ff:7)  end;
+     writeln(ft);writeln;
+     end;
+procedure ecriclun;begin
+nomf:=concat(nomba,sigler(sqe),'Fac.w');rewrite(firi,nomf);
+ttri^:=concat(sigler(sqe),':',titre);
+if (127<length(ttri^)) then ttri^:= copy(ttri^,1,127);
+for a:=1 to carf do begin
+     p1ww:=pww(@tampi[63+(2*a)]);p1ww^:=lama[a] end;
+p1ww:=pww(@tampi[65+(2*carf)]);p1ww^:=trace;
+p1ww:=pww(@tampi[67+(2*carf)]);p1ww^:=mtot;
+tampi[titab]:=carel;
+for u:=1 to titab do write(firi,tampi[u]);write(firi,2+carf);
+for a:=1 to carf do begin
+  if (a<10) then
+     sgli^:=zigler(concat('axe',chr(48+a))) else
+     sgli^:=zigler(concat('ax',chr(48+(a div 10)),chr(48+(a mod 10))));
+  for u:=1 to 3 do write(firi,tampi[u]) end;
+sgli^:=zigler('poid');for u:=1 to 3 do write(firi,tampi[u]);
+sgli^:=zigler('dis2');for u:=1 to 3 do write(firi,tampi[u]);
+end;
+procedure riclage;begin
+       with riri do  begin      sis := sql;
+         for a := 1 to carf do    Fac[a] :=Fpa^[a];
+  Fac[carf+1]:=fre;Fac[carf+2]:=d2;
+  for u:=1 to dir do write(firi,ptrc1^[u]);end;end;
+procedure sortir;begin
+ptrc1:=ptrc(@riri);ttri:=stringptr(@tampi);sgli:=pzgl(@tampi);
+w:=aamax;if (carj-1<w) then w:=carj-1;
+for a:=w downto 1 do begin res:=0;
+   for j:=1 to carj do res:=res+(Phaj[a]^[j]*fj[j]);res:=sqr(res);
+   if (lama[a]<=res) then w:=a-1 end;
+if (w<carf) then carf:=w;
+dir:=7+(2*carf);
+for a:=1 to carf do for j:=carj+1 to cartj do Phaj[a]^[j]:=0;
+for j:=carj+1 to cartj do begin fj[j]:=0;
+   for i:=1 to cari do fj[j]:=fj[j]+k1ji[j]^[i];
+   fj[j]:=fj[j]/mtot end;
+carel:=cari;che:='i';sqe:=zigler('i');writeln;ecriclun;
+nomf:=concat(nomba,'cortx'); rewrite(ft,nomf);
+writeln(ft,titre);writeln(ft,'trace  :  ',trace:4);
+b1:=((w-1) div 15)+1;res:=0;
+for b:=1 to b1 do begin
+  w1:=((b-1)*15)+1;w2:=w1+14;
+  if (w<w2) then w2:=w;
+  write(ft,'rang   : ');
+  for a:=w1 to w2 do write(ft,a:6);writeln(ft);
+  write(ft,'lambda : ');
+  for a:=w1 to w2 do write(ft,round(10000*lama[a]):6);
+  writeln(ft,'   e-4');write(ft,'taux   : ');
+  for a:=w1 to w2 do write(ft,round(10000*lama[a]/trace):6);
+  writeln(ft,'   e-4');write(ft,'cumul  : ');
+  for a:=w1 to w2 do begin res:=res+lama[a];
+      write(ft,round(10000*res/trace):6) end;
+  writeln(ft,'   e-4') end;
+
+if (carf<care) then care:=carf;
+for a:=1 to 19+(14*care) do write(ft,'_'); writeln(ft);
+write(ft,chr(124),'SIGI',chr(124),' QLT PDS INR',chr(124));
+for a:=1 to care do write(ft,'  F',a:2,' CO2 CTR',chr(124)); writeln(ft);
+for a:=1 to 19+(14*care) do write(ft,'_'); writeln(ft);
+for i:=1 to carti do begin
+     if (i=cari+1) then begin
+         close(firi);carel:=carti-cari;sqe:=zigler('is');ecriclun;
+         writeln(ft,'ci dessous element(s) supplementaire(s)');
+         writeln('ci dessous element(s) supplementaire(s)') end;
+     sql:=sig1i^[i];fre:=fi^[i];
+     for j:=1 to carj do ffj[j]:=k1ji[j]^[i];
+     preligni;lignage;riclage;
+     if (i<=cari) then
+       for j:=carj+1 to cartj do if not(fj[j]=0) then for a:=1 to carf do
+  Phaj[a]^[j]:=Phaj[a]^[j]+(Fpa^[a]*k1ji[j]^[i]/(fj[j]*mtot)) end;
+ close(firi);
+ for a:=1 to 19+(14*care) do write(ft,'_');writeln(ft);writeln;
+ for a:=1 to 19+(14*care) do write(ft,'_');writeln(ft);
+ write(ft,chr(124),'SIGJ',chr(124),' QLT PDS INR',chr(124));
+ for a:=1 to care do write(ft,'  F',a:2,' CO2 CTR',chr(124)); writeln(ft);
+ for a:=1 to 19+(14*care) do write(ft,'_'); writeln(ft);
+ for a:=1 to carf do begin di:= sqrt(lama[a]);
+      for j:=1 to carj do Phaj[a]^[j]:=di*Phaj[a]^[j] ;
+      if not (di=0) then di:=1/di;
+      for j:=carj+1 to cartj do begin Phaj[a]^[j]:=di*Phaj[a]^[j];
+         if (fj[j]=0) then Phaj[a]^[j]:=0 end end;
+ for j:=1 to cartj do rj[j]:=-1;
+ for i:=1 to cari do if not(fi^[i]=0) then for j :=1 to cartj do
+   if not(fj[j]=0) then begin
+     res:=k1ji[j]^[i];rj[j]:=rj[j]+(sqr(res/(mtot*fj[j]))/fi^[i]) end;
+ carel:=carj;che:='j';sqe:=zigler('j');ecriclun;
+ for j:=1 to cartj do begin
+     if (j=carj+1) then begin
+         close(firi);carel:=cartj-carj;sqe:=zigler('js');ecriclun;
+         writeln(ft,'ci dessous element(s) supplementaire(s)');
+         writeln('ci dessous element(s) supplementaire(s)') end;
+     if (rj[j]<0) then rj[j]:=0;d2:=rj[j];fre:=fj[j];sql:=spgj^[j];
+     for a:=1 to carf do Fpa^[a]:=Phaj[a]^[j];
+     lignage;riclage; end;
+for a:=1 to 19+(14*care) do write(ft,'_');writeln(ft);
+close(firi);close(ft);end;
+{$S init} {$U ulire5}
+procedure litab(var pj:ptr;pk,pn,pt:ptr;var rc:char;
+     var ic,jc:integer;var pi:ptr);external;
+procedure litaber;begin carti:=0;
+  litab(p2j,@t1k,@nomba,@titre,repc,carti,cartj,p1i);
+  if (repc='O') then begin
+     sig1i:=pzgi(p1i);spgj:=pzgi(p2j);new(Fpa);
+     memi:=carti;if (memi<cartj) then memi:=cartj;memi:=memi+2;
+  if (memi<ibmax) then sig1t:=pzgi(newptr(6*memi)) else new(sig1t);
+     pr1a:=ptni(newptr(2*memi));s1u:=ptni(newptr(2*memi));
+  if (memi<iamax) then fi:=ptdri(newptr(xtn*(2+carti))) else new(fi);
+     for j:=0 to cartj do k1ji[j]:=pti(t1k[j]);
+     write('nombre de facteurs a garder sur fichier = ');readln(carf);
+     write('nombre de facteurs a ecrire sur listage = ');readln(care);
+     if (carf<1) then carf:=1;if (aamax<carf) then carf:=aamax;
+     if (care<1) then care:=1;if (10<care) then care:=10 end;end;
+{$S tabl} {$U uens5}
+procedure ensembler(carte:integer;plmt,padj,psig1t,psu:ptr);external;
+procedure lecnombre;begin ffl:=0;
+      while not ((ord(carac) in [48..57]) or eof(ft)) do read(ft,carac);
+      while (ord(carac) in [48..57]) do begin
+          ffl:=(10*ffl)+(ord(carac)-48);
+   if eof(ft) then carac:=' ' else read(ft,carac) end;end;
+procedure suplirer;var ii:integer;begin
+  writeln('on lit le fichier ',nomf);
+  reset(ft,nomf);readln(ft,nomf);ia:=0;carac:=' ';
+  while not eof(ft) do begin lecnombre;i:=ffl;ic:=0;
+      if (i>10000) then begin i:=i mod 10000;ic:=1;end;
+      if (ia=0) then ia:=i;
+      if not((i<=0) or (carte<i)) then
+    for ii:=ia to i do s1u^[ii]:=1;
+      ia:=0;if (ic=1) then ia:=i end;
+  close(ft);end;
+
+
+procedure supeler;begin adj:='suppl';
+  writeln('le nombre des ',lmt,'s est',carte:4);
+  for i:=1 to carte do s1u^[i]:=0;
+  write('y a t il ',lmt,' supplementaire(S) ou non(N) ');readln(reps);
+  if (reps='N') then carel:=carte else begin reps:='S';
+   if (verif(stringptr(@nomf))=2) then suplirer else
+      ensembler(carte,@lmt,@adj,@sig1t^,@s1u^);
+   cares:=0;
+   for i:=1 to carte do cares:=cares+s1u^[i];carel:=carte-cares;
+   if (carel<2) then begin s1u^[1]:=0;s1u^[2]:=0;cares:=0;
+      for i:=1 to carte do cares:=cares+s1u^[i];carel:=carte-cares end;
+   ip:=0;is:=carel;
+   for i:=1 to carte do begin
+     if (s1u^[i]=0) then begin ip:=ip+1;ih:=ip end
+          else begin is:=is+1;ih:=is end;
+     pr1a^[i]:=ih end end;
+  rewrite(fin,concat(nomba,che,'pr'));
+  for i:=1 to carte do write(fin,1-s1u^[i]);close(fin);end;
+procedure tabuler;begin
+  lmt:='colonne';carte:=cartj;che:='j';
+  nomf:=concat(nomba,che,'supx');
+  for j:=1 to carte do begin sig1t^[j]:=spgj^[j];g1ji[j]:=k1ji[j] end;
+  supeler;
+  if (reps='S') then for j:=1 to cartj do begin
+     k1ji[pr1a^[j]]:=g1ji[j];spgj^[pr1a^[j]]:=sig1t^[j] end;
+  carj:=carel;if (carj<carf+1) then carf:=carj-1;
+  lmt:='ligne';carte:=carti;che:='i';
+  nomf:=concat(nomba,che,'supx');
+  for i:=1 to carte do sig1t^[i]:=sig1i^[i];
+  supeler;cari:=carel;
+  if (reps='S') then begin
+   for i:=1 to carti do sig1i^[pr1a^[i]]:=sig1t^[i];
+   for j:=1 to cartj do begin gi:=k1ji[0];k1ji[0]:=k1ji[j];
+       for i:=1 to carti do gi^[pr1a^[i]]:=k1ji[j]^[i];k1ji[j]:=gi end end;
+ writeln(titre);end;
+
+procedure carrer;begin
+ for j:=1 to carj do fjj[j]:=prtj(newptr(xtn*cartj));
+ for j:=1 to carj do for jp:=1to carj do fjj[j]^[jp]:=0;mtot:=0;
+ for i := 1 to cari do  begin  fi^[i] := 0;
+   write(i:4);if (i mod 20 =0) then writeln;
+   for j := 1 to carj do  begin
+     rj[j] := k1ji[j]^[i];    fi^[i] := fi^[i] + rj[j]  end;
+   if not (fi^[i]=0) then begin
+     mtot := mtot + fi^[i];
+     for j := 1 to carj do   ffj[j] := rj[j] / fi^[i];
+     for j:=1 to carj do   for jp := 1 to carj do
+       fjj[j]^[jp] := fjj[j]^[jp] + ffj[j] * rj[jp] end end;
+ if (mtot=0) then mtot:=1;writeln;
+ for i :=cari+1 to carti do  begin  fi^[i] := 0;
+   for j := 1 to carj do  begin
+     rj[j] := k1ji[j]^[i];    fi^[i] := fi^[i] + rj[j]  end end;
+ for j := 1 to carj do  begin fj[j]:=0;
+   for jp := 1 to carj do  fj[j] := fj[j] + fjj[j]^[jp] end;    trace:=-1;
+ for j:=1 to carj do if (0<fj[j]) then ffj[j]:=1/sqrt(fj[j]) else ffj[j]:=0;
+ for j := 1 to carj do  begin
+   for jp := 1 to carj do   fjj[j]^[jp] := fjj[j]^[jp] *(ffj[j]*ffj[jp]);
+   fj[j] := fj[j] / mtot ;  trace:=trace+fjj[j]^[j]  end;
+ for i := 1 to carti do  fi^[i] := fi^[i] / mtot;
+ res:=sqrt(mtot);for j:=1 to carj do ffj[j]:=res*ffj[j];
+ for j := 1 to carj do  rj[j] := sqrt(fj[j]);
+ for j:=1 to carj do for jp:=1 to carj do
+      fjj[j]^[jp]:=fjj[j]^[jp]-(rj[j]*rj[jp]) ;end;
+
+begin {TextBook(ThePort);} benzecri;litaber;unloadseg(@litaber);
+if (repc='O') then begin
+  tabuler;carrer;unloadseg(@tabuler);
+  diagu(@Phaj,@fjj,@dj,@zz,@pza,@rj,@lama,carj);
+  renorm;unloadseg(@diagu);
+  sortir;
+  dispose(fi);dispose(sig1i);dispose(sig1t);dispose(s1u);dispose(pr1a);
+  for j:=0 to cartj do dispose(k1ji[j]);dispose(Fpa);
+  for j:=1 to carj do dispose(fjj[j]);dispose(spgj);
+  unloadseg(@sortir); readln(repa) end;end.

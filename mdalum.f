@@ -1,0 +1,78 @@
+	REAL DATA(64,29) 
+        REAL TOTAL(29,29), W1(29), W2(29), W3(29)
+	REAL MEAN(29), MGP(3,29), BETWEEN(3,3), BETW2(3,3), CPROJ(29,3)
+	INTEGER GP(64), NOG(3)
+	DIMENSION DUM(29)
+	DIMENSION IANAL(4,3)
+C
+	OPEN(UNIT=21,STATUS='OLD',FILE='luminosity.dat')
+C
+C	   Get input data.
+C
+	NG = 3
+	N = 64
+	M = 29
+	DO I = 1, N
+	   READ(21,100)(DATA(I,J),J=1,M),gp(i)
+           data(i,1) = data(i,1)+1.0  ! Fixup to get +ve values.
+  100	   FORMAT(15f6.3,/,14f6.3,i6)
+	ENDDO
+C
+	do j = 1, m
+	sum= 0.0
+	  do i = 1,n
+	     sum=sum+data(i,j)
+	  enddo
+	  write(6,*) ' total:',j,sum
+	enddo
+C
+	
+	IERR = 0
+	IPRINT = 3
+	CALL MDA(N,M,NG,DATA,GP,IPRINT,NOG,MEAN,MGP,TOTAL,BETWEEN,
+     X			BETW2,CPROJ,W1,W2,IERR)
+	IF (IERR.NE.0) GOTO 9000
+C
+C
+C ...   ANALYSE THE RESULTS
+C
+	DO I1 = 1,4
+	   DO I2 = 1,3
+	      IANAL(I1,I2)=0
+	   ENDDO
+	ENDDO
+	DO I = 1, N
+	      ICLASS=GP(I)
+	      IF(DATA(I,1).LT.0.0) THEN
+		    IANAL(2,ICLASS)=IANAL(2,ICLASS)+1
+	      ELSE
+	            IANAL(1,ICLASS)=IANAL(1,ICLASS)+1
+	      ENDIF
+	      IF(DATA(I,2).LT.0.0) THEN
+	            IANAL(4,ICLASS)=IANAL(4,ICLASS)+1
+	      ELSE
+	            IANAL(3,ICLASS)=IANAL(3,ICLASS)+1
+	      ENDIF
+	ENDDO
+	WRITE(6,*) ' '
+	WRITE(6,*) ' '
+	WRITE(6,*) ' IN THE FOLLOWING, THE 3 COLUMNS ARE THE CLASSES,'
+	WRITE(6,*) ' s, g, d  RESPECTIVELY.'
+	WRITE(6,*) ' '
+	WRITE(6,*) ' THE 4 ROWS ARE THE DIFFERENT QUADRANTS,'
+	WRITE(6,*) ' ROWS 1, 2  = POSITIVE, NEGATIVE FIRST AXIS,'
+	WRITE(6,*) ' ROWS 3, 4  = POSITIVE, NEGATIVE SECOND AXIS.'
+	WRITE(6,*) ' '
+	WRITE(6,*) ' LOOK FOR: CLASS x BEING OVERWHELMINGLY IN QUADRANT'
+	WRITE(6,*) ' DEFINED BY POSITIVE AXIS a, NEGATIVE AXIS b. ETC.'
+	WRITE(6,*) ' '
+	DO I1 = 1,4
+	   WRITE(6,174) (IANAL(I1,I2),I2=1,3)
+  174	   FORMAT(3I4)
+	ENDDO
+C
+C
+	GOTO 9900
+ 9000	WRITE (6,*) ' ABNORMAL END: IERR =', IERR
+ 9900	CONTINUE
+	END

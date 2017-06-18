@@ -1,0 +1,90 @@
+<html>
+<head>
+<title>Image and Data Analysis - The Multiscale Approach</title>
+</head>
+
+<body bgcolor=white >
+<img align=left src="../pic/galicon.jpg">
+<ul>
+<font color=red>
+<h1>Options for program: mr_pfilter </h1>
+</font>
+
+<p>
+
+<hr><p>
+
+<pre>
+$ mr_pfilter 
+
+Usage: mr_pfilter options in_image out_image 
+
+   where options =  
+         [-a ascii_file]
+
+         [-I image_file]
+         a & I options can't be used together, 
+         and one must be set. 
+
+         [-w]
+
+           write the following files
+             xx_Wavelet.mr : contains the wavelet transform
+              of the image.
+             xx_Support.mr : contains the thresholded  wavelet transform.
+
+         [-p]
+             Detect only positive structure. Default is no.
+
+         [-F first_detection_scale]
+             First scale used for the detection 
+             default is 1.
+
+         [-q abaque_file]
+              default is Abaque.fits.
+
+         [-n number_of_scales]
+             Number of scales used in the multiresolution transform
+             default is 6.
+
+         [-e minimum_of_events]
+             Minimum number of events for a detection.
+             default is 4
+
+         [-f type_of_filtering]
+              1: Iterative multiresolution thresholding 
+              2: Adjoint operator applied to the multiresolution support  
+              3: Multiresolution thresholding 
+              default is Iterative multiresolution thresholding.
+
+         [-l]
+             Dilate the support
+
+         [-k]
+             Suppress isolated pixels in the support. Default is no.
+
+         [-K]
+             Suppress the last scale. Default is no.
+
+         [-E Epsilon]
+             Epsilon = precision for computing thresholds
+                       (only used in case of Poisson noise with few events)
+             default is 1.00e-05 
+
+         [-i number_of_iterations]
+             Maximum number of iterations
+             default is 50.
+
+</pre>
+<p>
+
+<hr>
+</BODY>
+</HTML>
+
+
+
+
+
+
+

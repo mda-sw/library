@@ -1,0 +1,85 @@
+(1) LDA (linear discriminant analysis).
+    At approx. line 108, ensure that the absolute value of the determinant is
+    checked out:
+    IF (ABS(D).GT.0.00001) GOTO 1150
+    In early versions of this program, the actual value of D was checked 
+    against an epsilon, leading to many cases of termination with a seeming
+    indication of singularity.
+(2) PCA (principal components analysis).
+    In the routine which outputs eigenvalues in PCA (called OUTEVL in earlier
+    versions, but because of potential subroutine-name conflicts, this name
+    was changed in later versions), about 10 lines from the end, delete:
+    VALS(K) = VCPC
+    The comments at the beginning of the program should now be updated to 
+    indicate that W1, on output, contains the eigenvalues (and not the 
+    cumulative percentage variances associated with the principal components,
+    as heretofore).  The effect of leaving in the above line was to overwrite
+    information which is needed subsequently in the program.
+(3) SEECL (hierarchical clustering utility routine).
+    At very end, interchange I and J so that the loop statements read:
+    DO 705 J=1,9
+       DO 703 I=1,9
+    Hence, J should be the outermost loop, and I the innermost one.  The 
+    contraty situation lead to problems in certain situations.
+(4) Write statements under Sun/Unix.
+    There may be a need to alter the format Hollerith string, 1H , or 1H0, 
+    to a preceding write statement (which outputs a blank character string).
+(5) Precision of output values, emitted from write statements.
+    Especially when using covariances or sums-of-squares-and-cross-products,
+    the values obtained can in many instances be quite large.  These large
+    values are badly handled by current write statements, and may give rise
+    to frequent asterisks (indicating output unit space overflow).
+(6) The following problem relates to incorrect loop handling.
+    I have no problems in using these routines on VAX/VMS and Sun/Unix 
+    machines; in some measure they have also been checked out on MS-DOS and
+    VM/CMS machines.  However, compiling under VMS with use of the /CHECK=
+    (BOUNDS) may yield a little can of worms... Here are some changes which
+    are necessary to avoid having the compiler look after incorrect 
+    out-of-bounds situations:
+    (2.1) Insert the following statement before approx. line 25 of AGGLOM
+          (i.e. before statement: "120 IF (D.GE.CRIT(I)) GOTO 140"):
+          IF (I.EQ.0) GOTO 140
+    (2.2) In approx. line 98 of HCON2, alter the line: "IDUM=ICHAIN(LEN+1)" 
+          to: IF (LEN.LT.N) IDUM=ICHAIN(LEN+1)
+    (2.3) Before approx. line 48 of HCASS (i.e. just after the "56 CONTINUE" 
+          statement), insert the statement:
+          IF (LOC.GT.LEV) GOTO 58
+    There may well be other inaccuracies in beginning and terminating loops.
+
+
+(7) MDA is sensitive to the values of the data: cf. scaling-up 
+which is hard-wired in mda.f  
+---------------------------------------------------------------
+
+Programs and dependencies
+-------------------------
+
+pcat.for          driver routine for...
+pca.for           principal components analysis
+partt.for         driver routine for...
+part.for          partitioning (k-means)
+hct.for           driver routine for...
+hc.for            hierarchical clustering (7 criteria)
+hcon2t.for        driver routine for...
+hcon2.for         O(n^2) hierarchical clustering using Ward's criterion
+hcass.for         cluster assignments, called by hcon2t and hct
+hcden.for         plot of part of dendrogram, called by hcon2t and hct
+cat.for           driver routine for...
+ca.for            correspondence analysis
+knnt.for          driver routine for...
+knn.for           k-nearest neighbors discriminant analysis
+ldat.for          driver routine for...
+lda.for           Fisher's linear discriminant analysis
+mdat.for          driver routine for...
+mda.for           multiple discriminant analysis
+cmdst.for         driver routine for...
+cmds.for          "classical MDS" or principal coordinates analysis
+spectr.dat        test data set
+spectr2.dat
+spectr3.dat
+spectr4.dat
+cities.dat
+
+
+F. Murtagh, Sept. 1991.
+(murtagh@scivax.stsci.edu, fmurtagh@eso.org, fionn@dgaeso51.bitnet)

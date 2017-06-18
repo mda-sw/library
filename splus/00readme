@@ -1,0 +1,17 @@
+To install, source the file
+
+  install.q
+
+in S-Plus.  Check it out first - it sources script files, and dynamically
+loads object files.  In particular, check to see if the placement of help
+files is acceptable.  Note also that in a few places in the S script files,
+it is assumed that motif is the window management system in use: you may 
+need to change this to an alternative windowing system.
+
+Help files are available for functions: bea, distance, hierclust, members,
+modclust, partition, pca, plot.clustering, print.clustering, 
+summary.clustering, plot.hierarchy, print.hierarchy, summary.hierarchy,
+ca, ca.supplr, ca.supplc, flou, logique, sammon.
+
+
+F. Murtagh (fmurtagh@acm.org), Jan. 4, 1999
